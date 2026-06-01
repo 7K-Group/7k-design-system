@@ -1,0 +1,42 @@
+{
+  "name": "7k-design-system",
+  "version": "1.0.0-alpha.1",
+  "description": "Dark, neon-accented, manga-inflected design system for multi-project tech company 7K. Three-font system (Geist sans + Geist Mono + Geist Pixel 5 geometric variants), #FF0FF brand pulse, Tokyo neon atmosphere with 1-bit manga punctuation.",
+  "main": "dist/7k-design-system.css",
+  "files": [
+    "dist/",
+    "fonts/",
+    "build/",
+    "preview/",
+    "DESIGN.md",
+    "SKILL.md",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "cp colors_and_type.css dist/7k-design-system.css && cp -r fonts dist/ && cp -r build dist/ && cp -r preview dist/",
+    "test": "echo 'Open dist/test-isolation.html in a browser to verify'"
+  },
+  "keywords": [
+    "design-system",
+    "css",
+    "dark-theme",
+    "neon",
+    "manga",
+    "1-bit",
+    "geist",
+    "typography",
+    "tokens"
+  ],
+  "author": "7K",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-org/7k-design-system.git"
+  },
+  "bugs": {
+    "url": "https://github.com/your-org/7k-design-system/issues"
+  },
+  "homepage": "https://github.com/your-org/7k-design-system#readme",
+  "peerDependencies": {},
+  "devDependencies": {}
+}

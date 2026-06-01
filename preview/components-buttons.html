@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Buttons · 7k-design-system</title>
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  body { padding: 32px; background: var(--bg-base); color: var(--text-primary); }
+  h1 { margin-bottom: 8px; }
+  .mono-label { margin-bottom: 32px; display: block; }
+  section { margin-bottom: 48px; }
+  h2 { margin-bottom: 16px; }
+  .button-row { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; margin-bottom: 16px; }
+  .variant-label { font-family: var(--font-mono); font-size: 10px; color: var(--text-tertiary); min-width: 120px; }
+  .btn-modern { margin: 0; }
+</style>
+</head>
+<body>
+  <h1>Button Components</h1>
+  <span class="mono-label">7k-design-system · Modern neon button system</span>
+
+  <section>
+    <h2>Primary Variants</h2>
+    <div class="button-row"><span class="variant-label">Primary</span><button class="btn-modern btn-modern-primary">Primary Action</button><button class="btn-modern btn-modern-primary btn-modern-sm">Small</button><button class="btn-modern btn-modern-primary btn-modern-lg">Large</button></div>
+    <div class="button-row"><span class="variant-label">Glow</span><button class="btn-modern btn-modern-glow">Deploy System</button></div>
+    <div class="button-row"><span class="variant-label">Glow Cyan</span><button class="btn-modern btn-modern-glow-cyan">Circle Launch</button></div>
+    <div class="button-row"><span class="variant-label">Glow Grid</span><button class="btn-modern btn-modern-glow-grid">Grid Init</button></div>
+  </section>
+
+  <section>
+    <h2>Secondary & Ghost</h2>
+    <div class="button-row"><span class="variant-label">Secondary</span><button class="btn-modern btn-modern-secondary">Cancel</button></div>
+    <div class="button-row"><span class="variant-label">Ghost</span><button class="btn-modern btn-modern-ghost">Learn more</button></div>
+    <div class="button-row"><span class="variant-label">Danger</span><button class="btn-modern btn-modern-danger">Delete project</button></div>
+  </section>
+
+  <section>
+    <h2>Sizes</h2>
+    <div class="button-row"><span class="variant-label">Small (sm)</span><button class="btn-modern btn-modern-primary btn-modern-sm">Deploy</button></div>
+    <div class="button-row"><span class="variant-label">Default</span><button class="btn-modern btn-modern-primary">Deploy</button></div>
+    <div class="button-row"><span class="variant-label">Large (lg)</span><button class="btn-modern btn-modern-primary btn-modern-lg">Deploy System</button></div>
+  </section>
+
+  <section>
+    <h2>Icon Buttons</h2>
+    <div class="button-row">
+      <button class="btn-modern btn-modern-primary btn-modern-icon">✕</button>
+      <button class="btn-modern btn-modern-secondary btn-modern-icon">☰</button>
+      <button class="btn-modern btn-modern-primary btn-modern-lg-icon">▶</button>
+    </div>
+  </section>
+
+  <section>
+    <h2>Button Group & Split</h2>
+    <div class="button-row" style="flex-direction:column;align-items:flex-start;gap:12px">
+      <div class="btn-group">
+        <button class="btn-modern btn-modern-primary">Save</button>
+        <button class="btn-modern btn-modern-primary">Publish</button>
+        <button class="btn-modern btn-modern-primary">Archive</button>
+      </div>
+      <div class="btn-split">
+        <button class="btn-modern btn-modern-primary">Deploy</button>
+        <button class="btn-modern btn-modern-primary">▼</button>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Loading State</h2>
+    <div class="button-row">
+      <button class="btn-modern btn-modern-primary btn-modern-loading"><span class="btn-label">Processing</span></button>
+    </div>
+  </section>
+
+  <section>
+    <h2>Real Product Copy Examples</h2>
+    <div class="button-row"><button class="btn-modern btn-modern-glow">Launch Dashboard</button></div>
+    <div class="button-row"><button class="btn-modern btn-modern-primary">Create Project</button><button class="btn-modern btn-modern-secondary">View Docs</button></div>
+    <div class="button-row"><button class="btn-modern btn-modern-glow-cyan">Start Pipeline</button><button class="btn-modern btn-modern-ghost">Configure</button></div>
+    <div class="button-row"><button class="btn-modern btn-modern-danger">Delete Workspace</button></div>
+  </section>
+</body>
+</html>

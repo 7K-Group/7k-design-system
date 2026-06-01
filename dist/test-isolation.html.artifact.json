@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "kind": "html",
+  "title": "dist/test-isolation.html",
+  "entry": "dist/test-isolation.html",
+  "renderer": "html",
+  "status": "complete",
+  "exports": [
+    "html",
+    "pdf",
+    "zip"
+  ],
+  "createdAt": "2026-06-01T20:49:16.446Z",
+  "updatedAt": "2026-06-01T20:49:16.446Z",
+  "metadata": {
+    "inferred": true,
+    "reconciled": true
+  }
+}

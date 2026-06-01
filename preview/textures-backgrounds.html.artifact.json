@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "kind": "html",
+  "title": "preview/textures-backgrounds.html",
+  "entry": "preview/textures-backgrounds.html",
+  "renderer": "html",
+  "status": "complete",
+  "exports": [
+    "html",
+    "pdf",
+    "zip"
+  ],
+  "createdAt": "2026-06-01T20:20:20.120Z",
+  "updatedAt": "2026-06-01T20:20:20.120Z",
+  "metadata": {
+    "inferred": true,
+    "reconciled": true
+  }
+}

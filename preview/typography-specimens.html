@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Typography · 7k-design-system</title>
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  body { padding: 32px; background: var(--bg-base); color: var(--text-primary); }
+  h1 { margin-bottom: 8px; }
+  .mono-label { margin-bottom: 32px; display: block; }
+  section { margin-bottom: 48px; }
+  h2 { margin-bottom: 16px; font-size: var(--text-h3); }
+  .specimen { border-bottom: 1px solid var(--border-subtle); padding: 16px 0; }
+  .specimen:last-child { border-bottom: none; }
+  .specimen .token { font-family: var(--font-mono); font-size: 11px; color: var(--text-tertiary); margin-bottom: 4px; }
+  .specimen .notes { font-family: var(--font-mono); font-size: 10px; color: var(--text-tertiary); }
+  .pixel-row { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; }
+  .pixel-card { padding: 16px; border: 2px solid #FFFFFF; text-align: center; min-width: 120px; }
+  .pixel-card .label { font-family: var(--font-mono); font-size: 10px; color: var(--text-tertiary); margin-top: 8px; }
+</style>
+</head>
+<body>
+  <h1>Typography Specimens</h1>
+  <span class="mono-label">7k-design-system · Geist + Geist Mono + Geist Pixel</span>
+
+  <section>
+    <h2>Geist Sans — Display & Body</h2>
+    <div class="specimen"><div class="token">--text-display · Geist 900 · -0.04em</div><div class="display">Display 7K</div><div class="notes">clamp(48px, 8vw, 160px)</div></div>
+    <div class="specimen"><div class="token">--text-h1 · Geist 700 · -0.04em · 4rem</div><div class="h1">Heading One</div></div>
+    <div class="specimen"><div class="token">--text-h2 · Geist 700 · -0.03em · 3rem</div><div class="h2">Heading Two</div></div>
+    <div class="specimen"><div class="token">--text-h3 · Geist 600 · -0.02em · 2rem</div><div class="h3">Heading Three</div></div>
+    <div class="specimen"><div class="token">--text-h4 · Geist 600 · -0.02em · 1.5rem</div><div class="h4">Heading Four</div></div>
+    <div class="specimen"><div class="token">--text-body-lg · Geist 400 · -0.01em · 1.125rem</div><div class="body-lg">Large body text for lede paragraphs and introductions. Built for midnight.</div></div>
+    <div class="specimen"><div class="token">--text-body · Geist 400 · -0.01em · 1rem</div><div class="body">Body text at default size. The quick brown fox jumps over the lazy dog. Tokyo neon atmosphere meets manga-influenced 1-bit design.</div></div>
+    <div class="specimen"><div class="token">--text-body-sm · Geist 400 · 0.875rem</div><div class="body-sm">Small body text for secondary content and supporting copy.</div></div>
+    <div class="specimen"><div class="token">--text-caption · Geist 500 · 0.75rem</div><div class="caption">Caption text for metadata and timestamps</div></div>
+  </section>
+
+  <section>
+    <h2>Geist Mono — "Connective Tissue"</h2>
+    <div class="specimen"><div class="token">--text-mono-label · Geist Mono 500 · 0.12em uppercase · 11px</div><div class="mono-label">SYSTEM INTEGRITY CHECK · ONLINE · 94.2% UPTIME</div></div>
+    <div class="specimen"><div class="token">--text-mono-body · Geist Mono 400 · 13px</div><div class="mono-body">const design = new System({ brand: '#FF0FF', theme: 'dark' });<br>console.log(design.accent); // magenta</div></div>
+    <div class="specimen"><div class="token">tabular-nums · mono numerics</div><div class="stat-value" style="margin-top:8px">1,024 · 98.7% · $47,291</div></div>
+  </section>
+
+  <section>
+    <h2>Geist Pixel — 5 Geometric Variants</h2>
+    <div class="pixel-row">
+      <div class="pixel-card"><div class="pixel-square" style="font-size:24px">Square 400</div><div class="label">7K parent · magenta</div></div>
+      <div class="pixel-card"><div class="pixel-circle" style="font-size:24px">Circle 500</div><div class="label">Circle · cyan</div></div>
+      <div class="pixel-card"><div class="pixel-grid" style="font-size:24px">Grid 600</div><div class="label">Grid · acid</div></div>
+      <div class="pixel-card"><div class="pixel-line" style="font-size:24px">Line 700</div><div class="label">Line · ember</div></div>
+      <div class="pixel-card"><div class="pixel-triangle" style="font-size:24px">Tri 800</div><div class="label">Triangle · solar</div></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Weight Scale</h2>
+    <div style="display:flex;gap:16px;flex-wrap:wrap">
+      <span style="font-weight:100">100 Thin</span>
+      <span style="font-weight:200">200 XL</span>
+      <span style="font-weight:300">300 Light</span>
+      <span style="font-weight:400">400 Reg</span>
+      <span style="font-weight:500">500 Med</span>
+      <span style="font-weight:600">600 Semi</span>
+      <span style="font-weight:700">700 Bold</span>
+      <span style="font-weight:800">800 XBold</span>
+      <span style="font-weight:900">900 Black</span>
+    </div>
+  </section>
+</body>
+</html>

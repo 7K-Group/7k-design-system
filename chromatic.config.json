@@ -1,0 +1,6 @@
+const config = {
+  projectId: 'Project:replace-with-your-project-id',
+  zip: true,
+};
+
+export default config;

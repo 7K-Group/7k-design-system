@@ -1,0 +1,271 @@
+/* ===========================================================
+      1-BIT TEXTURE BACKGROUNDS — manga screentone library
+   =========================================================== */
+
+/* ---- Scanline overlay ---- */
+.scanline { position: relative; overflow: hidden; }
+.scanline::after {
+  content: ''; position: absolute; inset: 0;
+  background: repeating-linear-gradient(0deg, transparent, transparent 2px, var(--texture-03) 2px, var(--texture-03) 4px);
+  pointer-events: none; animation: scanline-scroll 8s linear infinite; z-index: 1;
+}
+.scanline-fast { position: relative; overflow: hidden; }
+.scanline-fast::after {
+  content: ''; position: absolute; inset: 0;
+  background: repeating-linear-gradient(0deg, transparent, transparent 1px, var(--texture-05) 1px, var(--texture-05) 2px);
+  pointer-events: none; animation: scanline-scroll 3s linear infinite; z-index: 1;
+}
+
+/* ---- Halftone dots (manga screentone) ---- */
+.halftone-sm   { background-image: radial-gradient(var(--texture-08) 0.5px, transparent 0.5px); background-size: 4px 4px; }
+.halftone-md   { background-image: radial-gradient(var(--texture-05) 1px, transparent 1px); background-size: 6px 6px; }
+.halftone-lg   { background-image: radial-gradient(var(--texture-04) 1.5px, transparent 1.5px); background-size: 10px 10px; }
+.halftone-accent { background-image: radial-gradient(var(--brand-primary) 1px, transparent 1px); background-size: 8px 8px; }
+
+/* ---- Dot matrix ---- */
+.dot-matrix { background-image: radial-gradient(var(--texture-07) 0.5px, transparent 0.5px); background-size: 6px 6px; }
+.dot-matrix-dense  { background-image: radial-gradient(var(--texture-09) 0.5px, transparent 0.5px); background-size: 3px 3px; }
+.dot-matrix-sparse { background-image: radial-gradient(var(--texture-04) 1px, transparent 1px); background-size: 12px 12px; }
+
+/* ---- Diagonal stripes ---- */
+.diagonal-stripes {
+  background: repeating-linear-gradient(45deg, transparent, transparent 6px, var(--texture-04) 6px, var(--texture-04) 7px);
+}
+.diagonal-stripes-dense {
+  background: repeating-linear-gradient(45deg, transparent, transparent 3px, var(--texture-08) 3px, var(--texture-08) 4px);
+}
+.diagonal-stripes-negative {
+  background: repeating-linear-gradient(45deg, var(--onebit-black), var(--onebit-black) 6px, var(--onebit-white) 6px, var(--onebit-white) 7px);
+}
+
+/* ---- Horizontal / vertical stripes ---- */
+.stripes-h   { background: repeating-linear-gradient(0deg, transparent, transparent 8px, var(--texture-04) 8px, var(--texture-04) 9px); }
+.stripes-h-dense { background: repeating-linear-gradient(0deg, transparent, transparent 4px, var(--texture-08) 4px, var(--texture-08) 5px); }
+.stripes-v   { background: repeating-linear-gradient(90deg, transparent, transparent 8px, var(--texture-04) 8px, var(--texture-04) 9px); }
+.stripes-v-dense { background: repeating-linear-gradient(90deg, transparent, transparent 4px, var(--texture-08) 4px, var(--texture-08) 5px); }
+
+/* ---- Crosshatch ---- */
+.crosshatch {
+  background-image: repeating-linear-gradient(45deg, transparent, transparent 6px, var(--texture-04) 6px, var(--texture-04) 7px),
+                    repeating-linear-gradient(-45deg, transparent, transparent 6px, var(--texture-04) 6px, var(--texture-04) 7px);
+}
+.crosshatch-dense {
+  background-image: repeating-linear-gradient(45deg, transparent, transparent 3px, var(--texture-08) 3px, var(--texture-08) 4px),
+                    repeating-linear-gradient(-45deg, transparent, transparent 3px, var(--texture-08) 3px, var(--texture-08) 4px);
+}
+
+/* ---- Checkerboard ---- */
+.checkerboard {
+  background-image: linear-gradient(45deg, var(--texture-04) 25%, transparent 25%),
+                    linear-gradient(-45deg, var(--texture-04) 25%, transparent 25%),
+                    linear-gradient(45deg, transparent 75%, var(--texture-04) 75%),
+                    linear-gradient(-45deg, transparent 75%, var(--texture-04) 75%);
+  background-size: 12px 12px; background-position: 0 0, 0 6px, 6px -6px, -6px 0;
+}
+.checkerboard-onebit {
+  background-image: linear-gradient(45deg, var(--onebit-black) 25%, transparent 25%),
+                    linear-gradient(-45deg, var(--onebit-black) 25%, transparent 25%),
+                    linear-gradient(45deg, transparent 75%, var(--onebit-black) 75%),
+                    linear-gradient(-45deg, transparent 75%, var(--onebit-black) 75%);
+  background-size: 16px 16px; background-position: 0 0, 0 8px, 8px -8px, -8px 0;
+}
+
+/* ---- Noise (SVG fractal) — theme-aware (white for dark, black for light) ---- */
+.noise { position: relative; }
+.noise::before {
+  content: ''; position: absolute; inset: 0;
+  background-image: var(--texture-noise-svg);
+  background-size: 128px 128px; pointer-events: none; opacity: 0.5; z-index: 1;
+}
+.noise-heavy::before { opacity: 0.12; }
+
+/* ---- Vignette ---- */
+.vignette-onebit { position: relative; }
+.vignette-onebit::after {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse at center, transparent 50%, var(--onebit-black)80 100%);
+  pointer-events: none; z-index: 1;
+}
+.vignette-onebit-sharp::after {
+  background: radial-gradient(ellipse at center, transparent 30%, var(--onebit-black) 100%);
+}
+
+/* ---- Waves — repeating concentric arcs via layered radial gradients ---- */
+.waves {
+  background:
+    radial-gradient(ellipse at 50% 0%, transparent 60%, var(--texture-02) 60%, var(--texture-02) 61%),
+    radial-gradient(ellipse at 50% 0%, transparent 50%, var(--texture-02) 50%, var(--texture-02) 51%),
+    radial-gradient(ellipse at 50% 0%, transparent 40%, var(--texture-03) 40%, var(--texture-03) 41%),
+    radial-gradient(ellipse at 50% 0%, transparent 30%, var(--texture-02) 30%, var(--texture-02) 31%),
+    radial-gradient(ellipse at 50% 0%, transparent 20%, var(--texture-03) 20%, var(--texture-03) 21%),
+    radial-gradient(ellipse at 50% 0%, transparent 10%, var(--texture-02) 10%, var(--texture-02) 11%);
+  background-size: 100px 80px, 100px 80px, 100px 80px, 100px 80px, 100px 80px, 100px 80px;
+  background-position: 0 0, 0 10px, 0 20px, 0 30px, 0 40px, 0 50px;
+}
+.waves-dense {
+  background:
+    radial-gradient(ellipse at 50% 0%, transparent 65%, var(--texture-05) 65%, var(--texture-05) 66%),
+    radial-gradient(ellipse at 50% 0%, transparent 55%, var(--texture-04) 55%, var(--texture-04) 56%),
+    radial-gradient(ellipse at 50% 0%, transparent 45%, var(--texture-05) 45%, var(--texture-05) 46%),
+    radial-gradient(ellipse at 50% 0%, transparent 35%, var(--texture-04) 35%, var(--texture-04) 36%),
+    radial-gradient(ellipse at 50% 0%, transparent 25%, var(--texture-05) 25%, var(--texture-05) 26%),
+    radial-gradient(ellipse at 50% 0%, transparent 15%, var(--texture-04) 15%, var(--texture-04) 16%);
+  background-size: 60px 50px, 60px 50px, 60px 50px, 60px 50px, 60px 50px, 60px 50px;
+  background-position: 0 0, 0 8px, 0 16px, 0 24px, 0 32px, 0 40px;
+}
+
+/* ---- Concentric rings — target pattern from center ---- */
+.concentric-rings {
+  background:
+    radial-gradient(circle at 50% 50%, transparent 10%, var(--texture-03) 10%, var(--texture-03) 11%, transparent 11%),
+    radial-gradient(circle at 50% 50%, transparent 20%, var(--texture-03) 20%, var(--texture-03) 21%, transparent 21%),
+    radial-gradient(circle at 50% 50%, transparent 30%, var(--texture-04) 30%, var(--texture-04) 31%, transparent 31%),
+    radial-gradient(circle at 50% 50%, transparent 40%, var(--texture-03) 40%, var(--texture-03) 41%, transparent 41%),
+    radial-gradient(circle at 50% 50%, transparent 50%, var(--texture-03) 50%, var(--texture-03) 51%, transparent 51%),
+    radial-gradient(circle at 50% 50%, transparent 60%, var(--texture-02) 60%, var(--texture-02) 61%);
+  background-size: 200px 200px;
+  background-position: center;
+}
+.concentric-rings-dense {
+  background:
+    radial-gradient(circle at 50% 50%, transparent 8%, var(--texture-06) 8%, var(--texture-06) 9%, transparent 9%),
+    radial-gradient(circle at 50% 50%, transparent 16%, var(--texture-05) 16%, var(--texture-05) 17%, transparent 17%),
+    radial-gradient(circle at 50% 50%, transparent 24%, var(--texture-06) 24%, var(--texture-06) 25%, transparent 25%),
+    radial-gradient(circle at 50% 50%, transparent 32%, var(--texture-05) 32%, var(--texture-05) 33%, transparent 33%),
+    radial-gradient(circle at 50% 50%, transparent 40%, var(--texture-06) 40%, var(--texture-06) 41%, transparent 41%),
+    radial-gradient(circle at 50% 50%, transparent 48%, var(--texture-05) 48%, var(--texture-05) 49%);
+  background-size: 120px 120px;
+  background-position: center;
+}
+
+/* ---- Grid dots — dots at intersection points of a grid ---- */
+.grid-dots {
+  background-image:
+    radial-gradient(var(--texture-06) 1px, transparent 1px),
+    radial-gradient(var(--texture-06) 1px, transparent 1px);
+  background-size: 16px 16px, 16px 16px;
+  background-position: 0 0, 8px 8px;
+}
+.grid-dots-dense {
+  background-image:
+    radial-gradient(var(--texture-09) 0.8px, transparent 0.8px),
+    radial-gradient(var(--texture-09) 0.8px, transparent 0.8px);
+  background-size: 8px 8px, 8px 8px;
+  background-position: 0 0, 4px 4px;
+}
+.grid-dots-accent {
+  background-image:
+    radial-gradient(var(--magenta-500 / 0.15) 1px, transparent 1px),
+    radial-gradient(var(--magenta-500 / 0.15) 1px, transparent 1px);
+  background-size: 20px 20px, 20px 20px;
+  background-position: 0 0, 10px 10px;
+}
+
+/* ---- Rain — slanted falling line pattern ---- */
+.rain {
+  background:
+    repeating-linear-gradient(
+      20deg,
+      transparent, transparent 3px,
+      var(--texture-02) 3px, var(--texture-02) 4px
+    );
+  background-size: 8px 20px;
+}
+.rain-dense {
+  background:
+    repeating-linear-gradient(
+      20deg,
+      transparent, transparent 2px,
+      var(--texture-05) 2px, var(--texture-05) 3px
+    );
+  background-size: 6px 12px;
+}
+.rain-angled {
+  background:
+    repeating-linear-gradient(
+      35deg,
+      transparent, transparent 3px,
+      var(--texture-03) 3px, var(--texture-03) 4px
+    ),
+    repeating-linear-gradient(
+      -35deg,
+      transparent, transparent 6px,
+      var(--texture-02) 6px, var(--texture-02) 7px
+    );
+  background-size: 12px 24px;
+}
+
+/* ---- Starburst — radiating lines from center ---- */
+.starburst {
+  background:
+    repeating-conic-gradient(
+      var(--texture-03) 0%, var(--texture-03) 0.5%,
+      transparent 0.5%, transparent 5%
+    );
+  background-size: 100% 100%;
+}
+.starburst-dense {
+  background:
+    repeating-conic-gradient(
+      var(--texture-06) 0%, var(--texture-06) 0.3%,
+      transparent 0.3%, transparent 3%
+    );
+}
+.starburst-accent {
+  background:
+    repeating-conic-gradient(
+      color-mix(in srgb, var(--brand-primary) 12%, transparent) 0%,
+      color-mix(in srgb, var(--brand-primary) 12%, transparent) 0.5%,
+      transparent 0.5%, transparent 4%
+    );
+}
+
+/* ---- Zigzag — sharp sawtooth line pattern ---- */
+.zigzag {
+  background:
+    repeating-linear-gradient(
+      75deg,
+      transparent, transparent 8px,
+      var(--texture-04) 8px, var(--texture-04) 9px
+    ),
+    repeating-linear-gradient(
+      -75deg,
+      transparent, transparent 8px,
+      var(--texture-04) 8px, var(--texture-04) 9px
+    );
+  background-size: 24px 12px;
+}
+.zigzag-dense {
+  background:
+    repeating-linear-gradient(
+      75deg,
+      transparent, transparent 4px,
+      var(--texture-07) 4px, var(--texture-07) 5px
+    ),
+    repeating-linear-gradient(
+      -75deg,
+      transparent, transparent 4px,
+      var(--texture-07) 4px, var(--texture-07) 5px
+    );
+  background-size: 12px 6px;
+}
+.zigzag-horizontal {
+  background:
+    repeating-linear-gradient(
+      165deg,
+      transparent, transparent 8px,
+      var(--texture-04) 8px, var(--texture-04) 9px
+    ),
+    repeating-linear-gradient(
+      -165deg,
+      transparent, transparent 8px,
+      var(--texture-04) 8px, var(--texture-04) 9px
+    );
+  background-size: 24px 12px;
+}
+
+/* ---- Section separators (theme-aware: white in dark, black in light) ---- */
+.separator-onebit { width: 100%; height: 1px; background: var(--texture-solid); border: none; margin: 0; opacity: 0.25; }
+.separator-onebit-thick { height: 2px; opacity: 0.4; }
+.separator-onebit-dashed { height: 0; border-top: 2px dashed var(--texture-solid); background: transparent; opacity: 0.3; }
+.separator-onebit-dotted { height: 0; border-top: 2px dotted var(--texture-solid); background: transparent; opacity: 0.25; }

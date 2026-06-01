@@ -1,0 +1,57 @@
+/* ===========================================================
+   FONTS — 7K Design System
+   Three-font system: Geist Sans + Geist Mono + Geist Pixel
+   
+   Strategy:
+   - Geist Sans & Mono: Loaded via CDN with swap display
+   - Geist Pixel: Self-hosted local files
+   
+   For self-hosting Geist Sans/Mono, install via npm:
+     npm install geist
+   Then import from node_modules instead of CDN.
+   =========================================================== */
+
+/* ---- Geist Sans & Mono (CDN with swap display) ---- */
+@import url('https://cdn.jsdelivr.net/npm/geist@1.3.0/dist/font/css/geist.min.css') layer(fonts);
+@import url('https://cdn.jsdelivr.net/npm/geist@1.3.0/dist/font/css/geist-mono.min.css') layer(fonts);
+
+/* ---- Geist Pixel — 5 geometric variants (self-hosted) ---- */
+@font-face {
+  font-family: 'Geist Pixel';
+  src: url('../fonts/GeistPixel-Square.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Geist Pixel';
+  src: url('../fonts/GeistPixel-Circle.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Geist Pixel';
+  src: url('../fonts/GeistPixel-Grid.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Geist Pixel';
+  src: url('../fonts/GeistPixel-Line.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Geist Pixel';
+  src: url('../fonts/GeistPixel-Triangle.ttf') format('truetype');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}

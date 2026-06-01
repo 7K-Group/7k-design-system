@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>7k-design-system — Applied UI Kit</title>
+  <link rel="stylesheet" href="../../colors_and_type.css">
+  <style>
+    body { margin: 0; background: var(--bg-base); color: var(--text-primary); }
+    #root { min-height: 100vh; }
+    .section { padding: 64px 0; }
+    .container { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" crossorigin></script>
+
+  <script src="components/Icon7k.js"></script>
+  <script src="components/Navbar.js"></script>
+  <script src="components/HeroSection.js"></script>
+  <script src="components/PhilosophySection.js"></script>
+  <script src="components/ProjectsSection.js"></script>
+  <script src="components/StatsSection.js"></script>
+  <script src="components/InteractiveSection.js"></script>
+  <script src="components/DataSection.js"></script>
+  <script src="components/EffectsSection.js"></script>
+  <script src="components/OverlaySection.js"></script>
+  <script src="components/CtaSection.js"></script>
+  <script src="components/FooterSection.js"></script>
+  <script src="components/ThemeToggle.js"></script>
+
+  <noscript>
+    <div style="padding:40px;background:#0A0A0D;color:#fff;font-family:monospace;text-align:center">
+      <h2>JavaScript required</h2>
+      <p>This UI kit demo requires JavaScript to render the React component tree.</p>
+    </div>
+  </noscript>
+  <script>
+    (function() {
+      try {
+        var h = React.createElement;
+
+        function App() {
+          try {
+            return h('div', null,
+              typeof window.Navbar !== 'undefined' ? h(window.Navbar) : null,
+              typeof window.HeroSection !== 'undefined' ? h(window.HeroSection) : null,
+              typeof window.PhilosophySection !== 'undefined' ? h(window.PhilosophySection) : null,
+              typeof window.ProjectsSection !== 'undefined' ? h(window.ProjectsSection) : null,
+              typeof window.StatsSection !== 'undefined' ? h(window.StatsSection) : null,
+              typeof window.InteractiveSection !== 'undefined' ? h(window.InteractiveSection) : null,
+              typeof window.DataSection !== 'undefined' ? h(window.DataSection) : null,
+              typeof window.EffectsSection !== 'undefined' ? h(window.EffectsSection) : null,
+              typeof window.OverlaySection !== 'undefined' ? h(window.OverlaySection) : null,
+              typeof window.CtaSection !== 'undefined' ? h(window.CtaSection) : null,
+              typeof window.FooterSection !== 'undefined' ? h(window.FooterSection) : null
+            );
+          } catch (e) {
+            console.error('App render error:', e);
+            return h('div', { style: { padding: 40, color: 'var(--status-danger)' } },
+              'Render error: ' + e.message
+            );
+          }
+        }
+
+        var root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(h(App));
+      } catch (e) {
+        console.error('Fatal init error:', e);
+        document.getElementById('root').innerHTML =
+          '<div style="padding:40px;background:#0A0A0D;color:#FF3B5C;font-family:monospace">' +
+          '<h2>Init Error</h2><pre>' + e.message + '</pre></div>';
+      }
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,108 @@
+import { Meta, ColorPalette, ColorItem } from '@storybook/blocks';
+
+<Meta title="Design System/Overview" />
+
+# 7K Design System
+
+> Dark-first, neon-accented, manga-inflected design system for multi-project tech company 7K.
+
+## Design Principles
+
+1. **Dark-first** — Default to dark theme; light mode is opt-in
+2. **Token-driven** — Always use CSS custom properties; never hard-code values
+3. **1-bit aesthetic** — Pure black/white elements, zero radius, 2px borders
+4. **Accessibility** — Maintain WCAG 2.1 AA compliance minimum
+5. **Performance** — Keep bundle size reasonable; prefer CSS over JS
+
+## Color System
+
+### Brand Colors
+
+<ColorPalette>
+  <ColorItem
+    title="Magenta (Primary)"
+    subtitle="Brand color"
+    colors={{
+      '50': '#FFE5FF',
+      '100': '#FFC2FF',
+      '200': '#FF99FF',
+      '300': '#FF66FF',
+      '400': '#FF33FF',
+      '500': '#FF00FF',
+      '600': '#D600D6',
+      '700': '#A800A8',
+      '800': '#800080',
+      '900': '#570057',
+      '950': '#330033',
+    }}
+  />
+  <ColorItem
+    title="Cyan (Circle)"
+    subtitle="Project accent"
+    colors={{
+      '50': '#E5FBFF',
+      '100': '#B8F6FF',
+      '200': '#8AF0FF',
+      '300': '#5CE9FF',
+      '400': '#2EE2FF',
+      '500': '#00E5FF',
+      '600': '#00B8CC',
+      '700': '#008FA0',
+      '800': '#006B78',
+      '900': '#00474D',
+      '950': '#002A2E',
+    }}
+  />
+  <ColorItem
+    title="Acid (Grid)"
+    subtitle="Project accent"
+    colors={{
+      '50': '#F2FFE5',
+      '100': '#DEFFB8',
+      '200': '#CAFF8A',
+      '300': '#B7FF5C',
+      '400': '#A3FF2E',
+      '500': '#7CFF00',
+      '600': '#66CC00',
+      '700': '#4D9900',
+      '800': '#3A7300',
+      '900': '#274D00',
+      '950': '#172E00',
+    }}
+  />
+</ColorPalette>
+
+## Typography
+
+The system uses three fonts:
+
+- **Geist Sans** — Display and body text
+- **Geist Mono** — Labels, code, and technical text
+- **Geist Pixel** — Ornamental and display (5 geometric variants)
+
+## Usage
+
+```tsx
+import { Button, ThemeProvider } from '7k-design-system/react';
+import '7k-design-system/css';
+
+function App() {
+  return (
+    <ThemeProvider>
+      <Button variant="primary">Click me</Button>
+    </ThemeProvider>
+  );
+}
+```
+
+Or use CSS only:
+
+```css
+@import '7k-design-system/css';
+
+.my-component {
+  background: var(--bg-elevated);
+  color: var(--text-primary);
+  border: 2px solid var(--border-default);
+}
+```

@@ -1,0 +1,28 @@
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+  .noise-animated::before { animation: none !important; }
+  .iso-grid-scroll,
+  .iso-terrain-shift,
+  .iso-drift,
+  .iso-bounce,
+  .iso-sway,
+  .iso-morph,
+  .iso-rain,
+  .iso-rain-2,
+  .iso-rain-3,
+  .iso-rain-4,
+  .iso-rain-5,
+  .iso-ripple,
+  .iso-ripple-2,
+  .iso-ripple-3,
+  .iso-ripple-4,
+  .iso-ripple-5,
+  .iso-step-rise,
+  .iso-step-rise-2,
+  .iso-step-rise-3,
+  .iso-step-rise-4,
+  .iso-step-rise-5 { animation: none !important; }
+}

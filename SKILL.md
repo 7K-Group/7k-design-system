@@ -1,6 +1,6 @@
 ---
 name: 7k-design-system
-description: Dark, neon-accented, manga-inflected design system for multi-project tech company 7K. Three-font system (Geist sans + Geist Mono + Geist Pixel 5 geometric variants), #FF0FF brand pulse, Tokyo neon atmosphere with 1-bit manga punctuation. 10 background texture patterns, 40+ 1-bit components, 20+ animation keyframes. One brand, sub-project accent overrides.
+description: Dark, neon-accented, manga-inflected design system for multi-project tech company 7K. Three-font system (Geist sans + Geist Mono + Geist Pixel 5 geometric variants), #FF0FF brand pulse, Tokyo neon atmosphere with 1-bit manga punctuation. 10 background texture patterns, 40+ 1-bit components, 20+ animation keyframes, React TypeScript UI kit (Button, Input, Badge, ThemeToggle, ThemeProvider, useTheme). One brand, sub-project accent overrides. Production-ready npm package with Vite + PostCSS build, Vitest test suite, Storybook documentation.
 user-invocable: true
 ---
 
@@ -12,13 +12,17 @@ This package is organized as a Claude Design-style reusable skill. Each file bel
 
 | File / dir | Role | Evidence basis |
 |---|---|---|---|
-| `DESIGN.md` | Canonical rules — visual foundations, color, type, spacing, components, motion, voice, anti-patterns | Each section opens with `Source context reference:` citing the brand brief |
-| `colors_and_type.css` | Reusable CSS — all tokens as custom properties, concrete hex + token values in component classes, utilities, keyframes | Tokens derived from brand hex #FF00FF → `--magenta-500`, Geist Pixel type (5 variants), dark-first theme |
+| `DESIGN.md` | Canonical rules — visual foundations, color, type, spacing, components, motion, voice, anti-patterns, React UI kit, modular CSS architecture, build system, testing | Each section opens with `Source context reference:` citing the brand brief |
+| `src/css/index.css` | Modular CSS entry point — imports 10 source files (fonts, tokens, themes, base, textures, isometric, components, modifiers, animations, accessibility) | Compiled to `dist/7k-design-system.css` via Vite + PostCSS |
+| `src/css/tokens.css` | All design tokens: 11-step color ramps, semantic role mapping, typography, spacing, motion, layout | Single source of truth for all token values |
+| `src/css/components.css` | 40+ 1-bit component classes + modern neon button system | Zero radius, 2px borders, invert hover, accent modifiers |
+| `src/react/` | TypeScript React UI kit — Button, Input, Badge, ThemeToggle, ThemeProvider, useTheme | Thin wrappers over CSS classes with ref forwarding |
 | `preview/` | 6 focused HTML review cards (colors-primary, typography-specimens, spacing-tokens, components-buttons, textures-backgrounds, brand-assets) | Each card demonstrates concrete token values with rendered swatches and specimens |
-| `ui_kits/app/` | Applied React interface kit (plain JS, no JSX) — 11 landing page section components composing into a full company surface | Company landing page with hero, philosophy, projects, stats, interactive demos, effects, overlays, CTA, footer |
+| `examples/legacy/ui_kits/app/` | Legacy landing page kit (plain JS React.createElement) — hero, philosophy, projects, stats, demos, effects, overlays, CTA, footer | Preserved for reference; new work uses the React UI kit |
 | `build/` | Brand runtime assets — logo-7k.svg, logo-7k-light.svg, icon.svg | Star-burst pattern SVG logo with color and light-background variants |
 | `fonts/` | GeistPixel-{Square,Circle,Grid,Line,Triangle}.ttf | Geist Pixel loaded via `@font-face` — 5 geometric variant TTF files |
-| `source_examples/` | Preserved high-signal source component snapshots | Sidebar.js and App.js from the dashboard UI kit pattern |
+| `tests/` | Vitest test suite — Button, Input, Badge, ThemeProvider, ThemeToggle, a11y | @testing-library/react + jsdom + jest-axe |
+| `src/stories/` | Storybook documentation — Overview, Tokens, Components, Textures | MDX + CSF stories for interactive documentation |
 
 ## Source context
 
@@ -43,26 +47,81 @@ Use when generating artifacts for any 7k-design-system branded surface. The foll
 | Surface | Read these files | Key rules to follow |
 |---|---|---|
 | Company website | DESIGN.md §1–5, preview/brand-assets.html | Dark bg, neon accent, scanline hero sections, "7K" logo |
-| Product dashboard | DESIGN.md §5–7, source_examples/Sidebar.js, source_examples/App.js, preview/components-buttons.html | Sidebar nav, card grids, tabular data, 1-bit trigger animations on buttons |
-| Sub-project landing | DESIGN.md §2, colors_and_type.css | Override `--accent-circle` / `--accent-grid` / `--accent-line` per child project, keep all other tokens unchanged |
+| Product dashboard | DESIGN.md §5–7, preview/components-buttons.html | Sidebar nav, card grids, tabular data, 1-bit trigger animations on buttons |
+| Sub-project landing | DESIGN.md §2, src/css/tokens.css | Override `--accent-circle` / `--accent-grid` / `--accent-line` per child project, keep all other tokens unchanged |
 | Internal tool | DESIGN.md §3, §5, §9, preview/spacing-tokens.html | Mono numerics, dense tables, minimum decoration |
 | Mobile app | DESIGN.md §5 (responsive), preview/colors-theme-dark.html or preview/colors-theme-light.html | 4-column grid at 480px, bottom tab nav |
 | Pitch deck / slides | DESIGN.md §7–9 | Scanline/glitch used sparingly, no warm tones |
+| React application | DESIGN.md §8 (React UI kit), CONSUMER_GUIDE.md | Import from `7k-design-system/react`, wrap with `ThemeProvider` |
+| CSS-only static site | DESIGN.md §6, §9, CONSUMER_GUIDE.md §2 | Import `7k-design-system/css`, use component classes directly |
 
 ## How to use
 
 ### Step 1 — Read the source
 Open `DESIGN.md §1` for the source context first. Then read `DESIGN.md` sections §1–2 (visual theme + color), §8 (voice), and §9 (anti-patterns) for the posture and constraints.
 
-### Step 2 — Bind tokens
-Import `colors_and_type.css` in the artifact's `<head>`:
+### Step 2 — Choose your integration path
+
+#### Path A: CSS-only (static sites, vanilla JS, full control)
+
+Import the compiled CSS bundle:
+
 ```html
-<link rel="stylesheet" href="colors_and_type.css">
+<link rel="stylesheet" href="node_modules/7k-design-system/dist/7k-design-system.css">
 ```
-Or inline its content for a self-contained file.
+
+Or via ES module import:
+```typescript
+import '7k-design-system/css';
+```
+
+Or import modular CSS for tree-shaking:
+```typescript
+import '7k-design-system/css/tokens';     // Tokens only
+import '7k-design-system/css/components'; // Components only
+import '7k-design-system/css/textures';   // Textures only
+import '7k-design-system/css/animations'; // Animations only
+```
+
+#### Path B: React (TypeScript components, theme management)
+
+```tsx
+// main.tsx — import CSS once at app entry
+import '7k-design-system/css';
+
+// App.tsx — wrap with ThemeProvider
+import { ThemeProvider } from '7k-design-system/react';
+
+function App() {
+  return (
+    <ThemeProvider defaultTheme="dark">
+      <YourApp />
+    </ThemeProvider>
+  );
+}
+```
+
+Use components:
+```tsx
+import { Button, Input, Badge, ThemeToggle, useTheme } from '7k-design-system/react';
+
+function Header() {
+  const { theme, toggleTheme } = useTheme();
+  return (
+    <header>
+      <ThemeToggle />
+      <Badge variant="success">Online</Badge>
+      <Button variant="primary" onClick={handleClick}>Submit</Button>
+      <Input placeholder="Search..." value={query} onChange={setQuery} />
+    </header>
+  );
+}
+```
 
 ### Step 3 — Override accent for sub-projects
+
 Set the project's assigned accent token at the scope:
+
 ```css
 .project-flow {
   --accent-circle: var(--cyan-500);    /* cyan accent */
@@ -70,6 +129,7 @@ Set the project's assigned accent token at the scope:
   --accent-line: var(--ember-500);     /* ember/orange accent */
 }
 ```
+
 Parent 7K uses `--accent-square` (magenta). Child projects pick one of the other four accent tokens.
 
 ### Step 4 — Preview token groups
@@ -81,8 +141,8 @@ Open any card in `preview/`:
 - `preview/textures-backgrounds.html` — 10 background texture categories with composition demos
 - `preview/brand-assets.html` — logo variants + brand in context
 
-### Step 5 — Reference the applied UI kit
-Open `ui_kits/app/index.html` in a browser. Components under `ui_kits/app/components/` demonstrate landing page patterns with React (plain JS, `React.createElement`). Each component exposes `window.ComponentName` per Claude Design conventions.
+### Step 5 — Reference the legacy UI kit
+Open `examples/legacy/ui_kits/app/index.html` in a browser. Components under `examples/legacy/ui_kits/app/components/` demonstrate landing page patterns with React (plain JS, `React.createElement`). Each component exposes `window.ComponentName` per Claude Design conventions. **Note:** This is legacy code preserved for reference. New work should use the React UI kit in `src/react/`.
 
 ### Step 6 — Use build assets
 Reference `build/logo-7k.svg` (color, default), `build/logo-7k-light.svg` (light backgrounds), or `build/icon.svg` (app icon).
@@ -98,6 +158,95 @@ Reference `build/logo-7k.svg` (color, default), `build/logo-7k-light.svg` (light
 | 1-bit textures | 10 pattern categories: scanline, halftone (3 densities), dot matrix (3 densities), diagonal stripes (3 variants), horizontal/vertical stripes, crosshatch (2 densities), checkerboard, noise (2 opacities), vignette (2 sharpnesses) | "Manga-influenced 1-bit" |
 | 1-bit animations | 20+ keyframes organized as ambient (flicker, blink, neon-pulse, shimmer, accent-flicker, frame-step) and trigger (glitch, glitch-complex, pixel-dots, invert-flash, typewriter, pixel-fade, scan-reveal, slide-up-reveal) | "abstract 1-bit animations" |
 | 1-bit components | 40+ unified components with zero radius, 2px borders, invert hover, thin accent layer modifiers (accent-border-top, accent-bar, accent-dot, glow-mod, accent-corner) | "Manga-influenced 1-bit" |
+| React UI kit | Button, Input, Badge, ThemeToggle, ThemeProvider, useTheme — TypeScript components with ref forwarding | Production-ready component library |
+| Modular CSS | 10 source files compiled via Vite + PostCSS; standalone exports for tokens, components, textures, animations | Tree-shakeable, performant |
 | Sub-projects | Accent token override via `--accent-square|triangle|circle|grid|line` — parent 7K stays magenta | "differentiate main company with projects" |
 | Spacing | 4px grid in rem, 14-step scale (0–128px) | "very complete and detailed" |
 | Reduced motion | All animations disabled at `prefers-reduced-motion: reduce` | System accessibility policy |
+| Testing | Vitest + @testing-library/react + jest-axe — 6 test files covering components and a11y | Production quality assurance |
+| Documentation | Storybook with Overview, Tokens, Components, and Textures stories | Interactive component documentation |
+
+## Quick reference — exact class names and tokens
+
+### Modern button classes (use these, not legacy .btn-*)
+```
+.btn-modern .btn-modern-primary .btn-modern-secondary .btn-modern-ghost
+.btn-modern-glow .btn-modern-glow-cyan .btn-modern-glow-grid .btn-modern-danger
+.btn-modern-sm .btn-modern-lg .btn-modern-icon .btn-modern-lg-icon .btn-modern-loading
+```
+
+### Texture classes
+```
+.scanline .scanline-fast
+.halftone-sm .halftone-md .halftone-lg .halftone-accent
+.dot-matrix-dense .dot-matrix .dot-matrix-sparse
+.diagonal-stripes .diagonal-stripes-dense .diagonal-stripes-negative
+.stripes-h .stripes-h-dense .stripes-v .stripes-v-dense
+.crosshatch .crosshatch-dense
+.checkerboard .checkerboard-onebit
+.noise .noise-heavy .noise-animated
+.vignette-onebit .vignette-onebit-sharp
+```
+
+### Animation classes
+```
+.glitch .glitch-complex .glitch-accent
+.flicker .flicker-fast .blink .blink-fast
+.typewriter .neon-pulse .neon-pulse-cyan
+.scan-reveal .pixel-fade-in .invert-flash
+.pixel-dots .pixel-dots-fast .accent-flicker
+.slide-up-reveal .shimmer .frame-step .spinner .skeleton
+.iso-float .iso-float-spin .iso-grid-scroll .iso-terrain-shift
+.iso-assemble .iso-assemble-2 ..-5 .iso-perspective-dolly .iso-step-build
+```
+
+### Key role tokens (always use these, never raw ramps)
+```
+--bg-void --bg-base --bg-elevated --bg-raised --bg-overlay --bg-pressed
+--text-primary --text-secondary --text-tertiary --text-disabled --text-inverse
+--border-subtle --border-default --border-strong --border-focus --border-brand
+--brand-primary --brand-primary-hover --brand-primary-active --brand-primary-glow
+--status-success --status-warning --status-danger --status-info --status-neutral
+--accent-square --accent-triangle --accent-circle --accent-grid --accent-line
+```
+
+## Build and development
+
+```bash
+# Development
+npm run dev           # Vite dev server
+npm run storybook     # Storybook at http://localhost:6006
+
+# Build
+npm run build         # CSS + React + assets
+npm run build:css     # CSS bundle only
+npm run build:react   # React bundle only
+
+# Quality
+npm test              # Unit tests (Vitest)
+npm run test:a11y     # Accessibility tests (axe-core)
+npm run lint          # ESLint + Stylelint
+npm run typecheck     # TypeScript check
+npm run format        # Prettier format
+```
+
+## Package exports reference
+
+```typescript
+// Full CSS bundle
+import '7k-design-system/css';
+
+// Modular CSS (tree-shakeable)
+import '7k-design-system/css/tokens';
+import '7k-design-system/css/components';
+import '7k-design-system/css/textures';
+import '7k-design-system/css/animations';
+
+// React components + hooks
+import { Button, Input, Badge, ThemeToggle, ThemeProvider, useTheme } from '7k-design-system/react';
+
+// Static assets
+import logo from '7k-design-system/build/logo-7k.svg';
+import logoLight from '7k-design-system/build/logo-7k-light.svg';
+import icon from '7k-design-system/build/icon.svg';
+```

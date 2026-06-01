@@ -78,12 +78,8 @@ Every design rule is grounded in the original brand brief (quoted inline in `DES
 │   ├── textures-backgrounds.html
 │   └── brand-assets.html
 │
-├── source_examples/             # Preserved high-signal component snapshots
-│   ├── README.md
-│   ├── App.js                   # Dashboard shell with sidebar + chat + project cards
-│   └── Sidebar.js               # Collapsible sidebar with nav + accent dots + status
-│
-├── ui_kits/app/                 # Applied React interface kit
+├── examples/legacy/             # Legacy UI kit (deprecated)
+│   └── ui_kits/app/             # Applied React interface kit
 │   ├── index.html               # Runnable entry point (loads React 18 + CSS)
 │   ├── README.md                # UI kit documentation
 │   └── components/              # 11 modular React components (plain JS, no JSX)

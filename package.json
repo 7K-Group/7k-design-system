@@ -2,7 +2,29 @@
   "name": "7k-design-system",
   "version": "1.0.0-alpha.1",
   "description": "Dark, neon-accented, manga-inflected design system for multi-project tech company 7K. Three-font system (Geist sans + Geist Mono + Geist Pixel 5 geometric variants), #FF0FF brand pulse, Tokyo neon atmosphere with 1-bit manga punctuation.",
-  "main": "dist/7k-design-system.css",
+  "type": "module",
+  "main": "./dist/7k-design-system.css",
+  "module": "./dist/7k-design-system.esm.css",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/7k-design-system.css",
+      "require": "./dist/7k-design-system.css",
+      "types": "./dist/index.d.ts"
+    },
+    "./css": "./dist/7k-design-system.css",
+    "./css/tokens": "./dist/tokens.css",
+    "./css/components": "./dist/components.css",
+    "./css/textures": "./dist/textures.css",
+    "./css/animations": "./dist/animations.css",
+    "./react": {
+      "import": "./dist/react/index.js",
+      "require": "./dist/react/index.cjs",
+      "types": "./dist/react/index.d.ts"
+    },
+    "./fonts/*": "./fonts/*",
+    "./build/*": "./build/*"
+  },
   "files": [
     "dist/",
     "fonts/",
@@ -10,11 +32,35 @@
     "preview/",
     "DESIGN.md",
     "SKILL.md",
-    "README.md"
+    "README.md",
+    "CHANGELOG.md",
+    "CONSUMER_GUIDE.md",
+    "LICENSE"
+  ],
+  "sideEffects": [
+    "*.css"
   ],
   "scripts": {
-    "build": "cp colors_and_type.css dist/7k-design-system.css && cp -r fonts dist/ && cp -r build dist/ && cp -r preview dist/",
-    "test": "echo 'Open dist/test-isolation.html in a browser to verify'"
+    "dev": "vite",
+    "build": "npm run build:css && npm run build:react && npm run build:copy-assets",
+    "build:css": "vite build --config vite.css.config.ts",
+    "build:react": "vite build --config vite.react.config.ts",
+    "build:copy-assets": "node scripts/copy-assets.js",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:a11y": "vitest run --config vitest.a11y.config.ts",
+    "lint": "npm run lint:js && npm run lint:css",
+    "lint:js": "eslint src --ext .ts,.tsx,.js,.jsx",
+    "lint:css": "stylelint 'src/**/*.css' 'colors_and_type.css'",
+    "lint:fix": "npm run lint:js -- --fix && npm run lint:css -- --fix",
+    "format": "prettier --write 'src/**/*.{ts,tsx,js,jsx,css,json,md}'",
+    "format:check": "prettier --check 'src/**/*.{ts,tsx,js,jsx,css,json,md}'",
+    "typecheck": "tsc --noEmit",
+    "preview": "vite preview",
+    "semantic-release": "semantic-release",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build",
+    "chromatic": "npx chromatic --exit-zero-on-changes"
   },
   "keywords": [
     "design-system",
@@ -25,7 +71,9 @@
     "1-bit",
     "geist",
     "typography",
-    "tokens"
+    "tokens",
+    "react",
+    "components"
   ],
   "author": "7K",
   "license": "MIT",
@@ -37,6 +85,63 @@
     "url": "https://github.com/your-org/7k-design-system/issues"
   },
   "homepage": "https://github.com/your-org/7k-design-system#readme",
-  "peerDependencies": {},
-  "devDependencies": {}
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
+  "peerDependencies": {
+    "react": ">=18.0.0",
+    "react-dom": ">=18.0.0"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": true
+    },
+    "react-dom": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/git": "^10.0.1",
+    "@storybook/addon-a11y": "^10.4.1",
+    "@storybook/addon-docs": "^10.4.1",
+    "@storybook/react-vite": "^10.4.1",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
+    "@types/jest-axe": "^3.5.9",
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "@vitejs/plugin-react": "^4.2.0",
+    "@vitest/browser": "^1.0.0",
+    "@vitest/coverage-v8": "^1.0.0",
+    "autoprefixer": "^10.4.16",
+    "axe-core": "^4.8.0",
+    "chromatic": "^17.2.0",
+    "cssnano": "^6.0.1",
+    "eslint": "^8.55.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-react": "^7.33.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.5",
+    "eslint-plugin-storybook": "^10.4.1",
+    "jest-axe": "^10.0.0",
+    "jsdom": "^23.0.0",
+    "playwright": "^1.60.0",
+    "postcss": "^8.4.32",
+    "postcss-custom-properties": "^13.3.2",
+    "postcss-import": "^15.1.0",
+    "postcss-nesting": "^12.0.1",
+    "prettier": "^3.1.1",
+    "semantic-release": "^22.0.0",
+    "storybook": "^10.4.1",
+    "stylelint": "^16.0.0",
+    "stylelint-config-standard": "^36.0.0",
+    "typescript": "^5.3.0",
+    "vite": "^5.0.0",
+    "vite-plugin-dts": "^3.6.0",
+    "vitest": "^1.0.0"
+  }
 }

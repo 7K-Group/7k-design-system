@@ -1,9 +1,11 @@
 # 7k-design-system
 
-> Version: alpha
+> Version: 1.0.0-alpha.1 (production-ready)
 > Category: Custom · Surface: web, mobile, desktop
 > Font: Geist + Geist Mono + Geist Pixel · Brand color: #FF0FF · Logo: 7K · Theme: Dark-first
 > 1-bit textures: 10 patterns · 1-bit components: 40+ · 1-bit animations: 20+ keyframes
+> React UI kit: Button, Input, Badge, ThemeToggle, ThemeProvider, useTheme
+> Build: Vite + PostCSS + TypeScript · Test: Vitest + Testing Library · Docs: Storybook
 
 ## Source context
 
@@ -21,6 +23,129 @@ Key constraints derived from the source:
 - **1-bit manga influence** → 10-texture background pattern library (scanline, halftone, dot matrix, stripes, crosshatch, checkerboard, noise, vignette). All textures are CSS gradients — no images, no SVG humans.
 - **Abstract 1-bit animations** → 20+ animation keyframes organized as ambient (continuous) and trigger (burst) categories. Step timing for retro feel, reduced-motion collapse.
 - **1-bit component system** → 40+ components with zero radius, 2px white borders, invert hover state. Unified black/white visual language with thin accent layer modifiers for color moments.
+- **React UI kit** → TypeScript React components (Button, Input, Badge, ThemeToggle) with ThemeProvider + useTheme hook for theme management.
+- **Modular CSS** → 10 source files in `src/css/` compiled into `dist/7k-design-system.css`.
+
+## Package Structure
+
+The design system is distributed as an npm package with dual entry points: CSS-only and React.
+
+```
+7k-design-system/
+├── src/
+│   ├── css/                    # Modular CSS source (10 files)
+│   │   ├── index.css           # Entry point: imports all modules
+│   │   ├── fonts.css           # @font-face declarations (Geist + Geist Pixel)
+│   │   ├── tokens.css          # All design tokens (colors, type, spacing, motion)
+│   │   ├── themes.css          # Dark default + light theme overrides
+│   │   ├── base.css            # Reset, body, html base styles
+│   │   ├── textures.css        # 10 texture pattern categories
+│   │   ├── isometric.css       # CSS-only 3D isometric patterns
+│   │   ├── components.css      # 40+ 1-bit component classes
+│   │   ├── modifiers.css       # Accent layer modifiers
+│   │   ├── animations.css      # 20+ keyframe animations
+│   │   └── accessibility.css   # Reduced motion, focus-visible, a11y
+│   ├── react/                  # React TypeScript components
+│   │   ├── index.ts            # Public API exports
+│   │   ├── types.ts            # Shared TypeScript interfaces
+│   │   ├── components/
+│   │   │   ├── Button.tsx      # Button with variant/size props
+│   │   │   ├── Input.tsx       # Controlled input wrapper
+│   │   │   ├── Badge.tsx       # Status badge with variants
+│   │   │   └── ThemeToggle.tsx # Dark/light toggle button
+│   │   └── theme/
+│   │       ├── ThemeProvider.tsx  # Context provider + persistence
+│   │       ├── ThemeContext.ts    # React context definition
+│   │       └── useTheme.ts        # useContext hook
+│   └── stories/                # Storybook documentation
+│       ├── Overview.mdx
+│       ├── Tokens.mdx
+│       ├── Components.stories.tsx
+│       └── Textures.stories.tsx
+├── tests/                      # Vitest test suite
+│   ├── Button.test.tsx
+│   ├── Input.test.tsx
+│   ├── Badge.test.tsx
+│   ├── ThemeProvider.test.tsx
+│   ├── ThemeToggle.test.tsx
+│   └── a11y.test.tsx
+├── preview/                    # 6 HTML review cards
+│   ├── colors-primary.html
+│   ├── typography-specimens.html
+│   ├── spacing-tokens.html
+│   ├── components-buttons.html
+│   ├── textures-backgrounds.html
+│   └── brand-assets.html
+├── build/                      # Brand assets
+│   ├── logo-7k.svg
+│   ├── logo-7k-light.svg
+│   └── icon.svg
+├── fonts/                      # Geist Pixel TTFs (5 variants)
+├── examples/legacy/ui_kits/app/  # Legacy landing page kit (plain JS React)
+├── dist/                       # Build outputs
+│   ├── 7k-design-system.css    # Compiled CSS bundle
+│   ├── tokens.css              # Standalone tokens
+│   ├── components.css          # Standalone components
+│   ├── textures.css            # Standalone textures
+│   ├── animations.css          # Standalone animations
+│   └── react/                  # Compiled React bundle
+│       ├── index.js            # ESM build
+│       ├── index.cjs           # CJS build
+│       └── index.d.ts          # TypeScript declarations
+├── package.json
+├── DESIGN.md                   # This file — canonical design documentation
+├── SKILL.md                    # AI agent usage guide
+├── CONSUMER_GUIDE.md           # End-user integration guide
+├── vite.css.config.ts          # Vite build config for CSS
+├── vite.react.config.ts        # Vite build config for React
+└── postcss.config.cjs          # PostCSS pipeline (import, nesting, autoprefixer)
+```
+
+### npm Package Exports
+
+```json
+{
+  "exports": {
+    ".": "./dist/7k-design-system.css",
+    "./css": "./dist/7k-design-system.css",
+    "./css/tokens": "./dist/tokens.css",
+    "./css/components": "./dist/components.css",
+    "./css/textures": "./dist/textures.css",
+    "./css/animations": "./dist/animations.css",
+    "./react": {
+      "import": "./dist/react/index.js",
+      "require": "./dist/react/index.cjs",
+      "types": "./dist/react/index.d.ts"
+    },
+    "./fonts/*": "./fonts/*",
+    "./build/*": "./build/*"
+  }
+}
+```
+
+**CSS-only usage:**
+```typescript
+import '7k-design-system/css';           // Full bundle
+import '7k-design-system/css/tokens';    // Tokens only
+import '7k-design-system/css/components'; // Components only
+import '7k-design-system/css/textures';  // Textures only
+import '7k-design-system/css/animations'; // Animations only
+```
+
+**React usage:**
+```typescript
+import { Button, Input, Badge, ThemeToggle, ThemeProvider, useTheme } from '7k-design-system/react';
+import '7k-design-system/css';
+```
+
+### Build System
+
+- **CSS build:** `vite build --config vite.css.config.ts` — compiles `src/css/index.css` into `dist/7k-design-system.css` with PostCSS pipeline (postcss-import, postcss-nesting, autoprefixer, cssnano)
+- **React build:** `vite build --config vite.react.config.ts` — compiles TypeScript React components into ESM + CJS bundles with `.d.ts` declarations via vite-plugin-dts
+- **Asset copy:** `node scripts/copy-assets.js` — copies preview/, fonts/, build/ to dist/
+- **Development:** `npm run dev` — Vite dev server; `npm run storybook` — Storybook at port 6006
+- **Testing:** `npm test` — Vitest + jsdom + @testing-library/react; `npm run test:a11y` — axe-core accessibility tests
+- **Linting:** `npm run lint` — ESLint (TS/TSX) + Stylelint (CSS); `npm run typecheck` — `tsc --noEmit`
 
 ## 1. Visual Theme & Atmosphere
 
@@ -30,7 +155,7 @@ Tokyo neon meets manga-influenced 1-bit. The canvas is deep near-black, with sha
 
 Company/project differentiation: the parent 7K brand uses vivid magenta (`--brand-primary`). Child projects adopt their own accent (solar, cyan, acid, ember) on the same dark base. Same system, distinct at a glance.
 
-**Logo:** Star-burst pattern logo in `build/logo-7k.svg` — a geometric radial pattern with #FF0FF brand accent tones. Light variant at `build/logo-7k-light.svg` (black polygons on light backgrounds). App icon at `build/icon.svg`.
+**Logo:** Star-burst pattern logo in `build/logo-7k.svg` — a geometric radial pattern with #FF0FF brand accent tones. Light variant at `build/logo-7k-light.svg` (light backgrounds). App icon at `build/icon.svg`.
 
 **1-bit texture primitives (background patterns):**
 - **Scanline**: `repeating-linear-gradient(0deg, transparent 2px, rgba(255,255,255,0.03) 2px)` — horizontal scan lines, scroll-animated. Two speeds: slow (8s) and fast (3s).
@@ -50,7 +175,7 @@ Company/project differentiation: the parent 7K brand uses vivid magenta (`--bran
 
 ## 1b. Background Design — 1-bit Texture System
 
-**Source context reference:** The brief's "Manga-influenced 1-bit using black and white as well as abstract 1-bit animations" requires a structured texture system. Every background pattern below is a standalone CSS class in `colors_and_type.css` that can be applied directly or composed via `::before`/`::after` pseudo-elements.
+**Source context reference:** The brief's "Manga-influenced 1-bit using black and white as well as abstract 1-bit animations" requires a structured texture system. Every background pattern below is a standalone CSS class in `src/css/textures.css` that can be applied directly or composed via `::before`/`::after` pseudo-elements.
 
 ### Texture categories
 
@@ -219,7 +344,7 @@ Each has a full 11-step scale (50–950). Never use directly — always go throu
 ---
 ### Layer 2 — Theme Role Mapping
 
-**Dark is the default.** Light is opt-in via `@media (prefers-color-scheme: light)` or `html[data-theme="light"]` (set by `ui_kits/app/components/ThemeToggle.js`). The same ramp primitives are used by both themes — only the role-to-ramp mapping changes.
+**Dark is the default.** Light is opt-in via `@media (prefers-color-scheme: light)` or `html[data-theme="light"` (set by `ThemeToggle` component in `src/react/components/ThemeToggle.tsx`). The same ramp primitives are used by both themes — only the role-to-ramp mapping changes.
 
 #### Surface ladder — backgrounds
 
@@ -770,7 +895,280 @@ These classes add thin color to any 1-bit component without breaking the black/w
 | Button (accent) | None | Color transition on hover |
 | Accent text | `.accent-flicker` | None |
 
-## 8. Voice & Brand
+## 8. React UI Kit
+
+The React UI kit provides TypeScript components that wrap the CSS component classes. All components are thin wrappers — they apply the correct CSS classes and forward refs. No inline styles beyond what the CSS system provides.
+
+### Installation
+
+```bash
+npm install 7k-design-system
+```
+
+```typescript
+// App entry point
+import '7k-design-system/css';
+import { ThemeProvider } from '7k-design-system/react';
+
+function App() {
+  return (
+    <ThemeProvider defaultTheme="dark">
+      <YourApp />
+    </ThemeProvider>
+  );
+}
+```
+
+### Button
+
+```typescript
+import { Button } from '7k-design-system/react';
+
+<Button
+  variant="primary"     // 'primary' | 'secondary' | 'ghost' | 'glow' | 'glow-cyan' | 'glow-grid' | 'danger'
+  size="md"             // 'sm' | 'md' | 'lg'
+  disabled={false}
+  onClick={() => {}}
+  type="button"         // 'button' | 'submit' | 'reset'
+  className=""
+>
+  Click me
+</Button>
+```
+
+**CSS classes applied:**
+- Base: `.btn-modern`
+- Variant: `.btn-modern-{variant}` (e.g., `.btn-modern-primary`)
+- Size: `.btn-modern-sm` | `.btn-modern-lg` (md applies no extra class)
+
+**Behavior:** Forwards ref to `<button>`. Combines `className` prop with generated classes.
+
+### Input
+
+```typescript
+import { Input } from '7k-design-system/react';
+
+<Input
+  type="text"
+  placeholder="Hint text"
+  disabled={false}
+  value={value}
+  onChange={(value) => setValue(value)}  // string callback, not event
+  className=""
+/>
+```
+
+**CSS class applied:** `.input`
+
+**Behavior:** Forwards ref to `<input>`. `onChange` receives the raw string value (not an event). All standard HTML input props pass through.
+
+### Badge
+
+```typescript
+import { Badge } from '7k-design-system/react';
+
+<Badge variant="default">   // 'default' | 'success' | 'warning' | 'danger' | 'info' | 'neutral'
+  Status
+</Badge>
+```
+
+**CSS classes applied:**
+- Base: `.badge`
+- Variant: `.badge-{variant}` (e.g., `.badge-success`)
+
+**Behavior:** Forwards ref to `<span>`. Children render as text content.
+
+### ThemeToggle
+
+```typescript
+import { ThemeToggle } from '7k-design-system/react';
+
+<ThemeToggle className="" />
+```
+
+**Behavior:** Renders a 32×32 square button with `☀` / `☾` icon. Uses `useTheme()` internally. Calls `toggleTheme()` on click. Sets `data-theme` attribute on `<html>` and persists to `localStorage` under key `7k-theme`.
+
+### ThemeProvider
+
+```typescript
+import { ThemeProvider } from '7k-design-system/react';
+
+<ThemeProvider
+  defaultTheme="dark"      // 'dark' | 'light'
+  storageKey="7k-theme"    // localStorage key
+>
+  {children}
+</ThemeProvider>
+```
+
+**Behavior:**
+- On mount: reads `localStorage` for stored theme, falls back to `defaultTheme`
+- On theme change: sets `document.documentElement.setAttribute('data-theme', theme)` and writes to `localStorage`
+- Exposes context value: `{ theme, toggleTheme, setTheme }`
+
+### useTheme
+
+```typescript
+import { useTheme } from '7k-design-system/react';
+
+const { theme, toggleTheme, setTheme } = useTheme();
+```
+
+**Returns:**
+- `theme: 'dark' | 'light'` — current active theme
+- `toggleTheme: () => void` — flips dark ↔ light
+- `setTheme: (theme: 'dark' | 'light') => void` — sets explicit theme
+
+**Error:** Throws if called outside a `ThemeProvider`.
+
+### TypeScript Types
+
+```typescript
+// src/react/types.ts
+interface BaseProps {
+  className?: string;
+  style?: CSSProperties;
+  children?: ReactNode;
+}
+
+type ButtonVariant = 'primary' | 'secondary' | 'ghost' | 'glow' | 'glow-cyan' | 'glow-grid' | 'danger';
+type ButtonSize = 'sm' | 'md' | 'lg';
+interface ButtonProps extends BaseProps {
+  variant?: ButtonVariant;
+  size?: ButtonSize;
+  disabled?: boolean;
+  onClick?: () => void;
+  type?: 'button' | 'submit' | 'reset';
+}
+
+type BadgeVariant = 'default' | 'success' | 'warning' | 'danger' | 'info' | 'neutral';
+interface BadgeProps extends BaseProps {
+  variant?: BadgeVariant;
+}
+
+interface InputProps extends BaseProps {
+  type?: string;
+  placeholder?: string;
+  disabled?: boolean;
+  value?: string;
+  onChange?: (value: string) => void;
+}
+
+type Theme = 'dark' | 'light';
+interface ThemeContextValue {
+  theme: Theme;
+  toggleTheme: () => void;
+  setTheme: (theme: Theme) => void;
+}
+```
+
+## 9. Modular CSS Architecture
+
+The CSS is split into 10 source files under `src/css/`, compiled into `dist/7k-design-system.css`. Each file has a single responsibility. Import `src/css/index.css` to load all modules, or import individual modules for tree-shaking.
+
+| File | Size | Responsibility |
+|------|------|---------------|
+| `fonts.css` | ~1.7KB | `@font-face` for Geist Pixel 5 variants; CDN imports for Geist Sans/Mono |
+| `tokens.css` | ~12.5KB | All design tokens: color ramps, semantic roles, typography, spacing, radii, shadows, motion, layout, z-index |
+| `themes.css` | ~7.2KB | Dark default in `:root`; light overrides in `@media (prefers-color-scheme: light)` and `html[data-theme="light"]` |
+| `base.css` | ~7.6KB | CSS reset, body/html base styles, `.mono-label` utility, `.display`/`.h1`–`.h4`/`.body` type utilities |
+| `textures.css` | ~12.4KB | 10 texture categories: scanline, halftone, dot matrix, stripes, crosshatch, checkerboard, noise, vignette |
+| `isometric.css` | ~12.5KB | 11 isometric patterns: grid, cubes, pyramid, hex, pipes, terrain + animation variants |
+| `components.css` | ~36KB | 40+ component classes: buttons, forms, nav, data display, overlays, feedback, media, misc |
+| `modifiers.css` | ~2.2KB | Accent layer modifiers: border-top, underline, dot, bar, glow, corner |
+| `animations.css` | ~15.8KB | 20+ keyframe animations: glitch, flicker, blink, typewriter, neon-pulse, scan-reveal, pixel-fade, iso-float |
+| `accessibility.css` | ~0.6KB | `prefers-reduced-motion` collapse, `:focus-visible` rings, `prefers-contrast` support, screen-reader utilities |
+
+### PostCSS Pipeline
+
+```
+src/css/index.css
+  → postcss-import      (inline @import)
+  → postcss-nesting     (native CSS nesting)
+  → autoprefixer        (vendor prefixes)
+  → cssnano             (minification for production)
+  → dist/7k-design-system.css
+```
+
+### Standalone CSS Exports
+
+```typescript
+import '7k-design-system/css';           // Full bundle (~115KB)
+import '7k-design-system/css/tokens';    // Tokens only (~12KB)
+import '7k-design-system/css/components'; // Components only (~36KB)
+import '7k-design-system/css/textures';  // Textures only (~12KB)
+import '7k-design-system/css/animations'; // Animations only (~16KB)
+```
+
+### Build Commands
+
+```bash
+npm run build:css       # Compile CSS bundle + standalone modules
+npm run build:react     # Compile React ESM + CJS + .d.ts
+npm run build:copy-assets  # Copy preview/, fonts/, build/ to dist/
+npm run build           # Run all three build steps
+```
+
+## 10. Testing & Documentation
+
+### Test Suite (Vitest)
+
+Location: `tests/`
+Runner: Vitest + jsdom + @testing-library/react + jest-axe
+
+| File | Coverage |
+|------|----------|
+| `Button.test.tsx` | Rendering, variant/size classes, click handler, disabled state |
+| `Input.test.tsx` | Rendering, value/onChange callback, disabled state, placeholder |
+| `Badge.test.tsx` | Rendering, variant classes, children content |
+| `ThemeProvider.test.tsx` | Default theme, localStorage persistence, `data-theme` attribute |
+| `ThemeToggle.test.tsx` | Click toggles theme, icon changes, aria-label updates |
+| `a11y.test.tsx` | axe-core accessibility checks on Button, Input, Badge |
+
+**Run tests:**
+```bash
+npm test           # Unit tests
+npm run test:a11y  # Accessibility tests
+npm run test:watch # Watch mode
+```
+
+### Storybook
+
+Location: `src/stories/`
+Port: 6006
+
+| Story | Content |
+|-------|---------|
+| `Design System/Overview` (`Overview.mdx`) | Design principles, color palette, usage examples |
+| `Design System/Tokens` (`Tokens.mdx`) | Token reference tables |
+| `Components/Button` (`Components.stories.tsx`) | All Button variants and sizes |
+| `Components/Input` (`Components.stories.tsx`) | Input states |
+| `Components/Badge` (`Components.stories.tsx`) | Badge variants |
+| `Components/ThemeToggle` (`Components.stories.tsx`) | Theme toggle button |
+| `Textures/All` (`Textures.stories.tsx`) | All 10 texture patterns |
+| `Textures/Isometric` (`Textures.stories.tsx`) | All 11 isometric patterns |
+
+**Run Storybook:**
+```bash
+npm run storybook       # Dev server at http://localhost:6006
+npm run build-storybook # Static build for deployment
+npm run chromatic       # Visual regression testing
+```
+
+### Preview HTML Cards
+
+Location: `preview/` (copied to `dist/preview/` on build)
+
+| File | Purpose |
+|------|---------|
+| `colors-primary.html` | Accent swatches, ramps, project overrides |
+| `typography-specimens.html` | Type scale + weights + pixel variants |
+| `spacing-tokens.html` | 4px grid, radii, shadows |
+| `components-buttons.html` | Product component states |
+| `textures-backgrounds.html` | 10 background texture categories with composition demos |
+| `brand-assets.html` | Logo variants + brand in context |
+
+## 11. Voice & Brand
 
 **Source context reference:** The brief's "our logo is just '7K'" and "tech company with different projects" inform the minimal brand identity. The logo is a geometric polygon SVG — dark (#111) background polygons frame the "7K" letterforms as clear white polygon shapes with thin #FF0FF accent shapes. Sub-projects differentiate by accent hue while keeping the wordmark structure.
 
@@ -782,7 +1180,7 @@ These classes add thin color to any 1-bit component without breaking the black/w
 - **No filler**: never use "streamlined", "innovative", "leveraging" unless literal
 - **Error messages**: direct, no "oops". "Connection failed. Retry." not "Something went wrong."
 
-## 9. Anti-patterns
+## 12. Anti-patterns
 
 **Source context reference:** Each anti-pattern below derives from a specific brief constraint: dark theme (no warm backgrounds), three-font system kept to Geist family only, 1-bit influence (no rounded corners on 1-bit elements), neon Tokyo (no generic purple gradients), brand-color-only accent (no color proliferation).
 

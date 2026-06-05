@@ -1,6 +1,6 @@
 {
   "name": "7k-design-system",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Dark, neon-accented, manga-inflected design system for multi-project tech company 7K. Three-font system (Geist sans + Geist Mono + Geist Pixel 5 geometric variants), #FF0FF brand pulse, Tokyo neon atmosphere with 1-bit manga punctuation.",
   "type": "module",
   "main": "./dist/7k-design-system.css",

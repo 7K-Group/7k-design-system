@@ -6,7 +6,7 @@ Thank you for your interest in contributing! This document outlines the process 
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/your-org/7k-design-system.git
+   git clone https://github.com/7K-Group/7k-design-system.git
    cd 7k-design-system
    ```
 

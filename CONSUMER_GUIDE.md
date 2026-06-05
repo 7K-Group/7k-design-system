@@ -33,10 +33,10 @@ npx create-next-app@latest my-project
 npm install 7k-design-system
 
 # Or install from GitHub
-npm install github:your-org/7k-design-system
+npm install github:7K-Group/7k-design-system
 
 # Or clone and link locally
-git clone https://github.com/your-org/7k-design-system.git
+git clone https://github.com/7K-Group/7k-design-system.git
 cd 7k-design-system
 npm link
 cd ../my-project

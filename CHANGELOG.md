@@ -1,3 +1,10 @@
+# 1.0.0 (2026-06-05)
+
+
+### Features
+
+* add release process ([f1c7527](https://github.com/7K-Group/7k-design-system/commit/f1c75270c0a27daf64e3f1983b455199b8d72122))
+
 # Changelog
 
 All notable changes to this project will be documented in this file.

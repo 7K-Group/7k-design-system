@@ -64,6 +64,11 @@ jobs:
       - name: Build package
         run: npm run build
 
+      - name: Configure npm authentication
+        run: |
+          npm config set //registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}
+          npm config set access public
+
       - name: Release to npm
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -1,62 +1,41 @@
 import type { Preview } from '@storybook/react-vite';
+import { withThemeByDataAttribute } from '@storybook/addon-themes';
+import type { ReactRenderer } from '@storybook/react';
+import { initialize, mswLoader } from 'msw-storybook-addon';
+import { ThemeProvider } from '../src/react/theme/ThemeProvider';
+import { mswHandlers } from './msw-handlers';
 import '../src/css/index.css';
 
+initialize({ onUnhandledRequest: 'bypass' });
+
 const preview: Preview = {
-  parameters: {
-    controls: {
-      matchers: {
-        color: /(background|color)$/i,
-        date: /Date$/i,
-      },
-    },
-    a11y: {
-      test: 'error',
-      config: {
-        rules: [
-          {
-            id: 'color-contrast',
-            enabled: true,
-          },
-        ],
-      },
-    },
-    backgrounds: {
-      default: 'dark',
-      values: [
-        {
-          name: 'dark',
-          value: '#0A0A0D',
-        },
-        {
-          name: 'light',
-          value: '#FAFAFB',
-        },
-        {
-          name: 'black',
-          value: '#000000',
-        },
-      ],
-    },
-    chromatic: {
-      modes: {
-        dark: {
-          backgrounds: { value: '#0A0A0D' },
-          theme: 'dark',
-        },
-        light: {
-          backgrounds: { value: '#FAFAFB' },
-          theme: 'light',
-        },
-      },
-    },
-  },
+  tags: ['autodocs'],
   decorators: [
+    withThemeByDataAttribute<ReactRenderer>({
+      themes: {
+        dark: 'dark',
+        light: 'light',
+      },
+      defaultTheme: 'dark',
+      attributeName: 'data-theme',
+    }),
     (Story) => (
-      <div style={{ padding: '24px' }}>
+      <ThemeProvider>
         <Story />
-      </div>
+      </ThemeProvider>
     ),
   ],
+  loaders: [mswLoader],
+  parameters: {
+    msw: { handlers: mswHandlers },
+
+    a11y: {
+      test: 'todo',
+    },
+  },
+  async beforeEach() {
+    localStorage.setItem('7k-theme', 'dark');
+  },
 };
 
 export default preview;

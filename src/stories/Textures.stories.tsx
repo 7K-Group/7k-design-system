@@ -1,17 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
-const meta: Meta = {
-  title: 'CSS/Textures',
+const meta = {
   parameters: {
     layout: 'padded',
-    docs: {
-      description: {
-        component: '1-bit texture backgrounds inspired by manga screentone patterns.',
-      },
-    },
   },
-  tags: ['autodocs'],
-};
+  tags: ['ai-generated'],
+} satisfies Meta;
 
 export default meta;
 type Story = StoryObj;
@@ -29,7 +23,9 @@ const TextureBox = ({ className, label }: { className: string; label: string }) 
     }}
     className={className}
   >
-    <span style={{ position: 'relative', zIndex: 2, fontSize: '12px', fontFamily: 'var(--font-mono)' }}>
+    <span
+      style={{ position: 'relative', zIndex: 2, fontSize: '12px', fontFamily: 'var(--font-mono)' }}
+    >
       {label}
     </span>
   </div>

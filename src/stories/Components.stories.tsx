@@ -1,17 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
-const meta: Meta = {
-  title: 'CSS/Components',
+const meta = {
   parameters: {
     layout: 'padded',
-    docs: {
-      description: {
-        component: 'CSS-only component classes available in the design system.',
-      },
-    },
   },
-  tags: ['autodocs'],
-};
+  tags: ['ai-generated'],
+} satisfies Meta;
 
 export default meta;
 type Story = StoryObj;
@@ -59,10 +53,18 @@ export const Badges: Story = {
 export const Navigation: Story = {
   render: () => (
     <div style={{ display: 'flex', gap: '4px' }}>
-      <a href="#" className="nav-item">Home</a>
-      <a href="#" className="nav-item active">Active</a>
-      <a href="#" className="nav-item">About</a>
-      <a href="#" className="nav-item">Contact</a>
+      <a href="#" className="nav-item">
+        Home
+      </a>
+      <a href="#" className="nav-item active">
+        Active
+      </a>
+      <a href="#" className="nav-item">
+        About
+      </a>
+      <a href="#" className="nav-item">
+        Contact
+      </a>
     </div>
   ),
 };

@@ -155,8 +155,8 @@
 }
 .grid-dots-accent {
   background-image:
-    radial-gradient(var(--magenta-500 / 0.15) 1px, transparent 1px),
-    radial-gradient(var(--magenta-500 / 0.15) 1px, transparent 1px);
+    radial-gradient(color-mix(in srgb, var(--magenta-500) 15%, transparent) 1px, transparent 1px),
+    radial-gradient(color-mix(in srgb, var(--magenta-500) 15%, transparent) 1px, transparent 1px);
   background-size: 20px 20px, 20px 20px;
   background-position: 0 0, 10px 10px;
 }

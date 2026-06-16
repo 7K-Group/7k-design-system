@@ -16,8 +16,8 @@
 }
 .isometric-grid-accent {
   background:
-    repeating-linear-gradient(30deg, transparent, transparent 24px, var(--magenta-500 / 0.12) 24px, var(--magenta-500 / 0.12) 25px),
-    repeating-linear-gradient(-30deg, transparent, transparent 24px, var(--magenta-500 / 0.12) 24px, var(--magenta-500 / 0.12) 25px);
+    repeating-linear-gradient(30deg, transparent, transparent 24px, color-mix(in srgb, var(--magenta-500) 12%, transparent) 24px, color-mix(in srgb, var(--magenta-500) 12%, transparent) 25px),
+    repeating-linear-gradient(-30deg, transparent, transparent 24px, color-mix(in srgb, var(--magenta-500) 12%, transparent) 24px, color-mix(in srgb, var(--magenta-500) 12%, transparent) 25px);
 }
 
 /* Isometric cubes — three faces simulated with 30°/-30°/150° gradients
@@ -41,9 +41,9 @@
 }
 .isometric-cubes-accent {
   background:
-    repeating-linear-gradient(150deg, transparent, transparent 20px, var(--magenta-500 / 0.12) 20px, var(--magenta-500 / 0.12) 21px),
-    repeating-linear-gradient(-30deg, transparent, transparent 20px, var(--magenta-500 / 0.20) 20px, var(--magenta-500 / 0.20) 21px),
-    repeating-linear-gradient(30deg, transparent, transparent 20px, var(--magenta-500 / 0.08) 20px, var(--magenta-500 / 0.08) 21px);
+    repeating-linear-gradient(150deg, transparent, transparent 20px, color-mix(in srgb, var(--magenta-500) 12%, transparent) 20px, color-mix(in srgb, var(--magenta-500) 12%, transparent) 21px),
+    repeating-linear-gradient(-30deg, transparent, transparent 20px, color-mix(in srgb, var(--magenta-500) 20%, transparent) 20px, color-mix(in srgb, var(--magenta-500) 20%, transparent) 21px),
+    repeating-linear-gradient(30deg, transparent, transparent 20px, color-mix(in srgb, var(--magenta-500) 8%, transparent) 20px, color-mix(in srgb, var(--magenta-500) 8%, transparent) 21px);
   background-size: 40px 40px;
 }
 
@@ -134,9 +134,9 @@
 }
 .isometric-diamond-facet-accent {
   background:
-    repeating-linear-gradient(150deg, transparent, transparent 20px, var(--magenta-500 / 0.10) 20px, var(--magenta-500 / 0.10) 21px),
-    repeating-linear-gradient(-30deg, transparent, transparent 20px, var(--magenta-500 / 0.06) 20px, var(--magenta-500 / 0.06) 21px),
-    repeating-linear-gradient(30deg, transparent, transparent 20px, var(--magenta-500 / 0.20) 20px, var(--magenta-500 / 0.20) 21px);
+    repeating-linear-gradient(150deg, transparent, transparent 20px, color-mix(in srgb, var(--magenta-500) 10%, transparent) 20px, color-mix(in srgb, var(--magenta-500) 10%, transparent) 21px),
+    repeating-linear-gradient(-30deg, transparent, transparent 20px, color-mix(in srgb, var(--magenta-500) 6%, transparent) 20px, color-mix(in srgb, var(--magenta-500) 6%, transparent) 21px),
+    repeating-linear-gradient(30deg, transparent, transparent 20px, color-mix(in srgb, var(--magenta-500) 20%, transparent) 20px, color-mix(in srgb, var(--magenta-500) 20%, transparent) 21px);
   background-size: 52px 30px;
 }
 
@@ -193,9 +193,9 @@
 }
 .isometric-city-accent {
   background:
-    repeating-linear-gradient(90deg, transparent, transparent 24px, var(--magenta-500 / 0.15) 24px, var(--magenta-500 / 0.15) 25px),
-    repeating-linear-gradient(150deg, transparent 12px, transparent 24px, var(--magenta-500 / 0.08) 24px, var(--magenta-500 / 0.08) 25px),
-    repeating-linear-gradient(0deg, transparent, transparent 6px, var(--magenta-500 / 0.06) 6px, var(--magenta-500 / 0.06) 7px);
+    repeating-linear-gradient(90deg, transparent, transparent 24px, color-mix(in srgb, var(--magenta-500) 15%, transparent) 24px, color-mix(in srgb, var(--magenta-500) 15%, transparent) 25px),
+    repeating-linear-gradient(150deg, transparent 12px, transparent 24px, color-mix(in srgb, var(--magenta-500) 8%, transparent) 24px, color-mix(in srgb, var(--magenta-500) 8%, transparent) 25px),
+    repeating-linear-gradient(0deg, transparent, transparent 6px, color-mix(in srgb, var(--magenta-500) 6%, transparent) 6px, color-mix(in srgb, var(--magenta-500) 6%, transparent) 7px);
   background-size: 48px 32px, 48px 32px, 24px 16px;
   background-position: 0 0, 24px 0, 6px 4px;
 }

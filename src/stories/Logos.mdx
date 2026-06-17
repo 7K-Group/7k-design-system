@@ -1,0 +1,76 @@
+import { Meta } from '@storybook/blocks';
+import logo7k from '../../build/logos/logo-7k.svg';
+import logo7kLight from '../../build/logos/logo-7k-light.svg';
+
+<Meta title="Design System/Logos" />
+
+# Logos
+
+Official 7K brand marks. Use the color variant on dark surfaces and the light variant on light surfaces.
+
+## Logo variants
+
+<div
+  style={{
+    display: 'grid',
+    gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
+    gap: '24px',
+    marginTop: '24px',
+  }}
+>
+  <div
+    style={{
+      border: '2px solid var(--border-default)',
+      padding: '24px',
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      gap: '12px',
+      background: 'var(--bg-base)',
+    }}
+  >
+    <img src={logo7k} alt="7K logo" style={{ width: '200px', height: 'auto' }} />
+    <span style={{ fontFamily: 'var(--font-mono)', fontSize: '12px', color: 'var(--text-secondary)' }}>
+      build/logos/logo-7k.svg
+    </span>
+    <span style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'var(--text-tertiary)' }}>
+      Color variant for dark backgrounds
+    </span>
+  </div>
+
+  <div
+    style={{
+      border: '2px solid var(--border-default)',
+      padding: '24px',
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      gap: '12px',
+      background: '#fff',
+    }}
+  >
+    <img src={logo7kLight} alt="7K light logo" style={{ width: '200px', height: 'auto' }} />
+    <span style={{ fontFamily: 'var(--font-mono)', fontSize: '12px', color: '#000' }}>
+      build/logos/logo-7k-light.svg
+    </span>
+    <span style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: '#333' }}>
+      Light variant for light backgrounds
+    </span>
+  </div>
+</div>
+
+## Usage
+
+```tsx
+import logo from '7k-design-system/build/logos/logo-7k.svg';
+import logoLight from '7k-design-system/build/logos/logo-7k-light.svg';
+
+<img src={logo} alt="7K" />;
+```
+
+## Rules
+
+- Logo is always uppercase `7K` — never lowercase.
+- Use the color variant on dark canvas and the light variant on light backgrounds.
+- Keep at least `24px` of clear space around the logo.
+- Parent brand uses magenta; child projects swap the accent hue.

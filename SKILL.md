@@ -145,7 +145,7 @@ Open any card in `preview/`:
 Open `examples/legacy/ui_kits/app/index.html` in a browser. Components under `examples/legacy/ui_kits/app/components/` demonstrate landing page patterns with React (plain JS, `React.createElement`). Each component exposes `window.ComponentName` per Claude Design conventions. **Note:** This is legacy code preserved for reference. New work should use the React UI kit in `src/react/`.
 
 ### Step 6 — Use build assets
-Reference `build/logo-7k.svg` (color, default), `build/logo-7k-light.svg` (light backgrounds), or `build/icon.svg` (app icon).
+Reference `build/logos/logo-7k.svg` (color, default), `build/logos/logo-7k-light.svg` (light backgrounds), or `build/icons/icon.svg` (app icon).
 
 ## Design system highlights
 
@@ -246,7 +246,7 @@ import '7k-design-system/css/animations';
 import { Button, Input, Badge, ThemeToggle, ThemeProvider, useTheme } from '7k-design-system/react';
 
 // Static assets
-import logo from '7k-design-system/build/logo-7k.svg';
-import logoLight from '7k-design-system/build/logo-7k-light.svg';
-import icon from '7k-design-system/build/icon.svg';
+import logo from '7k-design-system/build/logos/logo-7k.svg';
+import logoLight from '7k-design-system/build/logos/logo-7k-light.svg';
+import icon from '7k-design-system/build/icons/icon.svg';
 ```

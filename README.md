@@ -116,7 +116,7 @@ Each preview card is a standalone HTML file that loads `../colors_and_type.css` 
 | **Spacing Tokens** | `preview/spacing-tokens.html` | 4px baseline grid (`--space-0` through `--space-32`), radius scale (`--radius-none` through `--radius-full`), shadow elevation (`--shadow-sm` through `--shadow-glow`), applied spacing examples | `colors_and_type.css` §Spacing; `DESIGN.md` §4 |
 | **Buttons** | `preview/components-buttons.html` | Modern neon button system: primary, glow (magenta/cyan/grid), secondary, ghost, danger variants; sizes (sm/default/lg); icon buttons; button groups; split buttons; loading state; real product copy examples | `colors_and_type.css` §Button system; `DESIGN.md` §6a |
 | **Textures & Backgrounds** | `preview/textures-backgrounds.html` | All 10 texture categories with density variants: scanline (slow/fast), halftone (sm/md/lg/accent), dot matrix (dense/standard/sparse), stripes (diagonal/horizontal/vertical, dense/negative), crosshatch (standard/dense), checkerboard (standard/one-bit), noise (standard/heavy), vignette (standard/sharp), separators, section composition examples | `colors_and_type.css` §Textures; `DESIGN.md` §1b |
-| **Brand Assets** | `preview/brand-assets.html` | Logo variants (`build/logo-7k.svg`, `build/logo-7k-light.svg`, `build/icon.svg`) rendered at multiple sizes, brand application rules, contextual previews (scanline hero, manga section, brand fill, glow wordmark) | `build/` directory; `DESIGN.md` §8 (logo spec) |
+| **Brand Assets** | `preview/brand-assets.html` | Logo variants (`build/logos/logo-7k.svg`, `build/logos/logo-7k-light.svg`, `build/icons/icon.svg`) rendered at multiple sizes, brand application rules, contextual previews (scanline hero, manga section, brand fill, glow wordmark) | `build/` directory; `DESIGN.md` §8 (logo spec) |
 
 ## Quick Start
 
@@ -155,7 +155,7 @@ Requires self-hosting the `fonts/` directory for Geist Pixel variants.
    ```
 4. **Preview tokens** — Open relevant `preview/*.html` cards to verify token values render correctly
 5. **Reference UI kit** — Study `ui_kits/app/components/` for composition patterns; copy components into your project
-6. **Use build assets** — Reference `build/logo-7k.svg` (dark), `build/logo-7k-light.svg` (light), `build/icon.svg` (app)
+6. **Use build assets** — Reference `build/logos/logo-7k.svg` (dark), `build/logos/logo-7k-light.svg` (light), `build/icons/icon.svg` (app)
 
 ### For Developers
 

@@ -1,83 +1,176 @@
 <!doctype html>
 <html lang="en" data-theme="dark">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Brand Assets · 7k-design-system</title>
-<link rel="stylesheet" href="../colors_and_type.css">
-<style>
-  body { padding: 32px; background: var(--bg-base); color: var(--text-primary); }
-  h1 { margin-bottom: 8px; }
-  .mono-label { margin-bottom: 32px; display: block; }
-  section { margin-bottom: 48px; }
-  h2 { margin-bottom: 16px; }
-  .logo-grid { display: flex; gap: 32px; flex-wrap: wrap; align-items: center; }
-  .logo-card { display: flex; flex-direction: column; align-items: center; gap: 8px; }
-  .logo-card img, .logo-card object { border: 2px solid #FFFFFF; padding: 24px; background: #000; max-width: 320px; }
-  .logo-label { font-family: var(--font-mono); font-size: 11px; color: var(--text-secondary); }
-  .logo-path { font-family: var(--font-mono); font-size: 10px; color: var(--text-tertiary); }
-  .preview-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
-  .preview-card { border: 2px solid #FFFFFF; padding: 24px; position: relative; overflow: hidden; min-height: 160px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; }
-  .preview-card .preview-label { font-family: var(--font-mono); font-size: 11px; color: var(--text-primary); position: relative; z-index: 2; }
-</style>
-</head>
-<body>
-  <h1>Brand Assets</h1>
-  <span class="mono-label">7k-design-system · Logo + brand marks</span>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Brand Assets · 7k-design-system</title>
+    <link rel="stylesheet" href="../colors_and_type.css" />
+    <style>
+      body {
+        padding: 32px;
+        background: var(--bg-base);
+        color: var(--text-primary);
+      }
+      h1 {
+        margin-bottom: 8px;
+      }
+      .mono-label {
+        margin-bottom: 32px;
+        display: block;
+      }
+      section {
+        margin-bottom: 48px;
+      }
+      h2 {
+        margin-bottom: 16px;
+      }
+      .logo-grid {
+        display: flex;
+        gap: 32px;
+        flex-wrap: wrap;
+        align-items: center;
+      }
+      .logo-card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+      }
+      .logo-card img,
+      .logo-card object {
+        border: 2px solid #ffffff;
+        padding: 24px;
+        background: #000;
+        max-width: 320px;
+      }
+      .logo-label {
+        font-family: var(--font-mono);
+        font-size: 11px;
+        color: var(--text-secondary);
+      }
+      .logo-path {
+        font-family: var(--font-mono);
+        font-size: 10px;
+        color: var(--text-tertiary);
+      }
+      .preview-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 16px;
+      }
+      .preview-card {
+        border: 2px solid #ffffff;
+        padding: 24px;
+        position: relative;
+        overflow: hidden;
+        min-height: 160px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+      }
+      .preview-card .preview-label {
+        font-family: var(--font-mono);
+        font-size: 11px;
+        color: var(--text-primary);
+        position: relative;
+        z-index: 2;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Brand Assets</h1>
+    <span class="mono-label">7k-design-system · Logo + brand marks</span>
 
-  <section>
-    <h2>Logos</h2>
-    <div class="logo-grid">
-      <div class="logo-card">
-        <img src="../build/logo-7k.svg" alt="7K Logo" style="width:240px;height:auto">
-        <span class="logo-label">build/logo-7k.svg</span>
-        <span class="logo-path">Color variant — star-burst pattern with #FF0FF accent</span>
+    <section>
+      <h2>Logos</h2>
+      <div class="logo-grid">
+        <div class="logo-card">
+          <img src="../build/logos/logo-7k.svg" alt="7K Logo" style="width: 240px; height: auto" />
+          <span class="logo-label">build/logos/logo-7k.svg</span>
+          <span class="logo-path">Color variant — star-burst pattern with #FF0FF accent</span>
+        </div>
+        <div class="logo-card">
+          <img
+            src="../build/logos/logo-7k-light.svg"
+            alt="7K Light Logo"
+            style="width: 240px; height: auto"
+          />
+          <span class="logo-label">build/logos/logo-7k-light.svg</span>
+          <span class="logo-path">Light variant — black polygons for light backgrounds</span>
+        </div>
+        <div class="logo-card">
+          <img src="../build/icons/icon.svg" alt="7K Icon" style="width: 64px; height: auto" />
+          <span class="logo-label">build/icons/icon.svg</span>
+          <span class="logo-path">App icon — 208×207, 7K star-burst pattern</span>
+        </div>
       </div>
-      <div class="logo-card">
-        <img src="../build/logo-7k-light.svg" alt="7K Light Logo" style="width:240px;height:auto">
-        <span class="logo-label">build/logo-7k-light.svg</span>
-        <span class="logo-path">Light variant — black polygons for light backgrounds</span>
-      </div>
-      <div class="logo-card">
-        <img src="../build/icon.svg" alt="7K Icon" style="width:64px;height:auto">
-        <span class="logo-label">build/icon.svg</span>
-        <span class="logo-path">App icon — 208×207, 7K star-burst pattern</span>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <section>
-    <h2>Brand in Context</h2>
-    <p class="body" style="margin-bottom:24px">The 7K wordmark uses Geist Pixel Triangle (800 weight) in brand-primary. Below: logo applied to dark canvas, scanline hero, and one-bit section.</p>
-    <div class="preview-grid">
-      <div class="preview-card scanline" style="background:#000">
-        <img src="../build/logo-7k.svg" alt="7K" style="width:160px;height:auto;position:relative;z-index:2">
-        <span class="preview-label">Scanline Hero</span>
+    <section>
+      <h2>Brand in Context</h2>
+      <p class="body" style="margin-bottom: 24px">
+        The 7K wordmark uses Geist Pixel Triangle (800 weight) in brand-primary. Below: logo applied
+        to dark canvas, scanline hero, and one-bit section.
+      </p>
+      <div class="preview-grid">
+        <div class="preview-card scanline" style="background: #000">
+          <img
+            src="../build/logos/logo-7k.svg"
+            alt="7K"
+            style="width: 160px; height: auto; position: relative; z-index: 2"
+          />
+          <span class="preview-label">Scanline Hero</span>
+        </div>
+        <div class="preview-card halftone-sm" style="background: #000">
+          <img
+            src="../build/logos/logo-7k-light.svg"
+            alt="7K"
+            style="width: 140px; height: auto; position: relative; z-index: 2"
+          />
+          <span class="preview-label">Light variant / Manga Section</span>
+        </div>
+        <div class="preview-card" style="background: var(--brand-primary)">
+          <span
+            style="
+              font-family: 'Geist Pixel', monospace;
+              font-weight: 800;
+              font-size: 48px;
+              color: #000;
+              position: relative;
+              z-index: 2;
+            "
+            >7K</span
+          >
+          <span class="preview-label" style="color: #000">Invert — brand fill</span>
+        </div>
+        <div class="preview-card noise" style="background: #000">
+          <span
+            style="
+              font-family: 'Geist Pixel', monospace;
+              font-weight: 800;
+              font-size: 36px;
+              color: var(--brand-primary);
+              position: relative;
+              z-index: 2;
+            "
+            >7K</span
+          >
+          <span class="preview-label">Glow Wordmark</span>
+        </div>
       </div>
-      <div class="preview-card halftone-sm" style="background:#000">
-        <img src="../build/logo-7k-light.svg" alt="7K" style="width:140px;height:auto;position:relative;z-index:2">
-        <span class="preview-label">Light variant / Manga Section</span>
-      </div>
-      <div class="preview-card" style="background:var(--brand-primary)">
-        <span style="font-family:'Geist Pixel',monospace;font-weight:800;font-size:48px;color:#000;position:relative;z-index:2">7K</span>
-        <span class="preview-label" style="color:#000">Invert — brand fill</span>
-      </div>
-      <div class="preview-card noise" style="background:#000">
-        <span style="font-family:'Geist Pixel',monospace;font-weight:800;font-size:36px;color:var(--brand-primary);position:relative;z-index:2">7K</span>
-        <span class="preview-label">Glow Wordmark</span>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <section>
-    <h2>Brand Application Rules</h2>
-    <ul class="list" style="max-width:600px">
-      <li class="list-item">Logo always uppercase "7K" — never lowercase</li>
-      <li class="list-item">Color variant on dark canvas, light variant on light backgrounds</li>
-      <li class="list-item">Brand accent (#FF0FF) only — no secondary brand color</li>
-      <li class="list-item">Parent 7K uses magenta; child projects swap accent hue</li>
-      <li class="list-item">Min 24px padding around logo in all contexts</li>
-    </ul>
-  </section>
-</body>
+    <section>
+      <h2>Brand Application Rules</h2>
+      <ul class="list" style="max-width: 600px">
+        <li class="list-item">Logo always uppercase "7K" — never lowercase</li>
+        <li class="list-item">Color variant on dark canvas, light variant on light backgrounds</li>
+        <li class="list-item">Brand accent (#FF0FF) only — no secondary brand color</li>
+        <li class="list-item">Parent 7K uses magenta; child projects swap accent hue</li>
+        <li class="list-item">Min 24px padding around logo in all contexts</li>
+      </ul>
+    </section>
+  </body>
 </html>

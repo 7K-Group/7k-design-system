@@ -23,6 +23,8 @@
       "types": "./dist/react/index.d.ts"
     },
     "./fonts/*": "./fonts/*",
+    "./icons/*": "./build/icons/*",
+    "./logos/*": "./build/logos/*",
     "./build/*": "./build/*"
   },
   "files": [

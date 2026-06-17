@@ -16,7 +16,7 @@ The brand brief specifies: "We only have 1 font and it's Geist. Our logo is just
 Key constraints derived from the source:
 - **Three-font system** → Geist (sans-serif) for body and headings, Geist Mono for labels, code, and tabular data, Geist Pixel (5 geometric variants: Square, Circle, Grid, Line, Triangle) for ornamental and pixel-constrained display use.
 - **Single brand color** → #FF0FF (vivid magenta) as the sole brand accent. No secondary brand color.
-- **Logo** → Star-burst pattern logo in `build/logo-7k.svg`: a geometric radial pattern with #FF0FF brand accent tones. Light variant at `build/logo-7k-light.svg` (black polygons for light backgrounds). App icon at `build/icon.svg`.
+- **Logo** → Star-burst pattern logo in `build/logos/logo-7k.svg`: a geometric radial pattern with #FF0FF brand accent tones. Light variant at `build/logos/logo-7k-light.svg` (black polygons for light backgrounds). App icon at `build/icons/icon.svg`.
 - **Dark theme** → All surfaces start from near-black. Light theme is opt-in only.
 - **Project differentiation** → Child projects get their own accent (solar, cyan, acid, ember) on the same dark base. Parent 7K retains magenta. Each Geist Pixel geometric variant pairs with one accent: Square=magenta, Circle=cyan, Grid=acid, Line=ember, Triangle=solar.
 - **Tokyo neon** → High contrast, nocturnal canvas, electric accents, no warm/beige tones.
@@ -155,7 +155,7 @@ Tokyo neon meets manga-influenced 1-bit. The canvas is deep near-black, with sha
 
 Company/project differentiation: the parent 7K brand uses vivid magenta (`--brand-primary`). Child projects adopt their own accent (solar, cyan, acid, ember) on the same dark base. Same system, distinct at a glance.
 
-**Logo:** Star-burst pattern logo in `build/logo-7k.svg` — a geometric radial pattern with #FF0FF brand accent tones. Light variant at `build/logo-7k-light.svg` (light backgrounds). App icon at `build/icon.svg`.
+**Logo:** Star-burst pattern logo in `build/logos/logo-7k.svg` — a geometric radial pattern with #FF0FF brand accent tones. Light variant at `build/logos/logo-7k-light.svg` (light backgrounds). App icon at `build/icons/icon.svg`.
 
 **1-bit texture primitives (background patterns):**
 - **Scanline**: `repeating-linear-gradient(0deg, transparent 2px, rgba(255,255,255,0.03) 2px)` — horizontal scan lines, scroll-animated. Two speeds: slow (8s) and fast (3s).
@@ -1175,7 +1175,7 @@ Location: `preview/` (copied to `dist/preview/` on build)
 - **Tone**: Direct, technical, slightly playful. "Built for midnight."
 - **Capitalization**: Sentence case for headings, uppercase only for kickers/labels
 - **Company**: 7K (always uppercase with the numeral). Child projects: "7K Project Neon"
-- **Logo**: Star-burst pattern SVG in `build/logo-7k.svg` with #FF0FF brand accent tones. Light variant at `build/logo-7k-light.svg` (black polygons for light backgrounds). App icon at `build/icon.svg`.
+- **Logo**: Star-burst pattern SVG in `build/logos/logo-7k.svg` with #FF0FF brand accent tones. Light variant at `build/logos/logo-7k-light.svg` (black polygons for light backgrounds). App icon at `build/icons/icon.svg`.
 - **Terminology**: "Surface" for pages, "module" for components, "canvas" for background
 - **No filler**: never use "streamlined", "innovative", "leveraging" unless literal
 - **Error messages**: direct, no "oops". "Connection failed. Retry." not "Something went wrong."

@@ -5,22 +5,22 @@
   "type": "module",
   "main": "./dist/7k-design-system.css",
   "module": "./dist/7k-design-system.esm.css",
-  "types": "./dist/index.d.ts",
+  "types": "./dist/react/index.d.ts",
   "exports": {
     ".": {
       "import": "./dist/7k-design-system.css",
-      "require": "./dist/7k-design-system.css",
-      "types": "./dist/index.d.ts"
+      "require": "./dist/7k-design-system.css"
     },
     "./css": "./dist/7k-design-system.css",
     "./css/tokens": "./dist/tokens.css",
     "./css/components": "./dist/components.css",
     "./css/textures": "./dist/textures.css",
     "./css/animations": "./dist/animations.css",
+    "./css/projects": "./dist/projects.css",
     "./react": {
+      "types": "./dist/react/index.d.ts",
       "import": "./dist/react/index.js",
-      "require": "./dist/react/index.cjs",
-      "types": "./dist/react/index.d.ts"
+      "require": "./dist/react/index.cjs"
     },
     "./fonts/*": "./fonts/*",
     "./icons/*": "./build/icons/*",
@@ -31,7 +31,6 @@
     "dist/",
     "fonts/",
     "build/",
-    "preview/",
     "DESIGN.md",
     "SKILL.md",
     "README.md",
@@ -43,7 +42,8 @@
     "*.css"
   ],
   "scripts": {
-    "dev": "vite",
+    "prebuild": "rm -rf dist storybook-static",
+    "dev": "npm run storybook",
     "build": "npm run build:css && npm run build:react && npm run build:copy-assets",
     "build:css": "vite build --config vite.css.config.ts",
     "build:react": "vite build --config vite.react.config.ts",

@@ -17,142 +17,144 @@
      through a semantic token below.
      ============================================================ */
 
+  /* stylelint-disable color-no-hex -- raw token ramps are the canonical hex source */
   /* ---- MAGENTA · Parent brand (7K) ---- */
-  --magenta-50:  #FFE5FF;
-  --magenta-100: #FFC2FF;
-  --magenta-200: #F9F;
-  --magenta-300: #F6F;
-  --magenta-400: #F3F;
-  --magenta-500: #F0F;  /* Base */
-  --magenta-600: #D600D6;
-  --magenta-700: #A800A8;
+  --magenta-50: #ffe5ff;
+  --magenta-100: #ffc2ff;
+  --magenta-200: #f9f;
+  --magenta-300: #f6f;
+  --magenta-400: #f3f;
+  --magenta-500: #f0f; /* Base */
+  --magenta-600: #d600d6;
+  --magenta-700: #a800a8;
   --magenta-800: #800080;
   --magenta-900: #570057;
   --magenta-950: #303;
 
   /* ---- SOLAR · Triangle project accent ---- */
-  --solar-50:  #FFFCE5;
-  --solar-100: #FFF5B8;
-  --solar-200: #FFEE8A;
-  --solar-300: #FFE65C;
-  --solar-400: #FFDE2E;
-  --solar-500: #FFD60A;
-  --solar-600: #D6B208;
-  --solar-700: #A88D06;
-  --solar-800: #806C04;
+  --solar-50: #fffce5;
+  --solar-100: #fff5b8;
+  --solar-200: #ffee8a;
+  --solar-300: #ffe65c;
+  --solar-400: #ffde2e;
+  --solar-500: #ffd60a;
+  --solar-600: #d6b208;
+  --solar-700: #a88d06;
+  --solar-800: #806c04;
   --solar-900: #574903;
-  --solar-950: #332B02;
+  --solar-950: #332b02;
 
   /* ---- CYAN · Circle project accent ---- */
-  --cyan-50:  #E5FBFF;
-  --cyan-100: #B8F6FF;
-  --cyan-200: #8AF0FF;
-  --cyan-300: #5CE9FF;
-  --cyan-400: #2EE2FF;
-  --cyan-500: #00E5FF;
-  --cyan-600: #00B8CC;
-  --cyan-700: #008FA0;
-  --cyan-800: #006B78;
-  --cyan-900: #00474D;
-  --cyan-950: #002A2E;
+  --cyan-50: #e5fbff;
+  --cyan-100: #b8f6ff;
+  --cyan-200: #8af0ff;
+  --cyan-300: #5ce9ff;
+  --cyan-400: #2ee2ff;
+  --cyan-500: #00e5ff;
+  --cyan-600: #00b8cc;
+  --cyan-700: #008fa0;
+  --cyan-800: #006b78;
+  --cyan-900: #00474d;
+  --cyan-950: #002a2e;
 
   /* ---- ACID · Grid project accent ---- */
-  --acid-50:  #F2FFE5;
-  --acid-100: #DEFFB8;
-  --acid-200: #CAFF8A;
-  --acid-300: #B7FF5C;
-  --acid-400: #A3FF2E;
-  --acid-500: #7CFF00;
-  --acid-600: #6C0;
-  --acid-700: #4D9900;
-  --acid-800: #3A7300;
-  --acid-900: #274D00;
-  --acid-950: #172E00;
+  --acid-50: #f2ffe5;
+  --acid-100: #deffb8;
+  --acid-200: #caff8a;
+  --acid-300: #b7ff5c;
+  --acid-400: #a3ff2e;
+  --acid-500: #7cff00;
+  --acid-600: #6c0;
+  --acid-700: #4d9900;
+  --acid-800: #3a7300;
+  --acid-900: #274d00;
+  --acid-950: #172e00;
 
   /* ---- EMBER · Line project accent ---- */
-  --ember-50:  #FFEEE5;
-  --ember-100: #FFD2B8;
-  --ember-200: #FFB68A;
-  --ember-300: #FF9B5C;
-  --ember-400: #FF7F2E;
-  --ember-500: #FF6B35;
-  --ember-600: #D45929;
-  --ember-700: #A8431C;
-  --ember-800: #802F13;
-  --ember-900: #57200C;
+  --ember-50: #ffeee5;
+  --ember-100: #ffd2b8;
+  --ember-200: #ffb68a;
+  --ember-300: #ff9b5c;
+  --ember-400: #ff7f2e;
+  --ember-500: #ff6b35;
+  --ember-600: #d45929;
+  --ember-700: #a8431c;
+  --ember-800: #802f13;
+  --ember-900: #57200c;
   --ember-950: #331205;
 
   /* ---- NEUTRAL · Slight cool cast ---- */
-  --neutral-50:   #FAFAFB;
-  --neutral-100:  #EEEEF1;
-  --neutral-200:  #D7D7DC;
-  --neutral-300:  #B0B0B8;
-  --neutral-400:  #82828A;
-  --neutral-500:  #6B6B72;
-  --neutral-600:  #50505A;
-  --neutral-700:  #3A3A42;
-  --neutral-800:  #26262B;
-  --neutral-900:  #1C1C22;
-  --neutral-950:  #131318;
+  --neutral-50: #fafafb;
+  --neutral-100: #eeeef1;
+  --neutral-200: #d7d7dc;
+  --neutral-300: #b0b0b8;
+  --neutral-400: #82828a;
+  --neutral-500: #6b6b72;
+  --neutral-600: #50505a;
+  --neutral-700: #3a3a42;
+  --neutral-800: #26262b;
+  --neutral-900: #1c1c22;
+  --neutral-950: #131318;
   /* Below ramp — true backgrounds */
-  --neutral-1000: #0A0A0D;
+  --neutral-1000: #0a0a0d;
   --neutral-void: #000;
 
   /* ---- SUCCESS · green (semantic only) ---- */
-  --success-50:  #E5FCEF;
-  --success-100: #B8F5D2;
-  --success-200: #8AEDB6;
-  --success-300: #5CE69A;
-  --success-400: #2EDE7D;
-  --success-500: #00E676;
-  --success-600: #00B85D;
-  --success-700: #008A46;
+  --success-50: #e5fcef;
+  --success-100: #b8f5d2;
+  --success-200: #8aedb6;
+  --success-300: #5ce69a;
+  --success-400: #2ede7d;
+  --success-500: #00e676;
+  --success-600: #00b85d;
+  --success-700: #008a46;
   --success-800: #006534;
   --success-900: #004423;
   --success-950: #002915;
 
   /* ---- WARNING · amber (semantic only) ---- */
-  --warning-50:  #FFF8E5;
-  --warning-100: #FFEAB8;
-  --warning-200: #FFDC8A;
-  --warning-300: #FFCE5C;
-  --warning-400: #FFC02E;
-  --warning-500: #FFB300;
-  --warning-600: #D69500;
-  --warning-700: #A87600;
+  --warning-50: #fff8e5;
+  --warning-100: #ffeab8;
+  --warning-200: #ffdc8a;
+  --warning-300: #ffce5c;
+  --warning-400: #ffc02e;
+  --warning-500: #ffb300;
+  --warning-600: #d69500;
+  --warning-700: #a87600;
   --warning-800: #805900;
-  --warning-900: #573D00;
+  --warning-900: #573d00;
   --warning-950: #332400;
 
   /* ---- DANGER · red (semantic only) ---- */
-  --danger-50:  #FFE5EB;
-  --danger-100: #FFB8C5;
-  --danger-200: #FF8AA0;
-  --danger-300: #FF5C7A;
-  --danger-400: #FF4C6B;
-  --danger-500: #FF3B5C;
-  --danger-600: #D62E4A;
-  --danger-700: #A82338;
-  --danger-800: #801A29;
-  --danger-900: #57111C;
-  --danger-950: #330A10;
+  --danger-50: #ffe5eb;
+  --danger-100: #ffb8c5;
+  --danger-200: #ff8aa0;
+  --danger-300: #ff5c7a;
+  --danger-400: #ff4c6b;
+  --danger-500: #ff3b5c;
+  --danger-600: #d62e4a;
+  --danger-700: #a82338;
+  --danger-800: #801a29;
+  --danger-900: #57111c;
+  --danger-950: #330a10;
 
   /* ---- INFO · blue (semantic only) ---- */
-  --info-50:  #E5EFFF;
-  --info-100: #B8D2FF;
-  --info-200: #8AB5FF;
-  --info-300: #5C99FF;
-  --info-400: #4F94FF;
-  --info-500: #3F8EFF;
-  --info-600: #2C71D6;
-  --info-700: #1F58A8;
+  --info-50: #e5efff;
+  --info-100: #b8d2ff;
+  --info-200: #8ab5ff;
+  --info-300: #5c99ff;
+  --info-400: #4f94ff;
+  --info-500: #3f8eff;
+  --info-600: #2c71d6;
+  --info-700: #1f58a8;
   --info-800: #174180;
-  --info-900: #0F2C57;
-  --info-950: #091A33;
+  --info-900: #0f2c57;
+  --info-950: #091a33;
 
   /* ---- 1-bit primitives ---- */
   --onebit-black: #000;
-  --onebit-white: #FFF;
+  --onebit-white: #fff;
+  /* stylelint-enable color-no-hex */
 
   /* ---- Texture color tokens (theme-aware: white in dark, black in light) ---- */
   --texture-02: rgba(255, 255, 255, 0.02);
@@ -166,8 +168,10 @@
   --texture-13: rgba(255, 255, 255, 0.13);
   --texture-19: rgba(255, 255, 255, 0.19);
   --texture-38: rgba(255, 255, 255, 0.38);
-  --texture-50: rgba(255, 255, 255, 0.50);
-  --texture-solid: #FFF;
+  --texture-50: rgba(255, 255, 255, 0.5);
+  /* stylelint-disable color-no-hex -- 1-bit texture solid alias */
+  --texture-solid: #fff;
+  /* stylelint-enable color-no-hex */
   --texture-noise-svg: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' fill='white' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
 
   /* ============================================================
@@ -175,182 +179,190 @@
      ============================================================ */
 
   /* ---- BRAND ---- */
-  --brand-primary:        var(--magenta-500);
-  --brand-primary-hover:  var(--magenta-400);
+  --brand-primary: var(--magenta-500);
+  --brand-primary-hover: var(--magenta-400);
   --brand-primary-active: var(--magenta-600);
-  --brand-primary-muted:  var(--magenta-800);
+  --brand-primary-muted: var(--magenta-800);
   --brand-primary-subtle: var(--magenta-950);
-  --brand-primary-glow:   color-mix(in srgb, var(--magenta-500) 25%, transparent);
-  --text-on-brand:        var(--neutral-void);
+  --brand-primary-glow: color-mix(in srgb, var(--magenta-500) 25%, transparent);
+  --text-on-brand: var(--neutral-void);
 
   /* Legacy aliases — kept for compatibility */
-  --brand-primary-soft:   var(--magenta-400);
-  --brand-primary-deep:   var(--magenta-700);
+  --brand-primary-soft: var(--magenta-400);
+  --brand-primary-deep: var(--magenta-700);
 
   /* ---- SURFACES (backgrounds) ---- */
-  --bg-void:        var(--neutral-void);     /* page background only */
-  --bg-base:        var(--neutral-1000);     /* default surface */
-  --bg-elevated:    var(--neutral-950);      /* cards, sections */
-  --bg-raised:      var(--neutral-900);      /* inputs, popovers */
-  --bg-overlay:     var(--neutral-800);      /* hover surfaces */
-  --bg-pressed:     var(--neutral-700);      /* active/pressed */
+  --bg-void: var(--neutral-void); /* page background only */
+  --bg-base: var(--neutral-1000); /* default surface */
+  --bg-elevated: var(--neutral-950); /* cards, sections */
+  --bg-raised: var(--neutral-900); /* inputs, popovers */
+  --bg-overlay: var(--neutral-800); /* hover surfaces */
+  --bg-pressed: var(--neutral-700); /* active/pressed */
   --bg-translucent: rgba(255, 255, 255, 0.04);
 
   /* ---- TEXT ---- */
-  --text-primary:     var(--neutral-50);    /* headlines, body */
-  --text-secondary:   var(--neutral-300);   /* lede, card body */
-  --text-tertiary:    var(--neutral-500);   /* captions, mono labels */
-  --text-placeholder: var(--neutral-500);   /* form hints */
-  --text-disabled:    var(--neutral-700);   /* truly inactive */
-  --text-inverse:     var(--neutral-void);  /* on light surfaces */
+  --text-primary: var(--neutral-50); /* headlines, body */
+  --text-secondary: var(--neutral-300); /* lede, card body */
+  --text-tertiary: var(--neutral-500); /* captions, mono labels */
+  --text-placeholder: var(--neutral-500); /* form hints */
+  --text-disabled: var(--neutral-700); /* truly inactive */
+  --text-inverse: var(--neutral-void); /* on light surfaces */
 
   /* ---- BORDERS ---- */
-  --border-subtle:  rgba(255, 255, 255, 0.06);   /* internal dividers */
-  --border-default: rgba(255, 255, 255, 0.10);   /* cards, inputs */
-  --border-strong:  rgba(255, 255, 255, 0.18);   /* hover emphasis */
-  --border-focus:   var(--magenta-500);          /* form focus rings */
-  --border-brand:   var(--magenta-500);          /* decorative brand */
+  --border-subtle: rgba(255, 255, 255, 0.06); /* internal dividers */
+  --border-default: rgba(255, 255, 255, 0.1); /* cards, inputs */
+  --border-strong: rgba(255, 255, 255, 0.18); /* hover emphasis */
+  --border-focus: var(--magenta-500); /* form focus rings */
+  --border-brand: var(--magenta-500); /* decorative brand */
 
   /* ---- SEMANTIC STATUS · meaning, not decoration ---- */
-  --status-success:    var(--success-500);
+  --status-success: var(--success-500);
   --status-success-bg: var(--success-950);
   --status-success-fg: var(--success-300);
-  --status-warning:    var(--warning-500);
+  --status-warning: var(--warning-500);
   --status-warning-bg: var(--warning-950);
   --status-warning-fg: var(--warning-300);
-  --status-danger:     var(--danger-500);
-  --status-danger-bg:  var(--danger-950);
-  --status-danger-fg:  var(--danger-300);
-  --status-info:       var(--info-500);
-  --status-info-bg:    var(--info-950);
-  --status-info-fg:    var(--info-300);
-  --status-neutral:    var(--neutral-400);
+  --status-danger: var(--danger-500);
+  --status-danger-bg: var(--danger-950);
+  --status-danger-fg: var(--danger-300);
+  --status-info: var(--info-500);
+  --status-info-bg: var(--info-950);
+  --status-info-fg: var(--info-300);
+  --status-neutral: var(--neutral-400);
   --status-neutral-bg: var(--neutral-900);
   --status-neutral-fg: var(--neutral-300);
 
+  /* ---- BRAND SECONDARY · dynamic thematic accent (cyan default, overridable per project) ---- */
+  --brand-secondary: var(--cyan-500);
+  --brand-secondary-hover: var(--cyan-400);
+  --brand-secondary-active: var(--cyan-600);
+  --brand-secondary-muted: var(--cyan-800);
+  --brand-secondary-subtle: var(--cyan-950);
+  --brand-secondary-glow: color-mix(in srgb, var(--brand-secondary) 25%, transparent);
+
   /* ---- PROJECT ACCENTS (sub-brands) ---- */
-  --accent-square:   var(--magenta-500);     /* 7K parent */
+  --accent-square: var(--magenta-500); /* 7K parent */
   --accent-triangle: var(--solar-500);
-  --accent-circle:   var(--cyan-500);
-  --accent-grid:     var(--acid-500);
-  --accent-line:     var(--ember-500);
+  --accent-circle: var(--cyan-500);
+  --accent-grid: var(--acid-500);
+  --accent-line: var(--ember-500);
 
   /* ---- TYPOGRAPHY ---- */
-  --font-sans:    'Geist', system-ui, -apple-system, sans-serif;
-  --font-mono:    'Geist Mono', ui-monospace, 'SF Mono', menlo, monospace;
-  --font-pixel:   'Geist Pixel', monospace;
+  --font-sans: 'Geist', system-ui, -apple-system, sans-serif;
+  --font-mono: 'Geist Mono', ui-monospace, 'SF Mono', menlo, monospace;
+  --font-pixel: 'Geist Pixel', monospace;
 
   /* Type scale — new spec: Geist sans for text, Geist Mono for labels/code, Geist Pixel for ornamental */
-  --text-display: clamp(48px, 8vw, 160px);  /* Geist, 900 weight, -0.04em */
-  --text-7xl:     7.5rem;                    /* 120px — legacy */
-  --text-6xl:     5.5rem;                    /* 88px — legacy */
-  --text-5xl:     4rem;                      /* 64px */
-  --text-4xl:     3rem;                      /* 48px */
-  --text-3xl:     2.25rem;                   /* 36px */
-  --text-2xl:     1.75rem;                   /* 28px */
-  --text-xl:      1.375rem;                  /* 22px */
-  --text-lg:      1.125rem;                  /* 18px */
-  --text-base:    1rem;                      /* 16px */
-  --text-sm:      0.875rem;                  /* 14px */
-  --text-xs:      0.75rem;                   /* 12px */
-  --text-2xs:     0.625rem;                  /* 10px */
+  --text-display: clamp(48px, 8vw, 160px); /* Geist, 900 weight, -0.04em */
+  --text-7xl: 7.5rem; /* 120px — legacy */
+  --text-6xl: 5.5rem; /* 88px — legacy */
+  --text-5xl: 4rem; /* 64px */
+  --text-4xl: 3rem; /* 48px */
+  --text-3xl: 2.25rem; /* 36px */
+  --text-2xl: 1.75rem; /* 28px */
+  --text-xl: 1.375rem; /* 22px */
+  --text-lg: 1.125rem; /* 18px */
+  --text-base: 1rem; /* 16px */
+  --text-sm: 0.875rem; /* 14px */
+  --text-xs: 0.75rem; /* 12px */
+  --text-2xs: 0.625rem; /* 10px */
 
   /* Semantic type scale — new spec names */
-  --text-h1:      4rem;       /* 64px - Geist 700 */
-  --text-h2:      3rem;       /* 48px - Geist 700 */
-  --text-h3:      2rem;       /* 32px - Geist 600 */
-  --text-h4:      1.5rem;     /* 24px - Geist 600 */
-  --text-body-lg: 1.125rem;   /* 18px - Geist 400 */
-  --text-body:    1rem;       /* 16px - Geist 400 */
-  --text-body-sm: 0.875rem;   /* 14px - Geist 400 */
-  --text-caption: 0.75rem;    /* 12px - Geist 500 */
+  --text-h1: 4rem; /* 64px - Geist 700 */
+  --text-h2: 3rem; /* 48px - Geist 700 */
+  --text-h3: 2rem; /* 32px - Geist 600 */
+  --text-h4: 1.5rem; /* 24px - Geist 600 */
+  --text-body-lg: 1.125rem; /* 18px - Geist 400 */
+  --text-body: 1rem; /* 16px - Geist 400 */
+  --text-body-sm: 0.875rem; /* 14px - Geist 400 */
+  --text-caption: 0.75rem; /* 12px - Geist 500 */
   --text-mono-label: 0.6875rem; /* 11px - Geist Mono 500 uppercase */
-  --text-mono-body: 0.8125rem;  /* 13px - Geist Mono 400 */
+  --text-mono-body: 0.8125rem; /* 13px - Geist Mono 400 */
 
   /* Line heights */
-  --leading-none:    1;
-  --leading-tight:   1.15;
-  --leading-snug:    1.3;
-  --leading-normal:  1.5;
+  --leading-none: 1;
+  --leading-tight: 1.15;
+  --leading-snug: 1.3;
+  --leading-normal: 1.5;
   --leading-relaxed: 1.65;
 
   /* Letter spacing */
   --tracking-tightest: -0.04em;
-  --tracking-tighter:  -0.02em;
-  --tracking-tight:    -0.01em;
-  --tracking-normal:   0;
-  --tracking-wide:     0.02em;
-  --tracking-wider:    0.06em;
-  --tracking-widest:   0.14em;
+  --tracking-tighter: -0.02em;
+  --tracking-tight: -0.01em;
+  --tracking-normal: 0;
+  --tracking-wide: 0.02em;
+  --tracking-wider: 0.06em;
+  --tracking-widest: 0.14em;
 
   /* Weights */
-  --weight-thin:      100;
-  --weight-extralight:200;
-  --weight-light:     300;
-  --weight-regular:   400;
-  --weight-medium:    500;
-  --weight-semibold:  600;
-  --weight-bold:      700;
+  --weight-thin: 100;
+  --weight-extralight: 200;
+  --weight-light: 300;
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
   --weight-extrabold: 800;
-  --weight-black:     900;
+  --weight-black: 900;
 
   /* ---- SPACING (4px base) ---- */
-  --space-0:   0;
-  --space-1:   0.25rem;     /* 4 */
-  --space-2:   0.5rem;      /* 8 */
-  --space-3:   0.75rem;     /* 12 */
-  --space-4:   1rem;        /* 16 */
-  --space-5:   1.25rem;     /* 20 */
-  --space-6:   1.5rem;      /* 24 */
-  --space-8:   2rem;        /* 32 */
-  --space-10:  2.5rem;      /* 40 */
-  --space-12:  3rem;        /* 48 */
-  --space-16:  4rem;        /* 64 */
-  --space-20:  5rem;        /* 80 */
-  --space-24:  6rem;        /* 96 */
-  --space-32:  8rem;        /* 128 */
+  --space-0: 0;
+  --space-1: 0.25rem; /* 4 */
+  --space-2: 0.5rem; /* 8 */
+  --space-3: 0.75rem; /* 12 */
+  --space-4: 1rem; /* 16 */
+  --space-5: 1.25rem; /* 20 */
+  --space-6: 1.5rem; /* 24 */
+  --space-8: 2rem; /* 32 */
+  --space-10: 2.5rem; /* 40 */
+  --space-12: 3rem; /* 48 */
+  --space-16: 4rem; /* 64 */
+  --space-20: 5rem; /* 80 */
+  --space-24: 6rem; /* 96 */
+  --space-32: 8rem; /* 128 */
 
   /* ---- RADII ---- */
   --radius-none: 0;
-  --radius-xs:   2px;
-  --radius-sm:   4px;
-  --radius-md:   8px;
-  --radius-lg:   12px;
-  --radius-xl:   16px;
-  --radius-2xl:  24px;
+  --radius-xs: 2px;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-2xl: 24px;
   --radius-full: 9999px;
 
   /* ---- ELEVATION (subtle, used sparingly on dark) ---- */
-  --shadow-sm:  0 1px 2px rgba(0,0,0,0.4);
-  --shadow-md:  0 4px 12px rgba(0,0,0,0.5);
-  --shadow-lg:  0 12px 32px rgba(0,0,0,0.6);
-  --shadow-xl:  0 24px 64px rgba(0,0,0,0.7);
-  --shadow-glow:  0 0 0 1px var(--brand-primary), 0 0 24px var(--brand-primary-glow);
-  --shadow-inset: inset 0 1px 0 rgba(255,255,255,0.04);
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.6);
+  --shadow-xl: 0 24px 64px rgba(0, 0, 0, 0.7);
+  --shadow-glow: 0 0 0 1px var(--brand-primary), 0 0 24px var(--brand-primary-glow);
+  --shadow-inset: inset 0 1px 0 rgba(255, 255, 255, 0.04);
 
   /* ---- MOTION ---- */
-  --ease-out:      cubic-bezier(0.16, 1, 0.3, 1);
-  --ease-in-out:   cubic-bezier(0.65, 0, 0.35, 1);
-  --ease-spring:   cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
   --duration-instant: 80ms;
-  --duration-fast:    150ms;
-  --duration-base:    240ms;
-  --duration-slow:    400ms;
-  --duration-slower:  640ms;
+  --duration-fast: 150ms;
+  --duration-base: 240ms;
+  --duration-slow: 400ms;
+  --duration-slower: 640ms;
 
   /* ---- LAYOUT ---- */
-  --container-sm:   640px;
-  --container-md:   960px;
-  --container-lg:   1200px;
-  --container-xl:   1440px;
-  --grid-gutter:    var(--space-6);
+  --container-sm: 640px;
+  --container-md: 960px;
+  --container-lg: 1200px;
+  --container-xl: 1440px;
+  --grid-gutter: var(--space-6);
 
   /* ---- Z-INDEX ---- */
-  --z-base:    0;
-  --z-raised:  10;
-  --z-sticky:  100;
+  --z-base: 0;
+  --z-raised: 10;
+  --z-sticky: 100;
   --z-overlay: 200;
-  --z-modal:   300;
-  --z-toast:   400;
-  --z-max:     999;
+  --z-modal: 300;
+  --z-toast: 400;
+  --z-max: 999;
 }

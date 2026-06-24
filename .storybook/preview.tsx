@@ -19,6 +19,18 @@ const preview: Preview = {
       defaultTheme: 'dark',
       attributeName: 'data-theme',
     }),
+    withThemeByDataAttribute<ReactRenderer>({
+      themes: {
+        '7k': '7k',
+        square: 'square',
+        triangle: 'triangle',
+        circle: 'circle',
+        grid: 'grid',
+        line: 'line',
+      },
+      defaultTheme: '7k',
+      attributeName: 'data-project',
+    }),
     (Story) => (
       <ThemeProvider>
         <Story />

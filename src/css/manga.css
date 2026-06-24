@@ -1,0 +1,259 @@
+/* ===========================================================
+   MANGA PANEL SYSTEM — frames, gutters, speed lines, bubbles
+   Inspired by manga panel layout: thin borders, negative space,
+   screentone textures, and high-contrast splash panels.
+   =========================================================== */
+
+/* ---- Base panel ---- */
+.panel {
+  position: relative;
+  background: var(--bg-elevated);
+  border: 2px solid var(--onebit-white);
+  padding: var(--space-6);
+  overflow: hidden;
+}
+.panel::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0;
+}
+
+/* Panel frame — inset border for manga panel look */
+.panel-frame {
+  border: 2px solid var(--onebit-white);
+  outline: 2px solid var(--onebit-white);
+  outline-offset: 4px;
+}
+
+/* Panel gutter — thick separator between panels */
+.panel-gutter {
+  border: none;
+  border-bottom: 4px solid var(--onebit-white);
+  padding: 0;
+  background: transparent;
+}
+
+/* Inverted splash panel */
+.panel-invert {
+  background: var(--onebit-white);
+  color: var(--onebit-black);
+  border-color: var(--onebit-black);
+}
+.panel-invert .panel-frame {
+  outline-color: var(--onebit-black);
+}
+
+/* Corner brackets — manga focus frame */
+.corner-bracket {
+  position: relative;
+}
+.corner-bracket::before,
+.corner-bracket::after {
+  content: '';
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border-color: var(--brand-primary);
+  border-style: solid;
+  pointer-events: none;
+  z-index: 2;
+}
+.corner-bracket::before {
+  top: -2px;
+  left: -2px;
+  border-width: 2px 0 0 2px;
+}
+.corner-bracket::after {
+  bottom: -2px;
+  right: -2px;
+  border-width: 0 2px 2px 0;
+}
+
+/* ---- Speed lines ---- */
+.speed-line {
+  position: relative;
+  overflow: hidden;
+}
+.speed-line::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    90deg,
+    transparent,
+    transparent 8px,
+    var(--texture-06) 8px,
+    var(--texture-06) 10px
+  );
+  pointer-events: none;
+  animation: speed-line-scroll 0.6s linear infinite;
+  z-index: 1;
+}
+.speed-line-radial {
+  position: relative;
+  overflow: hidden;
+}
+.speed-line-radial::before {
+  content: '';
+  position: absolute;
+  inset: -50%;
+  background: repeating-conic-gradient(
+    from 0deg,
+    transparent 0deg,
+    transparent 4deg,
+    var(--texture-05) 4deg,
+    var(--texture-05) 5deg
+  );
+  pointer-events: none;
+  animation: speed-line-radial-spin 8s linear infinite;
+  z-index: 1;
+}
+.speed-line-horizontal {
+  position: relative;
+  overflow: hidden;
+}
+.speed-line-horizontal::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 6px,
+    var(--texture-05) 6px,
+    var(--texture-05) 8px
+  );
+  pointer-events: none;
+  animation: speed-line-scroll-vertical 0.8s linear infinite;
+  z-index: 1;
+}
+
+/* ---- Speech bubbles ---- */
+.manga-bubble {
+  position: relative;
+  background: var(--onebit-white);
+  color: var(--onebit-black);
+  border: 2px solid var(--onebit-black);
+  border-radius: var(--radius-lg);
+  padding: var(--space-4) var(--space-5);
+  font-family: var(--font-sans);
+  font-size: var(--text-body);
+  line-height: var(--leading-snug);
+}
+.manga-bubble::after {
+  content: '';
+  position: absolute;
+  bottom: -12px;
+  left: 24px;
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 12px solid var(--onebit-black);
+}
+.manga-bubble-invert {
+  background: var(--onebit-black);
+  color: var(--onebit-white);
+  border-color: var(--onebit-white);
+}
+.manga-bubble-invert::after {
+  border-top-color: var(--onebit-white);
+}
+
+/* Shout bubble — jagged outline */
+.manga-shout {
+  position: relative;
+  background: var(--onebit-white);
+  color: var(--onebit-black);
+  border: 3px solid var(--onebit-black);
+  padding: var(--space-4);
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: var(--text-lg);
+  clip-path: polygon(
+    0% 8%,
+    6% 0%,
+    18% 4%,
+    28% 0%,
+    40% 6%,
+    52% 0%,
+    64% 5%,
+    76% 0%,
+    88% 4%,
+    100% 10%,
+    96% 22%,
+    100% 34%,
+    95% 46%,
+    100% 58%,
+    96% 70%,
+    100% 82%,
+    94% 94%,
+    84% 100%,
+    72% 96%,
+    60% 100%,
+    48% 95%,
+    36% 100%,
+    24% 96%,
+    12% 100%,
+    4% 94%,
+    0% 84%,
+    5% 72%,
+    0% 60%,
+    4% 48%,
+    0% 36%,
+    5% 24%,
+    0% 12%
+  );
+}
+
+/* ---- Screentone overlay ---- */
+.screentone-overlay {
+  position: relative;
+}
+.screentone-overlay::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(var(--texture-06) 1px, transparent 1px);
+  background-size: 6px 6px;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.6;
+}
+
+/* ---- Keyframes for manga animations ---- */
+@keyframes speed-line-scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-18px);
+  }
+}
+@keyframes speed-line-scroll-vertical {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-14px);
+  }
+}
+@keyframes speed-line-radial-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .speed-line::before,
+  .speed-line-horizontal::before,
+  .speed-line-radial::before {
+    animation: none !important;
+  }
+}

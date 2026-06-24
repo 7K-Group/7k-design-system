@@ -8,7 +8,9 @@ export default defineConfig({
     react(),
     dts({
       insertTypesEntry: true,
+      entryRoot: 'src/react',
       outDir: 'dist/react',
+      exclude: ['**/*.stories.tsx', '**/stories/**'],
     }),
   ],
   build: {

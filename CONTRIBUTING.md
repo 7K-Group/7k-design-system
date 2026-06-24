@@ -5,19 +5,21 @@ Thank you for your interest in contributing! This document outlines the process 
 ## Development Setup
 
 1. **Clone the repository**
+
    ```bash
    git clone https://github.com/7K-Group/7k-design-system.git
    cd 7k-design-system
    ```
 
 2. **Install dependencies**
+
    ```bash
    npm install
    ```
 
 3. **Start development**
    ```bash
-   npm run dev
+   npm run storybook
    ```
 
 ## Project Structure
@@ -27,10 +29,10 @@ Thank you for your interest in contributing! This document outlines the process 
 ├── src/                    # Source files
 │   ├── css/               # Modular CSS files
 │   ├── react/             # React UI kit components
+│   ├── stories/           # Storybook documentation
 │   └── tokens/            # Design tokens in JSON format
 ├── build/                 # Brand assets (SVGs)
 ├── fonts/                 # Geist Pixel font files
-├── preview/               # HTML preview cards
 ├── dist/                  # Build output (generated)
 └── tests/                 # Test files
 ```
@@ -44,6 +46,7 @@ git checkout -b feat/your-feature-name
 ```
 
 Branch naming conventions:
+
 - `feat/` — New features
 - `fix/` — Bug fixes
 - `docs/` — Documentation changes
@@ -69,8 +72,14 @@ npm run typecheck
 # Tests
 npm run test
 
+# Accessibility tests
+npm run test:a11y
+
 # Build verification
 npm run build
+
+# Storybook build verification
+npm run build-storybook
 ```
 
 ### 4. Commit

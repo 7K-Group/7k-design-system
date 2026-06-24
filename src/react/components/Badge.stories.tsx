@@ -14,7 +14,7 @@ const meta = {
   argTypes: {
     variant: {
       control: 'select',
-      options: ['default', 'success', 'warning', 'danger', 'info', 'neutral'],
+      options: ['default', 'accent', 'success', 'warning', 'danger', 'info', 'neutral'],
       description: 'Visual style of the badge',
       table: {
         type: { summary: 'BadgeVariant' },
@@ -71,6 +71,7 @@ export const AllVariants: Story = {
   render: () => (
     <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
       <Badge>Default</Badge>
+      <Badge variant="accent">Accent</Badge>
       <Badge variant="success">Success</Badge>
       <Badge variant="warning">Warning</Badge>
       <Badge variant="danger">Danger</Badge>

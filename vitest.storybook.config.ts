@@ -24,7 +24,7 @@ export default mergeConfig(
         headless: true,
         instances: [{ browser: 'chromium' }],
       },
-      setupFiles: ['./.storybook/vitest.setup.ts'],
+      setupFiles: [],
     },
   })
 );

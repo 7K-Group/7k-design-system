@@ -6,18 +6,54 @@
 /* Isometric diamond grid — 30°/-30° dual hatch creates diamond tiling */
 .isometric-grid {
   background:
-    repeating-linear-gradient(30deg, transparent, transparent 24px, var(--texture-03) 24px, var(--texture-03) 25px),
-    repeating-linear-gradient(-30deg, transparent, transparent 24px, var(--texture-03) 24px, var(--texture-03) 25px);
+    repeating-linear-gradient(
+      30deg,
+      transparent,
+      transparent 24px,
+      var(--texture-03) 24px,
+      var(--texture-03) 25px
+    ),
+    repeating-linear-gradient(
+      -30deg,
+      transparent,
+      transparent 24px,
+      var(--texture-03) 24px,
+      var(--texture-03) 25px
+    );
 }
 .isometric-grid-dense {
   background:
-    repeating-linear-gradient(30deg, transparent, transparent 12px, var(--texture-05) 12px, var(--texture-05) 13px),
-    repeating-linear-gradient(-30deg, transparent, transparent 12px, var(--texture-05) 12px, var(--texture-05) 13px);
+    repeating-linear-gradient(
+      30deg,
+      transparent,
+      transparent 12px,
+      var(--texture-05) 12px,
+      var(--texture-05) 13px
+    ),
+    repeating-linear-gradient(
+      -30deg,
+      transparent,
+      transparent 12px,
+      var(--texture-05) 12px,
+      var(--texture-05) 13px
+    );
 }
 .isometric-grid-accent {
   background:
-    repeating-linear-gradient(30deg, transparent, transparent 24px, color-mix(in srgb, var(--magenta-500) 12%, transparent) 24px, color-mix(in srgb, var(--magenta-500) 12%, transparent) 25px),
-    repeating-linear-gradient(-30deg, transparent, transparent 24px, color-mix(in srgb, var(--magenta-500) 12%, transparent) 24px, color-mix(in srgb, var(--magenta-500) 12%, transparent) 25px);
+    repeating-linear-gradient(
+      30deg,
+      transparent,
+      transparent 24px,
+      color-mix(in srgb, var(--magenta-500) 12%, transparent) 24px,
+      color-mix(in srgb, var(--magenta-500) 12%, transparent) 25px
+    ),
+    repeating-linear-gradient(
+      -30deg,
+      transparent,
+      transparent 24px,
+      color-mix(in srgb, var(--magenta-500) 12%, transparent) 24px,
+      color-mix(in srgb, var(--magenta-500) 12%, transparent) 25px
+    );
 }
 
 /* Isometric cubes — three faces simulated with 30°/-30°/150° gradients
@@ -25,25 +61,79 @@
 .isometric-cubes {
   background:
     /* Right face — lighter */
-    repeating-linear-gradient(150deg, transparent, transparent 20px, var(--texture-06) 20px, var(--texture-06) 21px),
+    repeating-linear-gradient(
+      150deg,
+      transparent,
+      transparent 20px,
+      var(--texture-06) 20px,
+      var(--texture-06) 21px
+    ),
     /* Top face — brightest */
-    repeating-linear-gradient(-30deg, transparent, transparent 20px, var(--texture-09) 20px, var(--texture-09) 21px),
+    repeating-linear-gradient(
+        -30deg,
+        transparent,
+        transparent 20px,
+        var(--texture-09) 20px,
+        var(--texture-09) 21px
+      ),
     /* Left face — mid */
-    repeating-linear-gradient(30deg, transparent, transparent 20px, var(--texture-03) 20px, var(--texture-03) 21px);
+    repeating-linear-gradient(
+        30deg,
+        transparent,
+        transparent 20px,
+        var(--texture-03) 20px,
+        var(--texture-03) 21px
+      );
   background-size: 40px 40px;
 }
 .isometric-cubes-dense {
   background:
-    repeating-linear-gradient(150deg, transparent, transparent 10px, var(--texture-07) 10px, var(--texture-07) 11px),
-    repeating-linear-gradient(-30deg, transparent, transparent 10px, var(--texture-13) 10px, var(--texture-13) 11px),
-    repeating-linear-gradient(30deg, transparent, transparent 10px, var(--texture-04) 10px, var(--texture-04) 11px);
+    repeating-linear-gradient(
+      150deg,
+      transparent,
+      transparent 10px,
+      var(--texture-07) 10px,
+      var(--texture-07) 11px
+    ),
+    repeating-linear-gradient(
+      -30deg,
+      transparent,
+      transparent 10px,
+      var(--texture-13) 10px,
+      var(--texture-13) 11px
+    ),
+    repeating-linear-gradient(
+      30deg,
+      transparent,
+      transparent 10px,
+      var(--texture-04) 10px,
+      var(--texture-04) 11px
+    );
   background-size: 20px 20px;
 }
 .isometric-cubes-accent {
   background:
-    repeating-linear-gradient(150deg, transparent, transparent 20px, color-mix(in srgb, var(--magenta-500) 12%, transparent) 20px, color-mix(in srgb, var(--magenta-500) 12%, transparent) 21px),
-    repeating-linear-gradient(-30deg, transparent, transparent 20px, color-mix(in srgb, var(--magenta-500) 20%, transparent) 20px, color-mix(in srgb, var(--magenta-500) 20%, transparent) 21px),
-    repeating-linear-gradient(30deg, transparent, transparent 20px, color-mix(in srgb, var(--magenta-500) 8%, transparent) 20px, color-mix(in srgb, var(--magenta-500) 8%, transparent) 21px);
+    repeating-linear-gradient(
+      150deg,
+      transparent,
+      transparent 20px,
+      color-mix(in srgb, var(--magenta-500) 12%, transparent) 20px,
+      color-mix(in srgb, var(--magenta-500) 12%, transparent) 21px
+    ),
+    repeating-linear-gradient(
+      -30deg,
+      transparent,
+      transparent 20px,
+      color-mix(in srgb, var(--magenta-500) 20%, transparent) 20px,
+      color-mix(in srgb, var(--magenta-500) 20%, transparent) 21px
+    ),
+    repeating-linear-gradient(
+      30deg,
+      transparent,
+      transparent 20px,
+      color-mix(in srgb, var(--magenta-500) 8%, transparent) 20px,
+      color-mix(in srgb, var(--magenta-500) 8%, transparent) 21px
+    );
   background-size: 40px 40px;
 }
 
@@ -52,13 +142,17 @@
   background:
     repeating-linear-gradient(
       150deg,
-      transparent, transparent 15px,
-      var(--texture-04) 15px, var(--texture-04) 16px
+      transparent,
+      transparent 15px,
+      var(--texture-04) 15px,
+      var(--texture-04) 16px
     ),
     repeating-linear-gradient(
       -30deg,
-      transparent 0, transparent 30px,
-      var(--texture-09) 30px, var(--texture-09) 31px
+      transparent 0,
+      transparent 30px,
+      var(--texture-09) 30px,
+      var(--texture-09) 31px
     );
   background-size: 30px 30px;
 }
@@ -66,34 +160,106 @@
 /* Isometric hex grid — honeycomb from overlapping 60° gradients */
 .isometric-hex {
   background:
-    repeating-linear-gradient(60deg, transparent, transparent 18px, var(--texture-02) 18px, var(--texture-02) 19px),
-    repeating-linear-gradient(-60deg, transparent, transparent 18px, var(--texture-02) 18px, var(--texture-02) 19px),
-    repeating-linear-gradient(0deg, transparent, transparent 9px, var(--texture-04) 9px, var(--texture-04) 10px);
+    repeating-linear-gradient(
+      60deg,
+      transparent,
+      transparent 18px,
+      var(--texture-02) 18px,
+      var(--texture-02) 19px
+    ),
+    repeating-linear-gradient(
+      -60deg,
+      transparent,
+      transparent 18px,
+      var(--texture-02) 18px,
+      var(--texture-02) 19px
+    ),
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 9px,
+      var(--texture-04) 9px,
+      var(--texture-04) 10px
+    );
 }
 
 /* Isometric pipes / tunnels — converging lines toward vanishing point */
 .isometric-pipes {
   background:
     /* Left wall */
-    repeating-linear-gradient(30deg, transparent, transparent 16px, var(--texture-04) 16px, var(--texture-04) 17px),
+    repeating-linear-gradient(
+      30deg,
+      transparent,
+      transparent 16px,
+      var(--texture-04) 16px,
+      var(--texture-04) 17px
+    ),
     /* Right wall */
-    repeating-linear-gradient(-30deg, transparent, transparent 16px, var(--texture-04) 16px, var(--texture-04) 17px),
+    repeating-linear-gradient(
+        -30deg,
+        transparent,
+        transparent 16px,
+        var(--texture-04) 16px,
+        var(--texture-04) 17px
+      ),
     /* Floor */
-    repeating-linear-gradient(0deg, transparent, transparent 12px, var(--texture-02) 12px, var(--texture-02) 13px);
+    repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 12px,
+        var(--texture-02) 12px,
+        var(--texture-02) 13px
+      );
 }
 .isometric-pipes-fast {
   background:
-    repeating-linear-gradient(30deg, transparent, transparent 8px, var(--texture-05) 8px, var(--texture-05) 9px),
-    repeating-linear-gradient(-30deg, transparent, transparent 8px, var(--texture-05) 8px, var(--texture-05) 9px),
-    repeating-linear-gradient(0deg, transparent, transparent 6px, var(--texture-03) 6px, var(--texture-03) 7px);
+    repeating-linear-gradient(
+      30deg,
+      transparent,
+      transparent 8px,
+      var(--texture-05) 8px,
+      var(--texture-05) 9px
+    ),
+    repeating-linear-gradient(
+      -30deg,
+      transparent,
+      transparent 8px,
+      var(--texture-05) 8px,
+      var(--texture-05) 9px
+    ),
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 6px,
+      var(--texture-03) 6px,
+      var(--texture-03) 7px
+    );
 }
 
 /* Isometric terrain — horizontal zigzag depth layers */
 .isometric-terrain {
   background:
-    repeating-linear-gradient(0deg, transparent, transparent 8px, var(--texture-03) 8px, var(--texture-03) 9px),
-    repeating-linear-gradient(30deg, transparent, transparent 20px, var(--texture-05) 20px, var(--texture-05) 21px),
-    repeating-linear-gradient(-30deg, transparent, transparent 20px, var(--texture-04) 20px, var(--texture-04) 21px);
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 8px,
+      var(--texture-03) 8px,
+      var(--texture-03) 9px
+    ),
+    repeating-linear-gradient(
+      30deg,
+      transparent,
+      transparent 20px,
+      var(--texture-05) 20px,
+      var(--texture-05) 21px
+    ),
+    repeating-linear-gradient(
+      -30deg,
+      transparent,
+      transparent 20px,
+      var(--texture-04) 20px,
+      var(--texture-04) 21px
+    );
 }
 
 /* ---- Isometric staircase — ascending step pattern created by offset horizontal bands ---- */
@@ -101,150 +267,429 @@
   background:
     repeating-linear-gradient(
       0deg,
-      transparent, transparent 8px,
-      var(--texture-03) 8px, var(--texture-03) 10px,
-      transparent 10px, transparent 18px,
-      var(--texture-03) 18px, var(--texture-03) 20px
+      transparent,
+      transparent 8px,
+      var(--texture-03) 8px,
+      var(--texture-03) 10px,
+      transparent 10px,
+      transparent 18px,
+      var(--texture-03) 18px,
+      var(--texture-03) 20px
     ),
     repeating-linear-gradient(
       -30deg,
-      transparent, transparent 16px,
-      var(--texture-05) 16px, var(--texture-05) 17px
+      transparent,
+      transparent 16px,
+      var(--texture-05) 16px,
+      var(--texture-05) 17px
     );
-  background-size: 40px 40px, 40px 40px;
+  background-size:
+    40px 40px,
+    40px 40px;
 }
 
 /* ---- Isometric diamond facet — large faceted diamond grid with multiple face shades ---- */
 .isometric-diamond-facet {
   background:
     /* Upper face — left-leaning */
-    repeating-linear-gradient(150deg, transparent, transparent 20px, var(--texture-06) 20px, var(--texture-06) 21px),
+    repeating-linear-gradient(
+      150deg,
+      transparent,
+      transparent 20px,
+      var(--texture-06) 20px,
+      var(--texture-06) 21px
+    ),
     /* Lower face — right-leaning */
-    repeating-linear-gradient(-30deg, transparent, transparent 20px, var(--texture-03) 20px, var(--texture-03) 21px),
+    repeating-linear-gradient(
+        -30deg,
+        transparent,
+        transparent 20px,
+        var(--texture-03) 20px,
+        var(--texture-03) 21px
+      ),
     /* Center crease */
-    repeating-linear-gradient(30deg, transparent, transparent 20px, var(--texture-09) 20px, var(--texture-09) 21px);
+    repeating-linear-gradient(
+        30deg,
+        transparent,
+        transparent 20px,
+        var(--texture-09) 20px,
+        var(--texture-09) 21px
+      );
   background-size: 52px 30px;
 }
 .isometric-diamond-facet-dense {
   background:
-    repeating-linear-gradient(150deg, transparent, transparent 10px, var(--texture-07) 10px, var(--texture-07) 11px),
-    repeating-linear-gradient(-30deg, transparent, transparent 10px, var(--texture-04) 10px, var(--texture-04) 11px),
-    repeating-linear-gradient(30deg, transparent, transparent 10px, var(--texture-13) 10px, var(--texture-13) 11px);
+    repeating-linear-gradient(
+      150deg,
+      transparent,
+      transparent 10px,
+      var(--texture-07) 10px,
+      var(--texture-07) 11px
+    ),
+    repeating-linear-gradient(
+      -30deg,
+      transparent,
+      transparent 10px,
+      var(--texture-04) 10px,
+      var(--texture-04) 11px
+    ),
+    repeating-linear-gradient(
+      30deg,
+      transparent,
+      transparent 10px,
+      var(--texture-13) 10px,
+      var(--texture-13) 11px
+    );
   background-size: 26px 15px;
 }
 .isometric-diamond-facet-accent {
   background:
-    repeating-linear-gradient(150deg, transparent, transparent 20px, color-mix(in srgb, var(--magenta-500) 10%, transparent) 20px, color-mix(in srgb, var(--magenta-500) 10%, transparent) 21px),
-    repeating-linear-gradient(-30deg, transparent, transparent 20px, color-mix(in srgb, var(--magenta-500) 6%, transparent) 20px, color-mix(in srgb, var(--magenta-500) 6%, transparent) 21px),
-    repeating-linear-gradient(30deg, transparent, transparent 20px, color-mix(in srgb, var(--magenta-500) 20%, transparent) 20px, color-mix(in srgb, var(--magenta-500) 20%, transparent) 21px);
+    repeating-linear-gradient(
+      150deg,
+      transparent,
+      transparent 20px,
+      color-mix(in srgb, var(--magenta-500) 10%, transparent) 20px,
+      color-mix(in srgb, var(--magenta-500) 10%, transparent) 21px
+    ),
+    repeating-linear-gradient(
+      -30deg,
+      transparent,
+      transparent 20px,
+      color-mix(in srgb, var(--magenta-500) 6%, transparent) 20px,
+      color-mix(in srgb, var(--magenta-500) 6%, transparent) 21px
+    ),
+    repeating-linear-gradient(
+      30deg,
+      transparent,
+      transparent 20px,
+      color-mix(in srgb, var(--magenta-500) 20%, transparent) 20px,
+      color-mix(in srgb, var(--magenta-500) 20%, transparent) 21px
+    );
   background-size: 52px 30px;
 }
 
 /* ---- Isometric wave — undulating sine-like surface with staggered horizontal lines ---- */
 .isometric-wave {
   background:
-    repeating-linear-gradient(0deg, transparent, transparent 10px, var(--texture-03) 10px, var(--texture-03) 11px),
-    repeating-linear-gradient(15deg, transparent 0, transparent 12px, var(--texture-05) 12px, var(--texture-05) 13px),
-    repeating-linear-gradient(-15deg, transparent 0, transparent 20px, var(--texture-04) 20px, var(--texture-04) 21px);
-  background-size: 30px 20px, 40px 30px, 40px 30px;
-  background-position: 0 0, 10px 5px, -5px 10px;
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 10px,
+      var(--texture-03) 10px,
+      var(--texture-03) 11px
+    ),
+    repeating-linear-gradient(
+      15deg,
+      transparent 0,
+      transparent 12px,
+      var(--texture-05) 12px,
+      var(--texture-05) 13px
+    ),
+    repeating-linear-gradient(
+      -15deg,
+      transparent 0,
+      transparent 20px,
+      var(--texture-04) 20px,
+      var(--texture-04) 21px
+    );
+  background-size:
+    30px 20px,
+    40px 30px,
+    40px 30px;
+  background-position:
+    0 0,
+    10px 5px,
+    -5px 10px;
 }
 .isometric-wave-fluid {
   background:
-    repeating-linear-gradient(0deg, transparent, transparent 16px, var(--texture-02) 16px, var(--texture-02) 17px),
-    repeating-linear-gradient(10deg, transparent 0, transparent 24px, var(--texture-04) 24px, var(--texture-04) 25px),
-    repeating-linear-gradient(-10deg, transparent 0, transparent 16px, var(--texture-04) 16px, var(--texture-04) 17px),
-    repeating-linear-gradient(30deg, transparent 0, transparent 32px, var(--texture-02) 32px, var(--texture-02) 33px);
-  background-size: 60px 32px, 60px 48px, 60px 32px, 80px 64px;
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 16px,
+      var(--texture-02) 16px,
+      var(--texture-02) 17px
+    ),
+    repeating-linear-gradient(
+      10deg,
+      transparent 0,
+      transparent 24px,
+      var(--texture-04) 24px,
+      var(--texture-04) 25px
+    ),
+    repeating-linear-gradient(
+      -10deg,
+      transparent 0,
+      transparent 16px,
+      var(--texture-04) 16px,
+      var(--texture-04) 17px
+    ),
+    repeating-linear-gradient(
+      30deg,
+      transparent 0,
+      transparent 32px,
+      var(--texture-02) 32px,
+      var(--texture-02) 33px
+    );
+  background-size:
+    60px 32px,
+    60px 48px,
+    60px 32px,
+    80px 64px;
 }
 
 /* ---- Isometric rooms — interior room approximations with left/right walls + floor ---- */
 .isometric-rooms {
   background:
     /* Left wall */
-    repeating-linear-gradient(150deg, transparent, transparent 20px, var(--texture-03) 20px, var(--texture-03) 22px),
+    repeating-linear-gradient(
+      150deg,
+      transparent,
+      transparent 20px,
+      var(--texture-03) 20px,
+      var(--texture-03) 22px
+    ),
     /* Right wall */
-    repeating-linear-gradient(-30deg, transparent, transparent 20px, var(--texture-04) 20px, var(--texture-04) 22px),
+    repeating-linear-gradient(
+        -30deg,
+        transparent,
+        transparent 20px,
+        var(--texture-04) 20px,
+        var(--texture-04) 22px
+      ),
     /* Floor — zigzag depth lines */
-    repeating-linear-gradient(15deg, transparent, transparent 8px, var(--texture-02) 8px, var(--texture-02) 9px);
-  background-size: 60px 60px, 60px 60px, 40px 40px;
-  background-position: 0 0, 0 0, 20px 30px;
+    repeating-linear-gradient(
+        15deg,
+        transparent,
+        transparent 8px,
+        var(--texture-02) 8px,
+        var(--texture-02) 9px
+      );
+  background-size:
+    60px 60px,
+    60px 60px,
+    40px 40px;
+  background-position:
+    0 0,
+    0 0,
+    20px 30px;
 }
 
 /* ---- Isometric city — building-like block silhouettes using vertical + diagonal fills ---- */
 .isometric-city {
   background:
     /* Building face A — front */
-    repeating-linear-gradient(90deg, transparent, transparent 24px, var(--texture-06) 24px, var(--texture-06) 25px),
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 24px,
+      var(--texture-06) 24px,
+      var(--texture-06) 25px
+    ),
     /* Building face B — side */
-    repeating-linear-gradient(150deg, transparent 12px, transparent 24px, var(--texture-03) 24px, var(--texture-03) 25px),
+    repeating-linear-gradient(
+        150deg,
+        transparent 12px,
+        transparent 24px,
+        var(--texture-03) 24px,
+        var(--texture-03) 25px
+      ),
     /* Windows (dense dots on dark) */
-    repeating-linear-gradient(0deg, transparent, transparent 6px, var(--texture-03) 6px, var(--texture-03) 7px);
-  background-size: 48px 32px, 48px 32px, 24px 16px;
-  background-position: 0 0, 24px 0, 6px 4px;
+    repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 6px,
+        var(--texture-03) 6px,
+        var(--texture-03) 7px
+      );
+  background-size:
+    48px 32px,
+    48px 32px,
+    24px 16px;
+  background-position:
+    0 0,
+    24px 0,
+    6px 4px;
 }
 .isometric-city-dense {
   background:
-    repeating-linear-gradient(90deg, transparent, transparent 16px, var(--texture-08) 16px, var(--texture-08) 17px),
-    repeating-linear-gradient(150deg, transparent 8px, transparent 16px, var(--texture-04) 16px, var(--texture-04) 17px),
-    repeating-linear-gradient(0deg, transparent, transparent 4px, var(--texture-05) 4px, var(--texture-05) 5px);
-  background-size: 32px 24px, 32px 24px, 16px 12px;
-  background-position: 0 0, 16px 0, 4px 3px;
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 16px,
+      var(--texture-08) 16px,
+      var(--texture-08) 17px
+    ),
+    repeating-linear-gradient(
+      150deg,
+      transparent 8px,
+      transparent 16px,
+      var(--texture-04) 16px,
+      var(--texture-04) 17px
+    ),
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 4px,
+      var(--texture-05) 4px,
+      var(--texture-05) 5px
+    );
+  background-size:
+    32px 24px,
+    32px 24px,
+    16px 12px;
+  background-position:
+    0 0,
+    16px 0,
+    4px 3px;
 }
 .isometric-city-accent {
   background:
-    repeating-linear-gradient(90deg, transparent, transparent 24px, color-mix(in srgb, var(--magenta-500) 15%, transparent) 24px, color-mix(in srgb, var(--magenta-500) 15%, transparent) 25px),
-    repeating-linear-gradient(150deg, transparent 12px, transparent 24px, color-mix(in srgb, var(--magenta-500) 8%, transparent) 24px, color-mix(in srgb, var(--magenta-500) 8%, transparent) 25px),
-    repeating-linear-gradient(0deg, transparent, transparent 6px, color-mix(in srgb, var(--magenta-500) 6%, transparent) 6px, color-mix(in srgb, var(--magenta-500) 6%, transparent) 7px);
-  background-size: 48px 32px, 48px 32px, 24px 16px;
-  background-position: 0 0, 24px 0, 6px 4px;
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 24px,
+      color-mix(in srgb, var(--magenta-500) 15%, transparent) 24px,
+      color-mix(in srgb, var(--magenta-500) 15%, transparent) 25px
+    ),
+    repeating-linear-gradient(
+      150deg,
+      transparent 12px,
+      transparent 24px,
+      color-mix(in srgb, var(--magenta-500) 8%, transparent) 24px,
+      color-mix(in srgb, var(--magenta-500) 8%, transparent) 25px
+    ),
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 6px,
+      color-mix(in srgb, var(--magenta-500) 6%, transparent) 6px,
+      color-mix(in srgb, var(--magenta-500) 6%, transparent) 7px
+    );
+  background-size:
+    48px 32px,
+    48px 32px,
+    24px 16px;
+  background-position:
+    0 0,
+    24px 0,
+    6px 4px;
 }
 
 /* ---- Isometric spiral — concentric square spiral in isometric perspective ---- */
 .isometric-spiral {
-  background:
-    repeating-conic-gradient(
-      from 30deg at 50% 50%,
-      transparent 0deg, transparent 8deg,
-      var(--texture-03) 8deg, var(--texture-03) 10deg,
-      transparent 10deg, transparent 18deg,
-      var(--texture-03) 18deg, var(--texture-03) 20deg,
-      transparent 20deg, transparent 28deg,
-      var(--texture-03) 28deg, var(--texture-03) 30deg,
-      transparent 30deg, transparent 38deg,
-      var(--texture-03) 38deg, var(--texture-03) 40deg
-    );
+  background: repeating-conic-gradient(
+    from 30deg at 50% 50%,
+    transparent 0deg,
+    transparent 8deg,
+    var(--texture-03) 8deg,
+    var(--texture-03) 10deg,
+    transparent 10deg,
+    transparent 18deg,
+    var(--texture-03) 18deg,
+    var(--texture-03) 20deg,
+    transparent 20deg,
+    transparent 28deg,
+    var(--texture-03) 28deg,
+    var(--texture-03) 30deg,
+    transparent 30deg,
+    transparent 38deg,
+    var(--texture-03) 38deg,
+    var(--texture-03) 40deg
+  );
 }
 .isometric-spiral-dense {
-  background:
-    repeating-conic-gradient(
-      from 30deg at 50% 50%,
-      transparent 0deg, transparent 5deg,
-      var(--texture-06) 5deg, var(--texture-06) 6deg,
-      transparent 6deg, transparent 11deg,
-      var(--texture-06) 11deg, var(--texture-06) 12deg,
-      transparent 12deg, transparent 17deg,
-      var(--texture-06) 17deg, var(--texture-06) 18deg,
-      transparent 18deg, transparent 23deg,
-      var(--texture-06) 23deg, var(--texture-06) 24deg
-    );
+  background: repeating-conic-gradient(
+    from 30deg at 50% 50%,
+    transparent 0deg,
+    transparent 5deg,
+    var(--texture-06) 5deg,
+    var(--texture-06) 6deg,
+    transparent 6deg,
+    transparent 11deg,
+    var(--texture-06) 11deg,
+    var(--texture-06) 12deg,
+    transparent 12deg,
+    transparent 17deg,
+    var(--texture-06) 17deg,
+    var(--texture-06) 18deg,
+    transparent 18deg,
+    transparent 23deg,
+    var(--texture-06) 23deg,
+    var(--texture-06) 24deg
+  );
 }
 
 /* ---- Texture composition helpers ---- */
-.texture-overlay { position: absolute; inset: 0; pointer-events: none; z-index: 1; }
-.has-halftone-accent { position: relative; }
-.has-halftone-accent::before {
-  content: ''; position: absolute; inset: 0;
-  background-image: radial-gradient(var(--brand-primary) 1px, transparent 1px); background-size: 8px 8px;
-  pointer-events: none; opacity: 0.4; z-index: 0;
+.texture-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
 }
-.has-dot-matrix { position: relative; }
+.has-halftone-accent {
+  position: relative;
+}
+.has-halftone-accent::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(var(--brand-primary) 1px, transparent 1px);
+  background-size: 8px 8px;
+  pointer-events: none;
+  opacity: 0.4;
+  z-index: 0;
+}
+.has-dot-matrix {
+  position: relative;
+}
 .has-dot-matrix::before {
-  content: ''; position: absolute; inset: 0;
-  background-image: radial-gradient(var(--texture-07) 0.5px, transparent 0.5px); background-size: 6px 6px;
-  pointer-events: none; z-index: 0;
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(var(--texture-07) 0.5px, transparent 0.5px);
+  background-size: 6px 6px;
+  pointer-events: none;
+  z-index: 0;
 }
 .scanline-layer {
-  background: repeating-linear-gradient(0deg, transparent, transparent 2px, var(--texture-03) 2px, var(--texture-03) 4px);
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    var(--texture-03) 2px,
+    var(--texture-03) 4px
+  );
   pointer-events: none;
+}
+
+/* ===========================================================
+   ANIMATED ISOMETRIC BACKGROUNDS
+   Convenience classes that combine a pattern with motion.
+   All respect prefers-reduced-motion via accessibility.css.
+   =========================================================== */
+
+.isometric-grid-animated {
+  animation: iso-grid-scroll 4s linear infinite;
+}
+.isometric-grid-dense-animated {
+  animation: iso-grid-scroll 3s linear infinite;
+}
+.isometric-cubes-animated {
+  animation: iso-grid-scroll 5s linear infinite;
+}
+.isometric-terrain-animated {
+  animation: iso-terrain-shift 6s linear infinite;
+}
+.isometric-pipes-animated {
+  animation: iso-grid-scroll 3s linear infinite;
+}
+.isometric-hex-animated {
+  animation: iso-grid-scroll 6s linear infinite;
+}
+.isometric-city-animated {
+  animation: iso-grid-scroll 5s linear infinite;
+}
+.isometric-wave-animated {
+  animation: iso-terrain-shift 8s linear infinite;
 }

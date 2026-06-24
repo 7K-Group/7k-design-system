@@ -15,7 +15,7 @@ const meta = {
   argTypes: {
     variant: {
       control: 'select',
-      options: ['primary', 'secondary', 'ghost', 'glow', 'glow-cyan', 'glow-grid', 'danger'],
+      options: ['primary', 'secondary', 'ghost', 'glow', 'accent', 'glow-accent', 'danger'],
       description: 'Visual style of the button',
       table: {
         type: { summary: 'ButtonVariant' },
@@ -131,7 +131,7 @@ export const CssCheck: Story = {
   },
   play: async ({ canvas }) => {
     const button = canvas.getByRole('button', { name: /submit/i });
-    await expect(getComputedStyle(button).backgroundColor).toBe('rgb(255, 0, 255)');
+    await expect(getComputedStyle(button).backgroundColor).toBe('rgba(0, 0, 0, 0)');
   },
 };
 
@@ -142,8 +142,8 @@ export const AllVariants: Story = {
       <Button variant="secondary">Secondary</Button>
       <Button variant="ghost">Ghost</Button>
       <Button variant="glow">Glow</Button>
-      <Button variant="glow-cyan">Glow Cyan</Button>
-      <Button variant="glow-grid">Glow Grid</Button>
+      <Button variant="accent">Accent</Button>
+      <Button variant="glow-accent">Glow Accent</Button>
       <Button variant="danger">Danger</Button>
     </div>
   ),

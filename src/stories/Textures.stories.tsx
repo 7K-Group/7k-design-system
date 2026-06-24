@@ -89,3 +89,45 @@ export const Vignette: Story = {
     </div>
   ),
 };
+
+export const Isometric: Story = {
+  render: () => (
+    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '16px' }}>
+      <TextureBox className="isometric-grid" label=".isometric-grid" />
+      <TextureBox className="isometric-grid-dense" label=".isometric-grid-dense" />
+      <TextureBox className="isometric-cubes" label=".isometric-cubes" />
+      <TextureBox className="isometric-terrain" label=".isometric-terrain" />
+      <TextureBox className="isometric-pipes" label=".isometric-pipes" />
+      <TextureBox className="isometric-hex" label=".isometric-hex" />
+      <TextureBox className="isometric-city" label=".isometric-city" />
+      <TextureBox className="isometric-wave" label=".isometric-wave" />
+    </div>
+  ),
+};
+
+export const IsometricAnimated: Story = {
+  render: () => (
+    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '16px' }}>
+      <TextureBox
+        className="isometric-grid isometric-grid-animated"
+        label=".isometric-grid-animated"
+      />
+      <TextureBox
+        className="isometric-cubes isometric-cubes-animated"
+        label=".isometric-cubes-animated"
+      />
+      <TextureBox
+        className="isometric-terrain isometric-terrain-animated"
+        label=".isometric-terrain-animated"
+      />
+      <TextureBox
+        className="isometric-pipes isometric-pipes-animated"
+        label=".isometric-pipes-animated"
+      />
+      <TextureBox
+        className="isometric-city isometric-city-animated"
+        label=".isometric-city-animated"
+      />
+    </div>
+  ),
+};

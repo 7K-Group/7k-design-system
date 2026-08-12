@@ -115,7 +115,7 @@
     "@typescript-eslint/eslint-plugin": "^6.0.0",
     "@typescript-eslint/parser": "^6.0.0",
     "@vitejs/plugin-react": "^4.2.0",
-    "@vitest/browser": "^1.0.0",
+    "@vitest/browser": "^4.0.0",
     "@vitest/coverage-v8": "^1.0.0",
     "autoprefixer": "^10.4.16",
     "axe-core": "^4.8.0",

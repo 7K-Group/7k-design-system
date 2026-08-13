@@ -1,17 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 
-const meta: Meta = {
-  title: 'CSS/Textures',
+const meta = {
   parameters: {
     layout: 'padded',
-    docs: {
-      description: {
-        component: '1-bit texture backgrounds inspired by manga screentone patterns.',
-      },
-    },
   },
-  tags: ['autodocs'],
-};
+  tags: ['ai-generated'],
+} satisfies Meta;
 
 export default meta;
 type Story = StoryObj;
@@ -29,7 +23,9 @@ const TextureBox = ({ className, label }: { className: string; label: string }) 
     }}
     className={className}
   >
-    <span style={{ position: 'relative', zIndex: 2, fontSize: '12px', fontFamily: 'var(--font-mono)' }}>
+    <span
+      style={{ position: 'relative', zIndex: 2, fontSize: '12px', fontFamily: 'var(--font-mono)' }}
+    >
       {label}
     </span>
   </div>
@@ -90,6 +86,48 @@ export const Vignette: Story = {
     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '16px' }}>
       <TextureBox className="vignette-onebit" label=".vignette-onebit" />
       <TextureBox className="vignette-onebit-sharp" label=".vignette-onebit-sharp" />
+    </div>
+  ),
+};
+
+export const Isometric: Story = {
+  render: () => (
+    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '16px' }}>
+      <TextureBox className="isometric-grid" label=".isometric-grid" />
+      <TextureBox className="isometric-grid-dense" label=".isometric-grid-dense" />
+      <TextureBox className="isometric-cubes" label=".isometric-cubes" />
+      <TextureBox className="isometric-terrain" label=".isometric-terrain" />
+      <TextureBox className="isometric-pipes" label=".isometric-pipes" />
+      <TextureBox className="isometric-hex" label=".isometric-hex" />
+      <TextureBox className="isometric-city" label=".isometric-city" />
+      <TextureBox className="isometric-wave" label=".isometric-wave" />
+    </div>
+  ),
+};
+
+export const IsometricAnimated: Story = {
+  render: () => (
+    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '16px' }}>
+      <TextureBox
+        className="isometric-grid isometric-grid-animated"
+        label=".isometric-grid-animated"
+      />
+      <TextureBox
+        className="isometric-cubes isometric-cubes-animated"
+        label=".isometric-cubes-animated"
+      />
+      <TextureBox
+        className="isometric-terrain isometric-terrain-animated"
+        label=".isometric-terrain-animated"
+      />
+      <TextureBox
+        className="isometric-pipes isometric-pipes-animated"
+        label=".isometric-pipes-animated"
+      />
+      <TextureBox
+        className="isometric-city isometric-city-animated"
+        label=".isometric-city-animated"
+      />
     </div>
   ),
 };

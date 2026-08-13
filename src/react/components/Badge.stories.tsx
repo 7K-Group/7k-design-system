@@ -1,29 +1,36 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Badge } from './Badge';
 
-const meta: Meta<typeof Badge> = {
-  title: 'Components/Badge',
+const meta = {
   component: Badge,
   parameters: {
     layout: 'centered',
     docs: {
       description: {
-        component: 'Badge component for status indicators, labels, and counts.',
+        component: 'Status badge for labels, states, and counters.',
       },
     },
   },
-  tags: ['autodocs'],
   argTypes: {
     variant: {
       control: 'select',
-      options: ['default', 'success', 'warning', 'danger', 'info', 'neutral'],
-      description: 'Visual style variant',
+      options: ['default', 'accent', 'success', 'warning', 'danger', 'info', 'neutral'],
+      description: 'Visual style of the badge',
+      table: {
+        type: { summary: 'BadgeVariant' },
+        defaultValue: { summary: 'default' },
+      },
+    },
+    children: {
+      control: 'text',
+      description: 'Badge label',
     },
   },
-};
+  tags: ['ai-generated'],
+} satisfies Meta<typeof Badge>;
 
 export default meta;
-type Story = StoryObj<typeof Badge>;
+type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
@@ -64,6 +71,7 @@ export const AllVariants: Story = {
   render: () => (
     <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
       <Badge>Default</Badge>
+      <Badge variant="accent">Accent</Badge>
       <Badge variant="success">Success</Badge>
       <Badge variant="warning">Warning</Badge>
       <Badge variant="danger">Danger</Badge>

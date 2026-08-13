@@ -13,6 +13,11 @@ describe('Badge', () => {
     expect(screen.getByText('Success')).toHaveClass('badge-success');
   });
 
+  it('renders with accent variant', () => {
+    render(<Badge variant="accent">Accent</Badge>);
+    expect(screen.getByText('Accent')).toHaveClass('badge-accent');
+  });
+
   it('renders with danger variant', () => {
     render(<Badge variant="danger">Danger</Badge>);
     expect(screen.getByText('Danger')).toHaveClass('badge-danger');

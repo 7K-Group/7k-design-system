@@ -1,14 +1,52 @@
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;
   }
-  .noise-animated::before { animation: none !important; }
+
+  /* Textures */
+  .noise-animated::before {
+    animation: none !important;
+  }
+
+  /* Isometric scrolling patterns */
   .iso-grid-scroll,
   .iso-terrain-shift,
+  .isometric-grid-animated,
+  .isometric-grid-dense-animated,
+  .isometric-cubes-animated,
+  .isometric-terrain-animated,
+  .isometric-pipes-animated,
+  .isometric-hex-animated,
+  .isometric-city-animated,
+  .isometric-wave-animated {
+    animation: none !important;
+  }
+
+  /* Isometric motion classes */
+  .iso-float,
+  .iso-float-spin,
+  .iso-float-2,
+  .iso-float-3,
+  .iso-float-4,
+  .iso-float-5,
+  .iso-assemble,
+  .iso-assemble-2,
+  .iso-assemble-3,
+  .iso-assemble-4,
+  .iso-assemble-5,
+  .iso-rotate-cube,
+  .iso-perspective-dolly,
+  .iso-step-build,
   .iso-drift,
   .iso-bounce,
+  .iso-bounce-once,
   .iso-sway,
+  .iso-card-flip,
+  .iso-card-flip-2,
+  .iso-hinge,
   .iso-morph,
   .iso-rain,
   .iso-rain-2,
@@ -20,9 +58,54 @@
   .iso-ripple-3,
   .iso-ripple-4,
   .iso-ripple-5,
+  .iso-glitch,
   .iso-step-rise,
   .iso-step-rise-2,
   .iso-step-rise-3,
   .iso-step-rise-4,
-  .iso-step-rise-5 { animation: none !important; }
+  .iso-step-rise-5 {
+    animation: none !important;
+  }
+
+  /* Texture modifiers */
+  .texture-animated::before {
+    animation: none !important;
+  }
+
+  /* Manga speed lines */
+  .speed-line::before,
+  .speed-line-horizontal::before,
+  .speed-line-radial::before {
+    animation: none !important;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: more) {
+  .card,
+  .panel,
+  .modal,
+  .drawer,
+  .input,
+  .textarea,
+  .select-native,
+  .btn-modern,
+  .badge,
+  .tag,
+  .toast,
+  .menu,
+  .toolbar {
+    border-width: 2px;
+    border-color: currentColor;
+  }
+  .border-default,
+  .border-subtle,
+  .border-strong {
+    border-color: currentColor;
+  }
+  .focus-visible,
+  :focus-visible {
+    outline: 3px solid currentColor;
+    outline-offset: 3px;
+  }
 }

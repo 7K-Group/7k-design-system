@@ -4,46 +4,243 @@
    =========================================================== */
 
 /* Accent top border */
-.accent-border-top { border-top: 3px solid var(--magenta-500) !important; }
-.accent-border-left { border-left: 3px solid var(--magenta-500) !important; }
-.accent-border-bottom { border-bottom: 3px solid var(--magenta-500) !important; }
-.cyan-border-top { border-top: 3px solid var(--cyan-500) !important; }
-.lime-border-top { border-top: 3px solid var(--acid-500) !important; }
-.ember-border-top { border-top: 3px solid var(--accent-line) !important; }
+.accent-border-top {
+  border-top: 3px solid var(--brand-primary) !important;
+}
+.accent-border-left {
+  border-left: 3px solid var(--brand-primary) !important;
+}
+.accent-border-bottom {
+  border-bottom: 3px solid var(--brand-primary) !important;
+}
+
+/* Secondary (project) accent border */
+.accent-secondary-border-top {
+  border-top: 3px solid var(--brand-secondary) !important;
+}
+.accent-secondary-border-left {
+  border-left: 3px solid var(--brand-secondary) !important;
+}
+.accent-secondary-border-bottom {
+  border-bottom: 3px solid var(--brand-secondary) !important;
+}
 
 /* Accent underline */
-.accent-underline { text-decoration: underline var(--magenta-500) 2px; text-underline-offset: 4px; }
-.cyan-underline { text-decoration: underline var(--cyan-500) 2px; text-underline-offset: 4px; }
+.accent-underline {
+  text-decoration: underline var(--brand-primary) 2px;
+  text-underline-offset: 4px;
+}
+.accent-secondary-underline {
+  text-decoration: underline var(--brand-secondary) 2px;
+  text-underline-offset: 4px;
+}
 
 /* Accent dot indicator */
 .accent-dot::after {
-  content: ''; display: inline-block; width: 6px; height: 6px;
-  background: var(--magenta-500); margin-left: 6px; vertical-align: middle;
+  content: '';
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  background: var(--brand-primary);
+  margin-left: 6px;
+  vertical-align: middle;
 }
-.cyan-dot::after { background: var(--cyan-500); }
-.lime-dot::after { background: var(--acid-500); }
+.accent-secondary-dot::after {
+  content: '';
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  background: var(--brand-secondary);
+  margin-left: 6px;
+  vertical-align: middle;
+}
 
 /* Accent bar (thin colored bar, e.g. for card accent) */
-.accent-bar { position: relative; }
-.accent-bar::before {
-  content: ''; position: absolute; top: 0; left: 0; right: 0;
-  height: 3px; background: var(--magenta-500); z-index: 1;
+.accent-bar {
+  position: relative;
 }
-.cyan-bar::before { background: var(--cyan-500); }
-.lime-bar::before { background: var(--acid-500); }
-.ember-bar::before { background: var(--accent-line); }
+.accent-bar::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--brand-primary);
+  z-index: 1;
+}
+.accent-secondary-bar {
+  position: relative;
+}
+.accent-secondary-bar::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--brand-secondary);
+  z-index: 1;
+}
 
 /* Accent glow modifier */
-.glow-mod { box-shadow: 0 0 20px var(--magenta-500)4D; }
-.glow-mod-cyan { box-shadow: 0 0 20px var(--cyan-500)4D; }
+.glow-mod {
+  box-shadow: 0 0 20px color-mix(in srgb, var(--brand-primary) 25%, transparent);
+}
+.glow-mod-secondary {
+  box-shadow: 0 0 20px color-mix(in srgb, var(--brand-secondary) 25%, transparent);
+}
 
 /* Accent border override */
-.border-mod-accent { border-color: var(--magenta-500) !important; }
-.border-mod-cyan { border-color: var(--cyan-500) !important; }
+.border-mod-accent {
+  border-color: var(--brand-primary) !important;
+}
+.border-mod-secondary {
+  border-color: var(--brand-secondary) !important;
+}
+
+/* ===========================================================
+   TEXTURE MODIFIERS — apply background textures to components
+   Uses ::before overlay so content stays legible.
+   =========================================================== */
+
+.texture-overlay,
+.texture-halftone,
+.texture-scanline,
+.texture-noise,
+.texture-crosshatch,
+.texture-dots,
+.texture-grid-dots {
+  position: relative;
+  isolation: isolate;
+}
+
+.texture-overlay::before,
+.texture-halftone::before,
+.texture-scanline::before,
+.texture-noise::before,
+.texture-crosshatch::before,
+.texture-dots::before,
+.texture-grid-dots::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.5;
+}
+
+.texture-halftone::before {
+  background-image: radial-gradient(var(--texture-05) 1px, transparent 1px);
+  background-size: 6px 6px;
+}
+
+.texture-scanline::before {
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    var(--texture-04) 2px,
+    var(--texture-04) 4px
+  );
+}
+
+.texture-noise::before {
+  background-image: var(--texture-noise-svg);
+  background-size: 128px 128px;
+  opacity: 0.35;
+}
+
+.texture-crosshatch::before {
+  background-image:
+    repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 6px,
+      var(--texture-03) 6px,
+      var(--texture-03) 7px
+    ),
+    repeating-linear-gradient(
+      -45deg,
+      transparent,
+      transparent 6px,
+      var(--texture-03) 6px,
+      var(--texture-03) 7px
+    );
+}
+
+.texture-dots::before {
+  background-image: radial-gradient(var(--texture-06) 0.5px, transparent 0.5px);
+  background-size: 6px 6px;
+}
+
+.texture-grid-dots::before {
+  background-image:
+    radial-gradient(var(--texture-05) 1px, transparent 1px),
+    radial-gradient(var(--texture-05) 1px, transparent 1px);
+  background-size:
+    16px 16px,
+    16px 16px;
+  background-position:
+    0 0,
+    8px 8px;
+}
+
+/* Ensure content sits above texture overlay */
+.texture-overlay > *,
+.texture-halftone > *,
+.texture-scanline > *,
+.texture-noise > *,
+.texture-crosshatch > *,
+.texture-dots > *,
+.texture-grid-dots > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Muted texture variant for higher-density components */
+.texture-muted::before {
+  opacity: 0.25;
+}
+
+/* Animated texture variant */
+.texture-animated::before {
+  animation: texture-shift 4s linear infinite;
+}
+
+@keyframes texture-shift {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 16px 16px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .texture-animated::before {
+    animation: none !important;
+  }
+}
 
 /* Accent badge corner */
 .accent-corner::after {
-  content: ''; position: absolute; top: -1px; right: -1px;
-  width: 8px; height: 8px; background: var(--magenta-500); z-index: 2;
+  content: '';
+  position: absolute;
+  top: -1px;
+  right: -1px;
+  width: 8px;
+  height: 8px;
+  background: var(--brand-primary);
+  z-index: 2;
 }
-.cyan-corner::after { background: var(--cyan-500); }
+.accent-secondary-corner::after {
+  content: '';
+  position: absolute;
+  top: -1px;
+  right: -1px;
+  width: 8px;
+  height: 8px;
+  background: var(--brand-secondary);
+  z-index: 2;
+}

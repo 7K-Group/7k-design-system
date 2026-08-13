@@ -1,29 +1,32 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { ThemeProvider } from '../theme/ThemeProvider';
+import { expect } from 'storybook/test';
 import { ThemeToggle } from './ThemeToggle';
 
-const meta: Meta<typeof ThemeToggle> = {
-  title: 'Components/ThemeToggle',
+const meta = {
   component: ThemeToggle,
   parameters: {
     layout: 'centered',
     docs: {
       description: {
-        component: 'Toggle button for switching between dark and light themes.',
+        component: 'Button that toggles between dark and light themes.',
       },
     },
   },
-  tags: ['autodocs'],
-  decorators: [
-    (Story) => (
-      <ThemeProvider>
-        <Story />
-      </ThemeProvider>
-    ),
-  ],
-};
+  argTypes: {
+    className: {
+      control: 'text',
+      description: 'Additional CSS class',
+    },
+  },
+  tags: ['ai-generated'],
+} satisfies Meta<typeof ThemeToggle>;
 
 export default meta;
-type Story = StoryObj<typeof ThemeToggle>;
+type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  play: async ({ canvas }) => {
+    const button = canvas.getByRole('button');
+    await expect(button).toHaveAttribute('aria-label', 'Switch to light theme');
+  },
+};

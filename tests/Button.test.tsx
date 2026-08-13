@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, vi } from 'vitest';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { Button } from '../src/react';
 
@@ -19,6 +19,12 @@ describe('Button', () => {
 
     rerender(<Button variant="danger">Danger</Button>);
     expect(screen.getByRole('button')).toHaveClass('btn-modern-danger');
+
+    rerender(<Button variant="accent">Accent</Button>);
+    expect(screen.getByRole('button')).toHaveClass('btn-modern-accent');
+
+    rerender(<Button variant="glow-accent">Glow Accent</Button>);
+    expect(screen.getByRole('button')).toHaveClass('btn-modern-glow-accent');
   });
 
   it('handles click events', () => {

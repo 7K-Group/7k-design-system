@@ -116,16 +116,16 @@ All CSS custom properties are available globally:
   background: var(--bg-elevated);
   color: var(--text-primary);
   border: 2px solid var(--border-default);
-  
+
   /* Typography */
   font-family: var(--font-sans);
   font-size: var(--text-body);
   line-height: var(--leading-normal);
-  
+
   /* Spacing */
   padding: var(--space-4);
   gap: var(--space-2);
-  
+
   /* Brand accent */
   border-color: var(--brand-primary);
 }
@@ -194,7 +194,7 @@ import { useTheme } from '7k-design-system/react';
 
 function ThemeAwareComponent() {
   const { theme, toggleTheme, setTheme } = useTheme();
-  
+
   return (
     <div>
       <p>Current theme: {theme}</p>
@@ -212,11 +212,12 @@ function ThemeAwareComponent() {
 
 ```tsx
 <Button
-  variant="primary"    // 'primary' | 'secondary' | 'ghost' | 'glow' | 'glow-cyan' | 'glow-grid' | 'danger'
-  size="md"            // 'sm' | 'md' | 'lg'
+  variant="primary" // 'primary' | 'secondary' | 'ghost' | 'glow' | 'accent' | 'glow-accent' | 'glow-secondary' | 'danger'
+  size="md" // 'sm' | 'md' | 'lg'
   disabled={false}
+  loading={false}
   onClick={() => {}}
-  type="button"        // 'button' | 'submit' | 'reset'
+  type="button" // 'button' | 'submit' | 'reset'
 >
   Click me
 </Button>
@@ -226,11 +227,13 @@ function ThemeAwareComponent() {
 
 ```tsx
 <Input
-  type="text"          // any HTML input type
+  type="text" // any HTML input type
   placeholder="Hint"
   disabled={false}
   value={value}
   onChange={(value) => setValue(value)}
+  label="Email"
+  error="Required"
 />
 ```
 
@@ -238,37 +241,79 @@ function ThemeAwareComponent() {
 
 ```tsx
 <Badge
-  variant="default"    // 'default' | 'success' | 'warning' | 'danger' | 'info' | 'neutral'
+  variant="default" // 'default' | 'accent' | 'success' | 'warning' | 'danger' | 'info' | 'neutral'
+  role="status"
 >
   Status
 </Badge>
+```
+
+#### Card
+
+```tsx
+<Card texture="halftone" hover={true}>
+  <CardHeader>Title</CardHeader>
+  <CardBody>Content</CardBody>
+</Card>
+```
+
+#### Modal
+
+```tsx
+<Modal open={isOpen} onClose={close} texture="noise" aria-labelledby="modal-title">
+  <ModalHeader>
+    <h2 id="modal-title">Title</h2>
+  </ModalHeader>
+  <p>Content</p>
+  <ModalFooter>
+    <Button onClick={close}>Close</Button>
+  </ModalFooter>
+</Modal>
+```
+
+#### Layout helpers
+
+```tsx
+<TextureOverlay texture="halftone" animate>...</TextureOverlay>
+<IsometricBackground pattern="grid" animated>...</IsometricBackground>
+<MangaPanel frame texture="halftone" speedLine="horizontal">...</MangaPanel>
+```
+
+#### Forms
+
+```tsx
+<Checkbox label="Accept" />
+<Radio label="Option" name="group" />
+<Toggle label="Enable" checked={on} onChange={setOn} />
+<Select><option>A</option></Select>
+<Textarea rows={4} />
 ```
 
 ---
 
 ## Project Customization
 
-Each 7K sub-project can override the accent color while keeping the same base design.
+The parent 7K brand uses magenta primary + cyan secondary. Each sub-project can theme the secondary accent while keeping the same base design.
 
 ### Override Accent Colors
 
 ```css
 /* project-neon.css */
 .project-neon {
-  /* Circle project — cyan accent */
-  --accent-circle: var(--cyan-500);
+  /* Circle project — cyan secondary accent */
+  --brand-secondary: var(--cyan-500);
 }
 
 /* project-grid.css */
 .project-grid {
-  /* Grid project — acid green accent */
-  --accent-grid: var(--acid-500);
+  /* Grid project — acid green secondary accent */
+  --brand-secondary: var(--acid-500);
 }
 
 /* project-ember.css */
 .project-ember {
-  /* Line project — orange accent */
-  --accent-line: var(--ember-500);
+  /* Line project — orange secondary accent */
+  --brand-secondary: var(--ember-500);
 }
 ```
 
@@ -279,9 +324,9 @@ Each 7K sub-project can override the accent color while keeping the same base de
 function App() {
   return (
     <ThemeProvider>
-      <div className="project-neon">
+      <ProjectProvider defaultProject="circle">
         <YourApp />
-      </div>
+      </ProjectProvider>
     </ThemeProvider>
   );
 }
@@ -363,29 +408,31 @@ import { Button, ThemeToggle } from '7k-design-system/react';
 export function Home() {
   return (
     <div className="project-neon">
-      <nav style={{ 
-        position: 'sticky', 
-        top: 0, 
-        display: 'flex', 
-        justifyContent: 'space-between',
-        padding: '12px 24px',
-        background: 'var(--bg-base)',
-        borderBottom: '2px solid var(--border-default)'
-      }}>
+      <nav
+        style={{
+          position: 'sticky',
+          top: 0,
+          display: 'flex',
+          justifyContent: 'space-between',
+          padding: '12px 24px',
+          background: 'var(--bg-base)',
+          borderBottom: '2px solid var(--border-default)',
+        }}
+      >
         <span className="mono-label">7K GROUP</span>
         <ThemeToggle />
       </nav>
 
-      <section 
-        className="scanline" 
-        style={{ 
+      <section
+        className="scanline"
+        style={{
           minHeight: '80vh',
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'center',
           textAlign: 'center',
-          padding: 'var(--space-8)'
+          padding: 'var(--space-8)',
         }}
       >
         <span className="mono-label" style={{ color: 'var(--brand-primary)' }}>
@@ -395,8 +442,8 @@ export function Home() {
           Built for Midnight
         </h1>
         <p className="body-lg" style={{ maxWidth: '600px', marginTop: 'var(--space-4)' }}>
-          A multi-project technology company crafting infrastructure, 
-          AI pipelines, and digital products.
+          A multi-project technology company crafting infrastructure, AI pipelines, and digital
+          products.
         </p>
         <div style={{ display: 'flex', gap: 'var(--space-3)', marginTop: 'var(--space-6)' }}>
           <Button variant="glow">Explore Projects</Button>
@@ -404,15 +451,10 @@ export function Home() {
         </div>
       </section>
 
-      <section 
-        className="halftone-md"
-        style={{ padding: 'var(--space-8)' }}
-      >
+      <section className="halftone-md" style={{ padding: 'var(--space-8)' }}>
         <span className="mono-label">PHILOSOPHY</span>
         <h2 className="h2">Dark First</h2>
-        <p className="body">
-          We design for the dark. Light mode is opt-in, not default.
-        </p>
+        <p className="body">We design for the dark. Light mode is opt-in, not default.</p>
       </section>
     </div>
   );
@@ -466,6 +508,6 @@ Make sure your `tsconfig.json` includes:
 ## Next Steps
 
 1. Run `npm run storybook` in the design system repo to explore all components
-2. Open `preview/*.html` files to see token values rendered
+2. Browse the Tokens, Textures, and Components stories to see token values rendered
 3. Read `DESIGN.md` for detailed design principles and constraints
 4. Check `CONTRIBUTING.md` if you want to contribute back

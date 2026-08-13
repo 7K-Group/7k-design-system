@@ -9,10 +9,11 @@ export default defineConfig({
     rollupOptions: {
       input: {
         '7k-design-system': resolve(__dirname, 'src/css/index.css'),
-        'tokens': resolve(__dirname, 'src/css/tokens.css'),
-        'components': resolve(__dirname, 'src/css/components.css'),
-        'textures': resolve(__dirname, 'src/css/textures.css'),
-        'animations': resolve(__dirname, 'src/css/animations.css'),
+        tokens: resolve(__dirname, 'src/css/tokens.css'),
+        components: resolve(__dirname, 'src/css/components.css'),
+        textures: resolve(__dirname, 'src/css/textures.css'),
+        animations: resolve(__dirname, 'src/css/animations.css'),
+        projects: resolve(__dirname, 'src/css/projects.css'),
       },
       output: {
         assetFileNames: (assetInfo) => {

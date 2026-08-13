@@ -2,9 +2,9 @@
 
 > Version: 1.0.0-alpha.1 (production-ready)
 > Category: Custom · Surface: web, mobile, desktop
-> Font: Geist + Geist Mono + Geist Pixel · Brand color: #FF0FF · Logo: 7K · Theme: Dark-first
+> Font: Geist + Geist Mono + Geist Pixel · Major neon: #FF0FF · Secondary neon: cyan (thematic per project) · Logo: 7K · Theme: Dark-first
 > 1-bit textures: 10 patterns · 1-bit components: 40+ · 1-bit animations: 20+ keyframes
-> React UI kit: Button, Input, Badge, ThemeToggle, ThemeProvider, useTheme
+> React UI kit: Button, Input, Badge, Card, Modal, Drawer, Toast, Tooltip, Alert, Tabs, Nav, Checkbox, Radio, Toggle, Select, Textarea, ThemeToggle, ThemeProvider, ProjectProvider, useTheme, useProject
 > Build: Vite + PostCSS + TypeScript · Test: Vitest + Testing Library · Docs: Storybook
 
 ## Source context
@@ -14,16 +14,18 @@ Dark-first dual-theme design system for a tech holding. One parent brand (7K · 
 The brand brief specifies: "We only have 1 font and it's Geist. Our logo is just '7K' and our main brand color is #FF0FF. We are a tech company with different projects and we're open on an approach to differentiate brand wise the 'main company' with the other projects. We want to use inspiration from Tokyo's neon atmosphere and Manga-influenced 1-bit using black and white as well as abstract 1-bit animations. We're using a dark theme for websites."
 
 Key constraints derived from the source:
+
 - **Three-font system** → Geist (sans-serif) for body and headings, Geist Mono for labels, code, and tabular data, Geist Pixel (5 geometric variants: Square, Circle, Grid, Line, Triangle) for ornamental and pixel-constrained display use.
-- **Single brand color** → #FF0FF (vivid magenta) as the sole brand accent. No secondary brand color.
-- **Logo** → Star-burst pattern logo in `build/logo-7k.svg`: a geometric radial pattern with #FF0FF brand accent tones. Light variant at `build/logo-7k-light.svg` (black polygons for light backgrounds). App icon at `build/icon.svg`.
+- **Major neon accent** → #FF0FF (vivid magenta) as the primary brand accent.
+- **Secondary neon accent** → Cyan by default (`--brand-secondary`), dynamically themable per project via `data-project` or `ProjectProvider`.
+- **Logo** → Star-burst pattern logo in `build/logos/logo-7k.svg`: a geometric radial pattern with #FF0FF brand accent tones. Light variant at `build/logos/logo-7k-light.svg` (black polygons for light backgrounds). App icon at `build/icons/icon.svg`.
 - **Dark theme** → All surfaces start from near-black. Light theme is opt-in only.
-- **Project differentiation** → Child projects get their own accent (solar, cyan, acid, ember) on the same dark base. Parent 7K retains magenta. Each Geist Pixel geometric variant pairs with one accent: Square=magenta, Circle=cyan, Grid=acid, Line=ember, Triangle=solar.
+- **Project differentiation** → Child projects get their own secondary accent (solar, cyan, acid, ember) on the same dark base. The parent 7K brand uses the default cyan secondary; other projects theme `--brand-secondary` to their hue. Each Geist Pixel geometric variant pairs with one accent: Square=magenta, Circle=cyan, Grid=acid, Line=ember, Triangle=solar.
 - **Tokyo neon** → High contrast, nocturnal canvas, electric accents, no warm/beige tones.
 - **1-bit manga influence** → 10-texture background pattern library (scanline, halftone, dot matrix, stripes, crosshatch, checkerboard, noise, vignette). All textures are CSS gradients — no images, no SVG humans.
 - **Abstract 1-bit animations** → 20+ animation keyframes organized as ambient (continuous) and trigger (burst) categories. Step timing for retro feel, reduced-motion collapse.
 - **1-bit component system** → 40+ components with zero radius, 2px white borders, invert hover state. Unified black/white visual language with thin accent layer modifiers for color moments.
-- **React UI kit** → TypeScript React components (Button, Input, Badge, ThemeToggle) with ThemeProvider + useTheme hook for theme management.
+- **React UI kit** → TypeScript React components (Button, Input, Badge, Card, Modal, Drawer, Toast, Tooltip, Alert, Tabs, Nav, Checkbox, Radio, Toggle, Select, Textarea, ThemeToggle) with ThemeProvider, ProjectProvider, useTheme, and useProject hooks.
 - **Modular CSS** → 10 source files in `src/css/` compiled into `dist/7k-design-system.css`.
 
 ## Package Structure
@@ -69,13 +71,6 @@ The design system is distributed as an npm package with dual entry points: CSS-o
 │   ├── ThemeProvider.test.tsx
 │   ├── ThemeToggle.test.tsx
 │   └── a11y.test.tsx
-├── preview/                    # 6 HTML review cards
-│   ├── colors-primary.html
-│   ├── typography-specimens.html
-│   ├── spacing-tokens.html
-│   ├── components-buttons.html
-│   ├── textures-backgrounds.html
-│   └── brand-assets.html
 ├── build/                      # Brand assets
 │   ├── logo-7k.svg
 │   ├── logo-7k-light.svg
@@ -124,15 +119,17 @@ The design system is distributed as an npm package with dual entry points: CSS-o
 ```
 
 **CSS-only usage:**
+
 ```typescript
-import '7k-design-system/css';           // Full bundle
-import '7k-design-system/css/tokens';    // Tokens only
+import '7k-design-system/css'; // Full bundle
+import '7k-design-system/css/tokens'; // Tokens only
 import '7k-design-system/css/components'; // Components only
-import '7k-design-system/css/textures';  // Textures only
+import '7k-design-system/css/textures'; // Textures only
 import '7k-design-system/css/animations'; // Animations only
 ```
 
 **React usage:**
+
 ```typescript
 import { Button, Input, Badge, ThemeToggle, ThemeProvider, useTheme } from '7k-design-system/react';
 import '7k-design-system/css';
@@ -142,7 +139,7 @@ import '7k-design-system/css';
 
 - **CSS build:** `vite build --config vite.css.config.ts` — compiles `src/css/index.css` into `dist/7k-design-system.css` with PostCSS pipeline (postcss-import, postcss-nesting, autoprefixer, cssnano)
 - **React build:** `vite build --config vite.react.config.ts` — compiles TypeScript React components into ESM + CJS bundles with `.d.ts` declarations via vite-plugin-dts
-- **Asset copy:** `node scripts/copy-assets.js` — copies preview/, fonts/, build/ to dist/
+- **Asset copy:** `node scripts/copy-assets.js` — copies fonts/ and build/ to dist/
 - **Development:** `npm run dev` — Vite dev server; `npm run storybook` — Storybook at port 6006
 - **Testing:** `npm test` — Vitest + jsdom + @testing-library/react; `npm run test:a11y` — axe-core accessibility tests
 - **Linting:** `npm run lint` — ESLint (TS/TSX) + Stylelint (CSS); `npm run typecheck` — `tsc --noEmit`
@@ -155,9 +152,10 @@ Tokyo neon meets manga-influenced 1-bit. The canvas is deep near-black, with sha
 
 Company/project differentiation: the parent 7K brand uses vivid magenta (`--brand-primary`). Child projects adopt their own accent (solar, cyan, acid, ember) on the same dark base. Same system, distinct at a glance.
 
-**Logo:** Star-burst pattern logo in `build/logo-7k.svg` — a geometric radial pattern with #FF0FF brand accent tones. Light variant at `build/logo-7k-light.svg` (light backgrounds). App icon at `build/icon.svg`.
+**Logo:** Star-burst pattern logo in `build/logos/logo-7k.svg` — a geometric radial pattern with #FF0FF brand accent tones. Light variant at `build/logos/logo-7k-light.svg` (light backgrounds). App icon at `build/icons/icon.svg`.
 
 **1-bit texture primitives (background patterns):**
+
 - **Scanline**: `repeating-linear-gradient(0deg, transparent 2px, rgba(255,255,255,0.03) 2px)` — horizontal scan lines, scroll-animated. Two speeds: slow (8s) and fast (3s).
 - **Halftone dots**: `radial-gradient(color 1px, transparent 1px)` at 4px/6px/10px spacing — manga screentone at three densities (sm/md/lg). Accent-tinted variant uses magenta dots.
 - **Dot matrix**: Uniform dot grid at 3px (dense), 6px (standard), or 12px (sparse) spacing for texture depth.
@@ -169,6 +167,7 @@ Company/project differentiation: the parent 7K brand uses vivid magenta (`--bran
 - **Vignette**: Radial gradient from transparent center to black edge. Sharp variant clips tighter for manga panel corner fade.
 
 **Glitch primitives:**
+
 - Basic glitch: 5-frame translate jitter, 0.3s, 3 iterations
 - Complex glitch: multi-axis + skew + clip-path splits, 0.8s, 2 iterations
 - Invert flash: full-screen filter inversion, 0.15s burst
@@ -179,24 +178,24 @@ Company/project differentiation: the parent 7K brand uses vivid magenta (`--bran
 
 ### Texture categories
 
-| Category | Classes | Density variants | Use case |
-|----------|---------|------------------|----------|
-| Scanline | `.scanline`, `.scanline-fast` | slow (8s), fast (3s) | Hero sections, full-bleed walls |
-| Halftone dots | `.halftone-sm`, `.halftone-md`, `.halftone-lg`, `.halftone-accent` | 4px/6px/10px grid, accent-tinted | Manga panel backgrounds, card surfaces |
-| Dot matrix | `.dot-matrix-dense`, `.dot-matrix`, `.dot-matrix-sparse` | 3px/6px/12px grid | Texture depth behind text, dividers |
-| Diagonal stripes | `.diagonal-stripes`, `.diagonal-stripes-dense`, `.diagonal-stripes-negative` | 7px/4px pitch, pure B/W | Directional cues, loading areas |
-| Horizontal stripes | `.stripes-h`, `.stripes-h-dense` | 9px/5px pitch | Section rhythm, horizontal dividers |
-| Vertical stripes | `.stripes-v`, `.stripes-v-dense` | 9px/5px pitch | Sidebar textures, column dividers |
-| Crosshatch | `.crosshatch`, `.crosshatch-dense` | 7px/4px dual-angle | Dense manga shading, error states |
-| Checkerboard | `.checkerboard`, `.checkerboard-onebit` | 12px/16px grid, pure B/W | Retro sections, QR motifs |
-| Noise | `.noise`, `.noise-heavy`, `.noise-animated` | 4%/12% opacity, SVG fractal | CRT grain, analog texture |
-| Vignette | `.vignette-onebit`, `.vignette-onebit-sharp` | Soft/sharp radial fade | Panel corner fade, hero-edge vignette |
+| Category           | Classes                                                                      | Density variants                 | Use case                               |
+| ------------------ | ---------------------------------------------------------------------------- | -------------------------------- | -------------------------------------- |
+| Scanline           | `.scanline`, `.scanline-fast`                                                | slow (8s), fast (3s)             | Hero sections, full-bleed walls        |
+| Halftone dots      | `.halftone-sm`, `.halftone-md`, `.halftone-lg`, `.halftone-accent`           | 4px/6px/10px grid, accent-tinted | Manga panel backgrounds, card surfaces |
+| Dot matrix         | `.dot-matrix-dense`, `.dot-matrix`, `.dot-matrix-sparse`                     | 3px/6px/12px grid                | Texture depth behind text, dividers    |
+| Diagonal stripes   | `.diagonal-stripes`, `.diagonal-stripes-dense`, `.diagonal-stripes-negative` | 7px/4px pitch, pure B/W          | Directional cues, loading areas        |
+| Horizontal stripes | `.stripes-h`, `.stripes-h-dense`                                             | 9px/5px pitch                    | Section rhythm, horizontal dividers    |
+| Vertical stripes   | `.stripes-v`, `.stripes-v-dense`                                             | 9px/5px pitch                    | Sidebar textures, column dividers      |
+| Crosshatch         | `.crosshatch`, `.crosshatch-dense`                                           | 7px/4px dual-angle               | Dense manga shading, error states      |
+| Checkerboard       | `.checkerboard`, `.checkerboard-onebit`                                      | 12px/16px grid, pure B/W         | Retro sections, QR motifs              |
+| Noise              | `.noise`, `.noise-heavy`, `.noise-animated`                                  | 4%/12% opacity, SVG fractal      | CRT grain, analog texture              |
+| Vignette           | `.vignette-onebit`, `.vignette-onebit-sharp`                                 | Soft/sharp radial fade           | Panel corner fade, hero-edge vignette  |
 
 ### Texture composition rules
 
 1. **One texture per section layer.** Apply at most one texture on the background layer and one on the overlay layer (`::after`). Scanline + halftone is the default pair for hero sections.
 2. **Opacity scales with section density.** Hero/landing sections use lighter textures (5–10% opacity). Data-dense utility sections use stronger textures (10–15% opacity) or none.
-3. **No texture on interactive surfaces.** Cards, buttons, inputs, and form controls must not carry background textures that interfere with legibility. Use solid `--bg-elevated` instead.
+3. **Texture on components is allowed with restraint.** Cards, panels, modals, drawers, and buttons can carry low-opacity texture overlays (`::before`, `pointer-events: none`) as long as the texture sits behind content and does not reduce contrast. Inputs and form controls should remain solid to preserve legibility. Use `.card-halftone`, `.panel-scanline`, `.btn-modern-halftone`, `.modal-noise`, etc.
 4. **Texture as section separator.** When transitioning between full-bleed sections, add a `.separator-onebit` or `.stripes-h` band (40–80px tall) as a visual break — never use shadow or blur transitions.
 5. **Layering order:** Base color → texture background → content container → optional scanline overlay. The overlay must have `pointer-events: none` and `z-index: 1` so it does not block interaction.
 6. **Full-bleed hero walls** use scanline + vignette simultaneously: scanline on `::after` for the line pattern, vignette on `::before` for the edge fade. Both get `pointer-events: none`.
@@ -227,30 +226,30 @@ Section 4 (cta)     — Scanline-fast overlay, invert section if 1-bit
 
 ### Isometric pattern library
 
-| Class | Description | Technique |
-|-------|-------------|-----------|
-| `.isometric-grid` | Diamond tiling from dual 30°/-30° hatch lines at 24px pitch | `repeating-linear-gradient(30deg)` + `(-30deg)` |
-| `.isometric-grid-dense` | Tighter 12px diamond grid | Same technique, denser pitch |
-| `.isometric-grid-accent` | Magenta-tinted 24px diamond grid | Same, with `--magenta-500 / 0.12` stroke |
-| `.isometric-cubes` | 3-face cube wall: right (150°), top (-30°), left (30°) faces at 40px | 3 `repeating-linear-gradient` layers with face-specific opacity |
-| `.isometric-cubes-dense` | 20px cube wall | Same, finer resolution |
-| `.isometric-cubes-accent` | Magenta-tinted cube wall | Same, with accent hue fills |
-| `.isometric-pyramid` | Ascending zigzag steps: 150° + -30° gradients | Dual gradient with offset phase |
-| `.isometric-hex` | Honeycomb hex grid from 60°/-60°/0° overlapping | 3 `repeating-linear-gradient` layers |
-| `.isometric-pipes` | Converging tunnel perspective: left/right walls (30°/-30°) + floor (0°) | 3-gradient tunnel simulation |
-| `.isometric-pipes-fast` | Denser tunnel, 8px walls | Same, tighter spacing |
-| `.isometric-terrain` | Multi-layer depth: horizontal + 30° + -30° zigzag | 3-layer parallax-ready composition |
+| Class                     | Description                                                             | Technique                                                       |
+| ------------------------- | ----------------------------------------------------------------------- | --------------------------------------------------------------- |
+| `.isometric-grid`         | Diamond tiling from dual 30°/-30° hatch lines at 24px pitch             | `repeating-linear-gradient(30deg)` + `(-30deg)`                 |
+| `.isometric-grid-dense`   | Tighter 12px diamond grid                                               | Same technique, denser pitch                                    |
+| `.isometric-grid-accent`  | Magenta-tinted 24px diamond grid                                        | Same, with `--magenta-500 / 0.12` stroke                        |
+| `.isometric-cubes`        | 3-face cube wall: right (150°), top (-30°), left (30°) faces at 40px    | 3 `repeating-linear-gradient` layers with face-specific opacity |
+| `.isometric-cubes-dense`  | 20px cube wall                                                          | Same, finer resolution                                          |
+| `.isometric-cubes-accent` | Magenta-tinted cube wall                                                | Same, with accent hue fills                                     |
+| `.isometric-pyramid`      | Ascending zigzag steps: 150° + -30° gradients                           | Dual gradient with offset phase                                 |
+| `.isometric-hex`          | Honeycomb hex grid from 60°/-60°/0° overlapping                         | 3 `repeating-linear-gradient` layers                            |
+| `.isometric-pipes`        | Converging tunnel perspective: left/right walls (30°/-30°) + floor (0°) | 3-gradient tunnel simulation                                    |
+| `.isometric-pipes-fast`   | Denser tunnel, 8px walls                                                | Same, tighter spacing                                           |
+| `.isometric-terrain`      | Multi-layer depth: horizontal + 30° + -30° zigzag                       | 3-layer parallax-ready composition                              |
 
 ### Composition rules
 
 1. **One isometric pattern per section.** Apply at most one isometric gradient per container. Stack with scanline overlay via class stacking.
-2. **No texture on interactive surfaces.** Cards, buttons, inputs, and form controls must not carry isometric backgrounds — use solid `--bg-elevated` instead.
+2. **No isometric background on interactive surfaces.** Cards, buttons, inputs, and form controls must not carry isometric backgrounds — use solid `--bg-elevated` instead. Isometric patterns are for section backgrounds only.
 3. **Animate with animation classes.** Combine with `.iso-grid-scroll` for diagonal grid movement, `.iso-terrain-shift` for parallax depth layers.
 4. **Reduced motion:** All isometric animations collapse at `prefers-reduced-motion: reduce`.
 
 ## 2. Color
 
-**Source context reference:** The brand hex #FF0FF is the single brand color. All color tokens use hex values mapped through CSS custom properties.
+**Source context reference:** The brand hex #FF0FF is the major neon accent. A secondary neon accent (cyan by default) is used for complementary actions and can be themed per project. All color tokens use hex values mapped through CSS custom properties.
 
 The color system has three strict layers:
 
@@ -258,48 +257,49 @@ The color system has three strict layers:
 2. **Theme role mapping** — `--bg-*`, `--text-*`, `--border-*`, `--brand-*`, `--status-*`, `--accent-*` tokens that map ramp values to functional roles. Remap per dark/light theme. This is the only layer components touch.
 3. **Semantic colors** — `--status-success/warning/danger/info` tokens bound by **meaning, not decoration**. Use only for actual machine-state indication (badges, toasts, validation). Never use for decorative borders, accent accents, or non-status backgrounds.
 
-> See `preview/colors-theme-dark.html` for the default theme or `preview/colors-theme-light.html` for the opt-in light theme.
+> See Storybook for live color swatches of the default dark theme and the opt-in light theme.
 
 ---
+
 ### Layer 1 — Raw Color Ramps
 
 All ramps follow the same 11-step pattern (50 = lightest, 950 = darkest). Two extra steps exist below the ramp for true backgrounds.
 
 #### Neutral ramp (slight cool cast, hue ~330)
 
-| Token | Hex | Dark role | Light role |
-|-------|-----|-----------|------------|
-| `--neutral-50`  | `#FAFAFB` | — | `--bg-base`, `--bg-void` |
-| `--neutral-100` | `#EEEEF1` | — | `--bg-elevated` |
-| `--neutral-200` | `#D7D7DC` | — | `--bg-raised`, `--status-neutral-bg` |
-| `--neutral-300` | `#B0B0B8` | `--text-secondary` | `--bg-overlay`, `--text-disabled`, `--status-neutral-fg` |
-| `--neutral-400` | `#82828A` | `--status-neutral` | `--bg-pressed`, `--text-tertiary`, `--text-placeholder` |
-| `--neutral-500` | `#6B6B72` | `--text-tertiary`, `--text-placeholder` | `--text-secondary` |
-| `--neutral-600` | `#50505A` | `--text-disabled` | — |
-| `--neutral-700` | `#3A3A42` | `--bg-pressed` | — |
-| `--neutral-800` | `#26262B` | `--bg-overlay`, `--status-neutral-bg` | — |
-| `--neutral-900` | `#1C1C22` | `--bg-raised` | `--text-primary` |
-| `--neutral-950` | `#131318` | `--bg-elevated` | — |
-| `--neutral-1000` | `#0A0A0D` | `--bg-base` | — |
-| `--neutral-void` | `#000000` | `--bg-void`, `--text-on-brand`, `--text-inverse` | — |
+| Token            | Hex       | Dark role                                        | Light role                                               |
+| ---------------- | --------- | ------------------------------------------------ | -------------------------------------------------------- |
+| `--neutral-50`   | `#FAFAFB` | —                                                | `--bg-base`, `--bg-void`                                 |
+| `--neutral-100`  | `#EEEEF1` | —                                                | `--bg-elevated`                                          |
+| `--neutral-200`  | `#D7D7DC` | —                                                | `--bg-raised`, `--status-neutral-bg`                     |
+| `--neutral-300`  | `#B0B0B8` | `--text-secondary`                               | `--bg-overlay`, `--text-disabled`, `--status-neutral-fg` |
+| `--neutral-400`  | `#82828A` | `--status-neutral`                               | `--bg-pressed`, `--text-tertiary`, `--text-placeholder`  |
+| `--neutral-500`  | `#6B6B72` | `--text-tertiary`, `--text-placeholder`          | `--text-secondary`                                       |
+| `--neutral-600`  | `#50505A` | `--text-disabled`                                | —                                                        |
+| `--neutral-700`  | `#3A3A42` | `--bg-pressed`                                   | —                                                        |
+| `--neutral-800`  | `#26262B` | `--bg-overlay`, `--status-neutral-bg`            | —                                                        |
+| `--neutral-900`  | `#1C1C22` | `--bg-raised`                                    | `--text-primary`                                         |
+| `--neutral-950`  | `#131318` | `--bg-elevated`                                  | —                                                        |
+| `--neutral-1000` | `#0A0A0D` | `--bg-base`                                      | —                                                        |
+| `--neutral-void` | `#000000` | `--bg-void`, `--text-on-brand`, `--text-inverse` | —                                                        |
 
-**Usage rule:** Components reference the *role* tokens (e.g. `var(--bg-elevated)`), never the raw ramp tokens (e.g. `var(--neutral-950)`). The ramp table above documents what each step maps to — not what you should write.
+**Usage rule:** Components reference the _role_ tokens (e.g. `var(--bg-elevated)`), never the raw ramp tokens (e.g. `var(--neutral-950)`). The ramp table above documents what each step maps to — not what you should write.
 
 #### Brand ramp — Magenta (hue ~330)
 
-| Token | Hex | Dark role | Light role |
-|-------|-----|-----------|------------|
-| `--magenta-50`  | `#FFE5FF` | `--brand-primary-subtle` (dark) | — |
-| `--magenta-100` | `#FFC2FF` | — | `--brand-primary-subtle` (light) |
-| `--magenta-200` | `#FF99FF` | — | `--brand-primary-muted` (light) |
-| `--magenta-300` | `#FF66FF` | — | — |
-| `--magenta-400` | `#FF33FF` | `--brand-primary-hover` (dark) | — |
-| `--magenta-500` | `#FF00FF` | `--brand-primary` · `--border-focus` · `--border-brand` · `--accent-square` | same across themes |
-| `--magenta-600` | `#D600D6` | `--brand-primary-active` (dark) | `--brand-primary-hover` (light) |
-| `--magenta-700` | `#A800A8` | — | `--brand-primary-active` (light) |
-| `--magenta-800` | `#800080` | `--brand-primary-muted` (dark) | — |
-| `--magenta-900` | `#570057` | — | — |
-| `--magenta-950` | `#330033` | `--brand-primary-subtle` (dark) | — |
+| Token           | Hex       | Dark role                                                                   | Light role                       |
+| --------------- | --------- | --------------------------------------------------------------------------- | -------------------------------- |
+| `--magenta-50`  | `#FFE5FF` | `--brand-primary-subtle` (dark)                                             | —                                |
+| `--magenta-100` | `#FFC2FF` | —                                                                           | `--brand-primary-subtle` (light) |
+| `--magenta-200` | `#FF99FF` | —                                                                           | `--brand-primary-muted` (light)  |
+| `--magenta-300` | `#FF66FF` | —                                                                           | —                                |
+| `--magenta-400` | `#FF33FF` | `--brand-primary-hover` (dark)                                              | —                                |
+| `--magenta-500` | `#FF00FF` | `--brand-primary` · `--border-focus` · `--border-brand` · `--accent-square` | same across themes               |
+| `--magenta-600` | `#D600D6` | `--brand-primary-active` (dark)                                             | `--brand-primary-hover` (light)  |
+| `--magenta-700` | `#A800A8` | —                                                                           | `--brand-primary-active` (light) |
+| `--magenta-800` | `#800080` | `--brand-primary-muted` (dark)                                              | —                                |
+| `--magenta-900` | `#570057` | —                                                                           | —                                |
+| `--magenta-950` | `#330033` | `--brand-primary-subtle` (dark)                                             | —                                |
 
 #### Project accent ramps — Solar / Cyan / Acid / Ember
 
@@ -329,12 +329,12 @@ Accent token: `--accent-line`. Dark: `var(--ember-500)`, Light: `var(--ember-600
 
 Each has a full 11-step scale (50–950). Never use directly — always go through `--status-{name}`, `--status-{name}-bg`, or `--status-{name}-fg`.
 
-| Ramp | 50 | 100 | 300 | 500 (base) | 700 | 950 |
-|------|----|-----|-----|------------|-----|-----|
-| Success | `#E5FCEF` | `#B8F5D2` | `#5CE69A` | `#00E676` | `#008A46` | `#002915` |
-| Warning | `#FFF8E5` | `#FFEAB8` | `#FFCE5C` | `#FFB300` | `#A87600` | `#332400` |
-| Danger  | `#FFE5EB` | `#FFB8C5` | `#FF5C7A` | `#FF3B5C` | `#A82338` | `#330A10` |
-| Info    | `#E5EFFF` | `#B8D2FF` | `#5C99FF` | `#3F8EFF` | `#1F58A8` | `#091A33` |
+| Ramp    | 50        | 100       | 300       | 500 (base) | 700       | 950       |
+| ------- | --------- | --------- | --------- | ---------- | --------- | --------- |
+| Success | `#E5FCEF` | `#B8F5D2` | `#5CE69A` | `#00E676`  | `#008A46` | `#002915` |
+| Warning | `#FFF8E5` | `#FFEAB8` | `#FFCE5C` | `#FFB300`  | `#A87600` | `#332400` |
+| Danger  | `#FFE5EB` | `#FFB8C5` | `#FF5C7A` | `#FF3B5C`  | `#A82338` | `#330A10` |
+| Info    | `#E5EFFF` | `#B8D2FF` | `#5C99FF` | `#3F8EFF`  | `#1F58A8` | `#091A33` |
 
 #### 1-bit primitives
 
@@ -342,77 +342,80 @@ Each has a full 11-step scale (50–950). Never use directly — always go throu
 - `--onebit-white: #FFFFFF` (`oklch(100% 0 0)`)
 
 ---
+
 ### Layer 2 — Theme Role Mapping
 
 **Dark is the default.** Light is opt-in via `@media (prefers-color-scheme: light)` or `html[data-theme="light"` (set by `ThemeToggle` component in `src/react/components/ThemeToggle.tsx`). The same ramp primitives are used by both themes — only the role-to-ramp mapping changes.
 
 #### Surface ladder — backgrounds
 
-| Token | Dark value | Light value | Usage rule |
-|-------|-----------|-------------|------------|
-| `--bg-void` | `--neutral-void` | `--neutral-50` | Page background only. Outermost canvas. |
-| `--bg-base` | `--neutral-1000` | `--neutral-50` | Default surface. Most common container. |
-| `--bg-elevated` | `--neutral-950` | `--neutral-100` | Cards, panels, section backgrounds. |
-| `--bg-raised` | `--neutral-900` | `--neutral-200` | Modals, dropdowns, popovers, inputs. |
-| `--bg-overlay` | `--neutral-800` | `--neutral-300` | Hover surfaces, tooltip backgrounds. |
-| `--bg-pressed` | `--neutral-700` | `--neutral-400` | Active/pressed state. |
-| `--bg-translucent` | `rgba(255,255,255,0.04)` | `rgba(0,0,0,0.04)` | Subtle backdrop overlay. |
+| Token              | Dark value               | Light value        | Usage rule                              |
+| ------------------ | ------------------------ | ------------------ | --------------------------------------- |
+| `--bg-void`        | `--neutral-void`         | `--neutral-50`     | Page background only. Outermost canvas. |
+| `--bg-base`        | `--neutral-1000`         | `--neutral-50`     | Default surface. Most common container. |
+| `--bg-elevated`    | `--neutral-950`          | `--neutral-100`    | Cards, panels, section backgrounds.     |
+| `--bg-raised`      | `--neutral-900`          | `--neutral-200`    | Modals, dropdowns, popovers, inputs.    |
+| `--bg-overlay`     | `--neutral-800`          | `--neutral-300`    | Hover surfaces, tooltip backgrounds.    |
+| `--bg-pressed`     | `--neutral-700`          | `--neutral-400`    | Active/pressed state.                   |
+| `--bg-translucent` | `rgba(255,255,255,0.04)` | `rgba(0,0,0,0.04)` | Subtle backdrop overlay.                |
 
 **Ladder rule:** Step one level for each layer of depth. Never skip from `--bg-void` to `--bg-raised`.  
 `void → base → elevated → raised → overlay → pressed`
 
 #### Text ladder
 
-| Token | Dark value | Light value | Usage rule |
-|-------|-----------|-------------|------------|
-| `--text-primary` | `--neutral-50` | `--neutral-900` | Headlines, body paragraphs, labels. |
-| `--text-secondary` | `--neutral-300` | `--neutral-500` | Lede, card body, subtle headings. |
-| `--text-tertiary` | `--neutral-500` | `--neutral-400` | Captions, mono labels, metadata. |
-| `--text-placeholder` | `--neutral-500` | `--neutral-400` | Form field hints and placeholders. |
-| `--text-disabled` | `--neutral-600` | `--neutral-300` | Truly inactive elements. |
-| `--text-inverse` | `--neutral-void` | `--neutral-50` | Text on inverted/dark surfaces. |
+| Token                | Dark value       | Light value     | Usage rule                          |
+| -------------------- | ---------------- | --------------- | ----------------------------------- |
+| `--text-primary`     | `--neutral-50`   | `--neutral-900` | Headlines, body paragraphs, labels. |
+| `--text-secondary`   | `--neutral-300`  | `--neutral-500` | Lede, card body, subtle headings.   |
+| `--text-tertiary`    | `--neutral-500`  | `--neutral-400` | Captions, mono labels, metadata.    |
+| `--text-placeholder` | `--neutral-500`  | `--neutral-400` | Form field hints and placeholders.  |
+| `--text-disabled`    | `--neutral-600`  | `--neutral-300` | Truly inactive elements.            |
+| `--text-inverse`     | `--neutral-void` | `--neutral-50`  | Text on inverted/dark surfaces.     |
 
 #### Border ladder
 
-| Token | Dark value | Light value | Usage rule |
-|-------|-----------|-------------|------------|
-| `--border-subtle` | `rgba(255,255,255,0.06)` | `rgba(0,0,0,0.06)` | Internal dividers, hr rules. |
+| Token              | Dark value               | Light value        | Usage rule                        |
+| ------------------ | ------------------------ | ------------------ | --------------------------------- |
+| `--border-subtle`  | `rgba(255,255,255,0.06)` | `rgba(0,0,0,0.06)` | Internal dividers, hr rules.      |
 | `--border-default` | `rgba(255,255,255,0.10)` | `rgba(0,0,0,0.10)` | Cards, inputs, container strokes. |
-| `--border-strong` | `rgba(255,255,255,0.18)` | `rgba(0,0,0,0.18)` | Hover emphasis, focus rings. |
-| `--border-focus` | `--magenta-500` | `--magenta-500` | Form focus rings (brand). |
-| `--border-brand` | `--magenta-500` | `--magenta-500` | Decorative brand border. |
+| `--border-strong`  | `rgba(255,255,255,0.18)` | `rgba(0,0,0,0.18)` | Hover emphasis, focus rings.      |
+| `--border-focus`   | `--magenta-500`          | `--magenta-500`    | Form focus rings (brand).         |
+| `--border-brand`   | `--magenta-500`          | `--magenta-500`    | Decorative brand border.          |
 
 **Ladder rule:** `subtle → default → strong → focus/brand`. Use `--border-subtle` for separators, `--border-default` for card outlines.
 
 #### Brand tokens
 
-| Token | Dark value | Light value | Usage rule |
-|-------|-----------|-------------|------------|
-| `--brand-primary` | `--magenta-500` | `--magenta-500` | CTAs, focus rings, active nav, brand text. |
-| `--brand-primary-hover` | `--magenta-400` | `--magenta-600` | Accent hover state. |
-| `--brand-primary-active` | `--magenta-600` | `--magenta-700` | Accent pressed state. |
-| `--brand-primary-muted` | `--magenta-800` | `--magenta-200` | Muted brand backgrounds. |
-| `--brand-primary-subtle` | `--magenta-950` | `--magenta-100` | Subtle brand surfaces. |
-| `--brand-primary-glow` | `color-mix(in srgb, var(--magenta-500) 25%, transparent)` | `color-mix(in srgb, var(--magenta-500) 15%, transparent)` | Glow shadow source. |
-| `--text-on-brand` | `--neutral-void` | `--neutral-void` | Text on brand-colored fills. |
+| Token                     | Dark value                                                | Light value                                               | Usage rule                                 |
+| ------------------------- | --------------------------------------------------------- | --------------------------------------------------------- | ------------------------------------------ |
+| `--brand-primary`         | `--magenta-500`                                           | `--magenta-500`                                           | CTAs, focus rings, active nav, brand text. |
+| `--brand-primary-hover`   | `--magenta-400`                                           | `--magenta-600`                                           | Accent hover state.                        |
+| `--brand-primary-active`  | `--magenta-600`                                           | `--magenta-700`                                           | Accent pressed state.                      |
+| `--brand-primary-muted`   | `--magenta-800`                                           | `--magenta-200`                                           | Muted brand backgrounds.                   |
+| `--brand-primary-subtle`  | `--magenta-950`                                           | `--magenta-100`                                           | Subtle brand surfaces.                     |
+| `--brand-primary-glow`    | `color-mix(in srgb, var(--magenta-500) 25%, transparent)` | `color-mix(in srgb, var(--magenta-500) 15%, transparent)` | Glow shadow source.                        |
+| `--brand-secondary`       | `--cyan-500` (thematic per project)                       | `--cyan-600` (thematic per project)                       | Secondary CTAs, project accents.           |
+| `--brand-secondary-hover` | `--cyan-400`                                              | `--cyan-500`                                              | Secondary hover state.                     |
+| `--text-on-brand`         | `--neutral-void`                                          | `--neutral-void`                                          | Text on brand-colored fills.               |
 
 #### Status tokens
 
-| Token | Dark value | Light value | Usage rule |
-|-------|-----------|-------------|------------|
-| `--status-success` | `--success-500` | `--success-500` | Positive outcome / online. |
+| Token                 | Dark value      | Light value     | Usage rule                     |
+| --------------------- | --------------- | --------------- | ------------------------------ |
+| `--status-success`    | `--success-500` | `--success-500` | Positive outcome / online.     |
 | `--status-success-bg` | `--success-950` | `--success-100` | Background for success badges. |
 | `--status-success-fg` | `--success-300` | `--success-700` | Foreground for success badges. |
-| `--status-warning` | `--warning-500` | `--warning-500` | Attention needed. |
+| `--status-warning`    | `--warning-500` | `--warning-500` | Attention needed.              |
 | `--status-warning-bg` | `--warning-950` | `--warning-100` | Background for warning badges. |
 | `--status-warning-fg` | `--warning-300` | `--warning-700` | Foreground for warning badges. |
-| `--status-danger` | `--danger-500` | `--danger-500` | Error / destructive. |
-| `--status-danger-bg` | `--danger-950` | `--danger-100` | Background for danger badges. |
-| `--status-danger-fg` | `--danger-300` | `--danger-700` | Foreground for danger badges. |
-| `--status-info` | `--info-500` | `--info-500` | Informational. |
-| `--status-info-bg` | `--info-950` | `--info-100` | Background for info badges. |
-| `--status-info-fg` | `--info-300` | `--info-700` | Foreground for info badges. |
-| `--status-neutral` | `--neutral-400` | `--neutral-400` | Default / inactive. |
+| `--status-danger`     | `--danger-500`  | `--danger-500`  | Error / destructive.           |
+| `--status-danger-bg`  | `--danger-950`  | `--danger-100`  | Background for danger badges.  |
+| `--status-danger-fg`  | `--danger-300`  | `--danger-700`  | Foreground for danger badges.  |
+| `--status-info`       | `--info-500`    | `--info-500`    | Informational.                 |
+| `--status-info-bg`    | `--info-950`    | `--info-100`    | Background for info badges.    |
+| `--status-info-fg`    | `--info-300`    | `--info-700`    | Foreground for info badges.    |
+| `--status-neutral`    | `--neutral-400` | `--neutral-400` | Default / inactive.            |
 | `--status-neutral-bg` | `--neutral-900` | `--neutral-200` | Background for neutral badges. |
 | `--status-neutral-fg` | `--neutral-300` | `--neutral-700` | Foreground for neutral badges. |
 
@@ -420,43 +423,46 @@ Each has a full 11-step scale (50–950). Never use directly — always go throu
 
 #### Project accent tokens
 
-| Token | Dark base | Light base | Project |
-|-------|-----------|------------|---------|
-| `--accent-square` | `--magenta-500` | `--magenta-500` | 7K parent |
-| `--accent-triangle` | `--solar-500` | `--solar-600` | Triangle |
-| `--accent-circle` | `--cyan-500` | `--cyan-600` | Circle |
-| `--accent-grid` | `--acid-500` | `--acid-600` | Grid |
-| `--accent-line` | `--ember-500` | `--ember-600` | Line |
+| Token               | Dark base       | Light base      | Project   | Pixel variant |
+| ------------------- | --------------- | --------------- | --------- | ------------- |
+| `--accent-square`   | `--magenta-500` | `--magenta-500` | 7K parent | Square        |
+| `--accent-triangle` | `--solar-500`   | `--solar-600`   | Triangle  | Triangle      |
+| `--accent-circle`   | `--cyan-500`    | `--cyan-600`    | Circle    | Circle        |
+| `--accent-grid`     | `--acid-500`    | `--acid-600`    | Grid      | Grid          |
+| `--accent-line`     | `--ember-500`   | `--ember-600`   | Line      | Line          |
 
-Light theme shifts project accents one step darker (500→600) to maintain contrast against the brighter background.
+These tokens are the canonical hue pairings for Geist Pixel variants. They also feed `--brand-secondary` when a project scope is applied via `data-project` or `ProjectProvider`. Light theme shifts project accents one step darker (500→600) to maintain contrast against the brighter background.
 
 ---
+
 ### Layer 3 — Semantic Colors: Meaning, Not Decoration
 
 Semantic colors exist **only** for status indication. Each maps to exactly one meaning.
 
-| Match | Token | Example |
-|-------|-------|---------|
-| Positive outcome / online | `--status-success` + `--status-success-bg` | Badge: "Online" in green |
-| Attention needed | `--status-warning` + `--status-warning-bg` | Badge: "Pending" in amber |
-| Error / destructive | `--status-danger` + `--status-danger-bg` | Badge: "Error" in red |
-| Informational | `--status-info` + `--status-info-bg` | Badge: "Info" in blue |
-| Default / inactive | `--status-neutral` + `--status-neutral-bg` | Badge: "Offline" in grey |
+| Match                     | Token                                      | Example                   |
+| ------------------------- | ------------------------------------------ | ------------------------- |
+| Positive outcome / online | `--status-success` + `--status-success-bg` | Badge: "Online" in green  |
+| Attention needed          | `--status-warning` + `--status-warning-bg` | Badge: "Pending" in amber |
+| Error / destructive       | `--status-danger` + `--status-danger-bg`   | Badge: "Error" in red     |
+| Informational             | `--status-info` + `--status-info-bg`       | Badge: "Info" in blue     |
+| Default / inactive        | `--status-neutral` + `--status-neutral-bg` | Badge: "Offline" in grey  |
 
 **Do not use semantic colors for:**
+
 - Decorative borders on cards
 - Accent accent headers
 - Non-status icon fills
 - Background washes for sections
 
 ---
+
 ### Usage rules
 
 1. **Neutral ladder** — Step one surface layer per depth level: `void → base → elevated → raised → overlay → pressed`. Never skip a level for visual emphasis.
 2. **Accent on action, not surface** — Brand appears on primary CTAs, focus rings, active borders, brand typography. Never as a full surface background fill.
 3. **Semantic = meaning only** — Status hues exist for machine-state communication (badge bg, toast icon, validation message, online/offline dot). If it doesn't communicate a machine state, use the raw ramps instead.
 4. **Status bg uses `--*-bg`** — Status badges and pills use the `--status-*-bg` token, never the solid `--*-500` as a fill.
-5. **Project scoping** — Parent 7K uses `--accent-square` (magenta). Child projects swap `--accent-*` for their own hue. The neutral ramp stays unchanged.
+5. **Project scoping** — The parent 7K brand uses magenta primary + cyan secondary. Child projects theme `--brand-secondary` to their own hue (solar, cyan, acid, ember) via `data-project` or `ProjectProvider`. Geist Pixel variant pairings use the `--accent-*` tokens. The neutral ramp stays unchanged.
 6. **No raw ramp references in components** — Always reference role tokens (`--bg-elevated`, `--text-primary`, `--border-default`), never raw ramp tokens (`--neutral-950`, `--neutral-50`, etc.). This is how theme switching works.
 7. **Dark is default, light is opt-in** — `:root` holds dark token mappings. `@media (prefers-color-scheme: light)` overrides only the role tokens. Primitive ramps are shared and unchanged.
 
@@ -466,23 +472,24 @@ Semantic colors exist **only** for status indication. Each maps to exactly one m
 
 ### Three-font system
 
-| Family | Role | Weight range | Source |
-|--------|------|-------------|--------|
-| **Geist** (sans) | Display, headings, body, UI text | 100–900 | CDN (`geist` npm package) |
-| **Geist Mono** | Labels, code, tabular data, metadata | 400, 500 | CDN (`geist` npm package) |
-| **Geist Pixel** (5 variants) | Ornamental display, pixel-constrained surfaces, hero wordmarks | 400–800 (one per variant) | Local `fonts/` TTFs |
+| Family                       | Role                                                           | Weight range              | Source                    |
+| ---------------------------- | -------------------------------------------------------------- | ------------------------- | ------------------------- |
+| **Geist** (sans)             | Display, headings, body, UI text                               | 100–900                   | CDN (`geist` npm package) |
+| **Geist Mono**               | Labels, code, tabular data, metadata                           | 400, 500                  | CDN (`geist` npm package) |
+| **Geist Pixel** (5 variants) | Ornamental display, pixel-constrained surfaces, hero wordmarks | 400–800 (one per variant) | Local `fonts/` TTFs       |
 
 ### Geist Pixel variant → project accent pairing
 
-| Variant | Weight | Pairs with | Best for |
-|---------|--------|------------|----------|
-| **Square** | 400 (Regular) | Magenta (7K parent) | Body-sized pixel text, data displays |
-| **Circle** | 500 (Medium) | Cyan | Buttons, badges, navigation |
-| **Grid** | 600 (SemiBold) | Acid (Grid project) | Section titles, stat values |
-| **Line** | 700 (Bold) | Ember (Line project) | Display headlines, hero text |
-| **Triangle** | 800 (ExtraBold) | Solar (Triangle project) | Hero wordmarks, giant headlines |
+| Variant      | Weight          | Pairs with               | Best for                             |
+| ------------ | --------------- | ------------------------ | ------------------------------------ |
+| **Square**   | 400 (Regular)   | Magenta (7K parent)      | Body-sized pixel text, data displays |
+| **Circle**   | 500 (Medium)    | Cyan                     | Buttons, badges, navigation          |
+| **Grid**     | 600 (SemiBold)  | Acid (Grid project)      | Section titles, stat values          |
+| **Line**     | 700 (Bold)      | Ember (Line project)     | Display headlines, hero text         |
+| **Triangle** | 800 (ExtraBold) | Solar (Triangle project) | Hero wordmarks, giant headlines      |
 
 ### Font stacks
+
 ```
 --font-sans:  'Geist', system-ui, -apple-system, sans-serif;
 --font-mono:  'Geist Mono', ui-monospace, 'SF Mono', Menlo, monospace;
@@ -491,21 +498,22 @@ Semantic colors exist **only** for status indication. Each maps to exactly one m
 
 ### Type scale — engineering blueprint
 
-| Token | Size | Family / Weight | Usage |
-|-------|------|----------------|-------|
-| `--text-display` | `clamp(48px, 8vw, 160px)` | Geist 900 -0.04em | Hero numerals, giant headlines |
-| `--text-h1` | 4rem (64px) | Geist 700 -0.04em | Page titles |
-| `--text-h2` | 3rem (48px) | Geist 700 -0.03em | Section titles |
-| `--text-h3` | 2rem (32px) | Geist 600 -0.02em | Sub-section headers |
-| `--text-h4` | 1.5rem (24px) | Geist 600 -0.02em | Card titles |
-| `--text-body-lg` | 1.125rem (18px) | Geist 400 -0.01em | Larger body / lede |
-| `--text-body` | 1rem (16px) | Geist 400 -0.01em | Body paragraphs |
-| `--text-body-sm` | 0.875rem (14px) | Geist 400 -0.01em | Secondary text |
-| `--text-caption` | 0.75rem (12px) | Geist 500 | Metadata, timestamps |
-| `--text-mono-label` | 0.6875rem (11px) | Geist Mono 500 0.12em uppercase | Labels, badges, form labels — the "connective tissue" |
-| `--text-mono-body` | 0.8125rem (13px) | Geist Mono 400 | Code blocks, tabular data |
+| Token               | Size                      | Family / Weight                 | Usage                                                 |
+| ------------------- | ------------------------- | ------------------------------- | ----------------------------------------------------- |
+| `--text-display`    | `clamp(48px, 8vw, 160px)` | Geist 900 -0.04em               | Hero numerals, giant headlines                        |
+| `--text-h1`         | 4rem (64px)               | Geist 700 -0.04em               | Page titles                                           |
+| `--text-h2`         | 3rem (48px)               | Geist 700 -0.03em               | Section titles                                        |
+| `--text-h3`         | 2rem (32px)               | Geist 600 -0.02em               | Sub-section headers                                   |
+| `--text-h4`         | 1.5rem (24px)             | Geist 600 -0.02em               | Card titles                                           |
+| `--text-body-lg`    | 1.125rem (18px)           | Geist 400 -0.01em               | Larger body / lede                                    |
+| `--text-body`       | 1rem (16px)               | Geist 400 -0.01em               | Body paragraphs                                       |
+| `--text-body-sm`    | 0.875rem (14px)           | Geist 400 -0.01em               | Secondary text                                        |
+| `--text-caption`    | 0.75rem (12px)            | Geist 500                       | Metadata, timestamps                                  |
+| `--text-mono-label` | 0.6875rem (11px)          | Geist Mono 500 0.12em uppercase | Labels, badges, form labels — the "connective tissue" |
+| `--text-mono-body`  | 0.8125rem (13px)          | Geist Mono 400                  | Code blocks, tabular data                             |
 
 ### Legacy alignment tokens (deprecated but kept for compatibility)
+
 ```
 --text-7xl  7.5rem (120px)    --text-6xl  5.5rem (88px)
 --text-5xl  4rem (64px)       --text-4xl  3rem (48px)
@@ -516,6 +524,7 @@ Semantic colors exist **only** for status indication. Each maps to exactly one m
 ```
 
 ### Weight scale
+
 ```
 --weight-thin: 100    --weight-extralight: 200  --weight-light: 300
 --weight-regular: 400  --weight-medium: 500    --weight-semibold: 600
@@ -523,6 +532,7 @@ Semantic colors exist **only** for status indication. Each maps to exactly one m
 ```
 
 ### Line heights
+
 ```
 --leading-none:   1         --leading-tight:  1.15
 --leading-snug:   1.3       --leading-normal: 1.5
@@ -530,6 +540,7 @@ Semantic colors exist **only** for status indication. Each maps to exactly one m
 ```
 
 ### Letter spacing
+
 ```
 --tracking-tightest: -0.04em   --tracking-tighter:  -0.02em
 --tracking-tight:    -0.01em   --tracking-normal:   0
@@ -538,9 +549,11 @@ Semantic colors exist **only** for status indication. Each maps to exactly one m
 ```
 
 ### Mono-label language — "connective tissue"
+
 Every label, badge, form label, tab, breadcrumb, and status indicator uses `--text-mono-label` (Geist Mono, 11px, 500 weight, 0.12em uppercase). This creates the engineering-blueprint aesthetic: the reader always knows which layer they are looking at because the meta-information reads like a schematic.
 
 ### Numerics
+
 - All data / metrics use `font-family: var(--font-mono)` with `font-variant-numeric: tabular-nums`
 - Display: -0.04em, h1: -0.04em, h2: -0.03em, h3: -0.02em, h4: -0.02em
 
@@ -597,6 +610,7 @@ Sharp (0px) and subtle (2–4px) are preferred for 1-bit elements. 8–12px for 
 **Source context reference:** The brief's "tech company with different projects" suggests a dashboard/app-shell layout pattern. The 12-column grid supports both marketing pages and data-dense project dashboards.
 
 ### Container widths
+
 ```
 --container-sm:  640px
 --container-md:  960px
@@ -606,6 +620,7 @@ Sharp (0px) and subtle (2–4px) are preferred for 1-bit elements. 8–12px for 
 ```
 
 ### Z-index scale
+
 ```
 --z-base:    0
 --z-raised:  10
@@ -617,16 +632,19 @@ Sharp (0px) and subtle (2–4px) are preferred for 1-bit elements. 8–12px for 
 ```
 
 ### Grid
+
 - 12-column responsive grid, `--grid-gutter` (24px) gutter
 - Breakpoints: 480px (mobile), 768px (tablet), 1024px (desktop), 1440px (wide)
 - Max content width: 1280px, centered
 
 ### Navigation
+
 - Sticky top nav (frosted glass) on dark bg
 - Bottom tab bar on mobile, side nav for app shells
 - Active nav item: accent dot indicator
 
 ### 1-bit section rhythm
+
 - Scanline overlay on hero / full-bleed sections
 - Halftone dot separators between content blocks
 - Full-bleed sections use `.separator-onebit` (2px white line at 25% opacity) as rhythm breaks
@@ -634,6 +652,7 @@ Sharp (0px) and subtle (2–4px) are preferred for 1-bit elements. 8–12px for 
 - Manga panel composition: content is the "panel" (solid black border), background is the "page" (noise or scanline). Each panel gets a `.vignette-onebit` edge fade.
 
 ### Product shell layout
+
 ```
 ┌──────────────────────────────────────────┐
 │ Sidebar (240px)  │  Main content area     │
@@ -658,24 +677,25 @@ Sharp (0px) and subtle (2–4px) are preferred for 1-bit elements. 8–12px for 
 
 **Modern neon** — the only button system. All buttons use `mono-label` typography (Geist Mono, 11px, 500 weight, 0.12em uppercase) and 4px border-radius. Accent fills use the brand-primary ramp (500→hover:400→active:600). Button groups, split buttons, and loading state are built on the same base.
 
-| Class | Description |
-|-------|-------------|
-| `.btn-modern` | Base: mono-label typography, 12px/20px padding, `rounded.sm` (4px) |
-| `.btn-modern-primary` | `--brand-primary` (`--magenta-500`) fill, `--brand-primary-hover` on hover + glow shadow |
-| `.btn-modern-secondary` | `--bg-raised` fill, `--bg-overlay` on hover |
-| `.btn-modern-ghost` | Transparent, `--text-secondary` text, subtle bg on hover |
-| `.btn-modern-glow` | `--magenta-500` fill + neon glow, `--magenta-400` on hover |
-| `.btn-modern-glow-cyan` | `--cyan-500` fill + cyan glow, `--cyan-400` on hover |
-| `.btn-modern-glow-grid` | `--acid-500` fill + acid glow, `--acid-400` on hover |
-| `.btn-modern-danger` | Transparent + danger border, danger fill on hover |
-| `.btn-modern-sm/lg` | Size variants (8px/16px small, 16px/28px large) |
-| `.btn-modern-icon` | 40×40 square icon button |
-| `.btn-modern-lg-icon` | 52×52 large icon button |
-| `.btn-modern-loading` | Loading state — `onebit-spin` replaces icon |
-| `.btn-group` | Inline flex container for grouped buttons (adjacent borders merge) |
-| `.btn-split` | Split button trigger — last child gets narrower padding + left border |
+| Class                   | Description                                                                              |
+| ----------------------- | ---------------------------------------------------------------------------------------- |
+| `.btn-modern`           | Base: mono-label typography, 12px/20px padding, `rounded.sm` (4px)                       |
+| `.btn-modern-primary`   | `--brand-primary` (`--magenta-500`) fill, `--brand-primary-hover` on hover + glow shadow |
+| `.btn-modern-secondary` | `--bg-raised` fill, `--bg-overlay` on hover                                              |
+| `.btn-modern-ghost`     | Transparent, `--text-secondary` text, subtle bg on hover                                 |
+| `.btn-modern-glow`      | `--magenta-500` fill + neon glow, `--magenta-400` on hover                               |
+| `.btn-modern-glow-cyan` | `--cyan-500` fill + cyan glow, `--cyan-400` on hover                                     |
+| `.btn-modern-glow-grid` | `--acid-500` fill + acid glow, `--acid-400` on hover                                     |
+| `.btn-modern-danger`    | Transparent + danger border, danger fill on hover                                        |
+| `.btn-modern-sm/lg`     | Size variants (8px/16px small, 16px/28px large)                                          |
+| `.btn-modern-icon`      | 40×40 square icon button                                                                 |
+| `.btn-modern-lg-icon`   | 52×52 large icon button                                                                  |
+| `.btn-modern-loading`   | Loading state — `onebit-spin` replaces icon                                              |
+| `.btn-group`            | Inline flex container for grouped buttons (adjacent borders merge)                       |
+| `.btn-split`            | Split button trigger — last child gets narrower padding + left border                    |
 
 All variants use standard CSS transitions for interaction states:
+
 - **`:hover`** → fill shifts to `--brand-primary-hover` (`--magenta-400`), optional glow shadow intensifies
 - **`:focus-visible`** → outline ring
 - **`:active`** → fill shifts to `--brand-primary-active` (`--magenta-600`)
@@ -683,131 +703,132 @@ All variants use standard CSS transitions for interaction states:
 
 ### 6b. Form controls
 
-| Class | Description |
-|-------|-------------|
-| `.input` | Text input: black bg, 2px white border, accent glow on focus |
-| `.textarea` | Multi-line input, same tokens |
-| `.select-native` | Custom dropdown, SVG chevron |
-| `.checkbox` | 16px square, checked fills white (`.checkbox-accent`: fills magenta) |
-| `.radio` | 16px square, selected fills white (`.radio-accent`: fills magenta) |
-| `.toggle` | 36x18 switch, on state fills white (`.toggle-accent`: fills magenta) |
-| `.range` | 6px track, 16px square thumb |
-| `.form-group` | Flex column with gap |
-| `.form-label` | Mono uppercase label, 11px |
-| `.field-error` | Red mono error text |
-| `.input-group` | Inline input + addon |
-| `.input-addon` | Prefix/suffix decoration |
-| `.color-swatch` | 32px square, accent shadow on selected |
+| Class            | Description                                                          |
+| ---------------- | -------------------------------------------------------------------- |
+| `.input`         | Text input: black bg, 2px white border, accent glow on focus         |
+| `.textarea`      | Multi-line input, same tokens                                        |
+| `.select-native` | Custom dropdown, SVG chevron                                         |
+| `.checkbox`      | 16px square, checked fills white (`.checkbox-accent`: fills magenta) |
+| `.radio`         | 16px square, selected fills white (`.radio-accent`: fills magenta)   |
+| `.toggle`        | 36x18 switch, on state fills white (`.toggle-accent`: fills magenta) |
+| `.range`         | 6px track, 16px square thumb                                         |
+| `.form-group`    | Flex column with gap                                                 |
+| `.form-label`    | Mono uppercase label, 11px                                           |
+| `.field-error`   | Red mono error text                                                  |
+| `.input-group`   | Inline input + addon                                                 |
+| `.input-addon`   | Prefix/suffix decoration                                             |
+| `.color-swatch`  | 32px square, accent shadow on selected                               |
 
 ### 6c. Navigation
 
-| Class | Description |
-|-------|-------------|
-| `.nav` | Vertical nav container |
-| `.nav-item` | Nav link with optional bullet, invert on active |
-| `.nav-item-accent` | Magenta border on active |
-| `.tabs` | Horizontal tab bar, 2px bottom border |
-| `.tab` | Mono uppercase tab, white underline on active |
-| `.tab-accent` | Magenta underline on active |
-| `.pagination` | Inline page button group |
-| `.page-btn` | 32px square, invert on active |
-| `.breadcrumb` | Mono slash-separated trail |
-| `.stepper` | Numbered step indicator with connecting line |
+| Class              | Description                                     |
+| ------------------ | ----------------------------------------------- |
+| `.nav`             | Vertical nav container                          |
+| `.nav-item`        | Nav link with optional bullet, invert on active |
+| `.nav-item-accent` | Magenta border on active                        |
+| `.tabs`            | Horizontal tab bar, 2px bottom border           |
+| `.tab`             | Mono uppercase tab, white underline on active   |
+| `.tab-accent`      | Magenta underline on active                     |
+| `.pagination`      | Inline page button group                        |
+| `.page-btn`        | 32px square, invert on active                   |
+| `.breadcrumb`      | Mono slash-separated trail                      |
+| `.stepper`         | Numbered step indicator with connecting line    |
 
 ### 6d. Data display
 
-| Class | Description |
-|-------|-------------|
-| `.table` | Collapsed table, 2px header border, mono uppercase headers |
-| `.badge` | Inline uppercase label, 11px, 1px border |
-| `.badge-inverted` | White bg, black text |
-| `.badge-accent` / `.badge-success` / `.badge-warning` / `.badge-danger` | Colored border variants |
-| `.tag` | 11px uppercase inline, 3 variants (default, outlined, inverted) |
-| `.chip` | Removable inline tag with close button |
-| `.chip-accent` | Magenta border variant |
-| `.avatar` | 32x32 square, 2px border, mono initial |
-| `.avatar-sm` / `.avatar-lg` / `.avatar-group` | Size + overlap group |
-| `.stat` | Value + label vertical pair |
-| `.stat-accent` | Magenta value color |
-| `.kbd` | Keyboard key with 3px bottom border weight |
-| `.code-block` | Pre block, 2px border, 13px mono |
-| `.code-inline` | Inline code snippet |
-| `.link` | Underlined white text, thicker hover |
-| `.link-accent` | Magenta colored link |
-| `.list` | Bordered list group with 2px border |
-| `.list-item` | 13px item with hover/active states |
-| `.tree` | Nested tree with lines |
-| `.tree-item` | Indented with left border, accent on active |
+| Class                                                                   | Description                                                     |
+| ----------------------------------------------------------------------- | --------------------------------------------------------------- |
+| `.table`                                                                | Collapsed table, 2px header border, mono uppercase headers      |
+| `.badge`                                                                | Inline uppercase label, 11px, 1px border                        |
+| `.badge-inverted`                                                       | White bg, black text                                            |
+| `.badge-accent` / `.badge-success` / `.badge-warning` / `.badge-danger` | Colored border variants                                         |
+| `.tag`                                                                  | 11px uppercase inline, 3 variants (default, outlined, inverted) |
+| `.chip`                                                                 | Removable inline tag with close button                          |
+| `.chip-accent`                                                          | Magenta border variant                                          |
+| `.avatar`                                                               | 32x32 square, 2px border, mono initial                          |
+| `.avatar-sm` / `.avatar-lg` / `.avatar-group`                           | Size + overlap group                                            |
+| `.stat`                                                                 | Value + label vertical pair                                     |
+| `.stat-accent`                                                          | Magenta value color                                             |
+| `.kbd`                                                                  | Keyboard key with 3px bottom border weight                      |
+| `.code-block`                                                           | Pre block, 2px border, 13px mono                                |
+| `.code-inline`                                                          | Inline code snippet                                             |
+| `.link`                                                                 | Underlined white text, thicker hover                            |
+| `.link-accent`                                                          | Magenta colored link                                            |
+| `.list`                                                                 | Bordered list group with 2px border                             |
+| `.list-item`                                                            | 13px item with hover/active states                              |
+| `.tree`                                                                 | Nested tree with lines                                          |
+| `.tree-item`                                                            | Indented with left border, accent on active                     |
 
 ### 6e. Overlays
 
-| Class | Description |
-|-------|-------------|
-| `.modal` | Black bg, 2px border, 8px hard offset shadow |
-| `.drawer` | Side panel, 300-480px width |
-| `.toast` | Notification with 4px hard offset shadow, slide-up animation |
-| `.toast-success` / `.toast-error` / `.toast-warning` | Colored icon variants |
-| `.tooltip` | Positioned label on hover |
-| `.alert` | Inline message with icon |
-| `.alert-success` / `.alert-error` / `.alert-warning` | Colored border variants |
+| Class                                                | Description                                                  |
+| ---------------------------------------------------- | ------------------------------------------------------------ |
+| `.modal`                                             | Black bg, 2px border, 8px hard offset shadow                 |
+| `.drawer`                                            | Side panel, 300-480px width                                  |
+| `.toast`                                             | Notification with 4px hard offset shadow, slide-up animation |
+| `.toast-success` / `.toast-error` / `.toast-warning` | Colored icon variants                                        |
+| `.tooltip`                                           | Positioned label on hover                                    |
+| `.alert`                                             | Inline message with icon                                     |
+| `.alert-success` / `.alert-error` / `.alert-warning` | Colored border variants                                      |
 
 ### 6f. Feedback
 
-| Class | Description |
-|-------|-------------|
-| `.progress` | 12px bar, 2px border |
-| `.progress-accent` | Magenta fill |
-| `.progress-indeterminate` | Scanning bar animation |
-| `.progress-striped` | Striped fill overlay |
-| `.spinner` | 20px square rotating frame, 90° steps |
-| `.spinner-accent` / `.spinner-cyan` | Colored border variants |
-| `.skeleton` | Loading placeholder, opacity pulse |
-| `.empty` | Dashed border placeholder, centered content |
-| `.loading-screen` | Full block loading with blinking label |
-| `.banner` | Full-width colored message bar |
+| Class                               | Description                                 |
+| ----------------------------------- | ------------------------------------------- |
+| `.progress`                         | 12px bar, 2px border                        |
+| `.progress-accent`                  | Magenta fill                                |
+| `.progress-indeterminate`           | Scanning bar animation                      |
+| `.progress-striped`                 | Striped fill overlay                        |
+| `.spinner`                          | 20px square rotating frame, 90° steps       |
+| `.spinner-accent` / `.spinner-cyan` | Colored border variants                     |
+| `.skeleton`                         | Loading placeholder, opacity pulse          |
+| `.empty`                            | Dashed border placeholder, centered content |
+| `.loading-screen`                   | Full block loading with blinking label      |
+| `.banner`                           | Full-width colored message bar              |
 
 ### 6g. Media & Layout
 
-| Class | Description |
-|-------|-------------|
-| `.image-frame` | 2px border placeholder |
-| `.video-frame` | 16:9 frame with play button + timeline |
-| `.icon-box` | 40x40 square icon container |
-| `.icon-box-sm` / `.icon-box-lg` / `.icon-box-accent` / `.icon-box-cyan` | Variants |
-| `.container` | 1280px centered max-width |
-| `.grid` / `.grid-2` / `.grid-3` / `.grid-4` | Grid with 24px gap |
-| `.hr` / `.hr-thick` | Horizontal rules |
+| Class                                                                   | Description                            |
+| ----------------------------------------------------------------------- | -------------------------------------- |
+| `.image-frame`                                                          | 2px border placeholder                 |
+| `.video-frame`                                                          | 16:9 frame with play button + timeline |
+| `.icon-box`                                                             | 40x40 square icon container            |
+| `.icon-box-sm` / `.icon-box-lg` / `.icon-box-accent` / `.icon-box-cyan` | Variants                               |
+| `.container`                                                            | 1280px centered max-width              |
+| `.grid` / `.grid-2` / `.grid-3` / `.grid-4`                             | Grid with 24px gap                     |
+| `.hr` / `.hr-thick`                                                     | Horizontal rules                       |
 
 ### 6h. Misc
 
-| Class | Description |
-|-------|-------------|
-| `.menu` | Dropdown menu list |
-| `.menu-item` | Menu entry with divider support |
-| `.toolbar` | Icon button row with separators |
-| `.status-dot` | 8px square dot (live/away/busy/offline) |
-| `.timeline` | Vertical timeline with dots + lines |
-| `.countdown` | Tabular numeric countdown with labels |
-| `.rating` | 5-star rating, 20px squares, accent on hover |
-| `.combobox` | Searchable select with dropdown menu |
-| `.date-input` | Date field with segmented parts |
+| Class         | Description                                  |
+| ------------- | -------------------------------------------- |
+| `.menu`       | Dropdown menu list                           |
+| `.menu-item`  | Menu entry with divider support              |
+| `.toolbar`    | Icon button row with separators              |
+| `.status-dot` | 8px square dot (live/away/busy/offline)      |
+| `.timeline`   | Vertical timeline with dots + lines          |
+| `.countdown`  | Tabular numeric countdown with labels        |
+| `.rating`     | 5-star rating, 20px squares, accent on hover |
+| `.combobox`   | Searchable select with dropdown menu         |
+| `.date-input` | Date field with segmented parts              |
 
 ### 6i. Accent layer modifiers
 
 These classes add thin color to any 1-bit component without breaking the black/white base. Apply alongside the component class.
 
-| Class | Effect |
-|-------|--------|
-| `.accent-border-top` / `.accent-border-left` / `.accent-border-bottom` | 3px magenta border on one edge |
-| `.cyan-border-top` / `.grid-border-top` / `.line-border-top` | 3px colored top border |
-| `.accent-underline` / `.cyan-underline` | Colored underline on text |
-| `.accent-dot` / `.cyan-dot` / `.grid-dot` | Small colored dot after element |
-| `.accent-bar` / `.cyan-bar` / `.grid-bar` / `.line-bar` | Thin colored bar across top |
-| `.glow-mod` / `.glow-mod-cyan` | Colored glow shadow |
-| `.border-mod-accent` / `.border-mod-cyan` | Border color override |
-| `.accent-corner` / `.cyan-corner` | Small colored corner badge |
+| Class                                                                  | Effect                          |
+| ---------------------------------------------------------------------- | ------------------------------- |
+| `.accent-border-top` / `.accent-border-left` / `.accent-border-bottom` | 3px magenta border on one edge  |
+| `.cyan-border-top` / `.grid-border-top` / `.line-border-top`           | 3px colored top border          |
+| `.accent-underline` / `.cyan-underline`                                | Colored underline on text       |
+| `.accent-dot` / `.cyan-dot` / `.grid-dot`                              | Small colored dot after element |
+| `.accent-bar` / `.cyan-bar` / `.grid-bar` / `.line-bar`                | Thin colored bar across top     |
+| `.glow-mod` / `.glow-mod-cyan`                                         | Colored glow shadow             |
+| `.border-mod-accent` / `.border-mod-cyan`                              | Border color override           |
+| `.accent-corner` / `.cyan-corner`                                      | Small colored corner badge      |
 
 ### 1-bit composition rules
+
 - **No radii.** Every 1-bit component uses `border-radius: 0`. Sharp corners are part of the identity.
 - **No blur shadows.** Only hard offset shadows (`box-shadow: 8px 8px 0 #FFFFFF`) on modal and toast.
 - **2px borders.** All bordered 1-bit components use 2px `solid` white borders unless specified.
@@ -822,6 +843,7 @@ These classes add thin color to any 1-bit component without breaking the black/w
 **Source context reference:** The brief's "abstract 1-bit animations" directly motivates the scanline-scroll, glitch, and halftone keyframe primitives. Reduced-motion support is a standard accessibility requirement.
 
 ### Durations & easing
+
 ```
 --ease-out:       cubic-bezier(0.16, 1, 0.3, 1)
 --ease-in-out:    cubic-bezier(0.65, 0, 0.35, 1)
@@ -835,43 +857,43 @@ These classes add thin color to any 1-bit component without breaking the black/w
 
 ### Full 1-bit Animation Library
 
-| Animation | Class | Duration | Type | Description |
-|-----------|-------|----------|------|-------------|
-| Scanline scroll | `.scanline` (::after) | 8s linear infinite | Ambient | Horizontal lines scroll down — signature 7K texture |
-| Scanline fast | `.scanline-fast` (::after) | 3s linear infinite | Ambient | Faster variant for high-energy sections |
-| Basic glitch | `.glitch` | 0.3s, 3 iterations | Trigger | Translate jitter on 5 random frames |
-| Complex glitch | `.glitch-complex` | 0.8s, 2 iterations | Trigger | Multi-axis + skew + clip-path splits |
-| Glitch accent | `.glitch-accent` | 0.4s, 2 iterations | Trigger | Glitch with magenta glow trail |
-| CRT flicker | `.flicker` / `.flicker-fast` | 4s / 1.5s infinite | Ambient | Opacity stutter at irregular intervals |
-| Binary blink | `.blink` / `.blink-fast` | 1s / 0.4s step-end | Ambient | Sharp on/off toggle |
-| Typewriter | `.typewriter` | 1.5s (30 steps) | Trigger | Text reveal from left |
-| Neon pulse | `.neon-pulse` / `.neon-pulse-cyan` | 2s ease-in-out | Ambient | Accent glow oscillation |
-| Noise shift | `.noise-animated` | 0.5s, steps(5) | Ambient | SVG noise translates in discrete positions |
-| Scan reveal | `.scan-reveal` | 2s, 1 iteration | Trigger | White bar sweeps down |
-| Pixel fade-in | `.pixel-fade-in` | 0.6s, steps(8) | Trigger | Left-to-right reveal in pixel steps |
-| Invert flash | `.invert-flash` | 0.15s, 2 iterations | Trigger | Full filter inversion burst |
-| Pixel dots | `.pixel-dots` / `.pixel-dots-fast` | 0.3s, steps(4), 2 iterations | Trigger | Small black squares scatter at random positions — 1-bit corruption effect |
-| Progress scan | `.progress-indeterminate` | 1.5s | Loading | Bar sweeps left-to-right |
-| Skeleton pulse | `.skeleton` | 1.2s ease-in-out | Loading | Opacity pulse |
-| Slide-up reveal | `.slide-up-reveal` | 0.5s ease-out | Trigger | Content rises with clip-path |
-| Shimmer sweep | `.shimmer` | 2s linear infinite | Loading | Horizontal gradient sweep |
-| Frame step | `.frame-step` (::after) | 0.8s steps(1) | Ambient | Binary character cycle (▌▐█▀) |
-| One-bit spin | `.spinner` | 0.6s linear | Loading | Square frame in 90° increments |
-| Matrix rain | `.matrix-rain-char` | 2s linear infinite | Ambient | Falling character column |
-| Accent flicker | `.accent-flicker` | 1.8s step-end infinite | Ambient | Blinking accent color text |
+| Animation       | Class                              | Duration                     | Type    | Description                                                               |
+| --------------- | ---------------------------------- | ---------------------------- | ------- | ------------------------------------------------------------------------- |
+| Scanline scroll | `.scanline` (::after)              | 8s linear infinite           | Ambient | Horizontal lines scroll down — signature 7K texture                       |
+| Scanline fast   | `.scanline-fast` (::after)         | 3s linear infinite           | Ambient | Faster variant for high-energy sections                                   |
+| Basic glitch    | `.glitch`                          | 0.3s, 3 iterations           | Trigger | Translate jitter on 5 random frames                                       |
+| Complex glitch  | `.glitch-complex`                  | 0.8s, 2 iterations           | Trigger | Multi-axis + skew + clip-path splits                                      |
+| Glitch accent   | `.glitch-accent`                   | 0.4s, 2 iterations           | Trigger | Glitch with magenta glow trail                                            |
+| CRT flicker     | `.flicker` / `.flicker-fast`       | 4s / 1.5s infinite           | Ambient | Opacity stutter at irregular intervals                                    |
+| Binary blink    | `.blink` / `.blink-fast`           | 1s / 0.4s step-end           | Ambient | Sharp on/off toggle                                                       |
+| Typewriter      | `.typewriter`                      | 1.5s (30 steps)              | Trigger | Text reveal from left                                                     |
+| Neon pulse      | `.neon-pulse` / `.neon-pulse-cyan` | 2s ease-in-out               | Ambient | Accent glow oscillation                                                   |
+| Noise shift     | `.noise-animated`                  | 0.5s, steps(5)               | Ambient | SVG noise translates in discrete positions                                |
+| Scan reveal     | `.scan-reveal`                     | 2s, 1 iteration              | Trigger | White bar sweeps down                                                     |
+| Pixel fade-in   | `.pixel-fade-in`                   | 0.6s, steps(8)               | Trigger | Left-to-right reveal in pixel steps                                       |
+| Invert flash    | `.invert-flash`                    | 0.15s, 2 iterations          | Trigger | Full filter inversion burst                                               |
+| Pixel dots      | `.pixel-dots` / `.pixel-dots-fast` | 0.3s, steps(4), 2 iterations | Trigger | Small black squares scatter at random positions — 1-bit corruption effect |
+| Progress scan   | `.progress-indeterminate`          | 1.5s                         | Loading | Bar sweeps left-to-right                                                  |
+| Skeleton pulse  | `.skeleton`                        | 1.2s ease-in-out             | Loading | Opacity pulse                                                             |
+| Slide-up reveal | `.slide-up-reveal`                 | 0.5s ease-out                | Trigger | Content rises with clip-path                                              |
+| Shimmer sweep   | `.shimmer`                         | 2s linear infinite           | Loading | Horizontal gradient sweep                                                 |
+| Frame step      | `.frame-step` (::after)            | 0.8s steps(1)                | Ambient | Binary character cycle (▌▐█▀)                                             |
+| One-bit spin    | `.spinner`                         | 0.6s linear                  | Loading | Square frame in 90° increments                                            |
+| Matrix rain     | `.matrix-rain-char`                | 2s linear infinite           | Ambient | Falling character column                                                  |
+| Accent flicker  | `.accent-flicker`                  | 1.8s step-end infinite       | Ambient | Blinking accent color text                                                |
 
 ### Isometric Animation Library
 
-| Animation | Class | Duration | Type | Description |
-|-----------|-------|----------|------|-------------|
-| Isometric float | `.iso-float` | 3s ease-in-out infinite | Ambient | Block bobs up/down with subtle scale depth shift |
-| Float + spin | `.iso-float-spin` | 4s ease-in-out infinite | Ambient | Float + slow Y-axis rotation (90° steps) |
-| Grid scroll | `.iso-grid-scroll` | 4s linear infinite | Ambient | Isometric diamond grid scrolls diagonally |
-| Terrain shift | `.iso-terrain-shift` | 6s linear infinite | Ambient | 3 parallax layers move at different speeds |
-| Rotate cube | `.iso-rotate-cube` | 6s linear infinite | Ambient | Full 3D cube rotation in isometric space |
-| Assemble blocks | `.iso-assemble` | 0.8s ease-out forwards | Trigger | Blocks rise from below into position (5 delay variants: `.iso-assemble-2` through `-5`) |
-| Perspective dolly | `.iso-perspective-dolly` | 1s ease-out forwards | Trigger | Content zooms toward viewer with blur-in |
-| Step build | `.iso-step-build` | 0.4s steps(6) forwards | Trigger | Square reveals in pixel-step sequence |
+| Animation         | Class                    | Duration                | Type    | Description                                                                             |
+| ----------------- | ------------------------ | ----------------------- | ------- | --------------------------------------------------------------------------------------- |
+| Isometric float   | `.iso-float`             | 3s ease-in-out infinite | Ambient | Block bobs up/down with subtle scale depth shift                                        |
+| Float + spin      | `.iso-float-spin`        | 4s ease-in-out infinite | Ambient | Float + slow Y-axis rotation (90° steps)                                                |
+| Grid scroll       | `.iso-grid-scroll`       | 4s linear infinite      | Ambient | Isometric diamond grid scrolls diagonally                                               |
+| Terrain shift     | `.iso-terrain-shift`     | 6s linear infinite      | Ambient | 3 parallax layers move at different speeds                                              |
+| Rotate cube       | `.iso-rotate-cube`       | 6s linear infinite      | Ambient | Full 3D cube rotation in isometric space                                                |
+| Assemble blocks   | `.iso-assemble`          | 0.8s ease-out forwards  | Trigger | Blocks rise from below into position (5 delay variants: `.iso-assemble-2` through `-5`) |
+| Perspective dolly | `.iso-perspective-dolly` | 1s ease-out forwards    | Trigger | Content zooms toward viewer with blur-in                                                |
+| Step build        | `.iso-step-build`        | 0.4s steps(6) forwards  | Trigger | Square reveals in pixel-step sequence                                                   |
 
 ### Animation composition rules
 
@@ -884,16 +906,16 @@ These classes add thin color to any 1-bit component without breaking the black/w
 
 ### Animation timing — when 1-bit animations apply
 
-| Surface | Ambient animation | Trigger animation |
-|---------|-------------------|-------------------|
-| Landing / marketing hero | `.scanline` (8s) | `.scan-reveal` on load |
-| Dashboard / app shell | None | `.glitch` on filter change |
-| Loading state | `.skeleton` or `.shimmer` | None |
-| Error state | None | `.glitch-complex` on container |
-| 1-bit splash / manga panel | `.scanline-fast` (3s) | `.invert-flash` on page enter |
-| Toast / notification | None | `.slide-up-reveal` on mount |
-| Button (accent) | None | Color transition on hover |
-| Accent text | `.accent-flicker` | None |
+| Surface                    | Ambient animation         | Trigger animation              |
+| -------------------------- | ------------------------- | ------------------------------ |
+| Landing / marketing hero   | `.scanline` (8s)          | `.scan-reveal` on load         |
+| Dashboard / app shell      | None                      | `.glitch` on filter change     |
+| Loading state              | `.skeleton` or `.shimmer` | None                           |
+| Error state                | None                      | `.glitch-complex` on container |
+| 1-bit splash / manga panel | `.scanline-fast` (3s)     | `.invert-flash` on page enter  |
+| Toast / notification       | None                      | `.slide-up-reveal` on mount    |
+| Button (accent)            | None                      | Color transition on hover      |
+| Accent text                | `.accent-flicker`         | None                           |
 
 ## 8. React UI Kit
 
@@ -908,12 +930,14 @@ npm install 7k-design-system
 ```typescript
 // App entry point
 import '7k-design-system/css';
-import { ThemeProvider } from '7k-design-system/react';
+import { ThemeProvider, ProjectProvider } from '7k-design-system/react';
 
 function App() {
   return (
     <ThemeProvider defaultTheme="dark">
-      <YourApp />
+      <ProjectProvider defaultProject="7k">
+        <YourApp />
+      </ProjectProvider>
     </ThemeProvider>
   );
 }
@@ -925,9 +949,10 @@ function App() {
 import { Button } from '7k-design-system/react';
 
 <Button
-  variant="primary"     // 'primary' | 'secondary' | 'ghost' | 'glow' | 'glow-cyan' | 'glow-grid' | 'danger'
+  variant="primary"     // 'primary' | 'secondary' | 'ghost' | 'glow' | 'accent' | 'glow-accent' | 'glow-secondary' | 'danger'
   size="md"             // 'sm' | 'md' | 'lg'
   disabled={false}
+  loading={false}
   onClick={() => {}}
   type="button"         // 'button' | 'submit' | 'reset'
   className=""
@@ -937,11 +962,13 @@ import { Button } from '7k-design-system/react';
 ```
 
 **CSS classes applied:**
+
 - Base: `.btn-modern`
 - Variant: `.btn-modern-{variant}` (e.g., `.btn-modern-primary`)
 - Size: `.btn-modern-sm` | `.btn-modern-lg` (md applies no extra class)
+- Loading: `.btn-modern-loading` when `loading={true}`
 
-**Behavior:** Forwards ref to `<button>`. Combines `className` prop with generated classes.
+**Behavior:** Forwards ref to `<button>`. Combines `className` prop with generated classes. Sets `aria-busy` when loading.
 
 ### Input
 
@@ -954,29 +981,206 @@ import { Input } from '7k-design-system/react';
   disabled={false}
   value={value}
   onChange={(value) => setValue(value)}  // string callback, not event
+  label="Email"
+  error="Required"
   className=""
 />
 ```
 
-**CSS class applied:** `.input`
+**CSS classes applied:** `.input`, `.form-group`, `.form-label`, `.field-error`
 
-**Behavior:** Forwards ref to `<input>`. `onChange` receives the raw string value (not an event). All standard HTML input props pass through.
+**Behavior:** Forwards ref to `<input>`. `onChange` receives the raw string value. Renders an associated `<label>` when `label` is provided and wires error text via `aria-describedby`.
 
 ### Badge
 
 ```typescript
 import { Badge } from '7k-design-system/react';
 
-<Badge variant="default">   // 'default' | 'success' | 'warning' | 'danger' | 'info' | 'neutral'
+<Badge variant="default" role="status">   // 'default' | 'accent' | 'success' | 'warning' | 'danger' | 'info' | 'neutral'
   Status
 </Badge>
 ```
 
 **CSS classes applied:**
+
 - Base: `.badge`
 - Variant: `.badge-{variant}` (e.g., `.badge-success`)
 
-**Behavior:** Forwards ref to `<span>`. Children render as text content.
+**Behavior:** Forwards ref to `<span>`. Renders with `role="status"` by default for accessibility.
+
+### Card
+
+```typescript
+import { Card, CardHeader, CardBody } from '7k-design-system/react';
+
+<Card texture="halftone" hover={true}>
+  <CardHeader>Title</CardHeader>
+  <CardBody>Content</CardBody>
+</Card>
+```
+
+**CSS classes applied:** `.card`, `.card-halftone` | `.card-scanline` | `.card-noise` | `.card-dots` | `.card-crosshatch`, `.card-header`, `.card-body`
+
+### Modal
+
+```typescript
+import { Modal, ModalHeader, ModalFooter } from '7k-design-system/react';
+
+<Modal open={isOpen} onClose={close} texture="noise" aria-labelledby="modal-title">
+  <ModalHeader>
+    <h2 id="modal-title">Modal Title</h2>
+  </ModalHeader>
+  <p>Modal content</p>
+  <ModalFooter>
+    <Button onClick={close}>Close</Button>
+  </ModalFooter>
+</Modal>
+```
+
+**CSS classes applied:** `.modal`, `.modal-backdrop`, `.modal-header`, `.modal-footer`, texture variants
+
+**Behavior:** Renders a fixed backdrop with `role="dialog"`, `aria-modal="true"`, and focus management. Body scroll is locked while open.
+
+### Drawer
+
+```typescript
+import { Drawer } from '7k-design-system/react';
+
+<Drawer open={isOpen} onClose={close} side="right" texture="scanline">
+  Drawer content
+</Drawer>
+```
+
+**CSS classes applied:** `.drawer`, `.drawer-backdrop`, texture variants
+
+### Toast
+
+```typescript
+import { Toast } from '7k-design-system/react';
+
+<Toast variant="success" onDismiss={dismiss} role="status">
+  Operation completed
+</Toast>
+```
+
+**CSS classes applied:** `.toast`, `.toast-success` | `.toast-error` | `.toast-warning`, `.toast-icon`, `.toast-dismiss`
+
+### Tooltip
+
+```typescript
+import { Tooltip } from '7k-design-system/react';
+
+<Tooltip content="Helper text" position="top">
+  <Button>Hover me</Button>
+</Tooltip>
+```
+
+**CSS classes applied:** `.tooltip`, `.tooltip-trigger`
+
+### Alert
+
+```typescript
+import { Alert } from '7k-design-system/react';
+
+<Alert variant="warning" onClose={close}>
+  Please review your settings
+</Alert>
+```
+
+**CSS classes applied:** `.alert`, `.alert-success` | `.alert-warning` | `.alert-danger` | `.alert-info`
+
+### Tabs
+
+```typescript
+import { Tabs, TabList, Tab, TabPanel } from '7k-design-system/react';
+
+<Tabs defaultIndex={0}>
+  <TabList>
+    <Tab index={0}>First</Tab>
+    <Tab index={1}>Second</Tab>
+  </TabList>
+  <TabPanel index={0}>Panel 1</TabPanel>
+  <TabPanel index={1}>Panel 2</TabPanel>
+</Tabs>
+```
+
+**CSS classes applied:** `.tabs`, `.tab-list`, `.tab`, `.tab-panel`
+
+### Nav
+
+```typescript
+import { Nav, NavItem } from '7k-design-system/react';
+
+<Nav orientation="horizontal">
+  <NavItem href="/" active>Home</NavItem>
+  <NavItem href="/about">About</NavItem>
+</Nav>
+```
+
+**CSS classes applied:** `.nav`, `.nav-horizontal` | `.nav-vertical`, `.nav-item`
+
+### Checkbox, Radio, Toggle
+
+```typescript
+import { Checkbox, Radio, Toggle } from '7k-design-system/react';
+
+<Checkbox label="Accept terms" />
+<Radio label="Option A" name="group" />
+<Toggle label="Enable notifications" checked={on} onChange={setOn} />
+```
+
+**CSS classes applied:** `.checkbox`, `.radio`, `.toggle`
+
+### Select & Textarea
+
+```typescript
+import { Select, Textarea } from '7k-design-system/react';
+
+<Select>
+  <option>One</option>
+  <option>Two</option>
+</Select>
+
+<Textarea rows={4} />
+```
+
+**CSS classes applied:** `.select-native`, `.textarea`
+
+### TextureOverlay
+
+```typescript
+import { TextureOverlay } from '7k-design-system/react';
+
+<TextureOverlay texture="halftone" animate>
+  <section>Content</section>
+</TextureOverlay>
+```
+
+**CSS classes applied:** `.texture-halftone`, `.texture-animated`
+
+### IsometricBackground
+
+```typescript
+import { IsometricBackground } from '7k-design-system/react';
+
+<IsometricBackground pattern="grid" animated>
+  <section>Hero content</section>
+</IsometricBackground>
+```
+
+**CSS classes applied:** `.isometric-grid`, `.isometric-grid-animated`
+
+### MangaPanel
+
+```typescript
+import { MangaPanel } from '7k-design-system/react';
+
+<MangaPanel frame texture="halftone" speedLine="horizontal">
+  Splash content
+</MangaPanel>
+```
+
+**CSS classes applied:** `.panel`, `.panel-frame`, `.panel-halftone`, `.speed-line-horizontal`
 
 ### ThemeToggle
 
@@ -986,7 +1190,7 @@ import { ThemeToggle } from '7k-design-system/react';
 <ThemeToggle className="" />
 ```
 
-**Behavior:** Renders a 32×32 square button with `☀` / `☾` icon. Uses `useTheme()` internally. Calls `toggleTheme()` on click. Sets `data-theme` attribute on `<html>` and persists to `localStorage` under key `7k-theme`.
+**Behavior:** Renders a 32×32 square button with sun/moon icon. Uses `useTheme()` internally. Calls `toggleTheme()` on click. Sets `data-theme` attribute on `<html>` and persists to `localStorage` under key `7k-theme`.
 
 ### ThemeProvider
 
@@ -1002,6 +1206,7 @@ import { ThemeProvider } from '7k-design-system/react';
 ```
 
 **Behavior:**
+
 - On mount: reads `localStorage` for stored theme, falls back to `defaultTheme`
 - On theme change: sets `document.documentElement.setAttribute('data-theme', theme)` and writes to `localStorage`
 - Exposes context value: `{ theme, toggleTheme, setTheme }`
@@ -1015,6 +1220,7 @@ const { theme, toggleTheme, setTheme } = useTheme();
 ```
 
 **Returns:**
+
 - `theme: 'dark' | 'light'` — current active theme
 - `toggleTheme: () => void` — flips dark ↔ light
 - `setTheme: (theme: 'dark' | 'light') => void` — sets explicit theme
@@ -1031,7 +1237,14 @@ interface BaseProps {
   children?: ReactNode;
 }
 
-type ButtonVariant = 'primary' | 'secondary' | 'ghost' | 'glow' | 'glow-cyan' | 'glow-grid' | 'danger';
+type ButtonVariant =
+  | 'primary'
+  | 'secondary'
+  | 'ghost'
+  | 'glow'
+  | 'glow-cyan'
+  | 'glow-grid'
+  | 'danger';
 type ButtonSize = 'sm' | 'md' | 'lg';
 interface ButtonProps extends BaseProps {
   variant?: ButtonVariant;
@@ -1066,18 +1279,18 @@ interface ThemeContextValue {
 
 The CSS is split into 10 source files under `src/css/`, compiled into `dist/7k-design-system.css`. Each file has a single responsibility. Import `src/css/index.css` to load all modules, or import individual modules for tree-shaking.
 
-| File | Size | Responsibility |
-|------|------|---------------|
-| `fonts.css` | ~1.7KB | `@font-face` for Geist Pixel 5 variants; CDN imports for Geist Sans/Mono |
-| `tokens.css` | ~12.5KB | All design tokens: color ramps, semantic roles, typography, spacing, radii, shadows, motion, layout, z-index |
-| `themes.css` | ~7.2KB | Dark default in `:root`; light overrides in `@media (prefers-color-scheme: light)` and `html[data-theme="light"]` |
-| `base.css` | ~7.6KB | CSS reset, body/html base styles, `.mono-label` utility, `.display`/`.h1`–`.h4`/`.body` type utilities |
-| `textures.css` | ~12.4KB | 10 texture categories: scanline, halftone, dot matrix, stripes, crosshatch, checkerboard, noise, vignette |
-| `isometric.css` | ~12.5KB | 11 isometric patterns: grid, cubes, pyramid, hex, pipes, terrain + animation variants |
-| `components.css` | ~36KB | 40+ component classes: buttons, forms, nav, data display, overlays, feedback, media, misc |
-| `modifiers.css` | ~2.2KB | Accent layer modifiers: border-top, underline, dot, bar, glow, corner |
-| `animations.css` | ~15.8KB | 20+ keyframe animations: glitch, flicker, blink, typewriter, neon-pulse, scan-reveal, pixel-fade, iso-float |
-| `accessibility.css` | ~0.6KB | `prefers-reduced-motion` collapse, `:focus-visible` rings, `prefers-contrast` support, screen-reader utilities |
+| File                | Size    | Responsibility                                                                                                    |
+| ------------------- | ------- | ----------------------------------------------------------------------------------------------------------------- |
+| `fonts.css`         | ~1.7KB  | `@font-face` for Geist Pixel 5 variants; CDN imports for Geist Sans/Mono                                          |
+| `tokens.css`        | ~12.5KB | All design tokens: color ramps, semantic roles, typography, spacing, radii, shadows, motion, layout, z-index      |
+| `themes.css`        | ~7.2KB  | Dark default in `:root`; light overrides in `@media (prefers-color-scheme: light)` and `html[data-theme="light"]` |
+| `base.css`          | ~7.6KB  | CSS reset, body/html base styles, `.mono-label` utility, `.display`/`.h1`–`.h4`/`.body` type utilities            |
+| `textures.css`      | ~12.4KB | 10 texture categories: scanline, halftone, dot matrix, stripes, crosshatch, checkerboard, noise, vignette         |
+| `isometric.css`     | ~12.5KB | 11 isometric patterns: grid, cubes, pyramid, hex, pipes, terrain + animation variants                             |
+| `components.css`    | ~36KB   | 40+ component classes: buttons, forms, nav, data display, overlays, feedback, media, misc                         |
+| `modifiers.css`     | ~2.2KB  | Accent layer modifiers: border-top, underline, dot, bar, glow, corner                                             |
+| `animations.css`    | ~15.8KB | 20+ keyframe animations: glitch, flicker, blink, typewriter, neon-pulse, scan-reveal, pixel-fade, iso-float       |
+| `accessibility.css` | ~0.6KB  | `prefers-reduced-motion` collapse, `:focus-visible` rings, `prefers-contrast` support, screen-reader utilities    |
 
 ### PostCSS Pipeline
 
@@ -1093,10 +1306,10 @@ src/css/index.css
 ### Standalone CSS Exports
 
 ```typescript
-import '7k-design-system/css';           // Full bundle (~115KB)
-import '7k-design-system/css/tokens';    // Tokens only (~12KB)
+import '7k-design-system/css'; // Full bundle (~115KB)
+import '7k-design-system/css/tokens'; // Tokens only (~12KB)
 import '7k-design-system/css/components'; // Components only (~36KB)
-import '7k-design-system/css/textures';  // Textures only (~12KB)
+import '7k-design-system/css/textures'; // Textures only (~12KB)
 import '7k-design-system/css/animations'; // Animations only (~16KB)
 ```
 
@@ -1105,7 +1318,7 @@ import '7k-design-system/css/animations'; // Animations only (~16KB)
 ```bash
 npm run build:css       # Compile CSS bundle + standalone modules
 npm run build:react     # Compile React ESM + CJS + .d.ts
-npm run build:copy-assets  # Copy preview/, fonts/, build/ to dist/
+npm run build:copy-assets  # Copy fonts/ and build/ to dist/
 npm run build           # Run all three build steps
 ```
 
@@ -1116,16 +1329,17 @@ npm run build           # Run all three build steps
 Location: `tests/`
 Runner: Vitest + jsdom + @testing-library/react + jest-axe
 
-| File | Coverage |
-|------|----------|
-| `Button.test.tsx` | Rendering, variant/size classes, click handler, disabled state |
-| `Input.test.tsx` | Rendering, value/onChange callback, disabled state, placeholder |
-| `Badge.test.tsx` | Rendering, variant classes, children content |
+| File                     | Coverage                                                        |
+| ------------------------ | --------------------------------------------------------------- |
+| `Button.test.tsx`        | Rendering, variant/size classes, click handler, disabled state  |
+| `Input.test.tsx`         | Rendering, value/onChange callback, disabled state, placeholder |
+| `Badge.test.tsx`         | Rendering, variant classes, children content                    |
 | `ThemeProvider.test.tsx` | Default theme, localStorage persistence, `data-theme` attribute |
-| `ThemeToggle.test.tsx` | Click toggles theme, icon changes, aria-label updates |
-| `a11y.test.tsx` | axe-core accessibility checks on Button, Input, Badge |
+| `ThemeToggle.test.tsx`   | Click toggles theme, icon changes, aria-label updates           |
+| `a11y.test.tsx`          | axe-core accessibility checks on Button, Input, Badge           |
 
 **Run tests:**
+
 ```bash
 npm test           # Unit tests
 npm run test:a11y  # Accessibility tests
@@ -1137,36 +1351,35 @@ npm run test:watch # Watch mode
 Location: `src/stories/`
 Port: 6006
 
-| Story | Content |
-|-------|---------|
-| `Design System/Overview` (`Overview.mdx`) | Design principles, color palette, usage examples |
-| `Design System/Tokens` (`Tokens.mdx`) | Token reference tables |
-| `Components/Button` (`Components.stories.tsx`) | All Button variants and sizes |
-| `Components/Input` (`Components.stories.tsx`) | Input states |
-| `Components/Badge` (`Components.stories.tsx`) | Badge variants |
-| `Components/ThemeToggle` (`Components.stories.tsx`) | Theme toggle button |
-| `Textures/All` (`Textures.stories.tsx`) | All 10 texture patterns |
-| `Textures/Isometric` (`Textures.stories.tsx`) | All 11 isometric patterns |
+| Story                                                | Content                                          |
+| ---------------------------------------------------- | ------------------------------------------------ |
+| `Design System/Overview` (`Overview.mdx`)            | Design principles, color palette, usage examples |
+| `Design System/Tokens` (`Tokens.mdx`)                | Token reference tables                           |
+| `Components/Button` (`Components.stories.tsx`)       | All Button variants and sizes                    |
+| `Components/TexturedButtons`                         | Textured button variants                         |
+| `Components/Inputs` (`Components.stories.tsx`)       | Input states                                     |
+| `Components/Badges` (`Components.stories.tsx`)       | Badge variants                                   |
+| `Components/Cards` (`Components.stories.tsx`)        | Card styles and textures                         |
+| `Components/TexturedCards`                           | Textured card variants                           |
+| `Components/MangaPanels`                             | Manga panel frames and textures                  |
+| `Components/Navigation` (`Components.stories.tsx`)   | Nav patterns                                     |
+| `Components/Alerts` (`Components.stories.tsx`)       | Alert variants                                   |
+| `Components/Toasts` (`Components.stories.tsx`)       | Toast variants                                   |
+| `Components/FormControls` (`Components.stories.tsx`) | Checkbox, radio, toggle                          |
+| `Components/ThemeToggle` (`Components.stories.tsx`)  | Theme toggle button                              |
+| `Textures/All` (`Textures.stories.tsx`)              | All texture patterns                             |
+| `Textures/Isometric` (`Textures.stories.tsx`)        | Isometric patterns                               |
+| `Textures/IsometricAnimated`                         | Animated isometric backgrounds                   |
 
 **Run Storybook:**
+
 ```bash
 npm run storybook       # Dev server at http://localhost:6006
 npm run build-storybook # Static build for deployment
 npm run chromatic       # Visual regression testing
 ```
 
-### Preview HTML Cards
-
-Location: `preview/` (copied to `dist/preview/` on build)
-
-| File | Purpose |
-|------|---------|
-| `colors-primary.html` | Accent swatches, ramps, project overrides |
-| `typography-specimens.html` | Type scale + weights + pixel variants |
-| `spacing-tokens.html` | 4px grid, radii, shadows |
-| `components-buttons.html` | Product component states |
-| `textures-backgrounds.html` | 10 background texture categories with composition demos |
-| `brand-assets.html` | Logo variants + brand in context |
+> **Note:** Preview HTML cards were removed in favor of Storybook as the canonical preview surface.
 
 ## 11. Voice & Brand
 
@@ -1175,7 +1388,7 @@ Location: `preview/` (copied to `dist/preview/` on build)
 - **Tone**: Direct, technical, slightly playful. "Built for midnight."
 - **Capitalization**: Sentence case for headings, uppercase only for kickers/labels
 - **Company**: 7K (always uppercase with the numeral). Child projects: "7K Project Neon"
-- **Logo**: Star-burst pattern SVG in `build/logo-7k.svg` with #FF0FF brand accent tones. Light variant at `build/logo-7k-light.svg` (black polygons for light backgrounds). App icon at `build/icon.svg`.
+- **Logo**: Star-burst pattern SVG in `build/logos/logo-7k.svg` with #FF0FF brand accent tones. Light variant at `build/logos/logo-7k-light.svg` (black polygons for light backgrounds). App icon at `build/icons/icon.svg`.
 - **Terminology**: "Surface" for pages, "module" for components, "canvas" for background
 - **No filler**: never use "streamlined", "innovative", "leveraging" unless literal
 - **Error messages**: direct, no "oops". "Connection failed. Retry." not "Something went wrong."
@@ -1184,24 +1397,24 @@ Location: `preview/` (copied to `dist/preview/` on build)
 
 **Source context reference:** Each anti-pattern below derives from a specific brief constraint: dark theme (no warm backgrounds), three-font system kept to Geist family only, 1-bit influence (no rounded corners on 1-bit elements), neon Tokyo (no generic purple gradients), brand-color-only accent (no color proliferation).
 
-| Anti-pattern | Why |
-|---|---|
-| Warm beige/cream/peach backgrounds | System is dark-first; light theme is precise white |
-| Multiple font families outside the system | Three fonts only: Geist (sans), Geist Mono, Geist Pixel (5 variants). No other families. |
-| Over-rounded everything | Sharp 0px or subtle 4px preferred |
-| Gradient overload | Max one gradient per page; no full-page gradient backgrounds |
-| Emoji iconography | Use CSS/SVG instead |
-| Drop shadows on text | Use high-contrast fg instead |
-| Stock photography | Use 1-bit halftone texture library |
-| Generic purple/violet gradients | Accent is magenta (#FF0FF), not purple |
-| Invented metrics/fake stats | Use real data or grey stubs |
-| Circular spinners on 1-bit elements | Spinner is square — never mix circular |
-| Rounded checkboxes/radios | One-bit form controls are square |
-| Blurred drop shadows on 1-bit components | Shadow is a hard offset, not a blur |
-| SVG humans / scenery / illustrations | 1-bit means abstract texture, not hand-drawn |
-| Glitch as a continuous loop | Glitch is a 2–3 iteration burst |
-| Warm/beige tones anywhere | System is nocturnal dark + neon |
-| Multiple textures on the same section layer | Max one background + one overlay per section |
-| Continuous animation on UI surfaces | Ambient animations are for hero/landing sections only |
-| Isometric animation on interactive UI | Isometric bg + motion is for hero/splash sections only; never on cards, buttons, or form controls |
-| Mixing 1-bit button patterns into product surfaces | Use the modern button system (.btn-modern*) for all product surfaces. 1-bit button classes (.btn, .btn-primary, .btn-accent) are removed — do not reintroduce raw invert-hover buttons in place of modern neon buttons. |
+| Anti-pattern                                       | Why                                                                                                                                                                                                                      |
+| -------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Warm beige/cream/peach backgrounds                 | System is dark-first; light theme is precise white                                                                                                                                                                       |
+| Multiple font families outside the system          | Three fonts only: Geist (sans), Geist Mono, Geist Pixel (5 variants). No other families.                                                                                                                                 |
+| Over-rounded everything                            | Sharp 0px or subtle 4px preferred                                                                                                                                                                                        |
+| Gradient overload                                  | Max one gradient per page; no full-page gradient backgrounds                                                                                                                                                             |
+| Emoji iconography                                  | Use CSS/SVG instead                                                                                                                                                                                                      |
+| Drop shadows on text                               | Use high-contrast fg instead                                                                                                                                                                                             |
+| Stock photography                                  | Use 1-bit halftone texture library                                                                                                                                                                                       |
+| Generic purple/violet gradients                    | Accent is magenta (#FF0FF), not purple                                                                                                                                                                                   |
+| Invented metrics/fake stats                        | Use real data or grey stubs                                                                                                                                                                                              |
+| Circular spinners on 1-bit elements                | Spinner is square — never mix circular                                                                                                                                                                                   |
+| Rounded checkboxes/radios                          | One-bit form controls are square                                                                                                                                                                                         |
+| Blurred drop shadows on 1-bit components           | Shadow is a hard offset, not a blur                                                                                                                                                                                      |
+| SVG humans / scenery / illustrations               | 1-bit means abstract texture, not hand-drawn                                                                                                                                                                             |
+| Glitch as a continuous loop                        | Glitch is a 2–3 iteration burst                                                                                                                                                                                          |
+| Warm/beige tones anywhere                          | System is nocturnal dark + neon                                                                                                                                                                                          |
+| Multiple textures on the same section layer        | Max one background + one overlay per section                                                                                                                                                                             |
+| Continuous animation on UI surfaces                | Ambient animations are for hero/landing sections only                                                                                                                                                                    |
+| Isometric animation on interactive UI              | Isometric bg + motion is for hero/splash sections only; never on cards, buttons, or form controls                                                                                                                        |
+| Mixing 1-bit button patterns into product surfaces | Use the modern button system (.btn-modern\*) for all product surfaces. 1-bit button classes (.btn, .btn-primary, .btn-accent) are removed — do not reintroduce raw invert-hover buttons in place of modern neon buttons. |

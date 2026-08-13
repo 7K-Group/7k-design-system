@@ -1,37 +1,50 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { expect } from 'storybook/test';
 import { Input } from './Input';
 
-const meta: Meta<typeof Input> = {
-  title: 'Components/Input',
+const meta = {
   component: Input,
   parameters: {
     layout: 'centered',
     docs: {
       description: {
-        component: 'Text input component with dark theme styling. Supports all standard HTML input types.',
+        component: 'Controlled text input wrapped with 7K styling.',
       },
     },
   },
-  tags: ['autodocs'],
   argTypes: {
     type: {
       control: 'select',
-      options: ['text', 'password', 'email', 'number', 'search', 'url'],
+      options: ['text', 'password', 'email', 'number', 'search', 'tel', 'url'],
       description: 'HTML input type',
+      table: {
+        type: { summary: 'string' },
+        defaultValue: { summary: 'text' },
+      },
     },
     placeholder: {
       control: 'text',
       description: 'Placeholder text',
     },
+    value: {
+      control: 'text',
+      description: 'Current input value',
+    },
     disabled: {
       control: 'boolean',
       description: 'Whether the input is disabled',
+      table: {
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'false' },
+      },
     },
+    onChange: { action: 'changed' },
   },
-};
+  tags: ['ai-generated'],
+} satisfies Meta<typeof Input>;
 
 export default meta;
-type Story = StoryObj<typeof Input>;
+type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
@@ -51,12 +64,20 @@ export const Disabled: Story = {
     value: 'Disabled input',
     disabled: true,
   },
+  play: async ({ canvas }) => {
+    const input = canvas.getByRole('textbox');
+    await expect(input).toBeDisabled();
+  },
 };
 
 export const Password: Story = {
   args: {
     type: 'password',
     placeholder: 'Enter password...',
+  },
+  play: async ({ canvas }) => {
+    const input = canvas.getByPlaceholderText('Enter password...');
+    await expect(input).toHaveAttribute('type', 'password');
   },
 };
 

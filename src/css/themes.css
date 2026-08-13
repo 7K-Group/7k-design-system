@@ -6,69 +6,79 @@
 @media (prefers-color-scheme: light) {
   :root {
     /* ---- BRAND ---- */
-    --brand-primary:        var(--magenta-500);
-    --brand-primary-hover:  var(--magenta-600);
+    --brand-primary: var(--magenta-500);
+    --brand-primary-hover: var(--magenta-600);
     --brand-primary-active: var(--magenta-700);
-    --brand-primary-muted:  var(--magenta-200);
+    --brand-primary-muted: var(--magenta-200);
     --brand-primary-subtle: var(--magenta-100);
-    --brand-primary-glow:   color-mix(in srgb, var(--magenta-500) 15%, transparent);
-    --text-on-brand:        var(--neutral-void);
+    --brand-primary-glow: color-mix(in srgb, var(--magenta-500) 15%, transparent);
+    --text-on-brand: var(--neutral-void);
 
     /* ---- SURFACES (backgrounds) ---- */
-    --bg-void:        var(--neutral-50);
-    --bg-base:        var(--neutral-50);
-    --bg-elevated:    var(--neutral-100);
-    --bg-raised:      var(--neutral-200);
-    --bg-overlay:     var(--neutral-300);
-    --bg-pressed:     var(--neutral-400);
+    --bg-void: var(--neutral-50);
+    --bg-base: var(--neutral-50);
+    --bg-elevated: var(--neutral-100);
+    --bg-raised: var(--neutral-200);
+    --bg-overlay: var(--neutral-300);
+    --bg-pressed: var(--neutral-400);
     --bg-translucent: rgba(0, 0, 0, 0.04);
 
     /* ---- TEXT ---- */
-    --text-primary:     var(--neutral-900);
-    --text-secondary:   var(--neutral-500);
-    --text-tertiary:    var(--neutral-400);
+    --text-primary: var(--neutral-900);
+    --text-secondary: var(--neutral-500);
+    --text-tertiary: var(--neutral-400);
     --text-placeholder: var(--neutral-400);
-    --text-disabled:    var(--neutral-300);
-    --text-inverse:     var(--neutral-50);
+    --text-disabled: var(--neutral-300);
+    --text-inverse: var(--neutral-50);
 
     /* ---- BORDERS ---- */
-    --border-subtle:  rgba(0, 0, 0, 0.06);
-    --border-default: rgba(0, 0, 0, 0.10);
-    --border-strong:  rgba(0, 0, 0, 0.18);
-    --border-focus:   var(--magenta-500);
-    --border-brand:   var(--magenta-500);
+    --border-subtle: rgba(0, 0, 0, 0.06);
+    --border-default: rgba(0, 0, 0, 0.1);
+    --border-strong: rgba(0, 0, 0, 0.18);
+    --border-focus: var(--magenta-500);
+    --border-brand: var(--magenta-500);
 
     /* ---- SEMANTIC STATUS ---- */
-    --status-success:    var(--success-500);
+    --status-success: var(--success-500);
     --status-success-bg: var(--success-100);
     --status-success-fg: var(--success-700);
-    --status-warning:    var(--warning-500);
+    --status-warning: var(--warning-500);
     --status-warning-bg: var(--warning-100);
     --status-warning-fg: var(--warning-700);
-    --status-danger:     var(--danger-500);
-    --status-danger-bg:  var(--danger-100);
-    --status-danger-fg:  var(--danger-700);
-    --status-info:       var(--info-500);
-    --status-info-bg:    var(--info-100);
-    --status-info-fg:    var(--info-700);
-    --status-neutral:    var(--neutral-400);
+    --status-danger: var(--danger-500);
+    --status-danger-bg: var(--danger-100);
+    --status-danger-fg: var(--danger-700);
+    --status-info: var(--info-500);
+    --status-info-bg: var(--info-100);
+    --status-info-fg: var(--info-700);
+    --status-neutral: var(--neutral-400);
     --status-neutral-bg: var(--neutral-200);
     --status-neutral-fg: var(--neutral-700);
 
+    /* ---- BRAND SECONDARY ---- */
+    --brand-secondary: var(--cyan-600);
+    --brand-secondary-hover: var(--cyan-500);
+    --brand-secondary-active: var(--cyan-700);
+    --brand-secondary-muted: var(--cyan-200);
+    --brand-secondary-subtle: var(--cyan-100);
+    --brand-secondary-glow: color-mix(in srgb, var(--cyan-600) 15%, transparent);
+
     /* ---- PROJECT ACCENTS ---- */
-    --accent-square:   var(--magenta-500);
+    --accent-square: var(--magenta-500);
     --accent-triangle: var(--solar-600);
-    --accent-circle:   var(--cyan-600);
-    --accent-grid:     var(--acid-600);
-    --accent-line:     var(--ember-600);
+    --accent-circle: var(--cyan-600);
+    --accent-grid: var(--acid-600);
+    --accent-line: var(--ember-600);
 
     /* ---- ELEVATION ---- */
-    --shadow-sm:  0 1px 2px rgba(0,0,0,0.08);
-    --shadow-md:  0 4px 12px rgba(0,0,0,0.10);
-    --shadow-lg:  0 12px 32px rgba(0,0,0,0.12);
-    --shadow-xl:  0 24px 64px rgba(0,0,0,0.15);
-    --shadow-glow: 0 0 0 1px var(--brand-primary), 0 0 20px color-mix(in srgb, var(--magenta-500) 20%, transparent);
-    --shadow-inset: inset 0 1px 0 rgba(255,255,255,0.6);
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.08);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.12);
+    --shadow-xl: 0 24px 64px rgba(0, 0, 0, 0.15);
+    --shadow-glow:
+      0 0 0 1px var(--brand-primary),
+      0 0 20px color-mix(in srgb, var(--magenta-500) 20%, transparent);
+    --shadow-inset: inset 0 1px 0 rgba(255, 255, 255, 0.6);
 
     /* ---- Texture colors (black on light background) ---- */
     --texture-02: rgba(0, 0, 0, 0.02);
@@ -82,7 +92,7 @@
     --texture-13: rgba(0, 0, 0, 0.13);
     --texture-19: rgba(0, 0, 0, 0.19);
     --texture-38: rgba(0, 0, 0, 0.38);
-    --texture-50: rgba(0, 0, 0, 0.50);
+    --texture-50: rgba(0, 0, 0, 0.5);
     --texture-solid: var(--onebit-black);
     --texture-noise-svg: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' fill='black' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
   }
@@ -91,58 +101,65 @@
 /* ---- Manual light theme toggle (html[data-theme="light"]) ---- */
 /* Same overrides as @media (prefers-color-scheme: light) above. Activated
    by ThemeToggle.js in the UI kit. */
-html[data-theme="light"] {
-  --brand-primary:        var(--magenta-500);
-  --brand-primary-hover:  var(--magenta-600);
+html[data-theme='light'] {
+  --brand-primary: var(--magenta-500);
+  --brand-primary-hover: var(--magenta-600);
   --brand-primary-active: var(--magenta-700);
-  --brand-primary-muted:  var(--magenta-200);
+  --brand-primary-muted: var(--magenta-200);
   --brand-primary-subtle: var(--magenta-100);
-  --brand-primary-glow:   color-mix(in srgb, var(--magenta-500) 15%, transparent);
-  --text-on-brand:        var(--neutral-void);
-  --bg-void:        var(--neutral-50);
-  --bg-base:        var(--neutral-50);
-  --bg-elevated:    var(--neutral-100);
-  --bg-raised:      var(--neutral-200);
-  --bg-overlay:     var(--neutral-300);
-  --bg-pressed:     var(--neutral-400);
+  --brand-primary-glow: color-mix(in srgb, var(--magenta-500) 15%, transparent);
+  --text-on-brand: var(--neutral-void);
+  --bg-void: var(--neutral-50);
+  --bg-base: var(--neutral-50);
+  --bg-elevated: var(--neutral-100);
+  --bg-raised: var(--neutral-200);
+  --bg-overlay: var(--neutral-300);
+  --bg-pressed: var(--neutral-400);
   --bg-translucent: rgba(0, 0, 0, 0.04);
-  --text-primary:     var(--neutral-900);
-  --text-secondary:   var(--neutral-500);
-  --text-tertiary:    var(--neutral-400);
+  --text-primary: var(--neutral-900);
+  --text-secondary: var(--neutral-500);
+  --text-tertiary: var(--neutral-400);
   --text-placeholder: var(--neutral-400);
-  --text-disabled:    var(--neutral-300);
-  --text-inverse:     var(--neutral-50);
-  --border-subtle:  rgba(0, 0, 0, 0.06);
-  --border-default: rgba(0, 0, 0, 0.10);
-  --border-strong:  rgba(0, 0, 0, 0.18);
-  --border-focus:   var(--magenta-500);
-  --border-brand:   var(--magenta-500);
-  --status-success:    var(--success-500);
+  --text-disabled: var(--neutral-300);
+  --text-inverse: var(--neutral-50);
+  --border-subtle: rgba(0, 0, 0, 0.06);
+  --border-default: rgba(0, 0, 0, 0.1);
+  --border-strong: rgba(0, 0, 0, 0.18);
+  --border-focus: var(--magenta-500);
+  --border-brand: var(--magenta-500);
+  --status-success: var(--success-500);
   --status-success-bg: var(--success-100);
   --status-success-fg: var(--success-700);
-  --status-warning:    var(--warning-500);
+  --status-warning: var(--warning-500);
   --status-warning-bg: var(--warning-100);
   --status-warning-fg: var(--warning-700);
-  --status-danger:     var(--danger-500);
-  --status-danger-bg:  var(--danger-100);
-  --status-danger-fg:  var(--danger-700);
-  --status-info:       var(--info-500);
-  --status-info-bg:    var(--info-100);
-  --status-info-fg:    var(--info-700);
-  --status-neutral:    var(--neutral-400);
+  --status-danger: var(--danger-500);
+  --status-danger-bg: var(--danger-100);
+  --status-danger-fg: var(--danger-700);
+  --status-info: var(--info-500);
+  --status-info-bg: var(--info-100);
+  --status-info-fg: var(--info-700);
+  --status-neutral: var(--neutral-400);
   --status-neutral-bg: var(--neutral-200);
   --status-neutral-fg: var(--neutral-700);
-  --accent-square:   var(--magenta-500);
+  --brand-secondary: var(--cyan-600);
+  --brand-secondary-hover: var(--cyan-500);
+  --brand-secondary-active: var(--cyan-700);
+  --brand-secondary-muted: var(--cyan-200);
+  --brand-secondary-subtle: var(--cyan-100);
+  --brand-secondary-glow: color-mix(in srgb, var(--cyan-600) 15%, transparent);
+  --accent-square: var(--magenta-500);
   --accent-triangle: var(--solar-600);
-  --accent-circle:   var(--cyan-600);
-  --accent-grid:     var(--acid-600);
-  --accent-line:     var(--ember-600);
-  --shadow-sm:  0 1px 2px rgba(0,0,0,0.08);
-  --shadow-md:  0 4px 12px rgba(0,0,0,0.10);
-  --shadow-lg:  0 12px 32px rgba(0,0,0,0.12);
-  --shadow-xl:  0 24px 64px rgba(0,0,0,0.15);
-  --shadow-glow: 0 0 0 1px var(--brand-primary), 0 0 20px color-mix(in srgb, var(--magenta-500) 20%, transparent);
-  --shadow-inset: inset 0 1px 0 rgba(255,255,255,0.6);
+  --accent-circle: var(--cyan-600);
+  --accent-grid: var(--acid-600);
+  --accent-line: var(--ember-600);
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.12);
+  --shadow-xl: 0 24px 64px rgba(0, 0, 0, 0.15);
+  --shadow-glow:
+    0 0 0 1px var(--brand-primary), 0 0 20px color-mix(in srgb, var(--magenta-500) 20%, transparent);
+  --shadow-inset: inset 0 1px 0 rgba(255, 255, 255, 0.6);
   --texture-02: rgba(0, 0, 0, 0.02);
   --texture-03: rgba(0, 0, 0, 0.03);
   --texture-04: rgba(0, 0, 0, 0.04);
@@ -154,7 +171,7 @@ html[data-theme="light"] {
   --texture-13: rgba(0, 0, 0, 0.13);
   --texture-19: rgba(0, 0, 0, 0.19);
   --texture-38: rgba(0, 0, 0, 0.38);
-  --texture-50: rgba(0, 0, 0, 0.50);
+  --texture-50: rgba(0, 0, 0, 0.5);
   --texture-solid: var(--onebit-black);
   --texture-noise-svg: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' fill='black' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
 }

@@ -1,10 +1,102 @@
-import { Meta, ColorPalette, ColorItem } from '@storybook/blocks';
+import { Meta, ColorPalette, ColorItem, Typeset } from '@storybook/blocks';
 
 <Meta title="Design System/Tokens" />
 
 # Design Tokens
 
+All values are stored as CSS custom properties in `src/css/tokens.css` and published as `dist/tokens.css`.
+
 ## Color Tokens
+
+### Brand & Project Accents
+
+<ColorPalette>
+  <ColorItem
+    title="Magenta (Primary)"
+    subtitle="Parent brand accent"
+    colors={{
+      50: '#FFE5FF',
+      100: '#FFC2FF',
+      200: '#FF99FF',
+      300: '#FF66FF',
+      400: '#FF33FF',
+      500: '#FF00FF',
+      600: '#D600D6',
+      700: '#A800A8',
+      800: '#800080',
+      900: '#570057',
+      950: '#330033',
+    }}
+  />
+  <ColorItem
+    title="Cyan (Circle)"
+    subtitle="Project accent"
+    colors={{
+      50: '#E5FBFF',
+      100: '#B8F6FF',
+      200: '#8AF0FF',
+      300: '#5CE9FF',
+      400: '#2EE2FF',
+      500: '#00E5FF',
+      600: '#00B8CC',
+      700: '#008FA0',
+      800: '#006B78',
+      900: '#00474D',
+      950: '#002A2E',
+    }}
+  />
+  <ColorItem
+    title="Acid (Grid)"
+    subtitle="Project accent"
+    colors={{
+      50: '#F2FFE5',
+      100: '#DEFFB8',
+      200: '#CAFF8A',
+      300: '#B7FF5C',
+      400: '#A3FF2E',
+      500: '#7CFF00',
+      600: '#66CC00',
+      700: '#4D9900',
+      800: '#3A7300',
+      900: '#274D00',
+      950: '#172E00',
+    }}
+  />
+  <ColorItem
+    title="Ember (Line)"
+    subtitle="Project accent"
+    colors={{
+      50: '#FFEEE5',
+      100: '#FFD2B8',
+      200: '#FFB68A',
+      300: '#FF9B5C',
+      400: '#FF7F2E',
+      500: '#FF6B35',
+      600: '#D45929',
+      700: '#A8431C',
+      800: '#802F13',
+      900: '#57200C',
+      950: '#331205',
+    }}
+  />
+  <ColorItem
+    title="Solar (Triangle)"
+    subtitle="Project accent"
+    colors={{
+      50: '#FFFCE5',
+      100: '#FFF5B8',
+      200: '#FFEE8A',
+      300: '#FFE65C',
+      400: '#FFDE2E',
+      500: '#FFD60A',
+      600: '#D6B208',
+      700: '#A88D06',
+      800: '#806C04',
+      900: '#574903',
+      950: '#332B02',
+    }}
+  />
+</ColorPalette>
 
 ### Semantic Colors
 
@@ -57,32 +149,77 @@ import { Meta, ColorPalette, ColorItem } from '@storybook/blocks';
 
 ## Typography Tokens
 
-| Token | Value | Usage |
-|-------|-------|-------|
-| `--text-display` | `clamp(48px, 8vw, 160px)` | Hero headlines |
-| `--text-h1` | `4rem` | Page titles |
-| `--text-h2` | `3rem` | Section headings |
-| `--text-h3` | `2rem` | Subsection headings |
-| `--text-body` | `1rem` | Body text |
-| `--text-caption` | `0.75rem` | Captions |
-| `--text-mono-label` | `0.6875rem` | Mono labels |
+| Token               | Value                     | Usage               |
+| ------------------- | ------------------------- | ------------------- |
+| `--text-display`    | `clamp(48px, 8vw, 160px)` | Hero headlines      |
+| `--text-h1`         | `4rem`                    | Page titles         |
+| `--text-h2`         | `3rem`                    | Section headings    |
+| `--text-h3`         | `2rem`                    | Subsection headings |
+| `--text-h4`         | `1.5rem`                  | Minor headings      |
+| `--text-body-lg`    | `1.125rem`                | Lead body text      |
+| `--text-body`       | `1rem`                    | Body text           |
+| `--text-body-sm`    | `0.875rem`                | Small body text     |
+| `--text-caption`    | `0.75rem`                 | Captions            |
+| `--text-mono-label` | `0.6875rem`               | Mono labels         |
+| `--text-mono-body`  | `0.8125rem`               | Mono body           |
+
+### Font Families
+
+| Token          | Stack                                                     |
+| -------------- | --------------------------------------------------------- |
+| `--font-sans`  | `'Geist', system-ui, -apple-system, sans-serif`           |
+| `--font-mono`  | `'Geist Mono', ui-monospace, 'SF Mono', menlo, monospace` |
+| `--font-pixel` | `'Geist Pixel', monospace`                                |
 
 ## Spacing Tokens
 
-| Token | Value |
-|-------|-------|
-| `--space-1` | `0.25rem` (4px) |
-| `--space-2` | `0.5rem` (8px) |
-| `--space-3` | `0.75rem` (12px) |
-| `--space-4` | `1rem` (16px) |
-| `--space-6` | `1.5rem` (24px) |
-| `--space-8` | `2rem` (32px) |
+| Token        | Value            |
+| ------------ | ---------------- |
+| `--space-1`  | `0.25rem` (4px)  |
+| `--space-2`  | `0.5rem` (8px)   |
+| `--space-3`  | `0.75rem` (12px) |
+| `--space-4`  | `1rem` (16px)    |
+| `--space-5`  | `1.25rem` (20px) |
+| `--space-6`  | `1.5rem` (24px)  |
+| `--space-8`  | `2rem` (32px)    |
+| `--space-10` | `2.5rem` (40px)  |
+| `--space-12` | `3rem` (48px)    |
+| `--space-16` | `4rem` (64px)    |
 
 ## Border Radius Tokens
 
-| Token | Value |
-|-------|-------|
-| `--radius-none` | `0` |
-| `--radius-sm` | `2px` |
-| `--radius-md` | `8px` |
+| Token           | Value    |
+| --------------- | -------- |
+| `--radius-none` | `0`      |
+| `--radius-xs`   | `2px`    |
+| `--radius-sm`   | `4px`    |
+| `--radius-md`   | `8px`    |
+| `--radius-lg`   | `12px`   |
+| `--radius-xl`   | `16px`   |
+| `--radius-2xl`  | `24px`   |
 | `--radius-full` | `9999px` |
+
+## Motion Tokens
+
+| Token                | Value                               |
+| -------------------- | ----------------------------------- |
+| `--ease-out`         | `cubic-bezier(0.16, 1, 0.3, 1)`     |
+| `--ease-in-out`      | `cubic-bezier(0.65, 0, 0.35, 1)`    |
+| `--ease-spring`      | `cubic-bezier(0.34, 1.56, 0.64, 1)` |
+| `--duration-instant` | `80ms`                              |
+| `--duration-fast`    | `150ms`                             |
+| `--duration-base`    | `240ms`                             |
+| `--duration-slow`    | `400ms`                             |
+| `--duration-slower`  | `640ms`                             |
+
+## Usage
+
+```css
+.my-component {
+  background: var(--bg-elevated);
+  color: var(--text-primary);
+  border: 2px solid var(--border-default);
+  padding: var(--space-4);
+  font-family: var(--font-sans);
+}
+```

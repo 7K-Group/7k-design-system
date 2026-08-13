@@ -1,3 +1,12 @@
+## [1.1.1](https://github.com/7K-Group/7k-design-system/compare/v1.1.0...v1.1.1) (2026-08-13)
+
+
+### Bug Fixes
+
+* add missing perms ([b0e54a3](https://github.com/7K-Group/7k-design-system/commit/b0e54a3be2ff1248736e3c0de379c61a02af750d))
+* do not run ci on main and cd ([f38dce0](https://github.com/7K-Group/7k-design-system/commit/f38dce02bcb8e938b916a59acfede57225e18905))
+* release process failing ([ab488bc](https://github.com/7K-Group/7k-design-system/commit/ab488bc40537ed54dc04a606eef668da317a812b))
+
 # [1.1.0](https://github.com/7K-Group/7k-design-system/compare/v1.0.0...v1.1.0) (2026-06-05)
 
 

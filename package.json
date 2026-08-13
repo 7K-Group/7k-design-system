@@ -105,7 +105,7 @@
     }
   },
   "devDependencies": {
-    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/changelog": "^7.0.0",
     "@semantic-release/git": "^10.0.1",
     "@semantic-release/npm": "^13.1.5",
     "@storybook/addon-a11y": "^10.4.6",

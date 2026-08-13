@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/7K-Group/7k-design-system/compare/v1.0.0...v1.1.0) (2026-06-05)
+
+
+### Features
+
+* do not deploy storybook to gh pages ([75a6176](https://github.com/7K-Group/7k-design-system/commit/75a61769edd6320bbb0526d1d0415f449fdd6e70))
+
 # 1.0.0 (2026-06-05)
 
 

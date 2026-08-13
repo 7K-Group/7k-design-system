@@ -48,6 +48,7 @@
     "build:css": "vite build --config vite.css.config.ts",
     "build:react": "vite build --config vite.react.config.ts",
     "build:copy-assets": "node scripts/copy-assets.js",
+    "pretest": "npm run build:css",
     "test": "vitest run",
     "test:watch": "vitest",
     "test:a11y": "vitest run --config vitest.a11y.config.ts",

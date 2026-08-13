@@ -127,7 +127,7 @@
     "@vitest/coverage-v8": "^4.1.9",
     "autoprefixer": "^10.4.16",
     "axe-core": "^4.8.0",
-    "chromatic": "^17.2.0",
+    "chromatic": "^18.0.0",
     "cssnano": "^6.0.1",
     "eslint": "^8.55.0",
     "eslint-config-prettier": "^9.1.0",

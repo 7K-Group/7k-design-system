@@ -234,7 +234,8 @@
 .btn-modern:disabled,
 .btn-modern[aria-disabled='true'] {
   opacity: 0.4;
-  cursor: not-allowed;
+  /* pointer-events: none already suppresses the cursor; explicit not-allowed
+     would be dead code here */
   box-shadow: none;
   pointer-events: none;
 }

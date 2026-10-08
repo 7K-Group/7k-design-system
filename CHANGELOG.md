@@ -35,7 +35,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `.btn-modern:disabled` / `[aria-disabled='true']` styling (40% opacity, no pointer events, glow removed) for all button variants
 - `.select-native:disabled`, `.checkbox`/`.radio`/`.toggle` disabled styling (`:has(input:disabled)`, 40% opacity)
 - Visible keyboard focus rings for custom `Checkbox`, `Radio`, and `Toggle` controls (`:has(input:focus-visible)`)
-- Missing status variant classes: `.toast-info`, `.alert-info`, `.alert-content`, `.alert-close`, `.toast-content`, plus focus-visible styles for dismiss buttons
+- Missing status variant classes: `.toast-info`, `.alert-info`, `.alert-danger` (the React `Alert` `danger` variant emitted an unstyled class), `.alert-content`, `.alert-close`, `.toast-content`, plus focus-visible styles for dismiss buttons
 - `.card-static:hover` reset so `Card hover={false}` actually disables the hover lift
 - `.spinner-cyan` and `.icon-box-cyan` classes (previously documented but unimplemented)
 - Modal: Escape key closes, Tab focus is trapped inside the dialog while open

@@ -1319,6 +1319,13 @@
 .alert-error .alert-icon {
   background: var(--status-danger);
 }
+/* React Alert emits .alert-danger for variant="danger" */
+.alert-danger {
+  border-color: var(--status-danger);
+}
+.alert-danger .alert-icon {
+  background: var(--status-danger);
+}
 .alert-warning {
   border-color: var(--status-warning);
 }

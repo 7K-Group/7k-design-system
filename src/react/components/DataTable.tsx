@@ -1,7 +1,7 @@
 import type { DataTableProps } from '../types';
 import { Skeleton } from './Skeleton';
 
-export function DataTable<Row extends Record<string, unknown>>({
+export function DataTable<Row extends object>({
   columns,
   rows,
   rowKey,
@@ -16,7 +16,7 @@ export function DataTable<Row extends Record<string, unknown>>({
   style,
 }: DataTableProps<Row>) {
   const keyOf = (row: Row, index: number) =>
-    typeof rowKey === 'function' ? rowKey(row, index) : String(row[rowKey]);
+    typeof rowKey === 'function' ? rowKey(row, index) : String((row as Record<string, unknown>)[rowKey]);
 
   const wrapperClasses = ['datatable', className].filter(Boolean).join(' ');
 
@@ -59,7 +59,7 @@ export function DataTable<Row extends Record<string, unknown>>({
                 <tr key={keyOf(row, i)}>
                   {columns.map((col) => (
                     <td key={col.key} className={col.mono ? 'mono' : undefined} data-label={typeof col.label === 'string' ? col.label : undefined}>
-                      {col.render ? col.render(row, i) : String(row[col.key] ?? '')}
+                      {col.render ? col.render(row, i) : String((row as Record<string, unknown>)[col.key] ?? '')}
                     </td>
                   ))}
                 </tr>

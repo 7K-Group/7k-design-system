@@ -16,7 +16,7 @@ export function DataTable<Row extends object>({
   style,
 }: DataTableProps<Row>) {
   const keyOf = (row: Row, index: number) =>
-    typeof rowKey === 'function' ? rowKey(row, index) : String((row as Record<string, unknown>)[rowKey]);
+    typeof rowKey === 'function' ? rowKey(row, index) : String((row as Record<string, unknown>)[rowKey as string]);
 
   const wrapperClasses = ['datatable', className].filter(Boolean).join(' ');
 

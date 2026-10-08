@@ -7,24 +7,24 @@ describe('Button', () => {
     render(<Button>Click me</Button>);
     const button = screen.getByRole('button', { name: /click me/i });
     expect(button).toBeInTheDocument();
-    expect(button).toHaveClass('btn-modern', 'btn-modern-primary');
+    expect(button).toHaveClass('btn', 'btn-primary');
   });
 
   it('renders with different variants', () => {
     const { rerender } = render(<Button variant="secondary">Secondary</Button>);
-    expect(screen.getByRole('button')).toHaveClass('btn-modern-secondary');
+    expect(screen.getByRole('button')).toHaveClass('btn-secondary');
 
     rerender(<Button variant="ghost">Ghost</Button>);
-    expect(screen.getByRole('button')).toHaveClass('btn-modern-ghost');
+    expect(screen.getByRole('button')).toHaveClass('btn-ghost');
 
     rerender(<Button variant="danger">Danger</Button>);
-    expect(screen.getByRole('button')).toHaveClass('btn-modern-danger');
+    expect(screen.getByRole('button')).toHaveClass('btn-danger');
 
     rerender(<Button variant="accent">Accent</Button>);
-    expect(screen.getByRole('button')).toHaveClass('btn-modern-accent');
+    expect(screen.getByRole('button')).toHaveClass('btn-accent');
 
     rerender(<Button variant="glow-accent">Glow Accent</Button>);
-    expect(screen.getByRole('button')).toHaveClass('btn-modern-glow-accent');
+    expect(screen.getByRole('button')).toHaveClass('btn-glow-accent');
   });
 
   it('handles click events', () => {

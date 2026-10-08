@@ -72,10 +72,10 @@
     animation: none !important;
   }
 
-  /* Manga speed lines */
-  .speed-line::before,
-  .speed-line-horizontal::before,
-  .speed-line-radial::before {
+  /* Motion lines */
+  .motion-lines::before,
+  .motion-lines-horizontal::before,
+  .motion-lines-radial::before {
     animation: none !important;
   }
 }
@@ -83,13 +83,13 @@
 /* High contrast mode support */
 @media (prefers-contrast: more) {
   .card,
-  .panel,
+  .surface,
   .modal,
   .drawer,
   .input,
   .textarea,
   .select-native,
-  .btn-modern,
+  .btn,
   .badge,
   .tag,
   .toast,

@@ -20,7 +20,7 @@ Key constraints derived from the source:
 - **Secondary neon accent** → Cyan by default (`--brand-secondary`), dynamically themable per project via `data-project` or `ProjectProvider`.
 - **Logo** → Star-burst pattern logo in `build/logos/logo-7k.svg`: a geometric radial pattern with #FF0FF brand accent tones. Light variant at `build/logos/logo-7k-light.svg` (black polygons for light backgrounds). App icon at `build/icons/icon.svg`.
 - **Dark theme** → All surfaces start from near-black. Light theme is opt-in only.
-- **Project differentiation** → Child projects get their own secondary accent (solar, cyan, acid, ember) on the same dark base. The parent 7K brand uses the default cyan secondary; other projects theme `--brand-secondary` to their hue. Each Geist Pixel geometric variant pairs with one accent: Square=magenta, Circle=cyan, Grid=acid, Line=ember, Triangle=solar.
+- **Project differentiation** → Each project gets its own secondary accent on the same dark base: **magenta = 7KGroup** (parent, also `--brand-primary`), **cyan = 7KMinato**, **inari (burnt orange) = Inari**. Projects theme `--brand-secondary` to their hue via `data-project` or `ProjectProvider`.
 - **Tokyo neon** → High contrast, nocturnal canvas, electric accents, no warm/beige tones.
 - **1-bit manga influence** → 10-texture background pattern library (scanline, halftone, dot matrix, stripes, crosshatch, checkerboard, noise, vignette). All textures are CSS gradients — no images, no SVG humans.
 - **Abstract 1-bit animations** → 20+ animation keyframes organized as ambient (continuous) and trigger (burst) categories. Step timing for retro feel, reduced-motion collapse.
@@ -150,7 +150,7 @@ import '7k-design-system/css';
 
 Tokyo neon meets manga-influenced 1-bit. The canvas is deep near-black, with sharp white text, electric magenta (`#FF0FF`) as the primary brand accent, and cyan as a secondary project accent. Black-and-white 1-bit textures — scanline overlays, halftone dot noise, glitch keyframes — provide rhythm and atmosphere. The mood is nocturnal, high-contrast, and unapologetically digital.
 
-Company/project differentiation: the parent 7K brand uses vivid magenta (`--brand-primary`). Child projects adopt their own accent (solar, cyan, acid, ember) on the same dark base. Same system, distinct at a glance.
+Company/project differentiation: 7KGroup (parent) uses vivid magenta (`--brand-primary` baseline). Inside a project scope the project accent becomes dominant, overriding the full `--brand-primary` chain: 7KMinato runs cyan, Inari runs burnt orange (Fushimi Inari palette). Same system, distinct at a glance.
 
 **Logo:** Star-burst pattern logo in `build/logos/logo-7k.svg` — a geometric radial pattern with #FF0FF brand accent tones. Light variant at `build/logos/logo-7k-light.svg` (light backgrounds). App icon at `build/icons/icon.svg`.
 
@@ -187,16 +187,16 @@ Company/project differentiation: the parent 7K brand uses vivid magenta (`--bran
 | Horizontal stripes | `.stripes-h`, `.stripes-h-dense`                                             | 9px/5px pitch                    | Section rhythm, horizontal dividers    |
 | Vertical stripes   | `.stripes-v`, `.stripes-v-dense`                                             | 9px/5px pitch                    | Sidebar textures, column dividers      |
 | Crosshatch         | `.crosshatch`, `.crosshatch-dense`                                           | 7px/4px dual-angle               | Dense manga shading, error states      |
-| Checkerboard       | `.checkerboard`, `.checkerboard-onebit`                                      | 12px/16px grid, pure B/W         | Retro sections, QR motifs              |
+| Checkerboard       | `.checkerboard`, `.checkerboard-contrast`                                      | 12px/16px grid, pure B/W         | Retro sections, QR motifs              |
 | Noise              | `.noise`, `.noise-heavy`, `.noise-animated`                                  | 4%/12% opacity, SVG fractal      | CRT grain, analog texture              |
-| Vignette           | `.vignette-onebit`, `.vignette-onebit-sharp`                                 | Soft/sharp radial fade           | Panel corner fade, hero-edge vignette  |
+| Vignette           | `.vignette-ink`, `.vignette-ink-sharp`                                 | Soft/sharp radial fade           | Panel corner fade, hero-edge vignette  |
 
 ### Texture composition rules
 
 1. **One texture per section layer.** Apply at most one texture on the background layer and one on the overlay layer (`::after`). Scanline + halftone is the default pair for hero sections.
 2. **Opacity scales with section density.** Hero/landing sections use lighter textures (5–10% opacity). Data-dense utility sections use stronger textures (10–15% opacity) or none.
-3. **Texture on components is allowed with restraint.** Cards, panels, modals, drawers, and buttons can carry low-opacity texture overlays (`::before`, `pointer-events: none`) as long as the texture sits behind content and does not reduce contrast. Inputs and form controls should remain solid to preserve legibility. Use `.card-halftone`, `.panel-scanline`, `.btn-modern-halftone`, `.modal-noise`, etc.
-4. **Texture as section separator.** When transitioning between full-bleed sections, add a `.separator-onebit` or `.stripes-h` band (40–80px tall) as a visual break — never use shadow or blur transitions.
+3. **Texture on components is allowed with restraint.** Cards, panels, modals, drawers, and buttons can carry low-opacity texture overlays (`::before`, `pointer-events: none`) as long as the texture sits behind content and does not reduce contrast. Inputs and form controls should remain solid to preserve legibility. Use `.card-halftone`, `.surface-scanline`, `.btn-halftone`, `.modal-noise`, etc.
+4. **Texture as section separator.** When transitioning between full-bleed sections, add a `.separator-solid` or `.stripes-h` band (40–80px tall) as a visual break — never use shadow or blur transitions.
 5. **Layering order:** Base color → texture background → content container → optional scanline overlay. The overlay must have `pointer-events: none` and `z-index: 1` so it does not block interaction.
 6. **Full-bleed hero walls** use scanline + vignette simultaneously: scanline on `::after` for the line pattern, vignette on `::before` for the edge fade. Both get `pointer-events: none`.
 
@@ -204,21 +204,21 @@ Company/project differentiation: the parent 7K brand uses vivid magenta (`--bran
 
 ```
 Section 1 (hero)    — Scanline overlay + noise grain, full-bleed
-  ↓ separator-onebit
+  ↓ separator-solid
 Section 2 (content) — Solid surface, no texture (reading zone)
-  ↓ separator-onebit
+  ↓ separator-solid
 Section 3 (stats)   — Halftone-md background with accent tint
-  ↓ separator-onebit
+  ↓ separator-solid
 Section 4 (cta)     — Scanline-fast overlay, invert section if 1-bit
 ```
 
 ### 1-bit section variants
 
-- **Full invert section**: swap `--bg-base` with `--onebit-white`, `--text-primary` with `--onebit-black`. Used for CTAs, callout panels, or manga-style splash panels. Add `.diagonal-stripes-negative` for max contrast.
+- **Full invert section**: swap `--bg-base` with `--color-paper`, `--text-primary` with `--color-ink`. Used for CTAs, callout panels, or manga-style splash panels. Add `.diagonal-stripes-negative` for max contrast.
 - **Scanline hero**: dark canvas, scanline overlay, accent headline with glow. The scanline `::after` sits above the background but below all content (`z-index: 1`). Content gets `position: relative; z-index: 2`.
 - **Halftone card wall**: grid of cards with `.halftone-sm` or `.halftone-md` on the section container. Each card has solid `.card` background that breaks the texture — texture only lives between cards.
 - **Noise backdrop**: `.noise` on full-page backgrounds for analog feel. Use `.noise-heavy` only on splash/loading screens where content density is low.
-- **Vignette frame**: `.vignette-onebit` on slide/scene containers to draw the eye center. Used in intro animations and splash panels.
+- **Vignette frame**: `.vignette-ink` on slide/scene containers to draw the eye center. Used in intro animations and splash panels.
 
 ## 1c. Isometric Backgrounds — CSS-only 3D Perspective Patterns
 
@@ -253,7 +253,7 @@ Section 4 (cta)     — Scanline-fast overlay, invert section if 1-bit
 
 The color system has three strict layers:
 
-1. **Raw ramps** — 11-step scales (50–950) for Neutral, Magenta, Solar, Cyan, Acid, Ember, plus extended below-ramp values (1000, void) and 4 semantic ramps (Success, Warning, Danger, Info). Never reference these directly in components.
+1. **Raw ramps** — 11-step scales (50–950) for Neutral, Magenta (7KGroup), Cyan (7KMinato), Inari (Inari), plus extended below-ramp values (1000, void) and 4 semantic ramps (Success, Warning, Danger, Info). Never reference these directly in components.
 2. **Theme role mapping** — `--bg-*`, `--text-*`, `--border-*`, `--brand-*`, `--status-*`, `--accent-*` tokens that map ramp values to functional roles. Remap per dark/light theme. This is the only layer components touch.
 3. **Semantic colors** — `--status-success/warning/danger/info` tokens bound by **meaning, not decoration**. Use only for actual machine-state indication (badges, toasts, validation). Never use for decorative borders, accent accents, or non-status backgrounds.
 
@@ -301,29 +301,20 @@ All ramps follow the same 11-step pattern (50 = lightest, 950 = darkest). Two ex
 | `--magenta-900` | `#570057` | —                                                                           | —                                |
 | `--magenta-950` | `#330033` | `--brand-primary-subtle` (dark)                                             | —                                |
 
-#### Project accent ramps — Solar / Cyan / Acid / Ember
+#### Project accent ramps — 7KMinato (Cyan) / Inari
 
-Each child project gets a single accent hue. Same 11-step structure; only the base (--500) and the theme-mapped hover (--600 in light) differ.
+Each project gets a single accent hue. Same 11-step structure; only the base (--500) and the theme-mapped hover (--600 in light) differ. (7KGroup's accent is the magenta primary ramp above.)
 
-**Solar — Triangle (hue ~50)**
-
-`--solar-50: #FFFCE5` → `--solar-500: #FFD60A` → `--solar-950: #332B02`.  
-Accent token: `--accent-triangle`. Dark: `var(--solar-500)`, Light: `var(--solar-600)`.
-
-**Cyan — Circle (hue ~190)**
+**Cyan — 7KMinato (hue ~190)**
 
 `--cyan-50: #E5FBFF` → `--cyan-500: #00E5FF` → `--cyan-950: #002A2E`.  
-Accent token: `--accent-circle`. Dark: `var(--cyan-500)`, Light: `var(--cyan-600)`.
+Accent token: `--accent-7kminato`. Dark: `var(--cyan-500)`, Light: `var(--cyan-600)`.
 
-**Acid — Grid (hue ~105)**
+**Inari — Inari project (hue ~18, Fushimi Inari palette)**
 
-`--acid-50: #F2FFE5` → `--acid-500: #7CFF00` → `--acid-950: #172E00`.  
-Accent token: `--accent-grid`. Dark: `var(--acid-500)`, Light: `var(--acid-600)`.
-
-**Ember — Line (hue ~15)**
-
-`--ember-50: #FFEEE5` → `--ember-500: #FF6B35` → `--ember-950: #331205`.  
-Accent token: `--accent-line`. Dark: `var(--ember-500)`, Light: `var(--ember-600)`.
+`--inari-50: #FDEEE7` → `--inari-500: #EE560D` (Orangealicious) → `--inari-950: #2B1C17` (Tetsu-Guro Black).  
+Named stops: `--inari-400` Knockout Orange `#E56F3F`, `--inari-600` Red Panda `#C44813`, `--inari-800` Rogan Josh `#8B310D`.  
+Accent token: `--accent-inari`. Dark: `var(--inari-500)`, Light: `var(--inari-600)`.
 
 #### Semantic ramps (raw)
 
@@ -338,8 +329,8 @@ Each has a full 11-step scale (50–950). Never use directly — always go throu
 
 #### 1-bit primitives
 
-- `--onebit-black: #000000` (`oklch(0% 0 0)`)
-- `--onebit-white: #FFFFFF` (`oklch(100% 0 0)`)
+- `--color-ink: #000000` (`oklch(0% 0 0)`)
+- `--color-paper: #FFFFFF` (`oklch(100% 0 0)`)
 
 ---
 
@@ -423,15 +414,13 @@ Each has a full 11-step scale (50–950). Never use directly — always go throu
 
 #### Project accent tokens
 
-| Token               | Dark base       | Light base      | Project   | Pixel variant |
-| ------------------- | --------------- | --------------- | --------- | ------------- |
-| `--accent-square`   | `--magenta-500` | `--magenta-500` | 7K parent | Square        |
-| `--accent-triangle` | `--solar-500`   | `--solar-600`   | Triangle  | Triangle      |
-| `--accent-circle`   | `--cyan-500`    | `--cyan-600`    | Circle    | Circle        |
-| `--accent-grid`     | `--acid-500`    | `--acid-600`    | Grid      | Grid          |
-| `--accent-line`     | `--ember-500`   | `--ember-600`   | Line      | Line          |
+| Token              | Dark base       | Light base      | Project          |
+| ------------------ | --------------- | --------------- | ---------------- |
+| `--accent-7kgroup`  | `--magenta-500` | `--magenta-500` | 7KGroup (parent) |
+| `--accent-7kminato` | `--cyan-500`    | `--cyan-600`    | 7KMinato         |
+| `--accent-inari`    | `--inari-500`   | `--inari-600`   | Inari            |
 
-These tokens are the canonical hue pairings for Geist Pixel variants. They also feed `--brand-secondary` when a project scope is applied via `data-project` or `ProjectProvider`. Light theme shifts project accents one step darker (500→600) to maintain contrast against the brighter background.
+These tokens are the canonical hue for each project. They also feed `--brand-secondary` when a project scope is applied via `data-project` or `ProjectProvider`. Light theme shifts project accents one step darker (500→600) to maintain contrast against the brighter background.
 
 ---
 
@@ -462,7 +451,7 @@ Semantic colors exist **only** for status indication. Each maps to exactly one m
 2. **Accent on action, not surface** — Brand appears on primary CTAs, focus rings, active borders, brand typography. Never as a full surface background fill.
 3. **Semantic = meaning only** — Status hues exist for machine-state communication (badge bg, toast icon, validation message, online/offline dot). If it doesn't communicate a machine state, use the raw ramps instead.
 4. **Status bg uses `--*-bg`** — Status badges and pills use the `--status-*-bg` token, never the solid `--*-500` as a fill.
-5. **Project scoping** — The parent 7K brand uses magenta primary + cyan secondary. Child projects theme `--brand-secondary` to their own hue (solar, cyan, acid, ember) via `data-project` or `ProjectProvider`. Geist Pixel variant pairings use the `--accent-*` tokens. The neutral ramp stays unchanged.
+5. **Project scoping** — 7KGroup uses magenta, 7KMinato cyan, Inari burnt orange. Within a project scope (`data-project` or `ProjectProvider`), the project accent takes over the **entire brand chain** — `--brand-primary` and `--brand-secondary` (primary/glow buttons, focus rings, brand borders) — making the project hue more prevalent than the 7KGroup baseline. Magenta only persists in constant identity marks (`--accent-7kgroup`, logo/icon strokes). Semantic status colors and the neutral ramp stay unchanged.
 6. **No raw ramp references in components** — Always reference role tokens (`--bg-elevated`, `--text-primary`, `--border-default`), never raw ramp tokens (`--neutral-950`, `--neutral-50`, etc.). This is how theme switching works.
 7. **Dark is default, light is opt-in** — `:root` holds dark token mappings. `@media (prefers-color-scheme: light)` overrides only the role tokens. Primitive ramps are shared and unchanged.
 
@@ -482,11 +471,11 @@ Semantic colors exist **only** for status indication. Each maps to exactly one m
 
 | Variant      | Weight          | Pairs with               | Best for                             |
 | ------------ | --------------- | ------------------------ | ------------------------------------ |
-| **Square**   | 400 (Regular)   | Magenta (7K parent)      | Body-sized pixel text, data displays |
-| **Circle**   | 500 (Medium)    | Cyan                     | Buttons, badges, navigation          |
-| **Grid**     | 600 (SemiBold)  | Acid (Grid project)      | Section titles, stat values          |
-| **Line**     | 700 (Bold)      | Ember (Line project)     | Display headlines, hero text         |
-| **Triangle** | 800 (ExtraBold) | Solar (Triangle project) | Hero wordmarks, giant headlines      |
+| **Square**   | 400 (Regular)   | Magenta (7KGroup)        | Body-sized pixel text, data displays |
+| **Circle**   | 500 (Medium)    | Cyan (7KMinato)          | Buttons, badges, navigation          |
+| **Grid**     | 600 (SemiBold)  | Neutral                  | Section titles, stat values          |
+| **Line**     | 700 (Bold)      | Neutral                  | Display headlines, hero text         |
+| **Triangle** | 800 (ExtraBold) | Inari (Inari project)    | Hero wordmarks, giant headlines      |
 
 ### Font stacks
 
@@ -647,9 +636,9 @@ Sharp (0px) and subtle (2–4px) are preferred for 1-bit elements. 8–12px for 
 
 - Scanline overlay on hero / full-bleed sections
 - Halftone dot separators between content blocks
-- Full-bleed sections use `.separator-onebit` (2px white line at 25% opacity) as rhythm breaks
+- Full-bleed sections use `.separator-solid` (2px white line at 25% opacity) as rhythm breaks
 - Texture shift between sections: scanline → solid → halftone → solid → scanline. Never two textured sections adjacent.
-- Manga panel composition: content is the "panel" (solid black border), background is the "page" (noise or scanline). Each panel gets a `.vignette-onebit` edge fade.
+- Manga panel composition: content is the "panel" (solid black border), background is the "page" (noise or scanline). Each panel gets a `.vignette-ink` edge fade.
 
 ### Product shell layout
 
@@ -679,20 +668,20 @@ Sharp (0px) and subtle (2–4px) are preferred for 1-bit elements. 8–12px for 
 
 | Class                       | Description                                                                                |
 | --------------------------- | ------------------------------------------------------------------------------------------ |
-| `.btn-modern`               | Base: mono-label typography, 12px/20px padding, `rounded.sm` (4px)                         |
-| `.btn-modern-primary`       | Magenta outline, `--brand-primary-subtle` fill tint on hover, white text when active       |
-| `.btn-modern-secondary`     | `--bg-raised` fill, `--bg-overlay` on hover                                                |
-| `.btn-modern-ghost`         | Transparent, `--text-secondary` text, subtle bg on hover                                   |
-| `.btn-modern-glow`          | Magenta outline + persistent neon glow, intensifies on hover                               |
-| `.btn-modern-accent`        | Dynamic `--brand-secondary` outline + fill tint on hover (per-project accent)              |
-| `.btn-modern-glow-accent`   | `--brand-secondary` fill + glow (the filled "neon" button; magenta for the parent brand)   |
-| `.btn-modern-glow-secondary`| Cyan/`--brand-secondary` outline + glow variant of `.btn-modern-glow`                      |
-| `.btn-modern-danger`        | Transparent + danger border, danger fill on hover                                          |
-| `.btn-modern-sm/lg`         | Size variants (8px/16px small, 16px/28px large)                                            |
-| `.btn-modern-icon`          | 40×40 square icon button                                                                   |
-| `.btn-modern-lg-icon`       | 52×52 large icon button                                                                    |
-| `.btn-modern-loading`       | Loading state — `onebit-spin` replaces icon                                                |
-| `.btn-modern:disabled`      | 40% opacity, no pointer events, glow removed — applies to every variant                    |
+| `.btn`               | Base: mono-label typography, 12px/20px padding, `rounded.sm` (4px)                         |
+| `.btn-primary`       | Magenta outline, `--brand-primary-subtle` fill tint on hover, white text when active       |
+| `.btn-secondary`     | `--bg-raised` fill, `--bg-overlay` on hover                                                |
+| `.btn-ghost`         | Transparent, `--text-secondary` text, subtle bg on hover                                   |
+| `.btn-glow`          | Magenta outline + persistent neon glow, intensifies on hover                               |
+| `.btn-accent`        | Dynamic `--brand-secondary` outline + fill tint on hover (per-project accent)              |
+| `.btn-glow-accent`   | `--brand-secondary` fill + glow (the filled "neon" button; magenta for the parent brand)   |
+| `.btn-glow-secondary`| Cyan/`--brand-secondary` outline + glow variant of `.btn-glow`                      |
+| `.btn-danger`        | Transparent + danger border, danger fill on hover                                          |
+| `.btn-sm/lg`         | Size variants (8px/16px small, 16px/28px large)                                            |
+| `.btn-icon`          | 40×40 square icon button                                                                   |
+| `.btn-lg-icon`       | 52×52 large icon button                                                                    |
+| `.btn-loading`       | Loading state — `spin-steps` replaces icon                                                |
+| `.btn:disabled`      | 40% opacity, no pointer events, glow removed — applies to every variant                    |
 | `.btn-group`                | Inline flex container for grouped buttons (adjacent borders merge)                         |
 | `.btn-split`                | Split button trigger — last child gets narrower padding + left border                      |
 
@@ -700,9 +689,9 @@ All variants use standard CSS transitions for interaction states:
 
 - **`:hover`** → border/fill shifts to the `-hover` step of the variant's ramp, optional glow shadow intensifies
 - **`:focus-visible`** → outline ring
-- **`:active`** → fill shifts to the `-muted` step with `--onebit-white` text (keeps contrast ≥ 7:1)
+- **`:active`** → fill shifts to the `-muted` step with `--color-paper` text (keeps contrast ≥ 7:1)
 - **`:disabled`** → 40% opacity, `not-allowed` cursor, no glow
-- **`Loading`** → `onebit-spin` (0.6s steps(4) infinite — square frame rotation)
+- **`Loading`** → `spin-steps` (0.6s steps(4) infinite — square frame rotation)
 
 ### 6b. Form controls
 
@@ -966,10 +955,10 @@ import { Button } from '7k-design-system/react';
 
 **CSS classes applied:**
 
-- Base: `.btn-modern`
-- Variant: `.btn-modern-{variant}` (e.g., `.btn-modern-primary`)
-- Size: `.btn-modern-sm` | `.btn-modern-lg` (md applies no extra class)
-- Loading: `.btn-modern-loading` when `loading={true}`
+- Base: `.btn`
+- Variant: `.btn-{variant}` (e.g., `.btn-primary`)
+- Size: `.btn-sm` | `.btn-lg` (md applies no extra class)
+- Loading: `.btn-loading` when `loading={true}`
 
 **Behavior:** Forwards ref to `<button>`. Combines `className` prop with generated classes. Sets `aria-busy` when loading.
 
@@ -1173,18 +1162,6 @@ import { IsometricBackground } from '7k-design-system/react';
 
 **CSS classes applied:** `.isometric-grid`, `.isometric-grid-animated`
 
-### MangaPanel
-
-```typescript
-import { MangaPanel } from '7k-design-system/react';
-
-<MangaPanel frame texture="halftone" speedLine="horizontal">
-  Splash content
-</MangaPanel>
-```
-
-**CSS classes applied:** `.panel`, `.panel-frame`, `.panel-halftone`, `.speed-line-horizontal`
-
 ### ThemeToggle
 
 ```typescript
@@ -1364,7 +1341,6 @@ Port: 6006
 | `Components/Badges` (`Components.stories.tsx`)       | Badge variants                                   |
 | `Components/Cards` (`Components.stories.tsx`)        | Card styles and textures                         |
 | `Components/TexturedCards`                           | Textured card variants                           |
-| `Components/MangaPanels`                             | Manga panel frames and textures                  |
 | `Components/Navigation` (`Components.stories.tsx`)   | Nav patterns                                     |
 | `Components/Alerts` (`Components.stories.tsx`)       | Alert variants                                   |
 | `Components/Toasts` (`Components.stories.tsx`)       | Toast variants                                   |
@@ -1420,4 +1396,4 @@ npm run chromatic       # Visual regression testing
 | Multiple textures on the same section layer        | Max one background + one overlay per section                                                                                                                                                                             |
 | Continuous animation on UI surfaces                | Ambient animations are for hero/landing sections only                                                                                                                                                                    |
 | Isometric animation on interactive UI              | Isometric bg + motion is for hero/splash sections only; never on cards, buttons, or form controls                                                                                                                        |
-| Mixing 1-bit button patterns into product surfaces | Use the modern button system (.btn-modern\*) for all product surfaces. 1-bit button classes (.btn, .btn-primary, .btn-accent) are removed — do not reintroduce raw invert-hover buttons in place of modern neon buttons. |
+| Mixing 1-bit button patterns into product surfaces | Use the modern button system (.btn\*) for all product surfaces. 1-bit button classes (.btn, .btn-primary, .btn-accent) are removed — do not reintroduce raw invert-hover buttons in place of modern neon buttons. |

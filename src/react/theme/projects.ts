@@ -1,6 +1,6 @@
-export type Project = '7k' | 'square' | 'triangle' | 'circle' | 'grid' | 'line';
+export type Project = '7kgroup' | '7kminato' | 'inari';
 
-export const PROJECTS: readonly Project[] = ['7k', 'square', 'triangle', 'circle', 'grid', 'line'];
+export const PROJECTS: readonly Project[] = ['7kgroup', '7kminato', 'inari'];
 
 export const PROJECT_STORAGE_KEY = '7k-project';
 

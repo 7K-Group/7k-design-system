@@ -72,9 +72,9 @@ import '7k-design-system/css/animations';
 
 ```html
 <!-- Buttons -->
-<button class="btn-modern btn-modern-primary">Primary</button>
-<button class="btn-modern btn-modern-secondary">Secondary</button>
-<button class="btn-modern btn-modern-ghost">Ghost</button>
+<button class="btn btn-primary">Primary</button>
+<button class="btn btn-secondary">Secondary</button>
+<button class="btn btn-ghost">Ghost</button>
 
 <!-- Forms -->
 <input class="input" placeholder="Enter text" />
@@ -297,7 +297,6 @@ Mount toasts in a fixed container at the top of your app (they use `role="status
 ```tsx
 <TextureOverlay texture="halftone" animate>...</TextureOverlay>
 <IsometricBackground pattern="grid" animated>...</IsometricBackground>
-<MangaPanel frame texture="halftone" speedLine="horizontal">...</MangaPanel>
 ```
 
 #### Forms
@@ -307,6 +306,7 @@ Mount toasts in a fixed container at the top of your app (they use `role="status
 <Radio label="Option" name="group" />
 <Toggle label="Enable" checked={on} onChange={setOn} />
 <Select><option>A</option></Select>
+<Listbox options={[{ value: 'a', label: 'A' }]} value={v} onChange={setV} />
 <Textarea rows={4} />
 ```
 
@@ -323,20 +323,14 @@ The parent 7K brand uses magenta primary + cyan secondary. Each sub-project can 
 ```css
 /* project-neon.css */
 .project-neon {
-  /* Circle project — cyan secondary accent */
+  /* 7KMinato — cyan takes over the full brand chain */
   --brand-secondary: var(--cyan-500);
 }
 
-/* project-grid.css */
-.project-grid {
-  /* Grid project — acid green secondary accent */
-  --brand-secondary: var(--acid-500);
-}
-
-/* project-ember.css */
-.project-ember {
-  /* Line project — orange secondary accent */
-  --brand-secondary: var(--ember-500);
+/* project-inari.css */
+.project-inari {
+  /* Inari — burnt orange takes over the full brand chain */
+  --brand-secondary: var(--inari-500);
 }
 ```
 

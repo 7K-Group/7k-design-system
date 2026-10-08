@@ -19,13 +19,13 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     },
     ref
   ) => {
-    const sizeClass = size === 'sm' ? 'btn-modern-sm' : size === 'lg' ? 'btn-modern-lg' : '';
-    const variantClass = `btn-modern-${variant}`;
+    const sizeClass = size === 'sm' ? 'btn-sm' : size === 'lg' ? 'btn-lg' : '';
+    const variantClass = `btn-${variant}`;
     const classes = [
-      'btn-modern',
+      'btn',
       variantClass,
       sizeClass,
-      loading ? 'btn-modern-loading' : '',
+      loading ? 'btn-loading' : '',
       className,
     ]
       .filter(Boolean)

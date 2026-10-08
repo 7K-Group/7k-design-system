@@ -9,7 +9,7 @@ export interface ProjectContextValue {
 }
 
 export const ProjectContext = createContext<ProjectContextValue>({
-  project: '7k',
+  project: '7kgroup',
   setProject: () => {},
 });
 
@@ -21,7 +21,7 @@ export interface ProjectProviderProps {
 
 export function ProjectProvider({
   children,
-  defaultProject = '7k',
+  defaultProject = '7kgroup',
   storageKey = PROJECT_STORAGE_KEY,
 }: ProjectProviderProps) {
   const [project, setProjectState] = useState<Project>(() => {

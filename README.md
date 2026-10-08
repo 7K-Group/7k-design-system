@@ -1,11 +1,11 @@
 # 7k-design-system
 
-> Dark-first, neon-accented, manga-inflected design system for multi-project tech company 7K.
-> Built for midnight. Three-font system. Major neon #FF0FF. Secondary neon cyan (thematic per project). Background textures on components. Manga panels. Isometric animations.
+> Dark-first, neon-accented design system for multi-project tech company 7K.
+> Built for midnight. Three-font system. Major neon #FF0FF. Secondary neon cyan (thematic per project). Background textures on components. Callouts & surfaces. Isometric animations.
 
 ## Product Overview
 
-**7k-design-system** is a dark-first dual-theme design system created for 7K, a technology holding company with multiple sub-projects. The system embodies a Tokyo neon atmosphere — high contrast, nocturnal canvas, electric accents — combined with manga-influenced 1-bit visual language using pure black and white textures.
+**7k-design-system** is a dark-first dual-theme design system created for 7K, a technology holding company with multiple sub-projects. The system embodies a Tokyo neon atmosphere — high contrast, nocturnal canvas, electric accents — combined with high-contrast visual language using pure black and white textures.
 
 **Source product:** 7K is a technology holding company that builds infrastructure, AI pipelines, and digital products across multiple sub-projects. This design system serves as the visual foundation for 7K and all its child projects, providing a unified design language that differentiates sub-projects through accent color overrides while maintaining consistent typography, spacing, component patterns, and animation systems across all surfaces.
 
@@ -17,7 +17,7 @@ The design system supports five primary surfaces:
 | ----------------------- | ------------------------------------------------------------------------ | ---------------------------------------------------------------------- |
 | **Company Website**     | Dark landing pages with scanline heroes, project showcases, stats grids  | `DESIGN.md` §1–5, `src/stories/Components.stories.tsx`                 |
 | **Product Dashboard**   | Data-dense admin interfaces with sidebar nav, tables, status cards       | `src/react/components/`, `src/stories/Components.stories.tsx`          |
-| **Sub-project Landing** | Child project pages with accent hue overrides (cyan, acid, ember, solar) | `DESIGN.md` §2 (accent tokens), `src/css/projects.css`                 |
+| **Sub-project Landing** | Project pages with accent hue overrides (magenta = 7KGroup, cyan = 7KMinato, inari = Inari) | `DESIGN.md` §2 (accent tokens), `src/css/projects.css`                 |
 | **Internal Tools**      | CLI-like interfaces, monitoring panels, resource dashboards              | `DESIGN.md` §3 (mono labels), `src/stories/Tokens.mdx`                 |
 | **Mobile App**          | Responsive adaptations with bottom tab nav, touch-friendly targets       | `DESIGN.md` §5 (responsive grid), `src/stories/Components.stories.tsx` |
 
@@ -28,8 +28,8 @@ The system provides these core capabilities:
 - **Dark-first theming** with opt-in light mode via `data-theme="light"`
 - **Major neon accent** (#FF0FF magenta) + **secondary neon accent** (cyan by default, thematic per project)
 - **Three-font system**: Geist Sans (display/body), Geist Mono (labels/code), Geist Pixel (5 geometric variants for ornamental use)
-- **Texture categories**: scanline, halftone, dot matrix, stripes, crosshatch, checkerboard, noise, vignette, isometric, manga panels
-- **40+ 1-bit components**: zero-radius, 2px white borders, invert-on-hover, thin accent modifiers
+- **Texture categories**: scanline, halftone, dot matrix, stripes, crosshatch, checkerboard, noise, vignette, isometric, surfaces & callouts
+- **40+ components**: sharp geometry, high-contrast borders, invert-on-hover, thin accent modifiers
 - **Textured component variants**: halftone, scanline, noise, dots, crosshatch on cards, panels, modals, drawers, toasts, buttons
 - **20+ animations**: ambient (scanline scroll, CRT flicker, neon pulse) and trigger (glitch, pixel-dots, invert-flash)
 - **Isometric geometry animations**: combined animated background classes (`.isometric-grid-animated`, etc.)
@@ -47,8 +47,8 @@ Every design rule is grounded in the original brand brief (quoted inline in `DES
 | "Our main brand color is #FF0FF"       | Major magenta accent; cyan secondary (thematic per project)                                  |
 | "Tech company with different projects" | Sub-project accent overrides via `--brand-secondary` and `--accent-*` tokens                 |
 | "Tokyo's neon atmosphere"              | Dark near-black canvas (`#0A0A0D`), electric accents, no warm/beige tones                    |
-| "Manga-influenced 1-bit"               | Pure black/white elements, texture patterns, manga panel utilities, zero radius, 2px borders |
-| "Abstract 1-bit animations"            | 20+ keyframes with step timing for retro digital feel                                        |
+| "High-contrast textures"               | Pure black/white elements, texture patterns, surface & callout utilities, zero radius, 2px borders |
+| "Stepped animations"            | 20+ keyframes with step timing for retro digital feel                                        |
 | "Dark theme for websites"              | Dark-first: `--bg-void: #000000`, `--bg-base: #0A0A0D`; light is opt-in                      |
 
 ## Package Contents
@@ -69,9 +69,9 @@ Every design rule is grounded in the original brand brief (quoted inline in `DES
 ├── fonts/                       # Geist Pixel font files (preserved originals)
 │   ├── GeistPixel-Square.ttf    # 400 weight · pairs with magenta (7K parent)
 │   ├── GeistPixel-Circle.ttf    # 500 weight · pairs with cyan
-│   ├── GeistPixel-Grid.ttf      # 600 weight · pairs with acid
-│   ├── GeistPixel-Line.ttf      # 700 weight · pairs with ember
-│   └── GeistPixel-Triangle.ttf  # 800 weight · pairs with solar
+│   ├── GeistPixel-Grid.ttf      # 600 weight · neutral
+│   ├── GeistPixel-Line.ttf      # 700 weight · neutral
+│   └── GeistPixel-Triangle.ttf  # 800 weight · pairs with Inari
 │
 ├── src/                         # Source code
 │   ├── css/                     # Modular CSS source files
@@ -107,7 +107,7 @@ npm run build-storybook # Static build for deployment
 | -------------------- | ------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------- |
 | **Colors & Tokens**  | `src/stories/Tokens.mdx`              | Magenta/cyan brand ramps, semantic brand tokens, neutral/status colors, typography scale, spacing, radii, shadows                                                                       | `src/css/tokens.css`; `DESIGN.md` §2–4                   |
 | **Components**       | `src/stories/Components.stories.tsx`  | Modern neon button system (primary, glow, secondary, ghost, danger), cards, modals, drawers, toasts, tooltips, alerts, tabs, nav, inputs, toggles, selects, textareas, texture overlays | `src/react/components/`; `src/css/components.css`        |
-| **Textures**         | `src/stories/Textures.stories.tsx`    | All texture categories with density variants: scanline, halftone, dot matrix, stripes, crosshatch, checkerboard, noise, vignette, separators, manga panels                              | `src/css/textures.css`; `src/css/manga.css`; `DESIGN.md` |
+| **Textures**         | `src/stories/Textures.stories.tsx`    | All texture categories with density variants: scanline, halftone, dot matrix, stripes, crosshatch, checkerboard, noise, vignette, separators, surfaces & callouts                              | `src/css/textures.css`; `src/css/callouts.css`; `DESIGN.md` |
 | **Icons & Logos**    | `src/stories/Icons.stories.tsx`       | Curated icon set, logo variants, brand application rules, contextual previews                                                                                                           | `build/` directory; `src/react/components/Icon.tsx`      |
 | **Theme / Projects** | `src/stories/ThemeToggle.stories.tsx` | Light/dark/system theme switching and project accent overrides                                                                                                                          | `src/react/theme/`; `src/css/projects.css`               |
 | **Overview**         | `src/stories/Overview.mdx`            | Design principles, voice/tone, anti-patterns, reuse workflow                                                                                                                            | `DESIGN.md`; `SKILL.md`; `CONSUMER_GUIDE.md`             |
@@ -147,11 +147,11 @@ Requires self-hosting the `fonts/` directory for Geist Pixel variants.
 2. **Bind tokens** — Import `colors_and_type.css` (or `dist/7k-design-system.css` for external use)
 3. **Override accent** — For child projects, set the appropriate `--accent-*` token:
    ```css
-   .project-neon {
-     --accent-circle: var(--cyan-500);
+   .project-7kminato {
+     --accent-7kminato: var(--cyan-500);
    }
-   .project-grid {
-     --accent-grid: var(--acid-500);
+   .project-inari {
+     --accent-inari: var(--inari-500);
    }
    ```
 4. **Preview tokens** — Run `npm run storybook` and open the Colors, Tokens, Textures, and Components stories to verify values render correctly
@@ -172,7 +172,7 @@ Requires self-hosting the `fonts/` directory for Geist Pixel variants.
    }
    ```
 4. **Apply textures** — Add classes like `.scanline`, `.halftone-md`, `.noise` to sections
-5. **Use components** — Apply classes like `.btn-modern-primary`, `.badge-success`, `.input`
+5. **Use components** — Apply classes like `.btn-primary`, `.badge-success`, `.input`
 
 ## File Structure Notes
 

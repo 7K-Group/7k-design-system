@@ -1,6 +1,6 @@
 ---
 name: 7k-design-system
-description: Dark, neon-accented, manga-inflected design system for multi-project tech company 7K. Three-font system (Geist sans + Geist Mono + Geist Pixel 5 geometric variants), #FF0FF major neon + cyan secondary (thematic per project), Tokyo neon atmosphere with 1-bit manga punctuation. Background textures on components, manga panel utilities, isometric geometry animations, 40+ 1-bit components, 20+ animation keyframes. React TypeScript UI kit (Button, Input, Badge, Card, Modal, Drawer, Toast, Tooltip, Alert, Tabs, Nav, Checkbox, Radio, Toggle, Select, Textarea, ThemeToggle, ThemeProvider, ProjectProvider, useTheme, useProject). Production-ready npm package with Vite + PostCSS build, Vitest test suite, Storybook documentation.
+description: Dark-first, neon-accented design system for multi-project tech company 7K. Three-font system (Geist sans + Geist Mono + Geist Pixel 5 geometric variants), #FF0FF major neon + cyan secondary (thematic per project), Tokyo neon atmosphere with high-contrast texture punctuation. Background textures on components, surface & callout utilities, isometric geometry animations, 40+ components, 20+ animation keyframes. React TypeScript UI kit (Button, Input, Badge, Card, Modal, Drawer, Toast, Tooltip, Alert, Tabs, Nav, Checkbox, Radio, Toggle, Select, Textarea, ThemeToggle, ThemeProvider, ProjectProvider, useTheme, useProject). Production-ready npm package with Vite + PostCSS build, Vitest test suite, Storybook documentation.
 user-invocable: true
 ---
 
@@ -13,10 +13,10 @@ This package is organized as a Claude Design-style reusable skill. Each file bel
 | File / dir               | Role                                                                                                                                                                                                                | Evidence basis                                                             |
 | ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
 | `DESIGN.md`              | Canonical rules — visual foundations, color, type, spacing, components, motion, voice, anti-patterns, React UI kit, modular CSS architecture, build system, testing                                                 | Each section opens with `Source context reference:` citing the brand brief |
-| `src/css/index.css`      | Modular CSS entry point — imports source files (fonts, tokens, themes, projects, base, textures, isometric, manga, components, modifiers, animations, accessibility)                                                | Compiled to `dist/7k-design-system.css` via Vite + PostCSS                 |
+| `src/css/index.css`      | Modular CSS entry point — imports source files (fonts, tokens, themes, projects, base, textures, isometric, callouts, components, modifiers, animations, accessibility)                                                | Compiled to `dist/7k-design-system.css` via Vite + PostCSS                 |
 | `src/css/tokens.css`     | All design tokens: 11-step color ramps, semantic role mapping, typography, spacing, motion, layout                                                                                                                  | Single source of truth for all token values                                |
-| `src/css/components.css` | 40+ 1-bit component classes + modern neon button system + textured component variants                                                                                                                               | Zero radius, 2px borders, invert hover, accent modifiers, texture overlays |
-| `src/css/manga.css`      | Manga panel system — frames, gutters, speed lines, speech bubbles, screentone overlay                                                                                                                               | Manga-influenced layout primitives                                         |
+| `src/css/components.css` | 40+ component classes + modern neon button system + textured component variants                                                                                                                               | Zero radius, 2px borders, invert hover, accent modifiers, texture overlays |
+| `src/css/callouts.css`   | Surface & callout system — outlined surfaces, gutters, motion lines, callouts, screentone overlays                                                                                                                  | High-contrast layout primitives                                            |
 | `src/react/`             | TypeScript React UI kit — Button, Input, Badge, Card, Modal, Drawer, Toast, Tooltip, Alert, Tabs, Nav, Checkbox, Radio, Toggle, Select, Textarea, ThemeToggle, ThemeProvider, ProjectProvider, useTheme, useProject | Thin wrappers over CSS classes with ref forwarding and ARIA attributes     |
 | `src/stories/`           | Storybook documentation — Overview, Tokens, Components, Textures                                                                                                                                                    | MDX + CSF stories for interactive documentation                            |
 
@@ -30,10 +30,10 @@ Every design rule in this system is grounded in evidence from the brand brief (q
 | "1 font and it's Geist" (Geist superfamily) | Three-font system: Geist (sans) for headings/body, Geist Mono (monospace) for labels/code/tabular data, Geist Pixel (5 geometric variants) for ornamental display. Mono labels as "connective tissue"                  |
 | "Logo is just '7K'"                         | Star-burst pattern SVG logo. Color variant (magenta accents) or light variant (black polygons for light backgrounds)                                                                                                   |
 | "Tokyo's neon atmosphere"                   | Dark near-black canvas (`--bg-base: #0A0A0D`), electric accent, nocturnal high contrast                                                                                                                                |
-| "Manga-influenced 1-bit"                    | Pure black/white elements with zero radius, 10 texture patterns (scanline, halftone, dot matrix, stripes, crosshatch, checkerboard, noise, vignette), 40+ 1-bit components                                             |
+| "Manga-influenced 1-bit"                    | Pure black/white elements with zero radius, 10 texture patterns (scanline, halftone, dot matrix, stripes, crosshatch, checkerboard, noise, vignette), 40+ components                                                   |
 | "Abstract 1-bit animations"                 | 20+ keyframes: scanline-scroll, glitch (basic + complex), pixel-dots, flicker, blink, neon-pulse, typewriter, pixel-fade-in, invert-flash, scan-reveal, shimmer, noise-shift, slide-up-reveal, matrix-rain, frame-step |
 | "Dark theme for website"                    | Dark-first: `--bg-void: #000000`, `--bg-base: #0A0A0D` — near-black, not navy, not grey. Toggle via `html[data-theme="light"]` or `@media (prefers-color-scheme: light)`                                               |
-| "Differentiate main company with projects"  | Sub-project accent token override (`--accent-circle`, `--accent-grid`, `--accent-line`) — parent 7K stays magenta (`--accent-square`), child projects choose own hue                                                   |
+| "Differentiate main company with projects"  | Project accent tokens (`--accent-7kgroup` magenta, `--accent-7kminato` cyan, `--accent-inari` burnt orange) — each project has one canonical hue, and within its scope that hue overrides the whole `--brand-primary` chain, not just secondary                                                   |
 | "Very complete and detailed"                | 4px spacing grid in rem, 14-step scale, fluid type `clamp()`, 7-step radius, 4-level shadow, component specs for 5 button variants, 3 card types, 3 badge styles, inputs with focus/error, tables, tabs                |
 
 ## When to use
@@ -43,7 +43,7 @@ Use when generating artifacts for any 7k-design-system branded surface. The foll
 | Surface              | Read these files                                               | Key rules to follow                                                             |
 | -------------------- | -------------------------------------------------------------- | ------------------------------------------------------------------------------- |
 | Company website      | DESIGN.md §1–5, src/stories/Icons.stories.tsx                  | Dark bg, neon accent, scanline hero sections, "7K" logo                         |
-| Product dashboard    | DESIGN.md §5–7, src/stories/Components.stories.tsx             | Sidebar nav, card grids, tabular data, 1-bit trigger animations on buttons      |
+| Product dashboard    | DESIGN.md §5–7, src/stories/Components.stories.tsx             | Sidebar nav, card grids, tabular data, stepped trigger animations on buttons    |
 | Sub-project landing  | DESIGN.md §2, src/css/tokens.css, src/css/projects.css         | Override `--brand-secondary` per child project, keep all other tokens unchanged |
 | Internal tool        | DESIGN.md §3, §5, §9, src/stories/Tokens.mdx                   | Mono numerics, dense tables, minimum decoration                                 |
 | Mobile app           | DESIGN.md §5 (responsive), src/stories/ThemeToggle.stories.tsx | 4-column grid at 480px, bottom tab nav                                          |
@@ -125,16 +125,12 @@ function Header() {
 Set the project's assigned secondary brand color at the scope:
 
 ```css
-[data-project='flow'] {
+[data-project='7kminato'] {
   --brand-secondary: var(--cyan-500); /* cyan accent */
 }
 
-[data-project='grid'] {
-  --brand-secondary: var(--acid-500); /* acid/green accent */
-}
-
-[data-project='ember'] {
-  --brand-secondary: var(--ember-500); /* ember/orange accent */
+[data-project='inari'] {
+  --brand-secondary: var(--inari-500); /* burnt orange accent */
 }
 ```
 
@@ -180,11 +176,11 @@ Reference `build/logos/logo-7k.svg` (color, default), `build/logos/logo-7k-light
 | ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------ | ------ | ---- | ------------------------------- | ------------------------------------------ |
 | Theme             | Dark-first — `--bg-void: #000000`, `--bg-base: #0A0A0D` near-black canvas, toggle to light via `data-theme="light"`                                                                                                                  | "dark theme for website"                   |
 | Brand accent      | Magenta `--magenta-500: #FF00FF` with neon glow                                                                                                                                                                                      | #FF0FF brand hex                           |
-| Secondary accents | Solar (`--solar-500: #FFD60A`), Cyan (`--cyan-500: #00E5FF`), Acid (`--acid-500: #7CFF00`), Ember (`--ember-500: #FF6B35`)                                                                                                           | Tokyo neon atmosphere                      |
+| Secondary accents | Cyan 7KMinato (`--cyan-500: #00E5FF`), Inari (`--inari-500: #EE560D`)                                                                                                           | Tokyo neon atmosphere                      |
 | Type              | Three-font Geist system: Geist (sans) for headings/body, Geist Mono for labels/code/tabular data, Geist Pixel (5 variants: Square/Circle/Grid/Line/Triangle) for ornamental display                                                  | "only 1 font and it's Geist" (Geist Pixel) |
-| 1-bit textures    | 10 pattern categories: scanline, halftone (3 densities), dot matrix (3 densities), diagonal stripes (3 variants), horizontal/vertical stripes, crosshatch (2 densities), checkerboard, noise (2 opacities), vignette (2 sharpnesses) | "Manga-influenced 1-bit"                   |
-| 1-bit animations  | 20+ keyframes organized as ambient (flicker, blink, neon-pulse, shimmer, accent-flicker, frame-step) and trigger (glitch, glitch-complex, pixel-dots, invert-flash, typewriter, pixel-fade, scan-reveal, slide-up-reveal)            | "abstract 1-bit animations"                |
-| 1-bit components  | 40+ unified components with zero radius, 2px borders, invert hover, thin accent layer modifiers (accent-border-top, accent-bar, accent-dot, glow-mod, accent-corner)                                                                 | "Manga-influenced 1-bit"                   |
+| Textures          | 10 pattern categories: scanline, halftone (3 densities), dot matrix (3 densities), diagonal stripes (3 variants), horizontal/vertical stripes, crosshatch (2 densities), checkerboard, noise (2 opacities), vignette (2 sharpnesses) | "Manga-influenced 1-bit"                   |
+| Animations        | 20+ keyframes organized as ambient (flicker, blink, neon-pulse, shimmer, accent-flicker, frame-step) and trigger (glitch, glitch-complex, pixel-dots, invert-flash, typewriter, pixel-fade, scan-reveal, slide-up-reveal)            | "abstract 1-bit animations"                |
+| Components        | 40+ unified components with zero radius, 2px borders, invert hover, thin accent layer modifiers (accent-border-top, accent-bar, accent-dot, glow-mod, accent-corner)                                                                 | "Manga-influenced 1-bit"                   |
 | React UI kit      | Button, Input, Badge, ThemeToggle, ThemeProvider, useTheme — TypeScript components with ref forwarding                                                                                                                               | Production-ready component library         |
 | Modular CSS       | 10 source files compiled via Vite + PostCSS; standalone exports for tokens, components, textures, animations                                                                                                                         | Tree-shakeable, performant                 |
 | Sub-projects      | Accent token override via `--accent-square                                                                                                                                                                                           | triangle                                   | circle | grid | line` — parent 7K stays magenta | "differentiate main company with projects" |
@@ -198,11 +194,11 @@ Reference `build/logos/logo-7k.svg` (color, default), `build/logos/logo-7k-light
 ### Modern button classes (use these, not legacy .btn-\*)
 
 ```
-.btn-modern .btn-modern-primary .btn-modern-secondary .btn-modern-ghost
-.btn-modern-glow .btn-modern-accent .btn-modern-glow-accent .btn-modern-glow-secondary
-.btn-modern-danger
-.btn-modern-sm .btn-modern-lg .btn-modern-icon .btn-modern-lg-icon
-.btn-modern-loading .btn-modern:disabled
+.btn .btn-primary .btn-secondary .btn-ghost
+.btn-glow .btn-accent .btn-glow-accent .btn-glow-secondary
+.btn-danger
+.btn-sm .btn-lg .btn-icon .btn-lg-icon
+.btn-loading .btn:disabled
 ```
 
 ### Texture classes
@@ -214,9 +210,9 @@ Reference `build/logos/logo-7k.svg` (color, default), `build/logos/logo-7k-light
 .diagonal-stripes .diagonal-stripes-dense .diagonal-stripes-negative
 .stripes-h .stripes-h-dense .stripes-v .stripes-v-dense
 .crosshatch .crosshatch-dense
-.checkerboard .checkerboard-onebit
+.checkerboard .checkerboard-contrast
 .noise .noise-heavy .noise-animated
-.vignette-onebit .vignette-onebit-sharp
+.vignette-ink .vignette-ink-sharp
 ```
 
 ### Animation classes

@@ -72,6 +72,14 @@ describe('DataTable', () => {
     expect(onSort).toHaveBeenCalledWith('name');
   });
 
+  it('renders data-label attributes for the mobile stacked transform', () => {
+    const { container } = render(<DataTable columns={columns} rows={rows} rowKey="id" />);
+    const cells = container.querySelectorAll('td[data-label]');
+    expect(cells.length).toBe(rows.length * columns.length);
+    expect(cells[0]).toHaveAttribute('data-label', 'Name');
+    expect(cells[1]).toHaveAttribute('data-label', 'Status');
+  });
+
   it('uses custom render for cells', () => {
     const cols = [{ key: 'name', label: 'Name', render: (row: { name: string }) => <strong>{row.name}</strong> }];
     render(<DataTable columns={cols} rows={rows} rowKey="id" />);

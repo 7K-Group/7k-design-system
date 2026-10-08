@@ -69,3 +69,15 @@ export const DataTableEmpty: StoryObj<typeof DataTable<Row>> = {
     <DataTable<Row> columns={columns} rows={[]} rowKey="id" empty={<EmptyState title="No clusters" />} />
   ),
 };
+
+export const DataTableMobile: StoryObj<typeof DataTable<Row>> = {
+  parameters: {
+    viewport: { defaultViewport: 'mobile1' },
+    docs: {
+      description: {
+        story: 'Below 640px the table collapses into stacked cards labelled via data-label.',
+      },
+    },
+  },
+  render: () => <DataTable<Row> columns={columns} rows={rows} rowKey="id" />,
+};

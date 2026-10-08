@@ -57,8 +57,9 @@ export function Tab({ children, index: indexProp, className = '', style }: TabPr
   // ARIA APG keyboard support: Arrow keys move selection, Home/End jump.
   const handleKeyDown = (event: React.KeyboardEvent<HTMLButtonElement>) => {
     const tabs = Array.from(
-      event.currentTarget.closest('[role="tablist"]')?.querySelectorAll<HTMLButtonElement>('[role="tab"]') ??
-        []
+      event.currentTarget
+        .closest('[role="tablist"]')
+        ?.querySelectorAll<HTMLButtonElement>('[role="tab"]') ?? []
     );
     const currentPos = tabs.indexOf(event.currentTarget);
     if (currentPos === -1) return;

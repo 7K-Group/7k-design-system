@@ -24,18 +24,31 @@ export const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
     ref
   ) => {
     const drawerRef = useRef<HTMLDivElement | null>(null);
+    const previousActiveElement = useRef<Element | null>(null);
 
     useEffect(() => {
       if (open) {
+        previousActiveElement.current = document.activeElement;
         drawerRef.current?.focus();
         document.body.style.overflow = 'hidden';
-      } else {
-        document.body.style.overflow = '';
+
+        const handleKeyDown = (event: KeyboardEvent) => {
+          if (event.key === 'Escape') {
+            event.stopPropagation();
+            onClose?.();
+          }
+        };
+        document.addEventListener('keydown', handleKeyDown);
+        return () => {
+          document.removeEventListener('keydown', handleKeyDown);
+          document.body.style.overflow = '';
+          (previousActiveElement.current as HTMLElement)?.focus();
+        };
       }
       return () => {
         document.body.style.overflow = '';
       };
-    }, [open]);
+    }, [open, onClose]);
 
     if (!open) return null;
 
@@ -58,7 +71,7 @@ export const Drawer = forwardRef<HTMLDivElement, DrawerProps>(
           display: 'flex',
           justifyContent: side === 'left' ? 'flex-start' : 'flex-end',
           background: 'rgba(0,0,0,0.7)',
-          zIndex: 300,
+          zIndex: 'var(--z-modal)',
         }}
       >
         <div

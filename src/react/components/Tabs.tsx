@@ -54,15 +54,54 @@ export function Tab({ children, index: indexProp, className = '', style }: TabPr
   const index = indexProp ?? 0;
   const isSelected = selectedIndex === index;
 
+  // ARIA APG keyboard support: Arrow keys move selection, Home/End jump.
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLButtonElement>) => {
+    const tabs = Array.from(
+      event.currentTarget
+        .closest('[role="tablist"]')
+        ?.querySelectorAll<HTMLButtonElement>('[role="tab"]') ?? []
+    );
+    const currentPos = tabs.indexOf(event.currentTarget);
+    if (currentPos === -1) return;
+    const move = (nextPos: number) => {
+      const next = tabs[(nextPos + tabs.length) % tabs.length];
+      next.focus();
+      setSelectedIndex(Number(next.dataset.tabIndex ?? nextPos));
+    };
+    switch (event.key) {
+      case 'ArrowRight':
+      case 'ArrowDown':
+        event.preventDefault();
+        move(currentPos + 1);
+        break;
+      case 'ArrowLeft':
+      case 'ArrowUp':
+        event.preventDefault();
+        move(currentPos - 1);
+        break;
+      case 'Home':
+        event.preventDefault();
+        move(0);
+        break;
+      case 'End':
+        event.preventDefault();
+        move(tabs.length - 1);
+        break;
+    }
+  };
+
   return (
     <button
       role="tab"
       aria-selected={isSelected}
       aria-controls={`${baseId}-panel-${index}`}
       id={`${baseId}-tab-${index}`}
+      data-tab-index={index}
       className={`tab ${isSelected ? 'active' : ''} ${className}`}
       style={style}
+      tabIndex={isSelected ? 0 : -1}
       onClick={() => setSelectedIndex(index)}
+      onKeyDown={handleKeyDown}
     >
       {children}
     </button>
@@ -88,6 +127,7 @@ export function TabPanel({
       aria-labelledby={`${baseId}-tab-${index}`}
       className={`tab-panel ${className}`}
       style={style}
+      tabIndex={0}
     >
       {children}
     </div>

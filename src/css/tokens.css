@@ -203,9 +203,9 @@
   /* ---- TEXT ---- */
   --text-primary: var(--neutral-50); /* headlines, body */
   --text-secondary: var(--neutral-300); /* lede, card body */
-  --text-tertiary: var(--neutral-500); /* captions, mono labels */
-  --text-placeholder: var(--neutral-500); /* form hints */
-  --text-disabled: var(--neutral-700); /* truly inactive */
+  --text-tertiary: var(--neutral-400); /* captions, mono labels (WCAG AA on dark surfaces) */
+  --text-placeholder: var(--neutral-500); /* form hints (exempt: placeholder) */
+  --text-disabled: var(--neutral-600); /* truly inactive (WCAG-exempt, kept discernible) */
   --text-inverse: var(--neutral-void); /* on light surfaces */
 
   /* ---- BORDERS ---- */

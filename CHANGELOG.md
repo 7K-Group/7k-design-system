@@ -31,6 +31,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- `.btn-modern-glow-secondary` variant (cyan/per-project outline + glow) — completes the `glow-secondary` Button variant that React and the consumer guide already referenced
+- `.btn-modern:disabled` / `[aria-disabled='true']` styling (40% opacity, no pointer events, glow removed) for all button variants
+- `.select-native:disabled`, `.checkbox`/`.radio`/`.toggle` disabled styling (`:has(input:disabled)`, 40% opacity)
+- Visible keyboard focus rings for custom `Checkbox`, `Radio`, and `Toggle` controls (`:has(input:focus-visible)`)
+- Missing status variant classes: `.toast-info`, `.alert-info`, `.alert-danger` (the React `Alert` `danger` variant emitted an unstyled class), `.alert-content`, `.alert-close`, `.toast-content`, plus focus-visible styles for dismiss buttons
+- `.card-static:hover` reset so `Card hover={false}` actually disables the hover lift
+- `.spinner-cyan` and `.icon-box-cyan` classes (previously documented but unimplemented)
+- Modal: Escape key closes, Tab focus is trapped inside the dialog while open
+- Drawer: Escape key closes, focus returns to the triggering element
+- Tabs: ARIA APG keyboard support (Arrow/Home/End moves selection, roving tabindex), `TabPanel` is focusable
+- `tests/States.test.tsx` covering the new interaction states
 - Production-ready build pipeline with Vite, PostCSS, and autoprefixer
 - TypeScript configuration and type definitions for React UI kit
 - ESLint, Prettier, and Stylelint configurations for code quality
@@ -44,6 +55,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Self-hosted Geist font strategy with CDN fallback
 
 ### Changed
+- **Contrast (WCAG AA, dark theme):** `--text-tertiary` now maps to `--neutral-400` (was `--neutral-500`, 3.5–3.7:1) and `--text-disabled` to `--neutral-600` (was `--neutral-700`, 1.75:1); `.badge-neutral` uses `--status-neutral`; primary/glow button `:active` text is now white (was magenta on muted fill, 3.0:1). Visual change is subtle but visible — captions and disabled elements read slightly brighter
+- `Input` with an `error` now applies the `.error` class (danger border) in addition to `aria-invalid`
+- Component CSS now consumes semantic tokens instead of raw ramps (`.input:focus` → `--border-focus`; badge/toast/alert status colors → `--status-*`; `.table td`/`.modal-body` → `--text-secondary`)
+- Hard-coded z-index values replaced with `--z-*` tokens in `.tooltip-content`, `.combobox-menu`, and Modal/Drawer/Tooltip inline styles
+- Shimmer animation now uses theme-aware `--texture-*` tokens (works in light theme)
+- Light theme: `--shadow-inset` corrected to a black inner shadow; the `prefers-color-scheme: light` media block now yields to an explicit `data-theme` attribute
+- DESIGN.md, SKILL.md, and CONSUMER_GUIDE.md synced with implemented class names, button variants, modifier names, and token values
 - Converted React UI kit from plain JS to TypeScript with proper component patterns
 - Refactored CSS to eliminate hard-coded colors in favor of design tokens
 - Updated `package.json` with proper `exports`, `engines`, and `types` fields

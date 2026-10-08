@@ -35,7 +35,7 @@ export function Tooltip({
           role="tooltip"
           style={{
             position: 'absolute',
-            zIndex: 200,
+            zIndex: 'var(--z-overlay)',
             whiteSpace: 'nowrap',
             ...positionStyles[position],
           }}

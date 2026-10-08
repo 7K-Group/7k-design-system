@@ -273,8 +273,8 @@ All ramps follow the same 11-step pattern (50 = lightest, 950 = darkest). Two ex
 | `--neutral-100`  | `#EEEEF1` | —                                                | `--bg-elevated`                                          |
 | `--neutral-200`  | `#D7D7DC` | —                                                | `--bg-raised`, `--status-neutral-bg`                     |
 | `--neutral-300`  | `#B0B0B8` | `--text-secondary`                               | `--bg-overlay`, `--text-disabled`, `--status-neutral-fg` |
-| `--neutral-400`  | `#82828A` | `--status-neutral`                               | `--bg-pressed`, `--text-tertiary`, `--text-placeholder`  |
-| `--neutral-500`  | `#6B6B72` | `--text-tertiary`, `--text-placeholder`          | `--text-secondary`                                       |
+| `--neutral-400`  | `#82828A` | `--text-tertiary`, `--status-neutral`            | `--bg-pressed`, `--text-placeholder`                     |
+| `--neutral-500`  | `#6B6B72` | `--text-placeholder`                             | `--text-secondary`                                       |
 | `--neutral-600`  | `#50505A` | `--text-disabled`                                | —                                                        |
 | `--neutral-700`  | `#3A3A42` | `--bg-pressed`                                   | —                                                        |
 | `--neutral-800`  | `#26262B` | `--bg-overlay`, `--status-neutral-bg`            | —                                                        |
@@ -677,28 +677,31 @@ Sharp (0px) and subtle (2–4px) are preferred for 1-bit elements. 8–12px for 
 
 **Modern neon** — the only button system. All buttons use `mono-label` typography (Geist Mono, 11px, 500 weight, 0.12em uppercase) and 4px border-radius. Accent fills use the brand-primary ramp (500→hover:400→active:600). Button groups, split buttons, and loading state are built on the same base.
 
-| Class                   | Description                                                                              |
-| ----------------------- | ---------------------------------------------------------------------------------------- |
-| `.btn-modern`           | Base: mono-label typography, 12px/20px padding, `rounded.sm` (4px)                       |
-| `.btn-modern-primary`   | `--brand-primary` (`--magenta-500`) fill, `--brand-primary-hover` on hover + glow shadow |
-| `.btn-modern-secondary` | `--bg-raised` fill, `--bg-overlay` on hover                                              |
-| `.btn-modern-ghost`     | Transparent, `--text-secondary` text, subtle bg on hover                                 |
-| `.btn-modern-glow`      | `--magenta-500` fill + neon glow, `--magenta-400` on hover                               |
-| `.btn-modern-glow-cyan` | `--cyan-500` fill + cyan glow, `--cyan-400` on hover                                     |
-| `.btn-modern-glow-grid` | `--acid-500` fill + acid glow, `--acid-400` on hover                                     |
-| `.btn-modern-danger`    | Transparent + danger border, danger fill on hover                                        |
-| `.btn-modern-sm/lg`     | Size variants (8px/16px small, 16px/28px large)                                          |
-| `.btn-modern-icon`      | 40×40 square icon button                                                                 |
-| `.btn-modern-lg-icon`   | 52×52 large icon button                                                                  |
-| `.btn-modern-loading`   | Loading state — `onebit-spin` replaces icon                                              |
-| `.btn-group`            | Inline flex container for grouped buttons (adjacent borders merge)                       |
-| `.btn-split`            | Split button trigger — last child gets narrower padding + left border                    |
+| Class                       | Description                                                                                |
+| --------------------------- | ------------------------------------------------------------------------------------------ |
+| `.btn-modern`               | Base: mono-label typography, 12px/20px padding, `rounded.sm` (4px)                         |
+| `.btn-modern-primary`       | Magenta outline, `--brand-primary-subtle` fill tint on hover, white text when active       |
+| `.btn-modern-secondary`     | `--bg-raised` fill, `--bg-overlay` on hover                                                |
+| `.btn-modern-ghost`         | Transparent, `--text-secondary` text, subtle bg on hover                                   |
+| `.btn-modern-glow`          | Magenta outline + persistent neon glow, intensifies on hover                               |
+| `.btn-modern-accent`        | Dynamic `--brand-secondary` outline + fill tint on hover (per-project accent)              |
+| `.btn-modern-glow-accent`   | `--brand-secondary` fill + glow (the filled "neon" button; magenta for the parent brand)   |
+| `.btn-modern-glow-secondary`| Cyan/`--brand-secondary` outline + glow variant of `.btn-modern-glow`                      |
+| `.btn-modern-danger`        | Transparent + danger border, danger fill on hover                                          |
+| `.btn-modern-sm/lg`         | Size variants (8px/16px small, 16px/28px large)                                            |
+| `.btn-modern-icon`          | 40×40 square icon button                                                                   |
+| `.btn-modern-lg-icon`       | 52×52 large icon button                                                                    |
+| `.btn-modern-loading`       | Loading state — `onebit-spin` replaces icon                                                |
+| `.btn-modern:disabled`      | 40% opacity, no pointer events, glow removed — applies to every variant                    |
+| `.btn-group`                | Inline flex container for grouped buttons (adjacent borders merge)                         |
+| `.btn-split`                | Split button trigger — last child gets narrower padding + left border                      |
 
 All variants use standard CSS transitions for interaction states:
 
-- **`:hover`** → fill shifts to `--brand-primary-hover` (`--magenta-400`), optional glow shadow intensifies
+- **`:hover`** → border/fill shifts to the `-hover` step of the variant's ramp, optional glow shadow intensifies
 - **`:focus-visible`** → outline ring
-- **`:active`** → fill shifts to `--brand-primary-active` (`--magenta-600`)
+- **`:active`** → fill shifts to the `-muted` step with `--onebit-white` text (keeps contrast ≥ 7:1)
+- **`:disabled`** → 40% opacity, `not-allowed` cursor, no glow
 - **`Loading`** → `onebit-spin` (0.6s steps(4) infinite — square frame rotation)
 
 ### 6b. Form controls
@@ -708,9 +711,9 @@ All variants use standard CSS transitions for interaction states:
 | `.input`         | Text input: black bg, 2px white border, accent glow on focus         |
 | `.textarea`      | Multi-line input, same tokens                                        |
 | `.select-native` | Custom dropdown, SVG chevron                                         |
-| `.checkbox`      | 16px square, checked fills white (`.checkbox-accent`: fills magenta) |
-| `.radio`         | 16px square, selected fills white (`.radio-accent`: fills magenta)   |
-| `.toggle`        | 36x18 switch, on state fills white (`.toggle-accent`: fills magenta) |
+| `.checkbox`      | 16px square, checked fills white (`.checkbox-accent`: fills `--brand-secondary`) |
+| `.radio`         | 16px square, selected fills white (`.radio-accent`: fills `--brand-secondary`)   |
+| `.toggle`        | 36x18 switch, on state fills white (`.toggle-accent`: fills `--brand-secondary`) |
 | `.range`         | 6px track, 16px square thumb                                         |
 | `.form-group`    | Flex column with gap                                                 |
 | `.form-label`    | Mono uppercase label, 11px                                           |
@@ -776,7 +779,7 @@ All variants use standard CSS transitions for interaction states:
 | Class                               | Description                                 |
 | ----------------------------------- | ------------------------------------------- |
 | `.progress`                         | 12px bar, 2px border                        |
-| `.progress-accent`                  | Magenta fill                                |
+| `.progress-accent`                  | `--brand-secondary` (project accent) fill   |
 | `.progress-indeterminate`           | Scanning bar animation                      |
 | `.progress-striped`                 | Striped fill overlay                        |
 | `.spinner`                          | 20px square rotating frame, 90° steps       |
@@ -816,16 +819,16 @@ All variants use standard CSS transitions for interaction states:
 
 These classes add thin color to any 1-bit component without breaking the black/white base. Apply alongside the component class.
 
-| Class                                                                  | Effect                          |
-| ---------------------------------------------------------------------- | ------------------------------- |
-| `.accent-border-top` / `.accent-border-left` / `.accent-border-bottom` | 3px magenta border on one edge  |
-| `.cyan-border-top` / `.grid-border-top` / `.line-border-top`           | 3px colored top border          |
-| `.accent-underline` / `.cyan-underline`                                | Colored underline on text       |
-| `.accent-dot` / `.cyan-dot` / `.grid-dot`                              | Small colored dot after element |
-| `.accent-bar` / `.cyan-bar` / `.grid-bar` / `.line-bar`                | Thin colored bar across top     |
-| `.glow-mod` / `.glow-mod-cyan`                                         | Colored glow shadow             |
-| `.border-mod-accent` / `.border-mod-cyan`                              | Border color override           |
-| `.accent-corner` / `.cyan-corner`                                      | Small colored corner badge      |
+| Class                                                                                  | Effect                                            |
+| -------------------------------------------------------------------------------------- | ------------------------------------------------- |
+| `.accent-border-top` / `.accent-border-left` / `.accent-border-bottom`                 | 3px `--brand-primary` (magenta) border on one edge |
+| `.accent-secondary-border-top` / `-left` / `-bottom`                                   | 3px `--brand-secondary` (per-project) border      |
+| `.accent-underline` / `.accent-secondary-underline`                                    | Colored underline on text                         |
+| `.accent-dot` / `.accent-secondary-dot`                                                | Small colored dot after element                   |
+| `.accent-bar` / `.accent-secondary-bar`                                                | Thin colored bar across top                       |
+| `.glow-mod` / `.glow-mod-secondary`                                                    | Colored glow shadow                               |
+| `.border-mod-accent` / `.border-mod-secondary`                                         | Border color override                             |
+| `.accent-corner` / `.accent-secondary-corner`                                          | Small colored corner badge                        |
 
 ### 1-bit composition rules
 

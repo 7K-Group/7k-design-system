@@ -23,7 +23,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
     const id = idProp ?? generatedId;
     const errorId = error ? `${id}-error` : undefined;
     const ariaDescribedBy = [ariaDescribedByProp, errorId].filter(Boolean).join(' ') || undefined;
-    const classes = ['input', className].filter(Boolean).join(' ');
+    const classes = ['input', error ? 'error' : '', className].filter(Boolean).join(' ');
 
     return (
       <div className="form-group" style={style}>

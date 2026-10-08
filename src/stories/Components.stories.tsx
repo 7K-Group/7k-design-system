@@ -13,13 +13,13 @@ type Story = StoryObj;
 export const Buttons: Story = {
   render: () => (
     <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
-      <button className="btn-modern btn-modern-primary">Primary</button>
-      <button className="btn-modern btn-modern-secondary">Secondary</button>
-      <button className="btn-modern btn-modern-ghost">Ghost</button>
-      <button className="btn-modern btn-modern-glow">Glow</button>
-      <button className="btn-modern btn-modern-accent">Accent</button>
-      <button className="btn-modern btn-modern-glow-accent">Glow Accent</button>
-      <button className="btn-modern btn-modern-danger">Danger</button>
+      <button className="btn btn-primary">Primary</button>
+      <button className="btn btn-secondary">Secondary</button>
+      <button className="btn btn-ghost">Ghost</button>
+      <button className="btn btn-glow">Glow</button>
+      <button className="btn btn-accent">Accent</button>
+      <button className="btn btn-glow-accent">Glow Accent</button>
+      <button className="btn btn-danger">Danger</button>
     </div>
   ),
 };
@@ -102,7 +102,7 @@ export const Cards: Story = {
           <span className="mono-label">FEATURED</span>
         </div>
         <h3>Card Title</h3>
-        <p className="body">Card content with the 1-bit manga aesthetic.</p>
+        <p className="body">Card content with the high-contrast texture aesthetic.</p>
       </div>
       <div className="card accent-border-top" style={{ padding: '24px', maxWidth: '300px' }}>
         <div className="card-header" style={{ marginBottom: '12px' }}>
@@ -118,9 +118,9 @@ export const Cards: Story = {
 export const TexturedButtons: Story = {
   render: () => (
     <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
-      <button className="btn-modern btn-modern-primary btn-modern-halftone">Halftone</button>
-      <button className="btn-modern btn-modern-primary btn-modern-scanline">Scanline</button>
-      <button className="btn-modern btn-modern-accent btn-modern-dots">Dots</button>
+      <button className="btn btn-primary btn-halftone">Halftone</button>
+      <button className="btn btn-primary btn-scanline">Scanline</button>
+      <button className="btn btn-accent btn-dots">Dots</button>
     </div>
   ),
 };
@@ -141,25 +141,6 @@ export const TexturedCards: Story = {
         </div>
         <h3>Scanline Card</h3>
         <p className="body">CRT-style scanline overlay on a card surface.</p>
-      </div>
-    </div>
-  ),
-};
-
-export const MangaPanels: Story = {
-  render: () => (
-    <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap' }}>
-      <div className="panel panel-frame" style={{ maxWidth: '300px' }}>
-        <span className="mono-label">FRAME</span>
-        <p className="body">Manga panel with inset frame outline.</p>
-      </div>
-      <div className="panel panel-invert" style={{ maxWidth: '300px' }}>
-        <span className="mono-label">INVERT</span>
-        <p>High-contrast splash panel.</p>
-      </div>
-      <div className="panel panel-halftone" style={{ maxWidth: '300px' }}>
-        <span className="mono-label">TEXTURED</span>
-        <p className="body">Panel with halftone screentone overlay.</p>
       </div>
     </div>
   ),

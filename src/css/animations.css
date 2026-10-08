@@ -258,56 +258,56 @@
   animation: invert-flash 0.15s ease 2;
 }
 
-/* ---- Pixel dots (small black squares at random positions, 1-bit corruption) ---- */
+/* ---- Pixel dots (small black squares at random positions, digital corruption) ---- */
 /* stylelint-disable color-no-hex -- pixel-dots keyframes are 1-bit literal black */
 @keyframes pixel-dots {
   0% {
     box-shadow:
-      4px 8px 0 0 var(--onebit-black),
-      28px 3px 0 0 var(--onebit-black),
-      52px 18px 0 0 var(--onebit-black),
-      76px 5px 0 0 var(--onebit-black),
-      14px 24px 0 0 var(--onebit-black),
-      38px 12px 0 0 var(--onebit-black),
-      62px 28px 0 0 var(--onebit-black),
-      86px 15px 0 0 var(--onebit-black),
-      8px 32px 0 0 var(--onebit-black);
+      4px 8px 0 0 var(--color-ink),
+      28px 3px 0 0 var(--color-ink),
+      52px 18px 0 0 var(--color-ink),
+      76px 5px 0 0 var(--color-ink),
+      14px 24px 0 0 var(--color-ink),
+      38px 12px 0 0 var(--color-ink),
+      62px 28px 0 0 var(--color-ink),
+      86px 15px 0 0 var(--color-ink),
+      8px 32px 0 0 var(--color-ink);
   }
   25% {
     box-shadow:
-      6px 12px 0 0 var(--onebit-black),
-      32px 8px 0 0 var(--onebit-black),
-      48px 25px 0 0 var(--onebit-black),
-      82px 3px 0 0 var(--onebit-black),
-      10px 18px 0 0 var(--onebit-black),
-      42px 30px 0 0 var(--onebit-black),
-      68px 10px 0 0 var(--onebit-black),
-      90px 22px 0 0 var(--onebit-black),
-      20px 5px 0 0 var(--onebit-black);
+      6px 12px 0 0 var(--color-ink),
+      32px 8px 0 0 var(--color-ink),
+      48px 25px 0 0 var(--color-ink),
+      82px 3px 0 0 var(--color-ink),
+      10px 18px 0 0 var(--color-ink),
+      42px 30px 0 0 var(--color-ink),
+      68px 10px 0 0 var(--color-ink),
+      90px 22px 0 0 var(--color-ink),
+      20px 5px 0 0 var(--color-ink);
   }
   50% {
     box-shadow:
-      12px 4px 0 0 var(--onebit-black),
-      22px 20px 0 0 var(--onebit-black),
-      58px 8px 0 0 var(--onebit-black),
-      72px 28px 0 0 var(--onebit-black),
-      4px 15px 0 0 var(--onebit-black),
-      36px 6px 0 0 var(--onebit-black),
-      66px 22px 0 0 var(--onebit-black),
-      92px 12px 0 0 var(--onebit-black),
-      50px 30px 0 0 var(--onebit-black);
+      12px 4px 0 0 var(--color-ink),
+      22px 20px 0 0 var(--color-ink),
+      58px 8px 0 0 var(--color-ink),
+      72px 28px 0 0 var(--color-ink),
+      4px 15px 0 0 var(--color-ink),
+      36px 6px 0 0 var(--color-ink),
+      66px 22px 0 0 var(--color-ink),
+      92px 12px 0 0 var(--color-ink),
+      50px 30px 0 0 var(--color-ink);
   }
   75% {
     box-shadow:
-      2px 10px 0 0 var(--onebit-black),
-      26px 22px 0 0 var(--onebit-black),
-      44px 4px 0 0 var(--onebit-black),
-      70px 14px 0 0 var(--onebit-black),
-      18px 28px 0 0 var(--onebit-black),
-      54px 20px 0 0 var(--onebit-black),
-      84px 8px 0 0 var(--onebit-black),
-      8px 6px 0 0 var(--onebit-black),
-      40px 26px 0 0 var(--onebit-black);
+      2px 10px 0 0 var(--color-ink),
+      26px 22px 0 0 var(--color-ink),
+      44px 4px 0 0 var(--color-ink),
+      70px 14px 0 0 var(--color-ink),
+      18px 28px 0 0 var(--color-ink),
+      54px 20px 0 0 var(--color-ink),
+      84px 8px 0 0 var(--color-ink),
+      8px 6px 0 0 var(--color-ink),
+      40px 26px 0 0 var(--color-ink);
   }
   100% {
     box-shadow: none;
@@ -419,7 +419,7 @@
   animation: shimmer-sweep 2s linear infinite;
 }
 
-@keyframes onebit-spin {
+@keyframes spin-steps {
   0% {
     transform: rotate(0deg);
   }
@@ -920,3 +920,24 @@
 /* ---- Reduced motion ---- */
 /* Reduced-motion overrides live in accessibility.css so all animations are
    managed in one place. This file intentionally does not repeat them. */
+
+/* ---- Drawer entrance ---- */
+@keyframes drawer-slide-in {
+  from {
+    transform: translateX(32px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

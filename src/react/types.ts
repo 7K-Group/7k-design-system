@@ -186,11 +186,41 @@ export interface IsometricBackgroundProps extends BaseProps {
   animated?: boolean;
 }
 
-export interface MangaPanelProps extends BaseProps {
-  frame?: boolean;
-  invert?: boolean;
-  texture?: Texture;
-  speedLine?: 'none' | 'horizontal' | 'radial';
+export interface SpinnerProps extends BaseProps {
+  size?: 'sm' | 'md' | 'lg';
+}
+
+export interface SkeletonProps extends BaseProps {
+  width?: number | string;
+  height?: number | string;
+}
+
+export interface AvatarProps extends BaseProps {
+  src?: string;
+  alt?: string;
+  initials?: string;
+  size?: 'sm' | 'md' | 'lg';
+  circle?: boolean;
+}
+
+export interface ProgressProps extends BaseProps {
+  value: number;
+  max?: number;
+  variant?: 'accent' | 'danger';
+}
+
+export interface ListboxOption {
+  value: string;
+  label: string;
+  disabled?: boolean;
+}
+
+export interface ListboxProps extends BaseProps {
+  options: ListboxOption[];
+  value?: string;
+  onChange?: (value: string) => void;
+  placeholder?: string;
+  disabled?: boolean;
 }
 
 export type IconName =
@@ -216,7 +246,7 @@ export interface IconProps extends BaseProps {
   size?: number;
 }
 
-export type Project = '7k' | 'square' | 'triangle' | 'circle' | 'grid' | 'line';
+export type Project = '7kgroup' | '7kminato' | 'inari';
 
 export interface ProjectContextValue {
   project: Project;

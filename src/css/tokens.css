@@ -2,8 +2,8 @@
       COLOR SYSTEM — 11-step ramps + semantic + theme role mapping
    ===========================================================
    Architecture (3 layers):
-     Layer 1 — Raw ramps: --magenta-{50..950}, --solar-{50..950},
-                --cyan-{50..950}, --acid-{50..950}, --ember-{50..950},
+     Layer 1 — Raw ramps: --magenta-{50..950} (7KGroup),
+                --cyan-{50..950} (7KMinato), --inari-{50..950} (Inari),
                 --neutral-{50..950}, --success/warning/danger/info-{50..950}
      Layer 2 — Semantic role tokens: --brand-primary, --bg-*, --text-*,
                 --border-*, --status-*
@@ -18,7 +18,7 @@
      ============================================================ */
 
   /* stylelint-disable color-no-hex -- raw token ramps are the canonical hex source */
-  /* ---- MAGENTA · Parent brand (7K) ---- */
+  /* ---- MAGENTA · 7KGroup (parent brand, primary) ---- */
   --magenta-50: #ffe5ff;
   --magenta-100: #ffc2ff;
   --magenta-200: #f9f;
@@ -31,20 +31,7 @@
   --magenta-900: #570057;
   --magenta-950: #303;
 
-  /* ---- SOLAR · Triangle project accent ---- */
-  --solar-50: #fffce5;
-  --solar-100: #fff5b8;
-  --solar-200: #ffee8a;
-  --solar-300: #ffe65c;
-  --solar-400: #ffde2e;
-  --solar-500: #ffd60a;
-  --solar-600: #d6b208;
-  --solar-700: #a88d06;
-  --solar-800: #806c04;
-  --solar-900: #574903;
-  --solar-950: #332b02;
-
-  /* ---- CYAN · Circle project accent ---- */
+  /* ---- CYAN · 7KMinato (project accent) ---- */
   --cyan-50: #e5fbff;
   --cyan-100: #b8f6ff;
   --cyan-200: #8af0ff;
@@ -57,31 +44,18 @@
   --cyan-900: #00474d;
   --cyan-950: #002a2e;
 
-  /* ---- ACID · Grid project accent ---- */
-  --acid-50: #f2ffe5;
-  --acid-100: #deffb8;
-  --acid-200: #caff8a;
-  --acid-300: #b7ff5c;
-  --acid-400: #a3ff2e;
-  --acid-500: #7cff00;
-  --acid-600: #6c0;
-  --acid-700: #4d9900;
-  --acid-800: #3a7300;
-  --acid-900: #274d00;
-  --acid-950: #172e00;
-
-  /* ---- EMBER · Line project accent ---- */
-  --ember-50: #ffeee5;
-  --ember-100: #ffd2b8;
-  --ember-200: #ffb68a;
-  --ember-300: #ff9b5c;
-  --ember-400: #ff7f2e;
-  --ember-500: #ff6b35;
-  --ember-600: #d45929;
-  --ember-700: #a8431c;
-  --ember-800: #802f13;
-  --ember-900: #57200c;
-  --ember-950: #331205;
+  /* ---- INARI · Inari project accent (Fushimi Inari palette) ---- */
+  --inari-50: #fdeee7;
+  --inari-100: #fbdccb;
+  --inari-200: #f6b490;
+  --inari-300: #f08c5b;
+  --inari-400: #e56f3f; /* Knockout Orange */
+  --inari-500: #ee560d; /* Orangealicious — Base */
+  --inari-600: #c44813; /* Red Panda */
+  --inari-700: #a03a10;
+  --inari-800: #8b310d; /* Rogan Josh */
+  --inari-900: #5c2108;
+  --inari-950: #2b1c17; /* Tetsu-Guro Black */
 
   /* ---- NEUTRAL · Slight cool cast ---- */
   --neutral-50: #fafafb;
@@ -151,9 +125,9 @@
   --info-900: #0f2c57;
   --info-950: #091a33;
 
-  /* ---- 1-bit primitives ---- */
-  --onebit-black: #000;
-  --onebit-white: #fff;
+  /* ---- Contrast primitives ---- */
+  --color-ink: #000;
+  --color-paper: #fff;
   /* stylelint-enable color-no-hex */
 
   /* ---- Texture color tokens (theme-aware: white in dark, black in light) ---- */
@@ -169,8 +143,9 @@
   --texture-19: rgba(255, 255, 255, 0.19);
   --texture-38: rgba(255, 255, 255, 0.38);
   --texture-50: rgba(255, 255, 255, 0.5);
-  /* stylelint-disable color-no-hex -- 1-bit texture solid alias */
+  /* stylelint-disable color-no-hex -- high-contrast texture solid alias */
   --texture-solid: #fff;
+  --icon-blob: var(--color-paper); /* project icon blobs: paper on dark, ink on light */
   /* stylelint-enable color-no-hex */
   --texture-noise-svg: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' fill='white' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
 
@@ -213,6 +188,9 @@
   --border-default: rgba(255, 255, 255, 0.1); /* cards, inputs */
   --border-strong: rgba(255, 255, 255, 0.18); /* hover emphasis */
   --border-focus: var(--magenta-500); /* form focus rings */
+  --focus-ring: 0 0 0 2px var(--bg-base), 0 0 0 4px var(--border-focus);
+  --focus-ring-secondary: 0 0 0 2px var(--bg-base), 0 0 0 4px var(--brand-secondary);
+  --focus-ring-danger: 0 0 0 2px var(--bg-base), 0 0 0 4px var(--danger-500);
   --border-brand: var(--magenta-500); /* decorative brand */
 
   /* ---- SEMANTIC STATUS · meaning, not decoration ---- */
@@ -232,7 +210,7 @@
   --status-neutral-bg: var(--neutral-900);
   --status-neutral-fg: var(--neutral-300);
 
-  /* ---- BRAND SECONDARY · dynamic thematic accent (cyan default, overridable per project) ---- */
+  /* ---- BRAND SECONDARY · dynamic project accent (default: 7KMinato cyan; overridden per project via data-project / ProjectProvider) ---- */
   --brand-secondary: var(--cyan-500);
   --brand-secondary-hover: var(--cyan-400);
   --brand-secondary-active: var(--cyan-600);
@@ -240,12 +218,10 @@
   --brand-secondary-subtle: var(--cyan-950);
   --brand-secondary-glow: color-mix(in srgb, var(--brand-secondary) 25%, transparent);
 
-  /* ---- PROJECT ACCENTS (sub-brands) ---- */
-  --accent-square: var(--magenta-500); /* 7K parent */
-  --accent-triangle: var(--solar-500);
-  --accent-circle: var(--cyan-500);
-  --accent-grid: var(--acid-500);
-  --accent-line: var(--ember-500);
+  /* ---- PROJECT ACCENTS — one canonical hue per project ---- */
+  --accent-7kgroup: var(--magenta-500); /* 7KGroup (parent) */
+  --accent-7kminato: var(--cyan-500); /* 7KMinato */
+  --accent-inari: var(--inari-500); /* Inari */
 
   /* ---- TYPOGRAPHY ---- */
   --font-sans: 'Geist', system-ui, -apple-system, sans-serif;
@@ -254,6 +230,7 @@
 
   /* Type scale — new spec: Geist sans for text, Geist Mono for labels/code, Geist Pixel for ornamental */
   --text-display: clamp(48px, 8vw, 160px); /* Geist, 900 weight, -0.04em */
+  --text-body-fluid: clamp(0.9375rem, 0.875rem + 0.2vw, 1rem); /* 15-16px fluid body */
   --text-7xl: 7.5rem; /* 120px — legacy */
   --text-6xl: 5.5rem; /* 88px — legacy */
   --text-5xl: 4rem; /* 64px */

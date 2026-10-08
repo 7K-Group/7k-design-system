@@ -1,5 +1,5 @@
 /* ===========================================================
-      1-BIT TEXTURE BACKGROUNDS — manga screentone library
+      TEXTURE BACKGROUNDS — screentone pattern library
    =========================================================== */
 
 /* ---- Scanline overlay ---- */
@@ -42,7 +42,7 @@
   z-index: 1;
 }
 
-/* ---- Halftone dots (manga screentone) ---- */
+/* ---- Halftone dots (screentone) ---- */
 .halftone-sm {
   background-image: radial-gradient(var(--texture-08) 0.5px, transparent 0.5px);
   background-size: 4px 4px;
@@ -96,10 +96,10 @@
 .diagonal-stripes-negative {
   background: repeating-linear-gradient(
     45deg,
-    var(--onebit-black),
-    var(--onebit-black) 6px,
-    var(--onebit-white) 6px,
-    var(--onebit-white) 7px
+    var(--color-ink),
+    var(--color-ink) 6px,
+    var(--color-paper) 6px,
+    var(--color-paper) 7px
   );
 }
 
@@ -191,12 +191,12 @@
     6px -6px,
     -6px 0;
 }
-.checkerboard-onebit {
+.checkerboard-contrast {
   background-image:
-    linear-gradient(45deg, var(--onebit-black) 25%, transparent 25%),
-    linear-gradient(-45deg, var(--onebit-black) 25%, transparent 25%),
-    linear-gradient(45deg, transparent 75%, var(--onebit-black) 75%),
-    linear-gradient(-45deg, transparent 75%, var(--onebit-black) 75%);
+    linear-gradient(45deg, var(--color-ink) 25%, transparent 25%),
+    linear-gradient(-45deg, var(--color-ink) 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, var(--color-ink) 75%),
+    linear-gradient(-45deg, transparent 75%, var(--color-ink) 75%);
   background-size: 16px 16px;
   background-position:
     0 0,
@@ -224,23 +224,23 @@
 }
 
 /* ---- Vignette ---- */
-.vignette-onebit {
+.vignette-ink {
   position: relative;
 }
-.vignette-onebit::after {
+.vignette-ink::after {
   content: '';
   position: absolute;
   inset: 0;
   background: radial-gradient(
     ellipse at center,
     transparent 50%,
-    color-mix(in srgb, var(--onebit-black) 80%, transparent) 100%
+    color-mix(in srgb, var(--color-ink) 80%, transparent) 100%
   );
   pointer-events: none;
   z-index: 1;
 }
-.vignette-onebit-sharp::after {
-  background: radial-gradient(ellipse at center, transparent 30%, var(--onebit-black) 100%);
+.vignette-ink-sharp::after {
+  background: radial-gradient(ellipse at center, transparent 30%, var(--color-ink) 100%);
 }
 
 /* ---- Waves — repeating concentric arcs via layered radial gradients ---- */
@@ -604,7 +604,7 @@
 }
 
 /* ---- Section separators (theme-aware: white in dark, black in light) ---- */
-.separator-onebit {
+.separator-solid {
   width: 100%;
   height: 1px;
   background: var(--texture-solid);
@@ -612,17 +612,17 @@
   margin: 0;
   opacity: 0.25;
 }
-.separator-onebit-thick {
+.separator-thick {
   height: 2px;
   opacity: 0.4;
 }
-.separator-onebit-dashed {
+.separator-dashed {
   height: 0;
   border-top: 2px dashed var(--texture-solid);
   background: transparent;
   opacity: 0.3;
 }
-.separator-onebit-dotted {
+.separator-dotted {
   height: 0;
   border-top: 2px dotted var(--texture-solid);
   background: transparent;

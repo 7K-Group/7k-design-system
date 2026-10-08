@@ -1,69 +1,147 @@
 /* ===========================================================
-   PROJECT THEMATIC ACCENT OVERRIDES
-   Switch the dynamic --brand-secondary token by project.
-   The parent 7K brand uses cyan as the default secondary neon;
-   child projects can theme it to their own accent hue.
+   PROJECT THEME OVERRIDES
+   Within a project scope, the project accent becomes the
+   PREVALENT brand color: it takes over the full --brand-primary
+   chain (primary buttons, focus rings, brand borders) as well as
+   --brand-secondary. The magenta 7KGroup baseline only remains in
+   constant identity marks (logo strokes, --accent-7kgroup).
+   Canonical mapping:
+     7KGroup  (parent)  → magenta  (--accent-7kgroup)
+     7KMinato           → cyan     (--accent-7kminato)
+     Inari              → inari    (--accent-inari)
    Use on <html data-project="...">, a container class, or via
    ProjectProvider in React.
    =========================================================== */
 
-/* ---- Per-project overrides ---- */
-[data-project='7k'],
-.project-7k {
+/* ---- 7KGroup (parent) — magenta (same as baseline defaults) ---- */
+[data-project='7kgroup'],
+.project-7kgroup {
+  --brand-primary: var(--magenta-500);
+  --brand-primary-hover: var(--magenta-400);
+  --brand-primary-active: var(--magenta-600);
+  --brand-primary-muted: var(--magenta-800);
+  --brand-primary-subtle: var(--magenta-950);
+  --brand-primary-glow: color-mix(in srgb, var(--magenta-500) 25%, transparent);
   --brand-secondary: var(--magenta-500);
   --brand-secondary-hover: var(--magenta-400);
   --brand-secondary-active: var(--magenta-600);
   --brand-secondary-muted: var(--magenta-800);
   --brand-secondary-subtle: var(--magenta-950);
   --brand-secondary-glow: color-mix(in srgb, var(--magenta-500) 25%, transparent);
+  --border-focus: var(--magenta-500);
+  --border-brand: var(--magenta-500);
 }
 
-[data-project='square'],
-.project-square {
-  --brand-secondary: var(--magenta-500);
-  --brand-secondary-hover: var(--magenta-400);
-  --brand-secondary-active: var(--magenta-600);
-  --brand-secondary-muted: var(--magenta-800);
-  --brand-secondary-subtle: var(--magenta-950);
-  --brand-secondary-glow: color-mix(in srgb, var(--magenta-500) 25%, transparent);
-}
-
-[data-project='triangle'],
-.project-triangle {
-  --brand-secondary: var(--solar-500);
-  --brand-secondary-hover: var(--solar-400);
-  --brand-secondary-active: var(--solar-600);
-  --brand-secondary-muted: var(--solar-800);
-  --brand-secondary-subtle: var(--solar-950);
-  --brand-secondary-glow: color-mix(in srgb, var(--solar-500) 25%, transparent);
-}
-
-[data-project='circle'],
-.project-circle {
+/* ---- 7KMinato — cyan takes over the brand chain ---- */
+[data-project='7kminato'],
+.project-7kminato {
+  --brand-primary: var(--cyan-500);
+  --brand-primary-hover: var(--cyan-400);
+  --brand-primary-active: var(--cyan-600);
+  --brand-primary-muted: var(--cyan-800);
+  --brand-primary-subtle: var(--cyan-950);
+  --brand-primary-glow: color-mix(in srgb, var(--cyan-500) 25%, transparent);
   --brand-secondary: var(--cyan-500);
   --brand-secondary-hover: var(--cyan-400);
   --brand-secondary-active: var(--cyan-600);
   --brand-secondary-muted: var(--cyan-800);
   --brand-secondary-subtle: var(--cyan-950);
   --brand-secondary-glow: color-mix(in srgb, var(--cyan-500) 25%, transparent);
+  --border-focus: var(--cyan-500);
+  --border-brand: var(--cyan-500);
 }
 
-[data-project='grid'],
-.project-grid {
-  --brand-secondary: var(--acid-500);
-  --brand-secondary-hover: var(--acid-400);
-  --brand-secondary-active: var(--acid-600);
-  --brand-secondary-muted: var(--acid-800);
-  --brand-secondary-subtle: var(--acid-950);
-  --brand-secondary-glow: color-mix(in srgb, var(--acid-500) 25%, transparent);
+/* ---- Inari — burnt orange takes over the brand chain ---- */
+[data-project='inari'],
+.project-inari {
+  --brand-primary: var(--inari-500);
+  --brand-primary-hover: var(--inari-400);
+  --brand-primary-active: var(--inari-600);
+  --brand-primary-muted: var(--inari-800);
+  --brand-primary-subtle: var(--inari-950);
+  --brand-primary-glow: color-mix(in srgb, var(--inari-500) 25%, transparent);
+  --brand-secondary: var(--inari-500);
+  --brand-secondary-hover: var(--inari-400);
+  --brand-secondary-active: var(--inari-600);
+  --brand-secondary-muted: var(--inari-800);
+  --brand-secondary-subtle: var(--inari-950);
+  --brand-secondary-glow: color-mix(in srgb, var(--inari-500) 25%, transparent);
+  --border-focus: var(--inari-500);
+  --border-brand: var(--inari-500);
 }
 
-[data-project='line'],
-.project-line {
-  --brand-secondary: var(--ember-500);
-  --brand-secondary-hover: var(--ember-400);
-  --brand-secondary-active: var(--ember-600);
-  --brand-secondary-muted: var(--ember-800);
-  --brand-secondary-subtle: var(--ember-950);
-  --brand-secondary-glow: color-mix(in srgb, var(--ember-500) 25%, transparent);
+/* ---- Light-theme variants — project hue one step darker for contrast.
+   Needed because html[data-theme='light'] out-specificities the base
+   project selectors when data-project lives on <html>. ---- */
+html[data-theme='light'][data-project='7kminato'],
+html[data-theme='light'] .project-7kminato {
+  --brand-primary: var(--cyan-600);
+  --brand-primary-hover: var(--cyan-500);
+  --brand-primary-active: var(--cyan-700);
+  --brand-primary-muted: var(--cyan-200);
+  --brand-primary-subtle: var(--cyan-100);
+  --brand-primary-glow: color-mix(in srgb, var(--cyan-600) 15%, transparent);
+  --brand-secondary: var(--cyan-600);
+  --brand-secondary-hover: var(--cyan-500);
+  --brand-secondary-active: var(--cyan-700);
+  --brand-secondary-muted: var(--cyan-200);
+  --brand-secondary-subtle: var(--cyan-100);
+  --brand-secondary-glow: color-mix(in srgb, var(--cyan-600) 15%, transparent);
+  --border-focus: var(--cyan-600);
+  --border-brand: var(--cyan-600);
+}
+
+html[data-theme='light'][data-project='inari'],
+html[data-theme='light'] .project-inari {
+  --brand-primary: var(--inari-600);
+  --brand-primary-hover: var(--inari-500);
+  --brand-primary-active: var(--inari-700);
+  --brand-primary-muted: var(--inari-200);
+  --brand-primary-subtle: var(--inari-100);
+  --brand-primary-glow: color-mix(in srgb, var(--inari-600) 15%, transparent);
+  --brand-secondary: var(--inari-600);
+  --brand-secondary-hover: var(--inari-500);
+  --brand-secondary-active: var(--inari-700);
+  --brand-secondary-muted: var(--inari-200);
+  --brand-secondary-subtle: var(--inari-100);
+  --brand-secondary-glow: color-mix(in srgb, var(--inari-600) 15%, transparent);
+  --border-focus: var(--inari-600);
+  --border-brand: var(--inari-600);
+}
+
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme])[data-project='7kminato'],
+  :root:not([data-theme]) .project-7kminato {
+    --brand-primary: var(--cyan-600);
+    --brand-primary-hover: var(--cyan-500);
+    --brand-primary-active: var(--cyan-700);
+    --brand-primary-muted: var(--cyan-200);
+    --brand-primary-subtle: var(--cyan-100);
+    --brand-primary-glow: color-mix(in srgb, var(--cyan-600) 15%, transparent);
+    --brand-secondary: var(--cyan-600);
+    --brand-secondary-hover: var(--cyan-500);
+    --brand-secondary-active: var(--cyan-700);
+    --brand-secondary-muted: var(--cyan-200);
+    --brand-secondary-subtle: var(--cyan-100);
+    --brand-secondary-glow: color-mix(in srgb, var(--cyan-600) 15%, transparent);
+    --border-focus: var(--cyan-600);
+    --border-brand: var(--cyan-600);
+  }
+  :root:not([data-theme])[data-project='inari'],
+  :root:not([data-theme]) .project-inari {
+    --brand-primary: var(--inari-600);
+    --brand-primary-hover: var(--inari-500);
+    --brand-primary-active: var(--inari-700);
+    --brand-primary-muted: var(--inari-200);
+    --brand-primary-subtle: var(--inari-100);
+    --brand-primary-glow: color-mix(in srgb, var(--inari-600) 15%, transparent);
+    --brand-secondary: var(--inari-600);
+    --brand-secondary-hover: var(--inari-500);
+    --brand-secondary-active: var(--inari-700);
+    --brand-secondary-muted: var(--inari-200);
+    --brand-secondary-subtle: var(--inari-100);
+    --brand-secondary-glow: color-mix(in srgb, var(--inari-600) 15%, transparent);
+    --border-focus: var(--inari-600);
+    --border-brand: var(--inari-600);
+  }
 }

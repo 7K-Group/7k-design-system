@@ -47,7 +47,7 @@ describe('CSS bundle', () => {
   it('contains core component classes', () => {
     const css = readFileSync(bundlePath, 'utf-8');
     const classes = [
-      '.btn-modern-primary',
+      '.btn-primary',
       '.card',
       '.modal',
       '.drawer',
@@ -63,11 +63,11 @@ describe('CSS bundle', () => {
     }
   });
 
-  it('contains texture and manga utilities', () => {
+  it('contains texture and surface utilities', () => {
     const css = readFileSync(bundlePath, 'utf-8');
     expect(css).toContain('.scanline');
     expect(css).toContain('.halftone');
-    expect(css).toContain('.panel');
+    expect(css).toContain('.surface');
     expect(css).toContain('.isometric-grid-animated');
   });
 });

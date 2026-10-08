@@ -14,7 +14,7 @@ html {
 }
 body {
   font-family: var(--font-sans);
-  font-size: var(--text-base);
+  font-size: var(--text-body-fluid);
   line-height: 1.6;
   color: var(--text-primary);
   background: var(--bg-base);
@@ -251,11 +251,11 @@ pre {
 .text-fg-secondary {
   color: var(--text-secondary);
 }
-.text-onebit-black {
-  color: var(--onebit-black);
+.text-ink {
+  color: var(--color-ink);
 }
-.text-onebit-white {
-  color: var(--onebit-white);
+.text-paper {
+  color: var(--color-paper);
 }
 .bg-accent {
   background: var(--brand-primary);
@@ -269,11 +269,11 @@ pre {
 .bg-surface-elevated {
   background: var(--bg-raised);
 }
-.bg-onebit-black {
-  background: var(--onebit-black);
+.bg-ink {
+  background: var(--color-ink);
 }
-.bg-onebit-white {
-  background: var(--onebit-white);
+.bg-paper {
+  background: var(--color-paper);
 }
 .border-accent {
   border-color: var(--brand-primary);
@@ -410,5 +410,5 @@ pre {
 }
 ::selection {
   background: var(--brand-primary);
-  color: var(--onebit-white);
+  color: var(--color-paper);
 }

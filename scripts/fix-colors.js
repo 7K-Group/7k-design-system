@@ -22,8 +22,8 @@ const replacements = [
   { pattern: /#00000020/g, replacement: 'rgba(0, 0, 0, 0.12)' },
   
   // Then bare colors
-  { pattern: /#FFFFFF/g, replacement: 'var(--onebit-white)' },
-  { pattern: /#000000/g, replacement: 'var(--onebit-black)' },
+  { pattern: /#FFFFFF/g, replacement: 'var(--color-paper)' },
+  { pattern: /#000000/g, replacement: 'var(--color-ink)' },
 ];
 
 for (const file of files) {

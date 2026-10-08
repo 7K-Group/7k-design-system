@@ -1,6 +1,12 @@
 import { Meta } from '@storybook/blocks';
 import logo7k from '../../build/logos/logo-7k.svg';
 import logo7kLight from '../../build/logos/logo-7k-light.svg';
+import icon7kgroup from '../../build/icons/icon-7kgroup.svg';
+import icon7kminato from '../../build/icons/icon-7kminato.svg';
+import iconInari from '../../build/icons/icon-inari.svg';
+import icon7kgroupLight from '../../build/icons/icon-7kgroup-light.svg';
+import icon7kminatoLight from '../../build/icons/icon-7kminato-light.svg';
+import iconInariLight from '../../build/icons/icon-inari-light.svg';
 
 <Meta title="Design System/Logos" />
 
@@ -74,3 +80,36 @@ import logoLight from '7k-design-system/build/logos/logo-7k-light.svg';
 - Use the color variant on dark canvas and the light variant on light backgrounds.
 - Keep at least `24px` of clear space around the logo.
 - Parent brand uses magenta; child projects swap the accent hue.
+
+## Project icons
+
+Each project ships a stylized icon derived from the canonical base (`build/icons/icon-base.svg`, blobs tagged `blob-1`…`blob-5`). Exactly one blob is recolored with the project's accent token. Every variant ships in dark (`icon-*.svg`) and light (`icon-*-light.svg`) versions.
+
+<div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '24px', marginTop: '24px' }}>
+  {[
+    { name: '7KGroup (base)', dark: icon7kgroup, light: icon7kgroupLight, note: 'all-white blobs' },
+    { name: '7KMinato', dark: icon7kminato, light: icon7kminatoLight, note: 'blob-3 (top-left) → cyan' },
+    { name: 'Inari', dark: iconInari, light: iconInariLight, note: 'blob-2 (top) → orange' },
+  ].map((icon) => (
+    <div key={icon.name} style={{ border: '2px solid var(--border-default)' }}>
+      <div style={{ background: 'var(--bg-base)', padding: '24px', display: 'flex', justifyContent: 'center' }}>
+        <img src={icon.dark} alt={`${icon.name} icon`} style={{ width: '96px', height: 'auto' }} />
+      </div>
+      <div style={{ background: '#fff', padding: '24px', display: 'flex', justifyContent: 'center', borderTop: '2px solid var(--border-default)' }}>
+        <img src={icon.light} alt={`${icon.name} icon light`} style={{ width: '96px', height: 'auto' }} />
+      </div>
+      <div style={{ padding: '12px', display: 'flex', flexDirection: 'column', gap: '4px' }}>
+        <span style={{ fontFamily: 'var(--font-mono)', fontSize: '12px', color: 'var(--text-primary)' }}>{icon.name}</span>
+        <span style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', color: 'var(--text-tertiary)' }}>{icon.note}</span>
+      </div>
+    </div>
+  ))}
+</div>
+
+| Project | Dark file | Light file | Accent blob | Color |
+| --- | --- | --- | --- | --- |
+| 7KGroup (base) | `build/icons/icon-7kgroup.svg` | `icon-7kgroup-light.svg` | — | white blobs (dark) / black blobs (light) |
+| 7KMinato | `build/icons/icon-7kminato.svg` | `icon-7kminato-light.svg` | `blob-3` (top-left) | `--accent-7kminato` (`#00E5FF` dark / `#00B8CC` light) |
+| Inari | `build/icons/icon-inari.svg` | `icon-inari-light.svg` | `blob-2` (top) | `--accent-inari` (`#EE560D` dark / `#C44813` light) |
+
+Static files are importable per project (`7k-design-system/icons/icon-inari.svg`). In React, use `<ProjectIcon />` — it resolves the icon from the active `ProjectProvider` scope only. Its fills are theme-aware tokens (`--icon-blob` flips white→black in light mode, accents shift 500→600), so one component covers both themes.

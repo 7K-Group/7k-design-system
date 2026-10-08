@@ -1,4 +1,5 @@
 import { useTheme } from '../theme/useTheme';
+import { Icon } from './Icon';
 
 export interface ThemeToggleProps {
   className?: string;
@@ -11,19 +12,16 @@ export function ThemeToggle({ className = '' }: ThemeToggleProps) {
   return (
     <button
       onClick={toggleTheme}
-      className={`btn-modern btn-modern-ghost btn-modern-icon ${className}`}
+      className={`btn theme-toggle ${className}`}
       style={{
         width: 32,
         height: 32,
-        fontSize: 12,
         padding: 0,
-        border: '1px solid var(--border-default)',
-        borderRadius: 0,
       }}
       title={isDark ? 'Switch to light theme' : 'Switch to dark theme'}
       aria-label={isDark ? 'Switch to light theme' : 'Switch to dark theme'}
     >
-      {isDark ? '☀' : '☾'}
+      <Icon name={isDark ? 'sun' : 'moon'} size={14} />
     </button>
   );
 }

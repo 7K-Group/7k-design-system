@@ -24,7 +24,11 @@ import {
   Textarea,
   TextureOverlay,
   IsometricBackground,
-  MangaPanel,
+  Spinner,
+  Skeleton,
+  Avatar,
+  Progress,
+  Listbox,
   Icon,
 } from '../src/react';
 
@@ -179,14 +183,53 @@ describe('Layout helpers', () => {
     render(<IsometricBackground pattern="grid">Content</IsometricBackground>);
     expect(screen.getByText('Content')).toBeInTheDocument();
   });
+});
 
-  it('renders MangaPanel', () => {
-    render(
-      <MangaPanel frame texture="halftone">
-        Panel
-      </MangaPanel>
-    );
-    expect(screen.getByText('Panel')).toBeInTheDocument();
+describe('Spinner', () => {
+  it('renders with status role', () => {
+    render(<Spinner />);
+    expect(screen.getByRole('status')).toBeInTheDocument();
+  });
+
+  it('applies size class', () => {
+    render(<Spinner size="lg" />);
+    expect(screen.getByRole('status')).toHaveClass('spinner-lg');
+  });
+});
+
+describe('Skeleton', () => {
+  it('renders with dimensions', () => {
+    const { container } = render(<Skeleton width={120} height={24} />);
+    const el = container.firstChild as HTMLElement;
+    expect(el).toHaveClass('skeleton');
+    expect(el.style.width).toBe('120px');
+    expect(el.style.height).toBe('24px');
+  });
+});
+
+describe('Avatar', () => {
+  it('renders initials', () => {
+    render(<Avatar initials="7K" />);
+    expect(screen.getByText('7K')).toBeInTheDocument();
+  });
+
+  it('renders an image when src is provided', () => {
+    render(<Avatar src="/avatar.png" alt="User" />);
+    expect(screen.getByRole('img')).toHaveAttribute('src', '/avatar.png');
+  });
+});
+
+describe('Progress', () => {
+  it('renders progressbar with value', () => {
+    render(<Progress value={40} />);
+    const bar = screen.getByRole('progressbar');
+    expect(bar).toHaveAttribute('aria-valuenow', '40');
+    expect(bar.firstChild).toHaveStyle({ width: '40%' });
+  });
+
+  it('clamps out-of-range values', () => {
+    render(<Progress value={150} />);
+    expect(screen.getByRole('progressbar').firstChild).toHaveStyle({ width: '100%' });
   });
 });
 
@@ -199,5 +242,41 @@ describe('Icon', () => {
   it('returns null for unknown icon', () => {
     const { container } = render(<Icon name={'unknown' as never} />);
     expect(container.firstChild).toBeNull();
+  });
+});
+
+describe('Listbox', () => {
+  const options = [
+    { value: 'a', label: 'Option A' },
+    { value: 'b', label: 'Option B' },
+    { value: 'c', label: 'Option C', disabled: true },
+  ];
+
+  it('opens on click and selects an option', async () => {
+    const user = (await import('@testing-library/user-event')).default.setup();
+    const onChange = vi.fn();
+    render(<Listbox options={options} onChange={onChange} />);
+    await user.click(screen.getByRole('button'));
+    expect(screen.getByRole('listbox')).toBeInTheDocument();
+    await user.click(screen.getByRole('option', { name: 'Option B' }));
+    expect(onChange).toHaveBeenCalledWith('b');
+    expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
+  });
+
+  it('supports keyboard navigation', async () => {
+    const user = (await import('@testing-library/user-event')).default.setup();
+    const onChange = vi.fn();
+    render(<Listbox options={options} onChange={onChange} />);
+    screen.getByRole('button').focus();
+    await user.keyboard('{ArrowDown}');
+    expect(screen.getByRole('listbox')).toBeInTheDocument();
+    await user.keyboard('{ArrowDown}'); // highlight B (skips nothing, first move from A)
+    await user.keyboard('{Enter}');
+    expect(onChange).toHaveBeenCalledWith('b');
+  });
+
+  it('shows the selected label', () => {
+    render(<Listbox options={options} value="b" />);
+    expect(screen.getByRole('button')).toHaveTextContent('Option B');
   });
 });

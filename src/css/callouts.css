@@ -1,18 +1,18 @@
 /* ===========================================================
-   MANGA PANEL SYSTEM — frames, gutters, speed lines, bubbles
-   Inspired by manga panel layout: thin borders, negative space,
-   screentone textures, and high-contrast splash panels.
+   SURFACE & CALLOUT SYSTEM — surfaces, gutters, motion lines, callouts
+   High-contrast layout primitives: thin borders, negative space,
+   screentone textures, and high-contrast inverted surfaces.
    =========================================================== */
 
-/* ---- Base panel ---- */
-.panel {
+/* ---- Base surface ---- */
+.surface {
   position: relative;
   background: var(--bg-elevated);
-  border: 2px solid var(--onebit-white);
+  border: 2px solid var(--color-paper);
   padding: var(--space-6);
   overflow: hidden;
 }
-.panel::before {
+.surface::before {
   content: '';
   position: absolute;
   inset: 0;
@@ -21,32 +21,32 @@
   opacity: 0;
 }
 
-/* Panel frame — inset border for manga panel look */
-.panel-frame {
-  border: 2px solid var(--onebit-white);
-  outline: 2px solid var(--onebit-white);
+/* Outlined surface — inset double-border look */
+.surface-outlined {
+  border: 2px solid var(--color-paper);
+  outline: 2px solid var(--color-paper);
   outline-offset: 4px;
 }
 
-/* Panel gutter — thick separator between panels */
-.panel-gutter {
+/* Surface gutter — thick separator between surfaces */
+.surface-gutter {
   border: none;
-  border-bottom: 4px solid var(--onebit-white);
+  border-bottom: 4px solid var(--color-paper);
   padding: 0;
   background: transparent;
 }
 
-/* Inverted splash panel */
-.panel-invert {
-  background: var(--onebit-white);
-  color: var(--onebit-black);
-  border-color: var(--onebit-black);
+/* Inverted surface */
+.surface-invert {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  border-color: var(--color-ink);
 }
-.panel-invert .panel-frame {
-  outline-color: var(--onebit-black);
+.surface-invert .surface-outlined {
+  outline-color: var(--color-ink);
 }
 
-/* Corner brackets — manga focus frame */
+/* Corner brackets — focus frame */
 .corner-bracket {
   position: relative;
 }
@@ -73,11 +73,11 @@
 }
 
 /* ---- Speed lines ---- */
-.speed-line {
+.motion-lines {
   position: relative;
   overflow: hidden;
 }
-.speed-line::before {
+.motion-lines::before {
   content: '';
   position: absolute;
   inset: 0;
@@ -89,14 +89,14 @@
     var(--texture-06) 10px
   );
   pointer-events: none;
-  animation: speed-line-scroll 0.6s linear infinite;
+  animation: motion-lines-scroll 0.6s linear infinite;
   z-index: 1;
 }
-.speed-line-radial {
+.motion-lines-radial {
   position: relative;
   overflow: hidden;
 }
-.speed-line-radial::before {
+.motion-lines-radial::before {
   content: '';
   position: absolute;
   inset: -50%;
@@ -108,14 +108,14 @@
     var(--texture-05) 5deg
   );
   pointer-events: none;
-  animation: speed-line-radial-spin 8s linear infinite;
+  animation: motion-lines-radial-spin 8s linear infinite;
   z-index: 1;
 }
-.speed-line-horizontal {
+.motion-lines-horizontal {
   position: relative;
   overflow: hidden;
 }
-.speed-line-horizontal::before {
+.motion-lines-horizontal::before {
   content: '';
   position: absolute;
   inset: 0;
@@ -127,23 +127,23 @@
     var(--texture-05) 8px
   );
   pointer-events: none;
-  animation: speed-line-scroll-vertical 0.8s linear infinite;
+  animation: motion-lines-scroll-vertical 0.8s linear infinite;
   z-index: 1;
 }
 
 /* ---- Speech bubbles ---- */
-.manga-bubble {
+.callout {
   position: relative;
-  background: var(--onebit-white);
-  color: var(--onebit-black);
-  border: 2px solid var(--onebit-black);
+  background: var(--color-paper);
+  color: var(--color-ink);
+  border: 2px solid var(--color-ink);
   border-radius: var(--radius-lg);
   padding: var(--space-4) var(--space-5);
   font-family: var(--font-sans);
   font-size: var(--text-body);
   line-height: var(--leading-snug);
 }
-.manga-bubble::after {
+.callout::after {
   content: '';
   position: absolute;
   bottom: -12px;
@@ -152,23 +152,23 @@
   height: 0;
   border-left: 10px solid transparent;
   border-right: 10px solid transparent;
-  border-top: 12px solid var(--onebit-black);
+  border-top: 12px solid var(--color-ink);
 }
-.manga-bubble-invert {
-  background: var(--onebit-black);
-  color: var(--onebit-white);
-  border-color: var(--onebit-white);
+.callout-invert {
+  background: var(--color-ink);
+  color: var(--color-paper);
+  border-color: var(--color-paper);
 }
-.manga-bubble-invert::after {
-  border-top-color: var(--onebit-white);
+.callout-invert::after {
+  border-top-color: var(--color-paper);
 }
 
 /* Shout bubble — jagged outline */
-.manga-shout {
+.callout-emphasis {
   position: relative;
-  background: var(--onebit-white);
-  color: var(--onebit-black);
-  border: 3px solid var(--onebit-black);
+  background: var(--color-paper);
+  color: var(--color-ink);
+  border: 3px solid var(--color-ink);
   padding: var(--space-4);
   font-family: var(--font-sans);
   font-weight: 700;
@@ -224,8 +224,8 @@
   opacity: 0.6;
 }
 
-/* ---- Keyframes for manga animations ---- */
-@keyframes speed-line-scroll {
+/* ---- Keyframes for motion-line animations ---- */
+@keyframes motion-lines-scroll {
   0% {
     transform: translateX(0);
   }
@@ -233,7 +233,7 @@
     transform: translateX(-18px);
   }
 }
-@keyframes speed-line-scroll-vertical {
+@keyframes motion-lines-scroll-vertical {
   0% {
     transform: translateY(0);
   }
@@ -241,7 +241,7 @@
     transform: translateY(-14px);
   }
 }
-@keyframes speed-line-radial-spin {
+@keyframes motion-lines-radial-spin {
   0% {
     transform: rotate(0deg);
   }
@@ -251,9 +251,9 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .speed-line::before,
-  .speed-line-horizontal::before,
-  .speed-line-radial::before {
+  .motion-lines::before,
+  .motion-lines-horizontal::before,
+  .motion-lines-radial::before {
     animation: none !important;
   }
 }

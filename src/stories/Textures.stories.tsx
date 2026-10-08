@@ -84,8 +84,8 @@ export const Noise: Story = {
 export const Vignette: Story = {
   render: () => (
     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '16px' }}>
-      <TextureBox className="vignette-onebit" label=".vignette-onebit" />
-      <TextureBox className="vignette-onebit-sharp" label=".vignette-onebit-sharp" />
+      <TextureBox className="vignette-ink" label=".vignette-ink" />
+      <TextureBox className="vignette-ink-sharp" label=".vignette-ink-sharp" />
     </div>
   ),
 };

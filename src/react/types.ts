@@ -209,6 +209,43 @@ export interface ProgressProps extends BaseProps {
   variant?: 'accent' | 'danger';
 }
 
+export interface StatProps extends BaseProps {
+  value: ReactNode;
+  label: ReactNode;
+  trend?: ReactNode;
+  accent?: boolean;
+  status?: 'success' | 'warning' | 'danger' | 'neutral';
+}
+
+export interface EmptyStateProps extends BaseProps {
+  title: ReactNode;
+  body?: ReactNode;
+  action?: ReactNode;
+  icon?: ReactNode;
+}
+
+export interface DataTableColumn<Row> {
+  key: string;
+  label: ReactNode;
+  mono?: boolean;
+  sortable?: boolean;
+  width?: number | string;
+  render?: (row: Row, index: number) => ReactNode;
+}
+
+export interface DataTableProps<Row> extends BaseProps {
+  columns: DataTableColumn<Row>[];
+  rows: Row[];
+  rowKey: keyof Row | ((row: Row, index: number) => string);
+  loading?: boolean;
+  skeletonRows?: number;
+  empty?: ReactNode;
+  onSort?: (key: string) => void;
+  sortKey?: string;
+  sortDirection?: 'asc' | 'desc';
+  pagination?: ReactNode;
+}
+
 export interface ListboxOption {
   value: string;
   label: string;

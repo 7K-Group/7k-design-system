@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/7K-Group/7k-design-system/compare/v1.1.1...v1.2.0) (2026-10-08)
+
+
+### Features
+
+* modernize design system — naming standardization, Inari project, accent-driven UI ([#65](https://github.com/7K-Group/7k-design-system/issues/65)) ([b160a60](https://github.com/7K-Group/7k-design-system/commit/b160a60b4373c6a8fb1d91446397f8cd6b84ef80))
+
 ## [1.1.1](https://github.com/7K-Group/7k-design-system/compare/v1.1.0...v1.1.1) (2026-08-13)
 
 

@@ -22,6 +22,13 @@ const config: StorybookConfig = {
       '@storybook/addon-docs/mdx-react-shim': mdxReactShim,
       '@storybook/blocks': require.resolve('@storybook/addon-docs/blocks'),
     };
+    // Allow access via forwarded hostnames (e.g. code.7kgroup.org through
+    // kandev port-forwarding). Vite 6+/7+ blocks unknown Host headers by default.
+    config.server = config.server ?? {};
+    config.server.allowedHosts = [
+      ...(Array.isArray(config.server.allowedHosts) ? config.server.allowedHosts : []),
+      '.7kgroup.org',
+    ];
     config.build = config.build ?? {};
     config.build.rollupOptions = config.build.rollupOptions ?? {};
     config.build.rollupOptions.external = [

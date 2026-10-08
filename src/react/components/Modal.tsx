@@ -32,14 +32,45 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(
         previousActiveElement.current = document.activeElement;
         modalRef.current?.focus();
         document.body.style.overflow = 'hidden';
-      } else {
-        document.body.style.overflow = '';
-        (previousActiveElement.current as HTMLElement)?.focus();
+
+        const handleKeyDown = (event: KeyboardEvent) => {
+          if (event.key === 'Escape') {
+            event.stopPropagation();
+            onClose?.();
+            return;
+          }
+          // Simple focus trap: keep Tab cycling within the dialog
+          if (event.key === 'Tab' && modalRef.current) {
+            const focusables = modalRef.current.querySelectorAll<HTMLElement>(
+              'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])'
+            );
+            if (focusables.length === 0) {
+              event.preventDefault();
+              return;
+            }
+            const first = focusables[0];
+            const last = focusables[focusables.length - 1];
+            if (event.shiftKey && document.activeElement === first) {
+              event.preventDefault();
+              last.focus();
+            } else if (!event.shiftKey && document.activeElement === last) {
+              event.preventDefault();
+              first.focus();
+            }
+          }
+        };
+        document.addEventListener('keydown', handleKeyDown);
+        return () => {
+          document.removeEventListener('keydown', handleKeyDown);
+          document.body.style.overflow = '';
+        };
       }
+      document.body.style.overflow = '';
+      (previousActiveElement.current as HTMLElement)?.focus();
       return () => {
         document.body.style.overflow = '';
       };
-    }, [open]);
+    }, [open, onClose]);
 
     if (!open) return null;
 
@@ -62,7 +93,7 @@ export const Modal = forwardRef<HTMLDivElement, ModalProps>(
           display: 'grid',
           placeItems: 'center',
           background: 'rgba(0,0,0,0.7)',
-          zIndex: 300,
+          zIndex: 'var(--z-modal)',
         }}
       >
         <div

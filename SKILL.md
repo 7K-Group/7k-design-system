@@ -181,7 +181,7 @@ Reference `build/logos/logo-7k.svg` (color, default), `build/logos/logo-7k-light
 | Theme             | Dark-first — `--bg-void: #000000`, `--bg-base: #0A0A0D` near-black canvas, toggle to light via `data-theme="light"`                                                                                                                  | "dark theme for website"                   |
 | Brand accent      | Magenta `--magenta-500: #FF00FF` with neon glow                                                                                                                                                                                      | #FF0FF brand hex                           |
 | Secondary accents | Solar (`--solar-500: #FFD60A`), Cyan (`--cyan-500: #00E5FF`), Acid (`--acid-500: #7CFF00`), Ember (`--ember-500: #FF6B35`)                                                                                                           | Tokyo neon atmosphere                      |
-| Type              | Geist Pixel (5 variants: Square/Circle/Grid/Line/Triangle) for all surfaces including code/tabular                                                                                                                                   | "only 1 font and it's Geist" (Geist Pixel) |
+| Type              | Three-font Geist system: Geist (sans) for headings/body, Geist Mono for labels/code/tabular data, Geist Pixel (5 variants: Square/Circle/Grid/Line/Triangle) for ornamental display                                                  | "only 1 font and it's Geist" (Geist Pixel) |
 | 1-bit textures    | 10 pattern categories: scanline, halftone (3 densities), dot matrix (3 densities), diagonal stripes (3 variants), horizontal/vertical stripes, crosshatch (2 densities), checkerboard, noise (2 opacities), vignette (2 sharpnesses) | "Manga-influenced 1-bit"                   |
 | 1-bit animations  | 20+ keyframes organized as ambient (flicker, blink, neon-pulse, shimmer, accent-flicker, frame-step) and trigger (glitch, glitch-complex, pixel-dots, invert-flash, typewriter, pixel-fade, scan-reveal, slide-up-reveal)            | "abstract 1-bit animations"                |
 | 1-bit components  | 40+ unified components with zero radius, 2px borders, invert hover, thin accent layer modifiers (accent-border-top, accent-bar, accent-dot, glow-mod, accent-corner)                                                                 | "Manga-influenced 1-bit"                   |
@@ -190,7 +190,7 @@ Reference `build/logos/logo-7k.svg` (color, default), `build/logos/logo-7k-light
 | Sub-projects      | Accent token override via `--accent-square                                                                                                                                                                                           | triangle                                   | circle | grid | line` — parent 7K stays magenta | "differentiate main company with projects" |
 | Spacing           | 4px grid in rem, 14-step scale (0–128px)                                                                                                                                                                                             | "very complete and detailed"               |
 | Reduced motion    | All animations disabled at `prefers-reduced-motion: reduce`                                                                                                                                                                          | System accessibility policy                |
-| Testing           | Vitest + @testing-library/react + jest-axe — 6 test files covering components and a11y                                                                                                                                               | Production quality assurance               |
+| Testing           | Vitest + @testing-library/react + jest-axe — 9 test files (incl. a11y and component-state suites)                                                                                                                                    | Production quality assurance               |
 | Documentation     | Storybook with Overview, Tokens, Components, and Textures stories                                                                                                                                                                    | Interactive component documentation        |
 
 ## Quick reference — exact class names and tokens
@@ -199,8 +199,10 @@ Reference `build/logos/logo-7k.svg` (color, default), `build/logos/logo-7k-light
 
 ```
 .btn-modern .btn-modern-primary .btn-modern-secondary .btn-modern-ghost
-.btn-modern-glow .btn-modern-glow-cyan .btn-modern-glow-grid .btn-modern-danger
-.btn-modern-sm .btn-modern-lg .btn-modern-icon .btn-modern-lg-icon .btn-modern-loading
+.btn-modern-glow .btn-modern-accent .btn-modern-glow-accent .btn-modern-glow-secondary
+.btn-modern-danger
+.btn-modern-sm .btn-modern-lg .btn-modern-icon .btn-modern-lg-icon
+.btn-modern-loading .btn-modern:disabled
 ```
 
 ### Texture classes

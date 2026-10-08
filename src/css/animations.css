@@ -263,51 +263,51 @@
 @keyframes pixel-dots {
   0% {
     box-shadow:
-      4px 8px 0 0 #000,
-      28px 3px 0 0 #000,
-      52px 18px 0 0 #000,
-      76px 5px 0 0 #000,
-      14px 24px 0 0 #000,
-      38px 12px 0 0 #000,
-      62px 28px 0 0 #000,
-      86px 15px 0 0 #000,
-      8px 32px 0 0 #000;
+      4px 8px 0 0 var(--onebit-black),
+      28px 3px 0 0 var(--onebit-black),
+      52px 18px 0 0 var(--onebit-black),
+      76px 5px 0 0 var(--onebit-black),
+      14px 24px 0 0 var(--onebit-black),
+      38px 12px 0 0 var(--onebit-black),
+      62px 28px 0 0 var(--onebit-black),
+      86px 15px 0 0 var(--onebit-black),
+      8px 32px 0 0 var(--onebit-black);
   }
   25% {
     box-shadow:
-      6px 12px 0 0 #000,
-      32px 8px 0 0 #000,
-      48px 25px 0 0 #000,
-      82px 3px 0 0 #000,
-      10px 18px 0 0 #000,
-      42px 30px 0 0 #000,
-      68px 10px 0 0 #000,
-      90px 22px 0 0 #000,
-      20px 5px 0 0 #000;
+      6px 12px 0 0 var(--onebit-black),
+      32px 8px 0 0 var(--onebit-black),
+      48px 25px 0 0 var(--onebit-black),
+      82px 3px 0 0 var(--onebit-black),
+      10px 18px 0 0 var(--onebit-black),
+      42px 30px 0 0 var(--onebit-black),
+      68px 10px 0 0 var(--onebit-black),
+      90px 22px 0 0 var(--onebit-black),
+      20px 5px 0 0 var(--onebit-black);
   }
   50% {
     box-shadow:
-      12px 4px 0 0 #000,
-      22px 20px 0 0 #000,
-      58px 8px 0 0 #000,
-      72px 28px 0 0 #000,
-      4px 15px 0 0 #000,
-      36px 6px 0 0 #000,
-      66px 22px 0 0 #000,
-      92px 12px 0 0 #000,
-      50px 30px 0 0 #000;
+      12px 4px 0 0 var(--onebit-black),
+      22px 20px 0 0 var(--onebit-black),
+      58px 8px 0 0 var(--onebit-black),
+      72px 28px 0 0 var(--onebit-black),
+      4px 15px 0 0 var(--onebit-black),
+      36px 6px 0 0 var(--onebit-black),
+      66px 22px 0 0 var(--onebit-black),
+      92px 12px 0 0 var(--onebit-black),
+      50px 30px 0 0 var(--onebit-black);
   }
   75% {
     box-shadow:
-      2px 10px 0 0 #000,
-      26px 22px 0 0 #000,
-      44px 4px 0 0 #000,
-      70px 14px 0 0 #000,
-      18px 28px 0 0 #000,
-      54px 20px 0 0 #000,
-      84px 8px 0 0 #000,
-      8px 6px 0 0 #000,
-      40px 26px 0 0 #000;
+      2px 10px 0 0 var(--onebit-black),
+      26px 22px 0 0 var(--onebit-black),
+      44px 4px 0 0 var(--onebit-black),
+      70px 14px 0 0 var(--onebit-black),
+      18px 28px 0 0 var(--onebit-black),
+      54px 20px 0 0 var(--onebit-black),
+      84px 8px 0 0 var(--onebit-black),
+      8px 6px 0 0 var(--onebit-black),
+      40px 26px 0 0 var(--onebit-black);
   }
   100% {
     box-shadow: none;
@@ -406,16 +406,15 @@
   }
 }
 .shimmer {
-  /* stylelint-disable color-no-hex -- shimmer uses fixed low-opacity white overlays */
+  /* Theme-aware shimmer — uses texture tokens (white overlay dark, black in light) */
   background: linear-gradient(
     90deg,
     transparent 0%,
-    #ffffff08 40%,
-    #ffffff18 50%,
-    #ffffff08 60%,
+    var(--texture-03) 40%,
+    var(--texture-09) 50%,
+    var(--texture-03) 60%,
     transparent 100%
   );
-  /* stylelint-enable color-no-hex */
   background-size: 200% 100%;
   animation: shimmer-sweep 2s linear infinite;
 }

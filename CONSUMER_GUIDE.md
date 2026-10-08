@@ -271,6 +271,27 @@ function ThemeAwareComponent() {
 </Modal>
 ```
 
+Accessibility notes: `Modal` closes on **Escape**, traps **Tab** focus inside the dialog while open, and restores focus to the triggering element on close. Always pass `aria-labelledby` (or `aria-label`). `Drawer` supports Escape and focus restoration as well.
+
+#### Toast
+
+```tsx
+<Toast
+  variant="success" // 'default' | 'success' | 'error' | 'warning' | 'info'
+  onDismiss={() => setShow(false)}
+>
+  Deployed
+</Toast>
+```
+
+Mount toasts in a fixed container at the top of your app (they use `role="status"`/`role="alert"` and the `slide-up-reveal` animation). Example container:
+
+```tsx
+<div style={{ position: 'fixed', bottom: 24, right: 24, zIndex: 'var(--z-toast)', display: 'grid', gap: 8 }}>
+  {toasts.map((t) => <Toast key={t.id} {...t} />)}
+</div>
+```
+
 #### Layout helpers
 
 ```tsx
@@ -288,6 +309,8 @@ function ThemeAwareComponent() {
 <Select><option>A</option></Select>
 <Textarea rows={4} />
 ```
+
+Form notes: passing `error` to `Input` adds the `.error` class (danger border) and wires `aria-invalid` + an alert-role message automatically (for `Textarea`/`Select`, add the `error` class and `aria-invalid` manually). Custom `Checkbox`/`Radio`/`Toggle` render a visually-hidden native input — keyboard focus shows a magenta focus ring on the custom control via `:focus-visible`. `Tabs` supports full arrow-key / Home / End navigation with roving tabindex per the ARIA tabs pattern.
 
 ---
 

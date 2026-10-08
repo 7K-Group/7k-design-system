@@ -4,7 +4,7 @@
    Dark is the default in :root above. Only role-mapping tokens
    change — primitive ramps are shared and unchanged. */
 @media (prefers-color-scheme: light) {
-  :root {
+  :root:not([data-theme]) {
     /* ---- BRAND ---- */
     --brand-primary: var(--magenta-500);
     --brand-primary-hover: var(--magenta-600);
@@ -78,7 +78,7 @@
     --shadow-glow:
       0 0 0 1px var(--brand-primary),
       0 0 20px color-mix(in srgb, var(--magenta-500) 20%, transparent);
-    --shadow-inset: inset 0 1px 0 rgba(255, 255, 255, 0.6);
+    --shadow-inset: inset 0 1px 0 rgba(0, 0, 0, 0.06);
 
     /* ---- Texture colors (black on light background) ---- */
     --texture-02: rgba(0, 0, 0, 0.02);
@@ -99,8 +99,10 @@
 }
 
 /* ---- Manual light theme toggle (html[data-theme="light"]) ---- */
-/* Same overrides as @media (prefers-color-scheme: light) above. Activated
-   by ThemeToggle.js in the UI kit. */
+/* Same overrides as @media (prefers-color-scheme: light) above — keep the
+   two blocks in sync (CSS has no mixin without a preprocessor). The media
+   block skips explicit data-theme so data-theme="dark" always wins.
+   Activated by ThemeToggle in the UI kit. */
 html[data-theme='light'] {
   --brand-primary: var(--magenta-500);
   --brand-primary-hover: var(--magenta-600);
@@ -159,7 +161,7 @@ html[data-theme='light'] {
   --shadow-xl: 0 24px 64px rgba(0, 0, 0, 0.15);
   --shadow-glow:
     0 0 0 1px var(--brand-primary), 0 0 20px color-mix(in srgb, var(--magenta-500) 20%, transparent);
-  --shadow-inset: inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  --shadow-inset: inset 0 1px 0 rgba(0, 0, 0, 0.06);
   --texture-02: rgba(0, 0, 0, 0.02);
   --texture-03: rgba(0, 0, 0, 0.03);
   --texture-04: rgba(0, 0, 0, 0.04);

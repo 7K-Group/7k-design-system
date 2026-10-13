@@ -26,12 +26,15 @@ export function DataTable<Row extends object>({
         <thead>
           <tr>
             {columns.map((col) => (
-              <th key={col.key} style={col.width != null ? { width: col.width } : undefined}>
+              <th
+                key={col.key}
+                style={col.width != null ? { width: col.width } : undefined}
+                aria-sort={col.sortable && onSort && sortKey === col.key ? (sortDirection === 'desc' ? 'descending' : 'ascending') : undefined}
+              >
                 {col.sortable && onSort ? (
                   <button
                     type="button"
                     className="table-sort"
-                    aria-sort={sortKey === col.key ? (sortDirection === 'desc' ? 'descending' : 'ascending') : undefined}
                     onClick={() => onSort(col.key)}
                   >
                     {col.label}

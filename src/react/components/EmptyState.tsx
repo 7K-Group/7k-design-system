@@ -6,7 +6,7 @@ export function EmptyState({ title, body, action, icon, className = '', style }:
   return (
     <div className={classes} style={style}>
       {icon != null ? <span className="empty-icon">{icon}</span> : null}
-      <span className="empty-title">{title}</span>
+      <h3 className="empty-title">{title}</h3>
       {body != null && <span className="empty-text">{body}</span>}
       {action != null && <span className="empty-action">{action}</span>}
     </div>

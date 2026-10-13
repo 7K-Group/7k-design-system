@@ -227,6 +227,9 @@ export interface EmptyStateProps extends BaseProps {
 export interface DataTableColumn<Row> {
   key: string;
   label: ReactNode;
+  /** Plain-text label for the mobile stacked layout (`data-label`). Required
+   * when `label` is not a string, otherwise mobile cells show no label. */
+  mobileLabel?: string;
   mono?: boolean;
   sortable?: boolean;
   width?: number | string;

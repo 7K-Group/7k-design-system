@@ -18,6 +18,18 @@ export function DataTable<Row extends object>({
   const keyOf = (row: Row, index: number) =>
     typeof rowKey === 'function' ? rowKey(row, index) : String((row as Record<string, unknown>)[rowKey as string]);
 
+  const isDev = typeof process === 'undefined' || process.env?.NODE_ENV !== 'production';
+  if (isDev && !loading) {
+    const seen = new Set<string>();
+    rows.forEach((row, i) => {
+      const key = keyOf(row, i);
+      if (key === 'undefined' || seen.has(key)) {
+        console.warn(`DataTable: duplicate or missing rowKey "${key}" at row ${i}`);
+      }
+      seen.add(key);
+    });
+  }
+
   const wrapperClasses = ['datatable', className].filter(Boolean).join(' ');
 
   return (
@@ -61,7 +73,7 @@ export function DataTable<Row extends object>({
             : rows.map((row, i) => (
                 <tr key={keyOf(row, i)}>
                   {columns.map((col) => (
-                    <td key={col.key} className={col.mono ? 'mono' : undefined} data-label={typeof col.label === 'string' ? col.label : undefined}>
+                    <td key={col.key} className={col.mono ? 'mono' : undefined} data-label={col.mobileLabel ?? (typeof col.label === 'string' ? col.label : undefined)}>
                       {col.render ? col.render(row, i) : String((row as Record<string, unknown>)[col.key] ?? '')}
                     </td>
                   ))}

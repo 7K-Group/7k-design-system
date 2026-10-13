@@ -1,3 +1,15 @@
+# [1.3.0](https://github.com/7K-Group/7k-design-system/compare/v1.2.0...v1.3.0) (2026-10-08)
+
+
+### Features
+
+* add `Stat`, `EmptyState`, and `DataTable` React components (`.stat`/`.empty`/`.table` compositions with loading skeletons, sortable headers, and a mobile stacked-card transform) plus `.banner-count`/`.banner-link` banner slots ([3eae951](https://github.com/7K-Group/7k-design-system/commit/3eae951))
+* add token-based `u-*` utility classes (`utilities.css`): text/background/border helpers with explicit opacity and hover variants
+
+### Breaking Changes
+
+* rename legacy class families for consistency: `isometric-*` → `iso-*`, bare texture classes → `bg-*` (e.g. `.scanline` → `.bg-scanline`), `.pixel-*` → `.font-pixel-*`, `.pixel-fade-in`/`.pixel-dots` → `.step-fade-in`/`.step-dots`; `TextureOverlay` prop `animate` → `animated`; the conflicting duplicate `.texture-overlay` in isometric.css is now `.overlay-fill`
+
 # [1.2.0](https://github.com/7K-Group/7k-design-system/compare/v1.1.1...v1.2.0) (2026-10-08)
 
 

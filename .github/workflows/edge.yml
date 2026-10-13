@@ -1,0 +1,99 @@
+name: edge
+
+# Per-merge edge releases: every push to main publishes the package to npm as
+# <version>-edge.<shortsha> under the `edge` dist-tag (plus a moving GitHub
+# `edge` prerelease), so consumers (inari-ui) can track main without a local
+# checkout. Skipped on semantic-release merges — cd.yaml covers that commit.
+on:
+  push:
+    branches: [main]
+  # Manual repair path: republish :edge when a push-triggered run never fired
+  # (e.g. GitHub dropped the push event) or published from a stale commit.
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  id-token: write # npm provenance / trusted publishing
+
+concurrency:
+  group: edge-main
+  cancel-in-progress: false
+
+jobs:
+  gate:
+    runs-on: ubuntu-latest
+    outputs:
+      skip: ${{ steps.gate.outputs.skip }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          fetch-depth: 2
+      - name: Skip on release merges
+        id: gate
+        run: |
+          set -euo pipefail
+          msg="$(git log -1 --pretty=%s)"
+          if echo "$msg" | grep -qiE '^chore(\(.*\))?\(release\)|^chore(\(.*\))?: release'; then
+            echo "release merge detected ($msg) — skipping edge"
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "skip=false" >> "$GITHUB_OUTPUT"
+          fi
+
+  publish:
+    needs: gate
+    if: needs.gate.outputs.skip != 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+
+      - name: Setup Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7
+        with:
+          node-version: 24
+          cache: npm
+          registry-url: https://registry.npmjs.org
+
+      - run: npm ci
+      - run: npm run build
+
+      - name: Publish edge build to npm
+        id: pub
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          set -euo pipefail
+          base="$(node -p "require('./package.json').version")"
+          short="${GITHUB_SHA:0:7}"
+          edge="${base}-edge.${short}"
+          npm version --no-git-tag-version "$edge"
+          npm publish --tag edge --provenance --access public
+          echo "edge=$edge" >> "$GITHUB_OUTPUT"
+
+      - name: Create edge prerelease + move the edge channel tag
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          EDGE: ${{ steps.pub.outputs.edge }}
+        run: |
+          set -euo pipefail
+          if gh release view "v${EDGE}" > /dev/null 2>&1; then
+            echo "prerelease v${EDGE} already exists — skipping create (workflow rerun)"
+          else
+            gh release create "v${EDGE}" \
+              --prerelease \
+              --target "$GITHUB_SHA" \
+              --title "edge ${EDGE}" \
+              --notes "Edge build from ${GITHUB_SHA}. npm: \`7k-design-system@${EDGE}\` (also dist-tag \`edge\`). Superseded by the next stable release."
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git tag -f edge "$GITHUB_SHA"
+          git push -f origin refs/tags/edge
+          if gh release view edge > /dev/null 2>&1; then
+            gh release edit edge --prerelease --title "edge (v${EDGE})" \
+              --notes "Latest edge build: \`v${EDGE}\` (${GITHUB_SHA})."
+          else
+            gh release create edge --prerelease --target "$GITHUB_SHA" \
+              --title "edge (v${EDGE})" \
+              --notes "Latest edge build: \`v${EDGE}\` (${GITHUB_SHA})."
+          fi

@@ -162,7 +162,7 @@ Company/project differentiation: 7KGroup (parent) uses vivid magenta (`--brand-p
 - **Diagonal stripes**: 45° hatch lines at 7px or 4px pitch. Negative variant overlays pure white-on-black for high-contrast sections.
 - **Horizontal / vertical stripes**: Linear parallel lines at 9px or 5px pitch for directional motion cues.
 - **Crosshatch**: Dual-angle hatch (45° + -45°) for dense shading in manga panel style. Standard and dense variants.
-- **Checkerboard**: 12px alternating squares for pixel-art motifs. One-bit variant uses pure black/white for retro game sections.
+- **Checkerboard**: 12px alternating squares for pixel-art motifs. High-contrast variant uses pure black/white.
 - **Noise**: SVG fractal noise overlay at 128px tile, 4%–12% opacity for analog CRT grain. Animatable with translate keyframes.
 - **Vignette**: Radial gradient from transparent center to black edge. Sharp variant clips tighter for manga panel corner fade.
 
@@ -180,23 +180,23 @@ Company/project differentiation: 7KGroup (parent) uses vivid magenta (`--brand-p
 
 | Category           | Classes                                                                      | Density variants                 | Use case                               |
 | ------------------ | ---------------------------------------------------------------------------- | -------------------------------- | -------------------------------------- |
-| Scanline           | `.scanline`, `.scanline-fast`                                                | slow (8s), fast (3s)             | Hero sections, full-bleed walls        |
-| Halftone dots      | `.halftone-sm`, `.halftone-md`, `.halftone-lg`, `.halftone-accent`           | 4px/6px/10px grid, accent-tinted | Manga panel backgrounds, card surfaces |
-| Dot matrix         | `.dot-matrix-dense`, `.dot-matrix`, `.dot-matrix-sparse`                     | 3px/6px/12px grid                | Texture depth behind text, dividers    |
-| Diagonal stripes   | `.diagonal-stripes`, `.diagonal-stripes-dense`, `.diagonal-stripes-negative` | 7px/4px pitch, pure B/W          | Directional cues, loading areas        |
-| Horizontal stripes | `.stripes-h`, `.stripes-h-dense`                                             | 9px/5px pitch                    | Section rhythm, horizontal dividers    |
-| Vertical stripes   | `.stripes-v`, `.stripes-v-dense`                                             | 9px/5px pitch                    | Sidebar textures, column dividers      |
-| Crosshatch         | `.crosshatch`, `.crosshatch-dense`                                           | 7px/4px dual-angle               | Dense manga shading, error states      |
-| Checkerboard       | `.checkerboard`, `.checkerboard-contrast`                                      | 12px/16px grid, pure B/W         | Retro sections, QR motifs              |
-| Noise              | `.noise`, `.noise-heavy`, `.noise-animated`                                  | 4%/12% opacity, SVG fractal      | CRT grain, analog texture              |
-| Vignette           | `.vignette-ink`, `.vignette-ink-sharp`                                 | Soft/sharp radial fade           | Panel corner fade, hero-edge vignette  |
+| Scanline           | `.bg-scanline`, `.bg-scanline-fast`                                                | slow (8s), fast (3s)             | Hero sections, full-bleed walls        |
+| Halftone dots      | `.bg-halftone-sm`, `.bg-halftone-md`, `.bg-halftone-lg`, `.bg-halftone-accent`           | 4px/6px/10px grid, accent-tinted | Manga panel backgrounds, card surfaces |
+| Dot matrix         | `.bg-dot-matrix-dense`, `.bg-dot-matrix`, `.bg-dot-matrix-sparse`                     | 3px/6px/12px grid                | Texture depth behind text, dividers    |
+| Diagonal stripes   | `.bg-diagonal-stripes`, `.bg-diagonal-stripes-dense`, `.bg-diagonal-stripes-negative` | 7px/4px pitch, pure B/W          | Directional cues, loading areas        |
+| Horizontal stripes | `.bg-stripes-h`, `.bg-stripes-h-dense`                                             | 9px/5px pitch                    | Section rhythm, horizontal dividers    |
+| Vertical stripes   | `.bg-stripes-v`, `.bg-stripes-v-dense`                                             | 9px/5px pitch                    | Sidebar textures, column dividers      |
+| Crosshatch         | `.bg-crosshatch`, `.bg-crosshatch-dense`                                           | 7px/4px dual-angle               | Dense manga shading, error states      |
+| Checkerboard       | `.bg-checkerboard`, `.bg-checkerboard-contrast`                                      | 12px/16px grid, pure B/W         | Retro sections, QR motifs              |
+| Noise              | `.bg-noise`, `.bg-noise-heavy`, `.bg-noise-animated`                                  | 4%/12% opacity, SVG fractal      | CRT grain, analog texture              |
+| Vignette           | `.bg-vignette-ink`, `.bg-vignette-ink-sharp`                                 | Soft/sharp radial fade           | Panel corner fade, hero-edge vignette  |
 
 ### Texture composition rules
 
 1. **One texture per section layer.** Apply at most one texture on the background layer and one on the overlay layer (`::after`). Scanline + halftone is the default pair for hero sections.
 2. **Opacity scales with section density.** Hero/landing sections use lighter textures (5–10% opacity). Data-dense utility sections use stronger textures (10–15% opacity) or none.
 3. **Texture on components is allowed with restraint.** Cards, panels, modals, drawers, and buttons can carry low-opacity texture overlays (`::before`, `pointer-events: none`) as long as the texture sits behind content and does not reduce contrast. Inputs and form controls should remain solid to preserve legibility. Use `.card-halftone`, `.surface-scanline`, `.btn-halftone`, `.modal-noise`, etc.
-4. **Texture as section separator.** When transitioning between full-bleed sections, add a `.separator-solid` or `.stripes-h` band (40–80px tall) as a visual break — never use shadow or blur transitions.
+4. **Texture as section separator.** When transitioning between full-bleed sections, add a `.bg-separator-solid` or `.bg-stripes-h` band (40–80px tall) as a visual break — never use shadow or blur transitions.
 5. **Layering order:** Base color → texture background → content container → optional scanline overlay. The overlay must have `pointer-events: none` and `z-index: 1` so it does not block interaction.
 6. **Full-bleed hero walls** use scanline + vignette simultaneously: scanline on `::after` for the line pattern, vignette on `::before` for the edge fade. Both get `pointer-events: none`.
 
@@ -214,11 +214,11 @@ Section 4 (cta)     — Scanline-fast overlay, invert section if 1-bit
 
 ### 1-bit section variants
 
-- **Full invert section**: swap `--bg-base` with `--color-paper`, `--text-primary` with `--color-ink`. Used for CTAs, callout panels, or manga-style splash panels. Add `.diagonal-stripes-negative` for max contrast.
+- **Full invert section**: swap `--bg-base` with `--color-paper`, `--text-primary` with `--color-ink`. Used for CTAs, callout panels, or manga-style splash panels. Add `.bg-diagonal-stripes-negative` for max contrast.
 - **Scanline hero**: dark canvas, scanline overlay, accent headline with glow. The scanline `::after` sits above the background but below all content (`z-index: 1`). Content gets `position: relative; z-index: 2`.
-- **Halftone card wall**: grid of cards with `.halftone-sm` or `.halftone-md` on the section container. Each card has solid `.card` background that breaks the texture — texture only lives between cards.
-- **Noise backdrop**: `.noise` on full-page backgrounds for analog feel. Use `.noise-heavy` only on splash/loading screens where content density is low.
-- **Vignette frame**: `.vignette-ink` on slide/scene containers to draw the eye center. Used in intro animations and splash panels.
+- **Halftone card wall**: grid of cards with `.bg-halftone-sm` or `.bg-halftone-md` on the section container. Each card has solid `.card` background that breaks the texture — texture only lives between cards.
+- **Noise backdrop**: `.bg-noise` on full-page backgrounds for analog feel. Use `.bg-noise-heavy` only on splash/loading screens where content density is low.
+- **Vignette frame**: `.bg-vignette-ink` on slide/scene containers to draw the eye center. Used in intro animations and splash panels.
 
 ## 1c. Isometric Backgrounds — CSS-only 3D Perspective Patterns
 
@@ -228,17 +228,17 @@ Section 4 (cta)     — Scanline-fast overlay, invert section if 1-bit
 
 | Class                     | Description                                                             | Technique                                                       |
 | ------------------------- | ----------------------------------------------------------------------- | --------------------------------------------------------------- |
-| `.isometric-grid`         | Diamond tiling from dual 30°/-30° hatch lines at 24px pitch             | `repeating-linear-gradient(30deg)` + `(-30deg)`                 |
-| `.isometric-grid-dense`   | Tighter 12px diamond grid                                               | Same technique, denser pitch                                    |
-| `.isometric-grid-accent`  | Magenta-tinted 24px diamond grid                                        | Same, with `--magenta-500 / 0.12` stroke                        |
-| `.isometric-cubes`        | 3-face cube wall: right (150°), top (-30°), left (30°) faces at 40px    | 3 `repeating-linear-gradient` layers with face-specific opacity |
-| `.isometric-cubes-dense`  | 20px cube wall                                                          | Same, finer resolution                                          |
-| `.isometric-cubes-accent` | Magenta-tinted cube wall                                                | Same, with accent hue fills                                     |
-| `.isometric-pyramid`      | Ascending zigzag steps: 150° + -30° gradients                           | Dual gradient with offset phase                                 |
-| `.isometric-hex`          | Honeycomb hex grid from 60°/-60°/0° overlapping                         | 3 `repeating-linear-gradient` layers                            |
-| `.isometric-pipes`        | Converging tunnel perspective: left/right walls (30°/-30°) + floor (0°) | 3-gradient tunnel simulation                                    |
-| `.isometric-pipes-fast`   | Denser tunnel, 8px walls                                                | Same, tighter spacing                                           |
-| `.isometric-terrain`      | Multi-layer depth: horizontal + 30° + -30° zigzag                       | 3-layer parallax-ready composition                              |
+| `.iso-grid`         | Diamond tiling from dual 30°/-30° hatch lines at 24px pitch             | `repeating-linear-gradient(30deg)` + `(-30deg)`                 |
+| `.iso-grid-dense`   | Tighter 12px diamond grid                                               | Same technique, denser pitch                                    |
+| `.iso-grid-accent`  | Magenta-tinted 24px diamond grid                                        | Same, with `--magenta-500 / 0.12` stroke                        |
+| `.iso-cubes`        | 3-face cube wall: right (150°), top (-30°), left (30°) faces at 40px    | 3 `repeating-linear-gradient` layers with face-specific opacity |
+| `.iso-cubes-dense`  | 20px cube wall                                                          | Same, finer resolution                                          |
+| `.iso-cubes-accent` | Magenta-tinted cube wall                                                | Same, with accent hue fills                                     |
+| `.iso-pyramid`      | Ascending zigzag steps: 150° + -30° gradients                           | Dual gradient with offset phase                                 |
+| `.iso-hex`          | Honeycomb hex grid from 60°/-60°/0° overlapping                         | 3 `repeating-linear-gradient` layers                            |
+| `.iso-pipes`        | Converging tunnel perspective: left/right walls (30°/-30°) + floor (0°) | 3-gradient tunnel simulation                                    |
+| `.iso-pipes-fast`   | Denser tunnel, 8px walls                                                | Same, tighter spacing                                           |
+| `.iso-terrain`      | Multi-layer depth: horizontal + 30° + -30° zigzag                       | 3-layer parallax-ready composition                              |
 
 ### Composition rules
 
@@ -636,9 +636,9 @@ Sharp (0px) and subtle (2–4px) are preferred for 1-bit elements. 8–12px for 
 
 - Scanline overlay on hero / full-bleed sections
 - Halftone dot separators between content blocks
-- Full-bleed sections use `.separator-solid` (2px white line at 25% opacity) as rhythm breaks
+- Full-bleed sections use `.bg-separator-solid` (2px white line at 25% opacity) as rhythm breaks
 - Texture shift between sections: scanline → solid → halftone → solid → scanline. Never two textured sections adjacent.
-- Manga panel composition: content is the "panel" (solid black border), background is the "page" (noise or scanline). Each panel gets a `.vignette-ink` edge fade.
+- Manga panel composition: content is the "panel" (solid black border), background is the "page" (noise or scanline). Each panel gets a `.bg-vignette-ink` edge fade.
 
 ### Product shell layout
 
@@ -851,8 +851,8 @@ These classes add thin color to any 1-bit component without breaking the black/w
 
 | Animation       | Class                              | Duration                     | Type    | Description                                                               |
 | --------------- | ---------------------------------- | ---------------------------- | ------- | ------------------------------------------------------------------------- |
-| Scanline scroll | `.scanline` (::after)              | 8s linear infinite           | Ambient | Horizontal lines scroll down — signature 7K texture                       |
-| Scanline fast   | `.scanline-fast` (::after)         | 3s linear infinite           | Ambient | Faster variant for high-energy sections                                   |
+| Scanline scroll | `.bg-scanline` (::after)              | 8s linear infinite           | Ambient | Horizontal lines scroll down — signature 7K texture                       |
+| Scanline fast   | `.bg-scanline-fast` (::after)         | 3s linear infinite           | Ambient | Faster variant for high-energy sections                                   |
 | Basic glitch    | `.glitch`                          | 0.3s, 3 iterations           | Trigger | Translate jitter on 5 random frames                                       |
 | Complex glitch  | `.glitch-complex`                  | 0.8s, 2 iterations           | Trigger | Multi-axis + skew + clip-path splits                                      |
 | Glitch accent   | `.glitch-accent`                   | 0.4s, 2 iterations           | Trigger | Glitch with magenta glow trail                                            |
@@ -860,11 +860,11 @@ These classes add thin color to any 1-bit component without breaking the black/w
 | Binary blink    | `.blink` / `.blink-fast`           | 1s / 0.4s step-end           | Ambient | Sharp on/off toggle                                                       |
 | Typewriter      | `.typewriter`                      | 1.5s (30 steps)              | Trigger | Text reveal from left                                                     |
 | Neon pulse      | `.neon-pulse` / `.neon-pulse-cyan` | 2s ease-in-out               | Ambient | Accent glow oscillation                                                   |
-| Noise shift     | `.noise-animated`                  | 0.5s, steps(5)               | Ambient | SVG noise translates in discrete positions                                |
+| Noise shift     | `.bg-noise-animated`                  | 0.5s, steps(5)               | Ambient | SVG noise translates in discrete positions                                |
 | Scan reveal     | `.scan-reveal`                     | 2s, 1 iteration              | Trigger | White bar sweeps down                                                     |
-| Pixel fade-in   | `.pixel-fade-in`                   | 0.6s, steps(8)               | Trigger | Left-to-right reveal in pixel steps                                       |
+| Pixel fade-in   | `.step-fade-in`                   | 0.6s, steps(8)               | Trigger | Left-to-right reveal in stepped frames                                       |
 | Invert flash    | `.invert-flash`                    | 0.15s, 2 iterations          | Trigger | Full filter inversion burst                                               |
-| Pixel dots      | `.pixel-dots` / `.pixel-dots-fast` | 0.3s, steps(4), 2 iterations | Trigger | Small black squares scatter at random positions — 1-bit corruption effect |
+| Pixel dots      | `.step-dots` / `.step-dots-fast` | 0.3s, steps(4), 2 iterations | Trigger | Small black squares scatter at random positions — stepped corruption effect |
 | Progress scan   | `.progress-indeterminate`          | 1.5s                         | Loading | Bar sweeps left-to-right                                                  |
 | Skeleton pulse  | `.skeleton`                        | 1.2s ease-in-out             | Loading | Opacity pulse                                                             |
 | Slide-up reveal | `.slide-up-reveal`                 | 0.5s ease-out                | Trigger | Content rises with clip-path                                              |
@@ -891,7 +891,7 @@ These classes add thin color to any 1-bit component without breaking the black/w
 
 1. **One ambient + one trigger.** At most one ambient animation (scanline, noise, flicker, shimmer, iso-grid-scroll) runs continuously. Triggered animations (glitch, invert-flash, scan-reveal, iso-assemble, iso-perspective-dolly) fire on interaction.
 2. **Glitch is a burst, not a loop.** Basic glitch runs exactly 3 iterations (0.9s total) on the class utility. Pixel-dots runs 2 iterations (0.6s) for a quick corruption scatter. Never loop glitch infinitely.
-3. **Scanline is the default ambient.** Every hero/full-bleed section should evaluate whether `.scanline` adds atmosphere. UI content sections (dashboard, settings) must not use ambient animation.
+3. **Scanline is the default ambient.** Every hero/full-bleed section should evaluate whether `.bg-scanline` adds atmosphere. UI content sections (dashboard, settings) must not use ambient animation.
 4. **Cascade: reduced-motion wins.** All animations collapse to 0.01ms at `prefers-reduced-motion: reduce`. No exceptions.
 5. **Step timing for pixel-perfect animation.** Keyframes that simulate digital/retro effects use `steps()` timing instead of `ease`. This preserves sharp on/off quality.
 6. **Overlay animations must have `pointer-events: none`.** Scanline, vignette, noise, and scan-reveal use `::before`/`::after` pseudo-elements.
@@ -900,11 +900,11 @@ These classes add thin color to any 1-bit component without breaking the black/w
 
 | Surface                    | Ambient animation         | Trigger animation              |
 | -------------------------- | ------------------------- | ------------------------------ |
-| Landing / marketing hero   | `.scanline` (8s)          | `.scan-reveal` on load         |
+| Landing / marketing hero   | `.bg-scanline` (8s)          | `.scan-reveal` on load         |
 | Dashboard / app shell      | None                      | `.glitch` on filter change     |
 | Loading state              | `.skeleton` or `.shimmer` | None                           |
 | Error state                | None                      | `.glitch-complex` on container |
-| 1-bit splash / manga panel | `.scanline-fast` (3s)     | `.invert-flash` on page enter  |
+| 1-bit splash / manga panel | `.bg-scanline-fast` (3s)     | `.invert-flash` on page enter  |
 | Toast / notification       | None                      | `.slide-up-reveal` on mount    |
 | Button (accent)            | None                      | Color transition on hover      |
 | Accent text                | `.accent-flicker`         | None                           |
@@ -1160,7 +1160,7 @@ import { IsometricBackground } from '7k-design-system/react';
 </IsometricBackground>
 ```
 
-**CSS classes applied:** `.isometric-grid`, `.isometric-grid-animated`
+**CSS classes applied:** `.iso-grid`, `.iso-grid-animated`
 
 ### ThemeToggle
 
@@ -1269,7 +1269,7 @@ The CSS is split into 10 source files under `src/css/`, compiled into `dist/7k-d
 | `isometric.css`     | ~12.5KB | 11 isometric patterns: grid, cubes, pyramid, hex, pipes, terrain + animation variants                             |
 | `components.css`    | ~36KB   | 40+ component classes: buttons, forms, nav, data display, overlays, feedback, media, misc                         |
 | `modifiers.css`     | ~2.2KB  | Accent layer modifiers: border-top, underline, dot, bar, glow, corner                                             |
-| `animations.css`    | ~15.8KB | 20+ keyframe animations: glitch, flicker, blink, typewriter, neon-pulse, scan-reveal, pixel-fade, iso-float       |
+| `animations.css`    | ~15.8KB | 20+ keyframe animations: glitch, flicker, blink, typewriter, neon-pulse, scan-reveal, step-fade, iso-float       |
 | `accessibility.css` | ~0.6KB  | `prefers-reduced-motion` collapse, `:focus-visible` rings, `prefers-contrast` support, screen-reader utilities    |
 
 ### PostCSS Pipeline

@@ -178,7 +178,7 @@ export interface TextareaProps
 export interface TextureOverlayProps extends BaseProps {
   texture?: Texture;
   opacity?: number;
-  animate?: boolean;
+  animated?: boolean;
 }
 
 export interface IsometricBackgroundProps extends BaseProps {
@@ -207,6 +207,46 @@ export interface ProgressProps extends BaseProps {
   value: number;
   max?: number;
   variant?: 'accent' | 'danger';
+}
+
+export interface StatProps extends BaseProps {
+  value: ReactNode;
+  label: ReactNode;
+  trend?: ReactNode;
+  accent?: boolean;
+  status?: 'success' | 'warning' | 'danger' | 'neutral';
+}
+
+export interface EmptyStateProps extends BaseProps {
+  title: ReactNode;
+  body?: ReactNode;
+  action?: ReactNode;
+  icon?: ReactNode;
+}
+
+export interface DataTableColumn<Row> {
+  key: string;
+  label: ReactNode;
+  /** Plain-text label for the mobile stacked layout (`data-label`). Required
+   * when `label` is not a string, otherwise mobile cells show no label. */
+  mobileLabel?: string;
+  mono?: boolean;
+  sortable?: boolean;
+  width?: number | string;
+  render?: (row: Row, index: number) => ReactNode;
+}
+
+export interface DataTableProps<Row> extends BaseProps {
+  columns: DataTableColumn<Row>[];
+  rows: Row[];
+  rowKey: keyof Row | ((row: Row, index: number) => string);
+  loading?: boolean;
+  skeletonRows?: number;
+  empty?: ReactNode;
+  onSort?: (key: string) => void;
+  sortKey?: string;
+  sortDirection?: 'asc' | 'desc';
+  pagination?: ReactNode;
 }
 
 export interface ListboxOption {

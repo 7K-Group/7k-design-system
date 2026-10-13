@@ -1,5 +1,5 @@
 /* ===========================================================
-   1-BIT ANIMATION KEYFRAMES
+   ANIMATION KEYFRAMES
    =========================================================== */
 
 @keyframes scanline-scroll {
@@ -201,7 +201,7 @@
     transform: translate(0, 0);
   }
 }
-.noise-animated::before {
+.bg-noise-animated::before {
   animation: noise-shift 0.5s steps(5) infinite !important;
 }
 
@@ -230,7 +230,7 @@
   pointer-events: none;
 }
 
-@keyframes pixel-fade-in {
+@keyframes step-fade-in {
   0% {
     clip-path: inset(0 0 0 100%);
   }
@@ -238,8 +238,8 @@
     clip-path: inset(0 0 0 0);
   }
 }
-.pixel-fade-in {
-  animation: pixel-fade-in 0.6s steps(8) forwards;
+.step-fade-in {
+  animation: step-fade-in 0.6s steps(8) forwards;
   overflow: hidden;
 }
 
@@ -259,8 +259,8 @@
 }
 
 /* ---- Pixel dots (small black squares at random positions, digital corruption) ---- */
-/* stylelint-disable color-no-hex -- pixel-dots keyframes are 1-bit literal black */
-@keyframes pixel-dots {
+/* stylelint-disable color-no-hex -- step-dots keyframes are 1-bit literal black */
+@keyframes step-dots {
   0% {
     box-shadow:
       4px 8px 0 0 var(--color-ink),
@@ -314,11 +314,11 @@
   }
 }
 /* stylelint-enable color-no-hex */
-.pixel-dots {
-  animation: pixel-dots 0.3s steps(4) 2;
+.step-dots {
+  animation: step-dots 0.3s steps(4) 2;
 }
-.pixel-dots-fast {
-  animation: pixel-dots 0.15s steps(2) 1;
+.step-dots-fast {
+  animation: step-dots 0.15s steps(2) 1;
 }
 
 @keyframes progress-scan {
@@ -496,7 +496,7 @@
 }
 
 /* ===========================================================
-   1-BIT ISOMETRIC ANIMATIONS — step-timed, retro 3D feel
+   ISOMETRIC ANIMATIONS — step-timed, 3D feel
    =========================================================== */
 
 /* Isometric float — a block bobs up/down with subtle depth shift */

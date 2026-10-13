@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { render } from '@testing-library/react';
 import { axe, toHaveNoViolations } from 'jest-axe';
-import { Button, Input, Badge, ThemeProvider, ThemeToggle } from '../src/react';
+import { Button, Input, Badge, ThemeProvider, ThemeToggle, Stat, EmptyState, DataTable } from '../src/react';
 
 expect.extend(toHaveNoViolations);
 
@@ -60,6 +60,64 @@ describe('Accessibility - ThemeToggle', () => {
       <ThemeProvider>
         <ThemeToggle />
       </ThemeProvider>
+    );
+    expect(results).toHaveNoViolations();
+  });
+});
+
+describe('Accessibility - Stat', () => {
+  it('has no accessibility violations', async () => {
+    const results = await testA11y(<Stat value="12" label="Clusters" />);
+    expect(results).toHaveNoViolations();
+  });
+
+  it('has no violations with trend and accent', async () => {
+    const results = await testA11y(<Stat value="3" label="Pending" trend="+1" accent />);
+    expect(results).toHaveNoViolations();
+  });
+});
+
+describe('Accessibility - EmptyState', () => {
+  it('has no accessibility violations', async () => {
+    const results = await testA11y(
+      <EmptyState title="No clusters" body="Register one to get started" />
+    );
+    expect(results).toHaveNoViolations();
+  });
+
+  it('has no violations with an action', async () => {
+    const results = await testA11y(
+      <EmptyState title="No clusters" action={<button>Register</button>} />
+    );
+    expect(results).toHaveNoViolations();
+  });
+});
+
+describe('Accessibility - DataTable', () => {
+  const columns = [
+    { key: 'name', label: 'Name' },
+    { key: 'status', label: 'Status', mono: true, sortable: true },
+  ];
+  const rows = [
+    { id: '1', name: 'alpha', status: 'healthy' },
+    { id: '2', name: 'beta', status: 'degraded' },
+  ];
+
+  it('has no accessibility violations', async () => {
+    const results = await testA11y(
+      <DataTable columns={columns} rows={rows} rowKey="id" onSort={() => undefined} />
+    );
+    expect(results).toHaveNoViolations();
+  });
+
+  it('has no violations in loading state', async () => {
+    const results = await testA11y(<DataTable columns={columns} rows={[]} rowKey="id" loading />);
+    expect(results).toHaveNoViolations();
+  });
+
+  it('has no violations in empty state', async () => {
+    const results = await testA11y(
+      <DataTable columns={columns} rows={[]} rowKey="id" empty={<EmptyState title="No rows" />} />
     );
     expect(results).toHaveNoViolations();
   });

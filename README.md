@@ -31,8 +31,8 @@ The system provides these core capabilities:
 - **Texture categories**: scanline, halftone, dot matrix, stripes, crosshatch, checkerboard, noise, vignette, isometric, surfaces & callouts
 - **40+ components**: sharp geometry, high-contrast borders, invert-on-hover, thin accent modifiers
 - **Textured component variants**: halftone, scanline, noise, dots, crosshatch on cards, panels, modals, drawers, toasts, buttons
-- **20+ animations**: ambient (scanline scroll, CRT flicker, neon pulse) and trigger (glitch, pixel-dots, invert-flash)
-- **Isometric geometry animations**: combined animated background classes (`.isometric-grid-animated`, etc.)
+- **20+ animations**: ambient (scanline scroll, CRT flicker, neon pulse) and trigger (glitch, step-dots, invert-flash)
+- **Isometric geometry animations**: combined animated background classes (`.iso-grid-animated`, etc.)
 - **Engineering-blueprint aesthetic**: mono labels as "connective tissue" throughout all surfaces
 - **React UI kit**: 20+ TypeScript components wrapping the CSS system
 
@@ -171,7 +171,7 @@ Requires self-hosting the `fonts/` directory for Geist Pixel variants.
      font-family: var(--font-sans);
    }
    ```
-4. **Apply textures** — Add classes like `.scanline`, `.halftone-md`, `.noise` to sections
+4. **Apply textures** — Add classes like `.bg-scanline`, `.bg-halftone-md`, `.bg-noise` to sections
 5. **Use components** — Apply classes like `.btn-primary`, `.badge-success`, `.input`
 
 ## File Structure Notes

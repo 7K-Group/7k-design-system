@@ -1,5 +1,5 @@
 /* ===========================================================
-   1-BIT COMPONENT LIBRARY — unified black/white + accent layers
+   COMPONENT LIBRARY — unified black/white + accent layers
    Shared: 0 radius, 2px white borders, invert hover, uppercase labels
    =========================================================== */
 
@@ -864,6 +864,64 @@
 .table tr:hover td {
   background: rgba(255, 255, 255, 0.04);
 }
+.table-sort {
+  all: unset;
+  cursor: pointer;
+  font: inherit;
+  text-transform: inherit;
+  letter-spacing: inherit;
+  color: inherit;
+}
+.table-sort:focus-visible {
+  outline: 2px solid var(--border-focus, var(--color-paper));
+  outline-offset: 2px;
+}
+.table td.mono {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+.datatable {
+  width: 100%;
+  overflow-x: auto;
+}
+.datatable-pagination {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 12px;
+}
+@media (max-width: 640px) {
+  .datatable table,
+  .datatable thead,
+  .datatable tbody,
+  .datatable tr,
+  .datatable td {
+    display: block;
+    width: 100%;
+  }
+  .datatable thead {
+    display: none;
+  }
+  .datatable tr {
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    margin-bottom: 8px;
+    padding: 8px 0;
+  }
+  .datatable td {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    border-bottom: none;
+    padding: 4px 14px;
+  }
+  .datatable td::before {
+    content: attr(data-label);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: rgba(255, 255, 255, 0.5);
+  }
+}
 
 /* Badge */
 .badge {
@@ -1052,6 +1110,21 @@
 }
 .stat-accent .stat-value {
   color: var(--brand-secondary);
+}
+.stat-trend {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+  color: rgba(255, 255, 255, 0.5);
+}
+.stat-success .stat-value {
+  color: var(--status-success);
+}
+.stat-warning .stat-value {
+  color: var(--status-warning);
+}
+.stat-danger .stat-value {
+  color: var(--status-danger);
 }
 
 /* Keyboard key */
@@ -1601,6 +1674,18 @@
   color: rgba(255, 255, 255, 0.5);
   max-width: 240px;
 }
+.empty-title {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--color-paper);
+}
+.empty-action {
+  margin-top: 4px;
+}
 
 /* Loading screen */
 .loading-screen {
@@ -1652,6 +1737,21 @@
   border-color: var(--status-warning);
   background: var(--color-ink);
   color: var(--status-warning);
+}
+.banner-count {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+}
+.banner-link {
+  margin-left: auto;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: inherit;
+  text-decoration: underline;
+  cursor: pointer;
 }
 
 /* ---- G. Media ---- */

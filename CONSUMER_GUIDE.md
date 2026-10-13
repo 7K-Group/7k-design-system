@@ -310,6 +310,29 @@ Mount toasts in a fixed container at the top of your app (they use `role="status
 <Textarea rows={4} />
 ```
 
+#### Data display (1.3.0)
+
+```tsx
+<Stat value="24" label="Clusters" accent trend="+2" />
+<EmptyState title="No clusters" body="Register one to get started" action={<Button variant="accent">Register</Button>} />
+<DataTable
+  columns={[
+    { key: 'name', label: 'Name' },
+    { key: 'status', label: 'Status', mono: true, sortable: true },
+  ]}
+  rows={rows}
+  rowKey="id"
+  loading={isLoading}      // renders skeleton rows
+  empty={<EmptyState title="No rows" />}
+  onSort={(key) => sort(key)}
+  sortKey={sortKey}
+  sortDirection="asc"
+  pagination={<div className="pagination">…</div>}
+/>
+```
+
+`DataTable` composes the `.table` classes: mono uppercase headers, sortable-column buttons, skeleton rows while `loading`, an `empty` slot when there are no rows, and a stacked-card transform on narrow viewports (≤640px, each cell labelled via `data-label`).
+
 Form notes: passing `error` to `Input` adds the `.error` class (danger border) and wires `aria-invalid` + an alert-role message automatically (for `Textarea`/`Select`, add the `error` class and `aria-invalid` manually). Custom `Checkbox`/`Radio`/`Toggle` render a visually-hidden native input — keyboard focus shows a magenta focus ring on the custom control via `:focus-visible`. `Tabs` supports full arrow-key / Home / End navigation with roving tabindex per the ARIA tabs pattern.
 
 ---
@@ -390,7 +413,7 @@ function App() {
 
 - **Don't hard-code colors** — Avoid hex values; use design tokens
 - **Don't import CSS in components** — Import once at app level
-- **Don't mix textures** — Don't put `.scanline` inside `.halftone`
+- **Don't mix textures** — Don't put `.bg-scanline` inside `.halftone`
 - **Don't override component internals** — Style via props or wrapper classes
 - **Don't forget data-theme** — Light mode requires `data-theme="light"` on <html>
 

@@ -66,7 +66,7 @@ describe('CSS bundle', () => {
   it('contains texture and surface utilities', () => {
     const css = readFileSync(bundlePath, 'utf-8');
     expect(css).toContain('.bg-scanline');
-    expect(css).toContain('.halftone');
+    expect(css).toContain('.bg-halftone');
     expect(css).toContain('.surface');
     expect(css).toContain('.iso-grid-animated');
   });

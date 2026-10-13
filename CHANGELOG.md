@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/7K-Group/7k-design-system/compare/v1.2.0...v1.3.0) (2026-10-13)
+
+
+### Features
+
+* data-display components, u-* utilities, legacy class conformance, edge releases ([441ec7b](https://github.com/7K-Group/7k-design-system/commit/441ec7b72993d75899127ed803d273965434fb16))
+
 # [1.3.0](https://github.com/7K-Group/7k-design-system/compare/v1.2.0...v1.3.0) (2026-10-08)
 
 

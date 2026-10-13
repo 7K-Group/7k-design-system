@@ -7,21 +7,21 @@
   }
 
   /* Textures */
-  .noise-animated::before {
+  .bg-noise-animated::before {
     animation: none !important;
   }
 
   /* Isometric scrolling patterns */
   .iso-grid-scroll,
   .iso-terrain-shift,
-  .isometric-grid-animated,
-  .isometric-grid-dense-animated,
-  .isometric-cubes-animated,
-  .isometric-terrain-animated,
-  .isometric-pipes-animated,
-  .isometric-hex-animated,
-  .isometric-city-animated,
-  .isometric-wave-animated {
+  .iso-grid-animated,
+  .iso-grid-dense-animated,
+  .iso-cubes-animated,
+  .iso-terrain-animated,
+  .iso-pipes-animated,
+  .iso-hex-animated,
+  .iso-city-animated,
+  .iso-wave-animated {
     animation: none !important;
   }
 

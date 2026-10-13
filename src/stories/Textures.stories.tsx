@@ -34,8 +34,8 @@ const TextureBox = ({ className, label }: { className: string; label: string }) 
 export const Scanline: Story = {
   render: () => (
     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '16px' }}>
-      <TextureBox className="scanline" label=".scanline" />
-      <TextureBox className="scanline-fast" label=".scanline-fast" />
+      <TextureBox className="bg-scanline" label=".bg-scanline" />
+      <TextureBox className="bg-scanline-fast" label=".bg-scanline-fast" />
     </div>
   ),
 };
@@ -43,10 +43,10 @@ export const Scanline: Story = {
 export const Halftone: Story = {
   render: () => (
     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '16px' }}>
-      <TextureBox className="halftone-sm" label=".halftone-sm" />
-      <TextureBox className="halftone-md" label=".halftone-md" />
-      <TextureBox className="halftone-lg" label=".halftone-lg" />
-      <TextureBox className="halftone-accent" label=".halftone-accent" />
+      <TextureBox className="bg-halftone-sm" label=".bg-halftone-sm" />
+      <TextureBox className="bg-halftone-md" label=".bg-halftone-md" />
+      <TextureBox className="bg-halftone-lg" label=".bg-halftone-lg" />
+      <TextureBox className="bg-halftone-accent" label=".bg-halftone-accent" />
     </div>
   ),
 };
@@ -54,9 +54,9 @@ export const Halftone: Story = {
 export const DotMatrix: Story = {
   render: () => (
     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '16px' }}>
-      <TextureBox className="dot-matrix" label=".dot-matrix" />
-      <TextureBox className="dot-matrix-dense" label=".dot-matrix-dense" />
-      <TextureBox className="dot-matrix-sparse" label=".dot-matrix-sparse" />
+      <TextureBox className="bg-dot-matrix" label=".bg-dot-matrix" />
+      <TextureBox className="bg-dot-matrix-dense" label=".bg-dot-matrix-dense" />
+      <TextureBox className="bg-dot-matrix-sparse" label=".bg-dot-matrix-sparse" />
     </div>
   ),
 };
@@ -64,10 +64,10 @@ export const DotMatrix: Story = {
 export const Stripes: Story = {
   render: () => (
     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '16px' }}>
-      <TextureBox className="diagonal-stripes" label=".diagonal-stripes" />
-      <TextureBox className="diagonal-stripes-dense" label=".diagonal-stripes-dense" />
-      <TextureBox className="stripes-h" label=".stripes-h" />
-      <TextureBox className="stripes-v" label=".stripes-v" />
+      <TextureBox className="bg-diagonal-stripes" label=".bg-diagonal-stripes" />
+      <TextureBox className="bg-diagonal-stripes-dense" label=".bg-diagonal-stripes-dense" />
+      <TextureBox className="bg-stripes-h" label=".bg-stripes-h" />
+      <TextureBox className="bg-stripes-v" label=".bg-stripes-v" />
     </div>
   ),
 };
@@ -75,8 +75,8 @@ export const Stripes: Story = {
 export const Noise: Story = {
   render: () => (
     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '16px' }}>
-      <TextureBox className="noise" label=".noise" />
-      <TextureBox className="noise-heavy" label=".noise-heavy" />
+      <TextureBox className="bg-noise" label=".bg-noise" />
+      <TextureBox className="bg-noise-heavy" label=".bg-noise-heavy" />
     </div>
   ),
 };
@@ -84,8 +84,8 @@ export const Noise: Story = {
 export const Vignette: Story = {
   render: () => (
     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '16px' }}>
-      <TextureBox className="vignette-ink" label=".vignette-ink" />
-      <TextureBox className="vignette-ink-sharp" label=".vignette-ink-sharp" />
+      <TextureBox className="bg-vignette-ink" label=".bg-vignette-ink" />
+      <TextureBox className="bg-vignette-ink-sharp" label=".bg-vignette-ink-sharp" />
     </div>
   ),
 };
@@ -93,14 +93,14 @@ export const Vignette: Story = {
 export const Isometric: Story = {
   render: () => (
     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '16px' }}>
-      <TextureBox className="isometric-grid" label=".isometric-grid" />
-      <TextureBox className="isometric-grid-dense" label=".isometric-grid-dense" />
-      <TextureBox className="isometric-cubes" label=".isometric-cubes" />
-      <TextureBox className="isometric-terrain" label=".isometric-terrain" />
-      <TextureBox className="isometric-pipes" label=".isometric-pipes" />
-      <TextureBox className="isometric-hex" label=".isometric-hex" />
-      <TextureBox className="isometric-city" label=".isometric-city" />
-      <TextureBox className="isometric-wave" label=".isometric-wave" />
+      <TextureBox className="iso-grid" label=".iso-grid" />
+      <TextureBox className="iso-grid-dense" label=".iso-grid-dense" />
+      <TextureBox className="iso-cubes" label=".iso-cubes" />
+      <TextureBox className="iso-terrain" label=".iso-terrain" />
+      <TextureBox className="iso-pipes" label=".iso-pipes" />
+      <TextureBox className="iso-hex" label=".iso-hex" />
+      <TextureBox className="iso-city" label=".iso-city" />
+      <TextureBox className="iso-wave" label=".iso-wave" />
     </div>
   ),
 };
@@ -109,24 +109,24 @@ export const IsometricAnimated: Story = {
   render: () => (
     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '16px' }}>
       <TextureBox
-        className="isometric-grid isometric-grid-animated"
-        label=".isometric-grid-animated"
+        className="iso-grid iso-grid-animated"
+        label=".iso-grid-animated"
       />
       <TextureBox
-        className="isometric-cubes isometric-cubes-animated"
-        label=".isometric-cubes-animated"
+        className="iso-cubes iso-cubes-animated"
+        label=".iso-cubes-animated"
       />
       <TextureBox
-        className="isometric-terrain isometric-terrain-animated"
-        label=".isometric-terrain-animated"
+        className="iso-terrain iso-terrain-animated"
+        label=".iso-terrain-animated"
       />
       <TextureBox
-        className="isometric-pipes isometric-pipes-animated"
-        label=".isometric-pipes-animated"
+        className="iso-pipes iso-pipes-animated"
+        label=".iso-pipes-animated"
       />
       <TextureBox
-        className="isometric-city isometric-city-animated"
-        label=".isometric-city-animated"
+        className="iso-city iso-city-animated"
+        label=".iso-city-animated"
       />
     </div>
   ),

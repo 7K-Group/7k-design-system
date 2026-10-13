@@ -3,11 +3,11 @@
    =========================================================== */
 
 /* ---- Scanline overlay ---- */
-.scanline {
+.bg-scanline {
   position: relative;
   overflow: hidden;
 }
-.scanline::after {
+.bg-scanline::after {
   content: '';
   position: absolute;
   inset: 0;
@@ -22,11 +22,11 @@
   animation: scanline-scroll 8s linear infinite;
   z-index: 1;
 }
-.scanline-fast {
+.bg-scanline-fast {
   position: relative;
   overflow: hidden;
 }
-.scanline-fast::after {
+.bg-scanline-fast::after {
   content: '';
   position: absolute;
   inset: 0;
@@ -43,39 +43,39 @@
 }
 
 /* ---- Halftone dots (screentone) ---- */
-.halftone-sm {
+.bg-halftone-sm {
   background-image: radial-gradient(var(--texture-08) 0.5px, transparent 0.5px);
   background-size: 4px 4px;
 }
-.halftone-md {
+.bg-halftone-md {
   background-image: radial-gradient(var(--texture-05) 1px, transparent 1px);
   background-size: 6px 6px;
 }
-.halftone-lg {
+.bg-halftone-lg {
   background-image: radial-gradient(var(--texture-04) 1.5px, transparent 1.5px);
   background-size: 10px 10px;
 }
-.halftone-accent {
+.bg-halftone-accent {
   background-image: radial-gradient(var(--brand-primary) 1px, transparent 1px);
   background-size: 8px 8px;
 }
 
 /* ---- Dot matrix ---- */
-.dot-matrix {
+.bg-dot-matrix {
   background-image: radial-gradient(var(--texture-07) 0.5px, transparent 0.5px);
   background-size: 6px 6px;
 }
-.dot-matrix-dense {
+.bg-dot-matrix-dense {
   background-image: radial-gradient(var(--texture-09) 0.5px, transparent 0.5px);
   background-size: 3px 3px;
 }
-.dot-matrix-sparse {
+.bg-dot-matrix-sparse {
   background-image: radial-gradient(var(--texture-04) 1px, transparent 1px);
   background-size: 12px 12px;
 }
 
 /* ---- Diagonal stripes ---- */
-.diagonal-stripes {
+.bg-diagonal-stripes {
   background: repeating-linear-gradient(
     45deg,
     transparent,
@@ -84,7 +84,7 @@
     var(--texture-04) 7px
   );
 }
-.diagonal-stripes-dense {
+.bg-diagonal-stripes-dense {
   background: repeating-linear-gradient(
     45deg,
     transparent,
@@ -93,7 +93,7 @@
     var(--texture-08) 4px
   );
 }
-.diagonal-stripes-negative {
+.bg-diagonal-stripes-negative {
   background: repeating-linear-gradient(
     45deg,
     var(--color-ink),
@@ -104,7 +104,7 @@
 }
 
 /* ---- Horizontal / vertical stripes ---- */
-.stripes-h {
+.bg-stripes-h {
   background: repeating-linear-gradient(
     0deg,
     transparent,
@@ -113,7 +113,7 @@
     var(--texture-04) 9px
   );
 }
-.stripes-h-dense {
+.bg-stripes-h-dense {
   background: repeating-linear-gradient(
     0deg,
     transparent,
@@ -122,7 +122,7 @@
     var(--texture-08) 5px
   );
 }
-.stripes-v {
+.bg-stripes-v {
   background: repeating-linear-gradient(
     90deg,
     transparent,
@@ -131,7 +131,7 @@
     var(--texture-04) 9px
   );
 }
-.stripes-v-dense {
+.bg-stripes-v-dense {
   background: repeating-linear-gradient(
     90deg,
     transparent,
@@ -142,7 +142,7 @@
 }
 
 /* ---- Crosshatch ---- */
-.crosshatch {
+.bg-crosshatch {
   background-image:
     repeating-linear-gradient(
       45deg,
@@ -159,7 +159,7 @@
       var(--texture-04) 7px
     );
 }
-.crosshatch-dense {
+.bg-crosshatch-dense {
   background-image:
     repeating-linear-gradient(
       45deg,
@@ -178,7 +178,7 @@
 }
 
 /* ---- Checkerboard ---- */
-.checkerboard {
+.bg-checkerboard {
   background-image:
     linear-gradient(45deg, var(--texture-04) 25%, transparent 25%),
     linear-gradient(-45deg, var(--texture-04) 25%, transparent 25%),
@@ -191,7 +191,7 @@
     6px -6px,
     -6px 0;
 }
-.checkerboard-contrast {
+.bg-checkerboard-contrast {
   background-image:
     linear-gradient(45deg, var(--color-ink) 25%, transparent 25%),
     linear-gradient(-45deg, var(--color-ink) 25%, transparent 25%),
@@ -206,10 +206,10 @@
 }
 
 /* ---- Noise (SVG fractal) — theme-aware (white for dark, black for light) ---- */
-.noise {
+.bg-noise {
   position: relative;
 }
-.noise::before {
+.bg-noise::before {
   content: '';
   position: absolute;
   inset: 0;
@@ -219,15 +219,15 @@
   opacity: 0.5;
   z-index: 1;
 }
-.noise-heavy::before {
+.bg-noise-heavy::before {
   opacity: 0.12;
 }
 
 /* ---- Vignette ---- */
-.vignette-ink {
+.bg-vignette-ink {
   position: relative;
 }
-.vignette-ink::after {
+.bg-vignette-ink::after {
   content: '';
   position: absolute;
   inset: 0;
@@ -239,12 +239,12 @@
   pointer-events: none;
   z-index: 1;
 }
-.vignette-ink-sharp::after {
+.bg-vignette-ink-sharp::after {
   background: radial-gradient(ellipse at center, transparent 30%, var(--color-ink) 100%);
 }
 
 /* ---- Waves — repeating concentric arcs via layered radial gradients ---- */
-.waves {
+.bg-waves {
   background:
     radial-gradient(
       ellipse at 50% 0%,
@@ -297,7 +297,7 @@
     0 40px,
     0 50px;
 }
-.waves-dense {
+.bg-waves-dense {
   background:
     radial-gradient(
       ellipse at 50% 0%,
@@ -352,7 +352,7 @@
 }
 
 /* ---- Concentric rings — target pattern from center ---- */
-.concentric-rings {
+.bg-concentric-rings {
   background:
     radial-gradient(
       circle at 50% 50%,
@@ -398,7 +398,7 @@
   background-size: 200px 200px;
   background-position: center;
 }
-.concentric-rings-dense {
+.bg-concentric-rings-dense {
   background:
     radial-gradient(
       circle at 50% 50%,
@@ -446,7 +446,7 @@
 }
 
 /* ---- Grid dots — dots at intersection points of a grid ---- */
-.grid-dots {
+.bg-grid-dots {
   background-image:
     radial-gradient(var(--texture-06) 1px, transparent 1px),
     radial-gradient(var(--texture-06) 1px, transparent 1px);
@@ -457,7 +457,7 @@
     0 0,
     8px 8px;
 }
-.grid-dots-dense {
+.bg-grid-dots-dense {
   background-image:
     radial-gradient(var(--texture-09) 0.8px, transparent 0.8px),
     radial-gradient(var(--texture-09) 0.8px, transparent 0.8px);
@@ -468,7 +468,7 @@
     0 0,
     4px 4px;
 }
-.grid-dots-accent {
+.bg-grid-dots-accent {
   background-image:
     radial-gradient(color-mix(in srgb, var(--magenta-500) 15%, transparent) 1px, transparent 1px),
     radial-gradient(color-mix(in srgb, var(--magenta-500) 15%, transparent) 1px, transparent 1px);
@@ -481,7 +481,7 @@
 }
 
 /* ---- Rain — slanted falling line pattern ---- */
-.rain {
+.bg-rain {
   background: repeating-linear-gradient(
     20deg,
     transparent,
@@ -491,7 +491,7 @@
   );
   background-size: 8px 20px;
 }
-.rain-dense {
+.bg-rain-dense {
   background: repeating-linear-gradient(
     20deg,
     transparent,
@@ -501,7 +501,7 @@
   );
   background-size: 6px 12px;
 }
-.rain-angled {
+.bg-rain-angled {
   background:
     repeating-linear-gradient(
       35deg,
@@ -521,7 +521,7 @@
 }
 
 /* ---- Starburst — radiating lines from center ---- */
-.starburst {
+.bg-starburst {
   background: repeating-conic-gradient(
     var(--texture-03) 0%,
     var(--texture-03) 0.5%,
@@ -530,7 +530,7 @@
   );
   background-size: 100% 100%;
 }
-.starburst-dense {
+.bg-starburst-dense {
   background: repeating-conic-gradient(
     var(--texture-06) 0%,
     var(--texture-06) 0.3%,
@@ -538,7 +538,7 @@
     transparent 3%
   );
 }
-.starburst-accent {
+.bg-starburst-accent {
   background: repeating-conic-gradient(
     color-mix(in srgb, var(--brand-primary) 12%, transparent) 0%,
     color-mix(in srgb, var(--brand-primary) 12%, transparent) 0.5%,
@@ -548,7 +548,7 @@
 }
 
 /* ---- Zigzag — sharp sawtooth line pattern ---- */
-.zigzag {
+.bg-zigzag {
   background:
     repeating-linear-gradient(
       75deg,
@@ -566,7 +566,7 @@
     );
   background-size: 24px 12px;
 }
-.zigzag-dense {
+.bg-zigzag-dense {
   background:
     repeating-linear-gradient(
       75deg,
@@ -584,7 +584,7 @@
     );
   background-size: 12px 6px;
 }
-.zigzag-horizontal {
+.bg-zigzag-horizontal {
   background:
     repeating-linear-gradient(
       165deg,
@@ -604,7 +604,7 @@
 }
 
 /* ---- Section separators (theme-aware: white in dark, black in light) ---- */
-.separator-solid {
+.bg-separator-solid {
   width: 100%;
   height: 1px;
   background: var(--texture-solid);
@@ -612,17 +612,17 @@
   margin: 0;
   opacity: 0.25;
 }
-.separator-thick {
+.bg-separator-thick {
   height: 2px;
   opacity: 0.4;
 }
-.separator-dashed {
+.bg-separator-dashed {
   height: 0;
   border-top: 2px dashed var(--texture-solid);
   background: transparent;
   opacity: 0.3;
 }
-.separator-dotted {
+.bg-separator-dotted {
   height: 0;
   border-top: 2px dotted var(--texture-solid);
   background: transparent;

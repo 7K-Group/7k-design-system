@@ -413,7 +413,7 @@ function App() {
 
 - **Don't hard-code colors** — Avoid hex values; use design tokens
 - **Don't import CSS in components** — Import once at app level
-- **Don't mix textures** — Don't put `.scanline` inside `.halftone`
+- **Don't mix textures** — Don't put `.bg-scanline` inside `.halftone`
 - **Don't override component internals** — Style via props or wrapper classes
 - **Don't forget data-theme** — Light mode requires `data-theme="light"` on <html>
 

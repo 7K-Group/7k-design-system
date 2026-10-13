@@ -128,23 +128,23 @@ pre {
 }
 
 /* ---- Geist Pixel variant utility classes (ornamental/display only) ---- */
-.pixel-square {
+.font-pixel-square {
   font-family: 'Geist Pixel', monospace;
   font-weight: 400;
 }
-.pixel-circle {
+.font-pixel-circle {
   font-family: 'Geist Pixel', monospace;
   font-weight: 500;
 }
-.pixel-grid {
+.font-pixel-grid {
   font-family: 'Geist Pixel', monospace;
   font-weight: 600;
 }
-.pixel-line {
+.font-pixel-line {
   font-family: 'Geist Pixel', monospace;
   font-weight: 700;
 }
-.pixel-triangle {
+.font-pixel-triangle {
   font-family: 'Geist Pixel', monospace;
   font-weight: 800;
 }

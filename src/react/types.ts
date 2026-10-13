@@ -178,7 +178,7 @@ export interface TextareaProps
 export interface TextureOverlayProps extends BaseProps {
   texture?: Texture;
   opacity?: number;
-  animate?: boolean;
+  animated?: boolean;
 }
 
 export interface IsometricBackgroundProps extends BaseProps {

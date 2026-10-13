@@ -1,10 +1,10 @@
 /* ===========================================================
-   1-BIT ISOMETRIC BACKGROUNDS — CSS-only 3D perspective patterns
+   ISOMETRIC BACKGROUNDS — CSS-only 3D perspective patterns
    Tokyo neon × isometric grid · pure gradients, no images
    =========================================================== */
 
 /* Isometric diamond grid — 30°/-30° dual hatch creates diamond tiling */
-.isometric-grid {
+.iso-grid {
   background:
     repeating-linear-gradient(
       30deg,
@@ -21,7 +21,7 @@
       var(--texture-03) 25px
     );
 }
-.isometric-grid-dense {
+.iso-grid-dense {
   background:
     repeating-linear-gradient(
       30deg,
@@ -38,7 +38,7 @@
       var(--texture-05) 13px
     );
 }
-.isometric-grid-accent {
+.iso-grid-accent {
   background:
     repeating-linear-gradient(
       30deg,
@@ -58,7 +58,7 @@
 
 /* Isometric cubes — three faces simulated with 30°/-30°/150° gradients
    Creates repeating cube wall pattern on a dark base layer */
-.isometric-cubes {
+.iso-cubes {
   background:
     /* Right face — lighter */
     repeating-linear-gradient(
@@ -86,7 +86,7 @@
       );
   background-size: 40px 40px;
 }
-.isometric-cubes-dense {
+.iso-cubes-dense {
   background:
     repeating-linear-gradient(
       150deg,
@@ -111,7 +111,7 @@
     );
   background-size: 20px 20px;
 }
-.isometric-cubes-accent {
+.iso-cubes-accent {
   background:
     repeating-linear-gradient(
       150deg,
@@ -138,7 +138,7 @@
 }
 
 /* Isometric pyramid / zigzag — ascending steps in perspective */
-.isometric-pyramid {
+.iso-pyramid {
   background:
     repeating-linear-gradient(
       150deg,
@@ -158,7 +158,7 @@
 }
 
 /* Isometric hex grid — honeycomb from overlapping 60° gradients */
-.isometric-hex {
+.iso-hex {
   background:
     repeating-linear-gradient(
       60deg,
@@ -184,7 +184,7 @@
 }
 
 /* Isometric pipes / tunnels — converging lines toward vanishing point */
-.isometric-pipes {
+.iso-pipes {
   background:
     /* Left wall */
     repeating-linear-gradient(
@@ -211,7 +211,7 @@
         var(--texture-02) 13px
       );
 }
-.isometric-pipes-fast {
+.iso-pipes-fast {
   background:
     repeating-linear-gradient(
       30deg,
@@ -237,7 +237,7 @@
 }
 
 /* Isometric terrain — horizontal zigzag depth layers */
-.isometric-terrain {
+.iso-terrain {
   background:
     repeating-linear-gradient(
       0deg,
@@ -263,7 +263,7 @@
 }
 
 /* ---- Isometric staircase — ascending step pattern created by offset horizontal bands ---- */
-.isometric-staircase {
+.iso-staircase {
   background:
     repeating-linear-gradient(
       0deg,
@@ -289,7 +289,7 @@
 }
 
 /* ---- Isometric diamond facet — large faceted diamond grid with multiple face shades ---- */
-.isometric-diamond-facet {
+.iso-diamond-facet {
   background:
     /* Upper face — left-leaning */
     repeating-linear-gradient(
@@ -317,7 +317,7 @@
       );
   background-size: 52px 30px;
 }
-.isometric-diamond-facet-dense {
+.iso-diamond-facet-dense {
   background:
     repeating-linear-gradient(
       150deg,
@@ -342,7 +342,7 @@
     );
   background-size: 26px 15px;
 }
-.isometric-diamond-facet-accent {
+.iso-diamond-facet-accent {
   background:
     repeating-linear-gradient(
       150deg,
@@ -369,7 +369,7 @@
 }
 
 /* ---- Isometric wave — undulating sine-like surface with staggered horizontal lines ---- */
-.isometric-wave {
+.iso-wave {
   background:
     repeating-linear-gradient(
       0deg,
@@ -401,7 +401,7 @@
     10px 5px,
     -5px 10px;
 }
-.isometric-wave-fluid {
+.iso-wave-fluid {
   background:
     repeating-linear-gradient(
       0deg,
@@ -439,7 +439,7 @@
 }
 
 /* ---- Isometric rooms — interior room approximations with left/right walls + floor ---- */
-.isometric-rooms {
+.iso-rooms {
   background:
     /* Left wall */
     repeating-linear-gradient(
@@ -476,7 +476,7 @@
 }
 
 /* ---- Isometric city — building-like block silhouettes using vertical + diagonal fills ---- */
-.isometric-city {
+.iso-city {
   background:
     /* Building face A — front */
     repeating-linear-gradient(
@@ -511,7 +511,7 @@
     24px 0,
     6px 4px;
 }
-.isometric-city-dense {
+.iso-city-dense {
   background:
     repeating-linear-gradient(
       90deg,
@@ -543,7 +543,7 @@
     16px 0,
     4px 3px;
 }
-.isometric-city-accent {
+.iso-city-accent {
   background:
     repeating-linear-gradient(
       90deg,
@@ -577,7 +577,7 @@
 }
 
 /* ---- Isometric spiral — concentric square spiral in isometric perspective ---- */
-.isometric-spiral {
+.iso-spiral {
   background: repeating-conic-gradient(
     from 30deg at 50% 50%,
     transparent 0deg,
@@ -598,7 +598,7 @@
     var(--texture-03) 40deg
   );
 }
-.isometric-spiral-dense {
+.iso-spiral-dense {
   background: repeating-conic-gradient(
     from 30deg at 50% 50%,
     transparent 0deg,
@@ -621,16 +621,16 @@
 }
 
 /* ---- Texture composition helpers ---- */
-.texture-overlay {
+.overlay-fill {
   position: absolute;
   inset: 0;
   pointer-events: none;
   z-index: 1;
 }
-.has-halftone-accent {
+.texture-halftone-accent {
   position: relative;
 }
-.has-halftone-accent::before {
+.texture-halftone-accent::before {
   content: '';
   position: absolute;
   inset: 0;
@@ -640,10 +640,10 @@
   opacity: 0.4;
   z-index: 0;
 }
-.has-dot-matrix {
+.texture-dot-matrix {
   position: relative;
 }
-.has-dot-matrix::before {
+.texture-dot-matrix::before {
   content: '';
   position: absolute;
   inset: 0;
@@ -652,7 +652,7 @@
   pointer-events: none;
   z-index: 0;
 }
-.scanline-layer {
+.bg-scanline-layer {
   background: repeating-linear-gradient(
     0deg,
     transparent,
@@ -669,27 +669,27 @@
    All respect prefers-reduced-motion via accessibility.css.
    =========================================================== */
 
-.isometric-grid-animated {
+.iso-grid-animated {
   animation: iso-grid-scroll 4s linear infinite;
 }
-.isometric-grid-dense-animated {
+.iso-grid-dense-animated {
   animation: iso-grid-scroll 3s linear infinite;
 }
-.isometric-cubes-animated {
+.iso-cubes-animated {
   animation: iso-grid-scroll 5s linear infinite;
 }
-.isometric-terrain-animated {
+.iso-terrain-animated {
   animation: iso-terrain-shift 6s linear infinite;
 }
-.isometric-pipes-animated {
+.iso-pipes-animated {
   animation: iso-grid-scroll 3s linear infinite;
 }
-.isometric-hex-animated {
+.iso-hex-animated {
   animation: iso-grid-scroll 6s linear infinite;
 }
-.isometric-city-animated {
+.iso-city-animated {
   animation: iso-grid-scroll 5s linear infinite;
 }
-.isometric-wave-animated {
+.iso-wave-animated {
   animation: iso-terrain-shift 8s linear infinite;
 }

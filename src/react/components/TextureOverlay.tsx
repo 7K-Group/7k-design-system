@@ -14,14 +14,14 @@ export function TextureOverlay({
   children,
   texture = 'halftone',
   opacity,
-  animate = false,
+  animated = false,
   className = '',
   style,
 }: TextureOverlayProps) {
   const resolvedTexture = texture === false || texture === null ? 'texture' : texture;
   const classes = [
     textureClassMap[resolvedTexture] || textureClassMap.texture,
-    animate ? 'texture-animated' : '',
+    animated ? 'texture-animated' : '',
     className,
   ]
     .filter(Boolean)

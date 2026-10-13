@@ -39,6 +39,72 @@ jobs:
         run: npm run build
 
       - name: Release to npm
+        id: release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: npm run semantic-release
+
+  # Per-merge edge releases: publishes <version>-edge.<shortsha> under the npm
+  # `edge` dist-tag plus a moving GitHub `edge` prerelease, so consumers
+  # (inari-ui) can track main without a local checkout. Lives in cd.yaml
+  # because npm trusted publishing (OIDC) is bound to this workflow file.
+  # semantic-release commits carry [skip ci], so release commits never reach
+  # this workflow; the gate below is belt-and-braces for manual dispatches.
+  edge:
+    runs-on: ubuntu-latest
+    needs: publish
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - name: Skip on release commits
+        id: gate
+        run: |
+          set -euo pipefail
+          msg="$(git log -1 --pretty=%s)"
+          if echo "$msg" | grep -qiE '^chore(\(.*\))?: release'; then
+            echo "release commit ($msg) — skipping edge"; exit 1
+          fi
+      - name: Setup Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7
+        with:
+          node-version: 24
+          cache: 'npm'
+          registry-url: https://registry.npmjs.org
+      - run: npm ci
+      - run: npm run build
+      - name: Publish edge build to npm
+        id: pub
+        run: |
+          set -euo pipefail
+          base="$(node -p "require('./package.json').version")"
+          edge="${base}-edge.${GITHUB_SHA:0:7}"
+          npm version --no-git-tag-version "$edge"
+          npm publish --tag edge --provenance --access public
+          echo "edge=$edge" >> "$GITHUB_OUTPUT"
+      - name: Create edge prerelease + move the edge channel tag
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          EDGE: ${{ steps.pub.outputs.edge }}
+        run: |
+          set -euo pipefail
+          if gh release view "v${EDGE}" > /dev/null 2>&1; then
+            echo "prerelease v${EDGE} already exists — skipping create (workflow rerun)"
+          else
+            gh release create "v${EDGE}" \
+              --prerelease \
+              --target "$GITHUB_SHA" \
+              --title "edge ${EDGE}" \
+              --notes "Edge build from ${GITHUB_SHA}. npm: \`7k-design-system@${EDGE}\` (also dist-tag \`edge\`). Superseded by the next stable release."
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git tag -f edge "$GITHUB_SHA"
+          git push -f origin refs/tags/edge
+          if gh release view edge > /dev/null 2>&1; then
+            gh release edit edge --prerelease --title "edge (v${EDGE})" \
+              --notes "Latest edge build: \`v${EDGE}\` (${GITHUB_SHA})."
+          else
+            gh release create edge --prerelease --target "$GITHUB_SHA" \
+              --title "edge (v${EDGE})" \
+              --notes "Latest edge build: \`v${EDGE}\` (${GITHUB_SHA})."
+          fi

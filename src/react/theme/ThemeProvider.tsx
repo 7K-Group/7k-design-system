@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useLayoutEffect, useCallback } from 'react';
 import { ThemeContext } from './ThemeContext';
 import type { Theme, ThemeContextValue } from '../types';
 
@@ -22,7 +22,9 @@ export function ThemeProvider({
     return defaultTheme;
   });
 
-  useEffect(() => {
+  // useLayoutEffect: apply the theme before paint so consumers never render
+  // an unthemed frame (screenshot tests and first paint race otherwise).
+  useLayoutEffect(() => {
     const root = document.documentElement;
     root.setAttribute('data-theme', theme);
     localStorage.setItem(storageKey, theme);

@@ -1,3 +1,10 @@
+## [1.3.1](https://github.com/7K-Group/7k-design-system/compare/v1.3.0...v1.3.1) (2026-10-13)
+
+
+### Bug Fixes
+
+* self-host Geist Sans/Mono variable fonts (drop CDN dependency) ([ee94c56](https://github.com/7K-Group/7k-design-system/commit/ee94c56d64b33dc63a6f9f7ccd8f344481a9936c))
+
 # [1.3.0](https://github.com/7K-Group/7k-design-system/compare/v1.2.0...v1.3.0) (2026-10-13)
 
 

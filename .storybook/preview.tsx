@@ -1,6 +1,6 @@
 import type { Preview } from '@storybook/react-vite';
 import { useEffect } from 'react';
-import { initialize, mswLoader } from 'msw-storybook-addon';
+import { mswLoader } from 'msw-storybook-addon/csf3';
 import { ThemeProvider } from '../src/react/theme/ThemeProvider';
 import { ProjectProvider } from '../src/react/theme/ProjectProvider';
 import type { Theme } from '../src/react/types';
@@ -8,7 +8,6 @@ import type { Project } from '../src/react/theme/projects';
 import { mswHandlers } from './msw-handlers';
 import '../src/css/index.css';
 
-initialize({ onUnhandledRequest: 'bypass' });
 
 const preview: Preview = {
   tags: ['autodocs'],
@@ -60,7 +59,7 @@ const preview: Preview = {
       );
     },
   ],
-  loaders: [mswLoader],
+  loaders: [mswLoader()],
   parameters: {
     msw: { handlers: mswHandlers },
 

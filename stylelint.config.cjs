@@ -26,6 +26,7 @@ module.exports = {
     'media-feature-range-notation': null,
     'alpha-value-notation': null,
     'color-function-notation': null,
+    'color-function-alias-notation': null,
     'function-url-quotes': null,
     'font-family-name-quotes': null,
     'at-rule-empty-line-before': null,

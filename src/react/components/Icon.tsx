@@ -1,3 +1,4 @@
+import type { JSX } from 'react';
 import type { IconProps } from '../types';
 
 const icons: Record<string, JSX.Element> = {

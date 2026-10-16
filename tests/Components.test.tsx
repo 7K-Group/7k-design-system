@@ -30,6 +30,15 @@ import {
   Progress,
   Listbox,
   Icon,
+  Button,
+  Tag,
+  Banner,
+  Range,
+  ColorSwatch,
+  FormGroup,
+  InputGroup,
+  ButtonGroup,
+  ButtonSplit,
 } from '../src/react';
 
 describe('Card', () => {
@@ -242,6 +251,137 @@ describe('Icon', () => {
   it('returns null for unknown icon', () => {
     const { container } = render(<Icon name={'unknown' as never} />);
     expect(container.firstChild).toBeNull();
+  });
+});
+
+describe('Button & Badge Penpot parity axes', () => {
+  it('renders icon button sizes', () => {
+    const { rerender, container } = render(<Button size="icon" aria-label="Close" />);
+    expect(container.querySelector('button')).toHaveClass('btn-icon');
+    rerender(<Button size="icon-lg" aria-label="Close" />);
+    expect(container.querySelector('button')).toHaveClass('btn-lg-icon');
+  });
+
+  it('renders texture variants', () => {
+    const { container } = render(<Button texture="scanline">Scanline</Button>);
+    expect(container.querySelector('button')).toHaveClass('btn-scanline');
+  });
+});
+
+describe('Tag', () => {
+  it('renders solid variant by default', () => {
+    render(<Tag>Label</Tag>);
+    expect(screen.getByText('Label')).toHaveClass('tag');
+  });
+
+  it('applies outlined and inverted styles', () => {
+    const { rerender } = render(<Tag variant="outlined">Outlined</Tag>);
+    expect(screen.getByText('Outlined')).toHaveClass('tag-outlined');
+    rerender(<Tag variant="inverted">Inverted</Tag>);
+    expect(screen.getByText('Inverted')).toHaveClass('tag-inverted');
+  });
+});
+
+describe('Banner', () => {
+  it('renders tone classes', () => {
+    const { rerender } = render(<Banner tone="danger">Delete failed</Banner>);
+    expect(screen.getByText('Delete failed').closest('div')).toHaveClass('banner-error');
+    rerender(<Banner tone="success">Copied</Banner>);
+    expect(screen.getByText('Copied').closest('div')).toHaveClass('banner-success');
+  });
+
+  it('renders a count indicator', () => {
+    render(<Banner count={3}>Synced</Banner>);
+    expect(screen.getByText('3')).toHaveClass('banner-count');
+  });
+
+  it('calls onDismiss', () => {
+    const onDismiss = vi.fn();
+    render(<Banner onDismiss={onDismiss}>Message</Banner>);
+    fireEvent.click(screen.getByLabelText('Dismiss banner'));
+    expect(onDismiss).toHaveBeenCalledTimes(1);
+  });
+});
+
+describe('Range', () => {
+  it('renders a range input', () => {
+    render(<Range min={0} max={10} defaultValue={5} />);
+    expect(screen.getByRole('slider')).toHaveClass('range');
+  });
+});
+
+describe('ColorSwatch', () => {
+  it('renders a colored button', () => {
+    render(<ColorSwatch color="#ff00ff" aria-label="Magenta" />);
+    const swatch = screen.getByRole('button', { name: 'Magenta' });
+    expect(swatch).toHaveClass('color-swatch');
+    expect(swatch.style.background).toMatch(/ff00ff|255, 0, 255/);
+  });
+
+  it('applies selected state', () => {
+    const onClick = vi.fn();
+    render(<ColorSwatch color="#00ffff" selected onClick={onClick} />);
+    const swatch = screen.getByRole('button');
+    expect(swatch).toHaveClass('selected');
+    fireEvent.click(swatch);
+    expect(onClick).toHaveBeenCalledTimes(1);
+  });
+});
+
+describe('FormGroup', () => {
+  it('renders label and error', () => {
+    render(
+      <FormGroup label="Email" error="Invalid address">
+        <input />
+      </FormGroup>
+    );
+    expect(screen.getByText('Email')).toHaveClass('form-label');
+    expect(screen.getByText('Invalid address')).toHaveClass('field-error');
+  });
+});
+
+describe('InputGroup', () => {
+  it('renders a prefix addon', () => {
+    render(
+      <InputGroup addon="https://">
+        <input />
+      </InputGroup>
+    );
+    expect(screen.getByText('https://')).toHaveClass('input-addon');
+    expect(document.querySelector('.input-group')).toBeInTheDocument();
+  });
+
+  it('renders a suffix addon', () => {
+    render(
+      <InputGroup addon=".com" addonPosition="suffix">
+        <input />
+      </InputGroup>
+    );
+    expect(screen.getByText('.com')).toHaveClass('input-addon');
+  });
+});
+
+describe('ButtonGroup', () => {
+  it('groups children with group role', () => {
+    render(
+      <ButtonGroup>
+        <button className="btn">Undo</button>
+        <button className="btn">Redo</button>
+      </ButtonGroup>
+    );
+    expect(screen.getByRole('group')).toHaveClass('btn-group');
+  });
+});
+
+describe('ButtonSplit', () => {
+  it('renders split button container', () => {
+    render(
+      <ButtonSplit>
+        <button className="btn">Install</button>
+        <button className="btn" aria-label="More options" />
+      </ButtonSplit>
+    );
+    expect(screen.getByRole('group')).toHaveClass('btn-split');
   });
 });
 

@@ -2,10 +2,10 @@ import { forwardRef } from 'react';
 import type { ToastProps } from '../types';
 
 const variantClassMap: Record<string, string> = {
-  default: '',
+  neutral: '',
   success: 'toast-success',
-  error: 'toast-error',
   warning: 'toast-warning',
+  danger: 'toast-error',
   info: 'toast-info',
 };
 
@@ -18,7 +18,7 @@ export const Toast = forwardRef<HTMLDivElement, ToastProps>(
   (
     {
       children,
-      variant = 'default',
+      variant = 'neutral',
       onDismiss,
       texture,
       role = 'status',

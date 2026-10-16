@@ -2,7 +2,7 @@ import { forwardRef } from 'react';
 import type { AlertProps } from '../types';
 
 const variantClassMap: Record<string, string> = {
-  default: '',
+  neutral: '',
   success: 'alert-success',
   warning: 'alert-warning',
   danger: 'alert-danger',
@@ -11,7 +11,7 @@ const variantClassMap: Record<string, string> = {
 
 export const Alert = forwardRef<HTMLDivElement, AlertProps>(
   (
-    { children, variant = 'default', onClose, role = 'alert', className = '', style, ...rest },
+    { children, variant = 'neutral', onClose, role = 'alert', className = '', style, ...rest },
     ref
   ) => {
     const classes = ['alert', variantClassMap[variant], className].filter(Boolean).join(' ');

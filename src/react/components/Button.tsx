@@ -11,6 +11,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       loading = false,
       onClick,
       type = 'button',
+      texture,
       className = '',
       style,
       'aria-label': ariaLabel,
@@ -19,12 +20,19 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     },
     ref
   ) => {
-    const sizeClass = size === 'sm' ? 'btn-sm' : size === 'lg' ? 'btn-lg' : '';
+    const sizeClassMap: Record<string, string> = {
+      sm: 'btn-sm',
+      lg: 'btn-lg',
+      icon: 'btn-icon',
+      'icon-lg': 'btn-lg-icon',
+    };
     const variantClass = `btn-${variant}`;
+    const textureClass = texture ? `btn-${texture}` : '';
     const classes = [
       'btn',
       variantClass,
-      sizeClass,
+      sizeClassMap[size] ?? '',
+      textureClass,
       loading ? 'btn-loading' : '',
       className,
     ]

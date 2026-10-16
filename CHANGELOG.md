@@ -1,3 +1,10 @@
+# [1.4.0](https://github.com/7K-Group/7k-design-system/compare/v1.3.1...v1.4.0) (2026-10-16)
+
+
+### Features
+
+* **react:** Tag, Banner, Range, ColorSwatch, Form, ButtonGroup components ([#69](https://github.com/7K-Group/7k-design-system/issues/69)) ([bd31aac](https://github.com/7K-Group/7k-design-system/commit/bd31aac80c715f48d825d1f02ca998632f389ab0))
+
 ## [1.3.1](https://github.com/7K-Group/7k-design-system/compare/v1.3.0...v1.3.1) (2026-10-13)
 
 

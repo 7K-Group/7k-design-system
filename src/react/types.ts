@@ -22,7 +22,10 @@ export type ButtonVariant =
   | 'danger'
   | 'glow-secondary';
 
-export type ButtonSize = 'sm' | 'md' | 'lg';
+export type ButtonSize = 'sm' | 'md' | 'lg' | 'icon' | 'icon-lg';
+
+/** Texture overlay variants forming the Penpot Button texture axis. */
+export type ButtonTexture = 'halftone' | 'scanline' | 'dots';
 
 export interface ButtonProps extends BaseProps {
   variant?: ButtonVariant;
@@ -31,18 +34,13 @@ export interface ButtonProps extends BaseProps {
   loading?: boolean;
   onClick?: () => void;
   type?: 'button' | 'submit' | 'reset';
+  texture?: ButtonTexture;
   'aria-label'?: string;
   'aria-describedby'?: string;
 }
 
 export type BadgeVariant =
-  | 'default'
-  | 'accent'
-  | 'success'
-  | 'warning'
-  | 'danger'
-  | 'info'
-  | 'neutral';
+  'default' | 'accent' | 'success' | 'warning' | 'danger' | 'info' | 'neutral' | 'inverted';
 
 export interface BadgeProps extends BaseProps {
   variant?: BadgeVariant;
@@ -76,14 +74,7 @@ export type Texture =
   | null;
 
 export type IsometricPattern =
-  | 'grid'
-  | 'grid-dense'
-  | 'cubes'
-  | 'terrain'
-  | 'pipes'
-  | 'hex'
-  | 'city'
-  | 'wave';
+  'grid' | 'grid-dense' | 'cubes' | 'terrain' | 'pipes' | 'hex' | 'city' | 'wave';
 
 export interface CardProps extends BaseProps {
   texture?: Texture;
@@ -108,7 +99,8 @@ export interface DrawerProps extends BaseProps {
   'aria-labelledby'?: string;
 }
 
-export type ToastVariant = 'default' | 'success' | 'error' | 'warning' | 'info';
+/** Matches the Penpot Toast Tone axis; `neutral` is the base tone. */
+export type ToastVariant = 'neutral' | 'success' | 'warning' | 'danger' | 'info';
 
 export interface ToastProps extends BaseProps {
   variant?: ToastVariant;
@@ -122,7 +114,8 @@ export interface TooltipProps extends BaseProps {
   position?: 'top' | 'right' | 'bottom' | 'left';
 }
 
-export type AlertVariant = 'default' | 'success' | 'warning' | 'danger' | 'info';
+/** Matches the Penpot Alert Tone axis; `neutral` is the base tone. */
+export type AlertVariant = 'neutral' | 'success' | 'warning' | 'danger' | 'info';
 
 export interface AlertProps extends BaseProps {
   variant?: AlertVariant;
@@ -174,6 +167,46 @@ export interface SelectProps
 
 export interface TextareaProps
   extends BaseProps, Omit<TextareaHTMLAttributes<HTMLTextAreaElement>, 'className' | 'style'> {}
+
+/** Matches the Penpot Tag Style axis; `solid` is the default style. */
+export type TagStyle = 'solid' | 'outlined' | 'inverted';
+
+export interface TagProps extends BaseProps {
+  variant?: TagStyle;
+}
+
+/** Matches the Penpot Banner Tone axis; `error` is kept as an alias of `danger`. */
+export type BannerTone = 'success' | 'warning' | 'danger' | 'error';
+
+export interface BannerProps extends BaseProps {
+  tone?: BannerTone;
+  count?: number;
+  onDismiss?: () => void;
+}
+
+export interface RangeProps
+  extends BaseProps, Omit<InputHTMLAttributes<HTMLInputElement>, 'className' | 'style' | 'type'> {}
+
+export interface ColorSwatchProps extends BaseProps {
+  color: string;
+  selected?: boolean;
+  onClick?: () => void;
+  'aria-label'?: string;
+}
+
+export interface FormGroupProps extends BaseProps {
+  label?: ReactNode;
+  error?: string;
+}
+
+export interface InputGroupProps extends BaseProps {
+  addon?: ReactNode;
+  addonPosition?: 'prefix' | 'suffix';
+}
+
+export interface ButtonGroupProps extends BaseProps {
+  split?: boolean;
+}
 
 export interface TextureOverlayProps extends BaseProps {
   texture?: Texture;

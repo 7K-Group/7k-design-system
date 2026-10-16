@@ -4,7 +4,7 @@
 > Category: Custom · Surface: web, mobile, desktop
 > Font: Geist + Geist Mono + Geist Pixel · Major neon: #FF0FF · Secondary neon: cyan (thematic per project) · Logo: 7K · Theme: Dark-first
 > 1-bit textures: 10 patterns · 1-bit components: 40+ · 1-bit animations: 20+ keyframes
-> React UI kit: Button, Input, Badge, Card, Modal, Drawer, Toast, Tooltip, Alert, Tabs, Nav, Checkbox, Radio, Toggle, Select, Textarea, ThemeToggle, ThemeProvider, ProjectProvider, useTheme, useProject
+> React UI kit: Button, Input, Badge, Card, Modal, Drawer, Toast, Tooltip, Alert, Tabs, Nav, Checkbox, Radio, Toggle, Select, Textarea, Tag, Banner, Range, ColorSwatch, FormGroup, InputGroup, ButtonGroup, ButtonSplit, ThemeToggle, ThemeProvider, ProjectProvider, useTheme, useProject
 > Build: Vite + PostCSS + TypeScript · Test: Vitest + Testing Library · Docs: Storybook
 
 ## Source context
@@ -25,7 +25,7 @@ Key constraints derived from the source:
 - **1-bit manga influence** → 10-texture background pattern library (scanline, halftone, dot matrix, stripes, crosshatch, checkerboard, noise, vignette). All textures are CSS gradients — no images, no SVG humans.
 - **Abstract 1-bit animations** → 20+ animation keyframes organized as ambient (continuous) and trigger (burst) categories. Step timing for retro feel, reduced-motion collapse.
 - **1-bit component system** → 40+ components with zero radius, 2px white borders, invert hover state. Unified black/white visual language with thin accent layer modifiers for color moments.
-- **React UI kit** → TypeScript React components (Button, Input, Badge, Card, Modal, Drawer, Toast, Tooltip, Alert, Tabs, Nav, Checkbox, Radio, Toggle, Select, Textarea, ThemeToggle) with ThemeProvider, ProjectProvider, useTheme, and useProject hooks.
+- **React UI kit** → TypeScript React components (Button, Input, Badge, Card, Modal, Drawer, Toast, Tooltip, Alert, Tabs, Nav, Checkbox, Radio, Toggle, Select, Textarea, Tag, Banner, Range, ColorSwatch, FormGroup, InputGroup, ButtonGroup, ButtonSplit, ThemeToggle) with ThemeProvider, ProjectProvider, useTheme, and useProject hooks.
 - **Modular CSS** → 10 source files in `src/css/` compiled into `dist/7k-design-system.css`.
 
 ## Package Structure
